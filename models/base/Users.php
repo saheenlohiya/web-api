@@ -28,6 +28,10 @@ use Yii;
  * @property string $user_verification_code
  * @property integer $user_active
  * @property integer $user_is_verified
+ *
+ * @property \app\models\UsersVenuesCoupons[] $usersVenuesCoupons
+ * @property \app\models\Venues[] $venues
+ * @property \app\models\VenuesAdmins[] $venuesAdmins
  * @property string $aliasModel
  */
 abstract class Users extends \yii\db\ActiveRecord
@@ -100,6 +104,30 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_active' => 'User Active',
             'user_is_verified' => 'User Is Verified',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesCoupons()
+    {
+        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVenues()
+    {
+        return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVenuesAdmins()
+    {
+        return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id']);
     }
 
 
