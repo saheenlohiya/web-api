@@ -28,6 +28,7 @@ public function behaviors()
              parent::rules(),
              [
                   # custom validation rules
+                 ['user_email', 'email'],
              ]
         );
     }

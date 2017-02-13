@@ -70,6 +70,7 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_city'], 'string', 'max' => 30],
             [['user_state'], 'string', 'max' => 2],
             [['user_ip_address'], 'string', 'max' => 16],
+            [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
             ['user_gender', 'in', 'range' => [
                     self::USER_GENDER_M,
                     self::USER_GENDER_F,

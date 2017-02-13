@@ -64,6 +64,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             [['venue_city'], 'string', 'max' => 20],
             [['venue_state'], 'string', 'max' => 2],
             [['venue_phone'], 'string', 'max' => 16],
+            [['venue_google_place_id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['venue_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\VenuesTypes::className(), 'targetAttribute' => ['venue_type_id' => 'id']]
         ];
