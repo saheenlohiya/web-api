@@ -12,7 +12,11 @@ use yii\helpers\ArrayHelper;
 class Users extends BaseUsers
 {
 
-public function behaviors()
+    public static function create(){
+        return new self;
+    }
+
+    public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
@@ -25,11 +29,12 @@ public function behaviors()
     public function rules()
     {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-                 ['user_email', 'email'],
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+                ['user_email', 'required'],
+                ['user_email', 'email'],
+            ]
         );
     }
 }
