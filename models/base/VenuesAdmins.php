@@ -23,7 +23,6 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
 {
 
 
-
     /**
      * @inheritdoc
      */
@@ -93,7 +92,6 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\VenuesAdminsQuery the active query used by this AR class.

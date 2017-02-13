@@ -40,7 +40,6 @@ abstract class Venues extends \yii\db\ActiveRecord
 {
 
 
-
     /**
      * @inheritdoc
      */
@@ -132,7 +131,6 @@ abstract class Venues extends \yii\db\ActiveRecord
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\VenuesQuery the active query used by this AR class.

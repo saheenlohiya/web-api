@@ -12,7 +12,8 @@ use yii\helpers\ArrayHelper;
 class Users extends BaseUsers
 {
 
-    public static function create(){
+    public static function create()
+    {
         return new self;
     }
 
