@@ -4,6 +4,10 @@ namespace app\models;
 
 use Yii;
 use \app\models\base\Users as BaseUsers;
+use yii\behaviors\TimestampBehavior;
+
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -22,7 +26,15 @@ class Users extends BaseUsers
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => TimestampBehavior::className(),
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['user_date_modified'],
+                    ],
+                    // using datetime instead of UNIX timestamp:
+                    'value' => new Expression('NOW()'),
+                ],
             ]
         );
     }
@@ -33,7 +45,7 @@ class Users extends BaseUsers
             parent::rules(),
             [
                 # custom validation rules
-                ['user_email', 'required'],
+                [['user_firstname', 'user_lastname', 'user_email', 'user_phone', 'user_password'], 'required'],
                 ['user_email', 'email'],
             ]
         );

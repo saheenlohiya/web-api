@@ -25,6 +25,7 @@ use Yii;
  * @property string $user_photo_url
  * @property string $user_ip_address
  * @property string $user_date_joined
+ * @property string $user_date_modified
  * @property string $user_verification_code
  * @property integer $user_active
  * @property integer $user_is_verified
@@ -61,12 +62,12 @@ abstract class Users extends \yii\db\ActiveRecord
     {
         return [
             [['user_gender', 'user_photo_url'], 'string'],
-            [['user_dob', 'user_date_joined'], 'safe'],
+            [['user_dob', 'user_date_joined', 'user_date_modified'], 'safe'],
             [['user_active', 'user_is_verified'], 'integer'],
             [['user_firstname', 'user_lastname', 'user_facebook_account_id'], 'string', 'max' => 50],
             [['user_email', 'user_address_1', 'user_address_2'], 'string', 'max' => 100],
             [['user_phone'], 'string', 'max' => 20],
-            [['user_password', 'user_verification_code'], 'string', 'max' => 32],
+            [['user_password', 'user_verification_code'], 'string', 'max' => 100],
             [['user_city'], 'string', 'max' => 30],
             [['user_state'], 'string', 'max' => 2],
             [['user_ip_address'], 'string', 'max' => 16],
@@ -101,6 +102,7 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_photo_url' => 'User Photo Url',
             'user_ip_address' => 'User Ip Address',
             'user_date_joined' => 'User Date Joined',
+            'user_date_modified' => 'User Date Modified',
             'user_verification_code' => 'User Verification Code',
             'user_active' => 'User Active',
             'user_is_verified' => 'User Is Verified',

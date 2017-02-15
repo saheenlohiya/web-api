@@ -2,6 +2,7 @@
 namespace tests\models;
 
 use app\models\Users;
+use Yii;
 
 class UsersTest extends \Codeception\Test\Unit
 {
@@ -12,6 +13,7 @@ class UsersTest extends \Codeception\Test\Unit
      * @var \UnitTester
      */
     private $user;
+    protected $tester;
 
     protected function _before()
     {
@@ -23,14 +25,34 @@ class UsersTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testValidation()
+    public function testValidateNewUsers()
     {
 
         $this->user = Users::create();
 
+        $this->specify("Firstname is required", function () {
+            $this->user->user_firstname = null;
+            $this->assertFalse($this->user->validate(['user_firstname']));
+        });
+
+        $this->specify("Lastname is required", function () {
+            $this->user->user_lastname = null;
+            $this->assertFalse($this->user->validate(['user_lastname']));
+        });
+
         $this->specify("Email is required", function () {
             $this->user->user_email = null;
             $this->assertFalse($this->user->validate(['user_email']));
+        });
+
+        $this->specify("Phone is required", function () {
+            $this->user->user_phone = null;
+            $this->assertFalse($this->user->validate(['user_phone']));
+        });
+
+        $this->specify("Password is required", function () {
+            $this->user->user_password = null;
+            $this->assertFalse($this->user->validate(['user_password']));
         });
 
         $this->specify("Email not in correct format", function () {
@@ -42,5 +64,17 @@ class UsersTest extends \Codeception\Test\Unit
             $this->user->user_email = 'test@gmail.com';
             $this->assertTrue($this->user->validate(['user_email']));
         });
+
+        $this->specify("Can save user", function () {
+            $this->user->user_firstname = 'Dwamian';
+            $this->user->user_lastname = 'Mcleish';
+            $this->user->user_email = 'test2@gmail.com';
+            $this->user->user_phone = '8192189988';
+            $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
+            $this->assertTrue($this->user->save());
+            $this->assertNotNull($this->user->user_date_joined);
+        });
+
     }
+
 }
