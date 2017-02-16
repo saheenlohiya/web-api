@@ -65,4 +65,30 @@ class Users extends BaseUsers
         );
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'user_firstname' => 'Firstname',
+            'user_lastname' => 'Lastname',
+            'user_email' => 'Email',
+            'user_phone' => 'Phone',
+            'user_gender' => 'Gender',
+            'user_dob' => 'Dob',
+            'user_password' => 'Password',
+            'user_address_1' => 'Address 1',
+            'user_address_2' => 'Address 2',
+            'user_city' => 'City',
+            'user_state' => 'State',
+            'user_facebook_account_id' => 'Facebook Account ID',
+            'user_photo_url' => 'Photo Url',
+            'user_ip_address' => 'Ip Address',
+            'user_date_joined' => 'Date Joined',
+            'user_date_modified' => 'Date Modified',
+            'user_verification_code' => 'Verification Code',
+            'user_active' => 'Active',
+            'user_is_verified' => 'Is Verified',
+        ];
+    }
+
 }
