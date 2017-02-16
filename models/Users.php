@@ -4,10 +4,10 @@ namespace app\models;
 
 use app\components\behaviors\IPAddressBehavior;
 use app\components\behaviors\UUIDBehavior;
-use Yii;
 use \app\models\base\Users as BaseUsers;
-use yii\behaviors\TimestampBehavior;
 
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
