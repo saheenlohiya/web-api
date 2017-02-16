@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\components\behaviors\IPAddressBehavior;
+use app\components\behaviors\UUIDBehavior;
 use Yii;
 use \app\models\base\Users as BaseUsers;
 use yii\behaviors\TimestampBehavior;
@@ -29,12 +31,24 @@ class Users extends BaseUsers
                 [
                     'class' => TimestampBehavior::className(),
                     'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined'],
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined','user_date_modified'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['user_date_modified'],
                     ],
                     // using datetime instead of UNIX timestamp:
                     'value' => new Expression('NOW()'),
                 ],
+
+                [
+                    'class' => UUIDBehavior::className(),
+                    'column' => 'user_verification_code'
+                ],
+
+                [
+                    'class' => IPAddressBehavior::className(),
+                    'column' => 'user_ip_address'
+                ],
+
+
             ]
         );
     }
@@ -50,4 +64,5 @@ class Users extends BaseUsers
             ]
         );
     }
+
 }

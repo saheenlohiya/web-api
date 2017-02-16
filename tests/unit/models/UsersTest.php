@@ -73,6 +73,10 @@ class UsersTest extends \Codeception\Test\Unit
             $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_joined);
+            $this->assertNotNull($this->user->user_verification_code);
+            $this->assertNotNull($this->user->user_ip_address);
+            $this->assertTrue($this->user->save());
+            $this->assertNotNull($this->user->user_date_modified);
         });
 
     }
