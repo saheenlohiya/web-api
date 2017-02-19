@@ -12,6 +12,10 @@ use yii\helpers\ArrayHelper;
 class Venues extends BaseVenues
 {
 
+    public static function create(){
+        return new self;
+    }
+
     public function behaviors()
     {
         return ArrayHelper::merge(
@@ -27,7 +31,7 @@ class Venues extends BaseVenues
         return ArrayHelper::merge(
             parent::rules(),
             [
-                # custom validation rules
+                [['user_id','venue_name','venue_city','venue_state','venue_zip'],'required']
             ]
         );
     }

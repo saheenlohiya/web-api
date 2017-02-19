@@ -19,6 +19,7 @@ use Yii;
  * @property string $venue_address_2
  * @property string $venue_city
  * @property string $venue_state
+ * @property string $venue_zip
  * @property string $venue_phone
  * @property string $venue_email
  * @property string $venue_lat
@@ -38,6 +39,7 @@ use Yii;
  */
 abstract class Venues extends \yii\db\ActiveRecord
 {
+
 
 
     /**
@@ -62,6 +64,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
             [['venue_city'], 'string', 'max' => 20],
             [['venue_state'], 'string', 'max' => 2],
+            [['venue_zip'], 'string', 'max' => 10],
             [['venue_phone'], 'string', 'max' => 16],
             [['venue_google_place_id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -85,6 +88,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_address_2' => 'Venue Address 2',
             'venue_city' => 'Venue City',
             'venue_state' => 'Venue State',
+            'venue_zip' => 'Venue Zip',
             'venue_phone' => 'Venue Phone',
             'venue_email' => 'Venue Email',
             'venue_lat' => 'Venue Lat',
@@ -131,6 +135,7 @@ abstract class Venues extends \yii\db\ActiveRecord
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesQuery the active query used by this AR class.
