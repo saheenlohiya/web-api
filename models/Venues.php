@@ -22,7 +22,7 @@ class Venues extends BaseVenues
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                
             ]
         );
     }

@@ -90,6 +90,9 @@ class VenuesTest extends \Codeception\Test\Unit
             $this->venue->venue_type_id = 1;
 
             $this->assertTrue($this->venue->save());
+
+            $this->assertNotNull($this->venue->venue_lat);
+            $this->assertNotNull($this->venue->venue_lon);
         });
 
     }
