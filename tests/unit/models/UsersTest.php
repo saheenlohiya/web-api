@@ -74,7 +74,10 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_joined);
             $this->assertNotNull($this->user->user_verification_code);
+            $this->assertNotNull($this->user->uuid);
             $this->assertNotNull($this->user->user_ip_address);
+            //$this->assertNotNull($this->user->user_lat);
+            //$this->assertNotNull($this->user->user_lon);
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_modified);
         });

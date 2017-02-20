@@ -10,6 +10,7 @@ use Yii;
  * This is the base-model class for table "users".
  *
  * @property integer $id
+ * @property string $uuid
  * @property string $user_firstname
  * @property string $user_lastname
  * @property string $user_email
@@ -21,6 +22,9 @@ use Yii;
  * @property string $user_address_2
  * @property string $user_city
  * @property string $user_state
+ * @property string $user_zip
+ * @property string $user_lat
+ * @property string $user_lon
  * @property string $user_facebook_account_id
  * @property string $user_photo_url
  * @property string $user_ip_address
@@ -63,12 +67,14 @@ abstract class Users extends \yii\db\ActiveRecord
         return [
             [['user_gender', 'user_photo_url'], 'string'],
             [['user_dob', 'user_date_joined', 'user_date_modified'], 'safe'],
+            [['user_lat', 'user_lon'], 'number'],
             [['user_active', 'user_is_verified'], 'integer'],
+            [['uuid', 'user_email', 'user_password', 'user_address_1', 'user_address_2'], 'string', 'max' => 100],
             [['user_firstname', 'user_lastname', 'user_facebook_account_id'], 'string', 'max' => 50],
-            [['user_email', 'user_password', 'user_address_1', 'user_address_2'], 'string', 'max' => 100],
             [['user_phone'], 'string', 'max' => 20],
             [['user_city'], 'string', 'max' => 30],
             [['user_state'], 'string', 'max' => 2],
+            [['user_zip'], 'string', 'max' => 10],
             [['user_ip_address'], 'string', 'max' => 16],
             [['user_verification_code'], 'string', 'max' => 32],
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
@@ -87,6 +93,7 @@ abstract class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'uuid' => 'Uuid',
             'user_firstname' => 'User Firstname',
             'user_lastname' => 'User Lastname',
             'user_email' => 'User Email',
@@ -98,6 +105,9 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_address_2' => 'User Address 2',
             'user_city' => 'User City',
             'user_state' => 'User State',
+            'user_zip' => 'User Zip',
+            'user_lat' => 'User Lat',
+            'user_lon' => 'User Lon',
             'user_facebook_account_id' => 'User Facebook Account ID',
             'user_photo_url' => 'User Photo Url',
             'user_ip_address' => 'User Ip Address',

@@ -12,6 +12,8 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
+use app\components\behaviors\GeocodeBehavior;
+
 /**
  * This is the model class for table "users".
  */
@@ -44,10 +46,14 @@ class Users extends BaseUsers
                 ],
 
                 [
-                    'class' => IPAddressBehavior::className(),
-                    'column' => 'user_ip_address'
+                    'class' => UUIDBehavior::className(),
+                    'column' => 'uuid'
                 ],
 
+                [
+                    'class' => IPAddressBehavior::className(),
+                    'column' => 'user_ip_address'
+                ]
 
             ]
         );
