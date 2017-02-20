@@ -35,6 +35,8 @@ use Yii;
  * @property integer $user_is_verified
  *
  * @property \app\models\UsersVenuesCoupons[] $usersVenuesCoupons
+ * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
+ * @property \app\models\UsersVenuesRatings[] $usersVenuesRatings
  * @property \app\models\Venues[] $venues
  * @property \app\models\VenuesAdmins[] $venuesAdmins
  * @property string $aliasModel
@@ -125,6 +127,22 @@ abstract class Users extends \yii\db\ActiveRecord
     public function getUsersVenuesCoupons()
     {
         return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesFollows()
+    {
+        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesRatings()
+    {
+        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id']);
     }
 
     /**

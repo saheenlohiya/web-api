@@ -31,6 +31,8 @@ use Yii;
  * @property integer $venue_type_id
  * @property integer $venue_active
  *
+ * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
+ * @property \app\models\UsersVenuesRatings[] $usersVenuesRatings
  * @property \app\models\Users $user
  * @property \app\models\VenuesTypes $venueType
  * @property \app\models\VenuesAdmins[] $venuesAdmins
@@ -100,6 +102,22 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_type_id' => 'Venue Type ID',
             'venue_active' => 'Venue Active',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesFollows()
+    {
+        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['venue_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesRatings()
+    {
+        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['venue_id' => 'id']);
     }
 
     /**
