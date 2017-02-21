@@ -33,7 +33,7 @@ class Users extends BaseUsers
                 [
                     'class' => TimestampBehavior::className(),
                     'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined','user_date_modified'],
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined', 'user_date_modified'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['user_date_modified'],
                     ],
                     // using datetime instead of UNIX timestamp:

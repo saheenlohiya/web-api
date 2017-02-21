@@ -26,13 +26,13 @@ class Venues extends BaseVenues
                 [
                     'class' => GeocodeBehavior::className(),
 
-                        'address' => [
-                            'street_address' => $this->venue_address_1,
-                            'postal_code' => $this->venue_zip
-                        ],
-                        'latitudeAttribute' => 'venue_lat',
-                        'longitudeAttribute' => 'venue_lon'
-                    
+                    'address' => [
+                        'street_address' => $this->venue_address_1,
+                        'postal_code' => $this->venue_zip
+                    ],
+                    'latitudeAttribute' => 'venue_lat',
+                    'longitudeAttribute' => 'venue_lon'
+
                 ]
             ]
         );

@@ -20,7 +20,6 @@ abstract class UsersVenuesRatingsImages extends \yii\db\ActiveRecord
 {
 
 
-
     /**
      * @inheritdoc
      */
@@ -63,7 +62,6 @@ abstract class UsersVenuesRatingsImages extends \yii\db\ActiveRecord
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesRatingsImagesQuery the active query used by this AR class.
