@@ -88,13 +88,7 @@ class VenuesTest extends \Codeception\Test\Unit
             $this->venue->venue_state = "TX";
             $this->venue->venue_zip = "78758";
             $this->venue->venue_type_id = 1;
-
-            //set the address for the geocoding behavior
-            $this->venue->address = [
-                'street_address' => $this->venue->venue_address_1,
-                'postal_code' => $this->venue->venue_zip
-            ];
-
+            
             $this->assertTrue($this->venue->save());
 
             $this->assertNotNull($this->venue->venue_lat);

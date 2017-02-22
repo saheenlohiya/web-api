@@ -22,6 +22,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -62,7 +63,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('usersVenuesFollows');
     }
 
     /**
@@ -70,10 +71,11 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('usersVenuesFollows');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesFollowsQuery the active query used by this AR class.
