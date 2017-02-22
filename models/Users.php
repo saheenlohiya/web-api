@@ -12,6 +12,8 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
+use app\components\behaviors\GeocodeBehavior;
+
 /**
  * This is the model class for table "users".
  */
@@ -31,7 +33,7 @@ class Users extends BaseUsers
                 [
                     'class' => TimestampBehavior::className(),
                     'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined','user_date_modified'],
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['user_date_joined', 'user_date_modified'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['user_date_modified'],
                     ],
                     // using datetime instead of UNIX timestamp:
@@ -44,10 +46,14 @@ class Users extends BaseUsers
                 ],
 
                 [
-                    'class' => IPAddressBehavior::className(),
-                    'column' => 'user_ip_address'
+                    'class' => UUIDBehavior::className(),
+                    'column' => 'uuid'
                 ],
 
+                [
+                    'class' => IPAddressBehavior::className(),
+                    'column' => 'user_ip_address'
+                ]
 
             ]
         );

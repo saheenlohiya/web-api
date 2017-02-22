@@ -17,7 +17,7 @@ class UsersTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-
+        $this->user = Users::create();
     }
 
     protected function _after()
@@ -28,7 +28,7 @@ class UsersTest extends \Codeception\Test\Unit
     public function testValidateNewUsers()
     {
 
-        $this->user = Users::create();
+
 
         $this->specify("Firstname is required", function () {
             $this->user->user_firstname = null;
@@ -74,7 +74,10 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_joined);
             $this->assertNotNull($this->user->user_verification_code);
+            $this->assertNotNull($this->user->uuid);
             $this->assertNotNull($this->user->user_ip_address);
+            //$this->assertNotNull($this->user->user_lat);
+            //$this->assertNotNull($this->user->user_lon);
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_modified);
         });

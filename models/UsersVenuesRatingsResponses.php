@@ -3,13 +3,13 @@
 namespace app\models;
 
 use Yii;
-use \app\models\base\VenuesAdmins as BaseVenuesAdmins;
+use \app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "venues_admins".
+ * This is the model class for table "users_venues_ratings_responses".
  */
-class VenuesAdmins extends BaseVenuesAdmins
+class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
 {
 
     public function behaviors()

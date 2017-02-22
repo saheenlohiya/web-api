@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use \app\models\base\Venues as BaseVenues;
 use yii\helpers\ArrayHelper;
+use app\components\behaviors\GeocodeBehavior;
 
 /**
  * This is the model class for table "venues".
@@ -22,7 +23,17 @@ class Venues extends BaseVenues
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => GeocodeBehavior::className(),
+
+                    'address' => [
+                        'street_address' => $this->venue_address_1,
+                        'postal_code' => $this->venue_zip
+                    ],
+                    'latitudeAttribute' => 'venue_lat',
+                    'longitudeAttribute' => 'venue_lon'
+
+                ]
             ]
         );
     }
