@@ -54,8 +54,18 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
             'id' => 'ID',
             'venue_id' => 'Venue ID',
             'user_id' => 'User ID',
-            'venue_admin_level' => 'Venue Admin Level',
+            'venue_admin_level' => '1000 is the highest level.',
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return array_merge(parent::attributeHints(), [
+            'venue_admin_level' => '1000 is the highest level.',
+        ]);
     }
 
     /**

@@ -55,7 +55,8 @@ class Venues extends BaseVenues
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['user_id', 'venue_name', 'venue_email', 'venue_address_1', 'venue_city', 'venue_state', 'venue_zip', 'venue_type_id'], 'required']
+                [['user_id', 'venue_name', 'venue_email', 'venue_address_1', 'venue_city', 'venue_state', 'venue_zip', 'venue_type_id'], 'required'],
+                ['venue_email','email']
             ]
         );
     }
