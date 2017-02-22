@@ -11,7 +11,7 @@ modules:
                dsn: 'mysql:host=127.0.0.1;dbname=tellus_tests'
                user: 'root'
                password: 'password'
-               dump: 'tests/_data/dump.sql'
+               dump: 'setup/dump.sql'
                populate: true
                cleanup: true
                reconnect: true
