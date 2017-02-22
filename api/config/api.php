@@ -33,6 +33,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
             ],
         ],
         'db' => $db,

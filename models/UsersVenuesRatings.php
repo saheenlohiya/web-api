@@ -4,6 +4,9 @@ namespace app\models;
 
 use Yii;
 use \app\models\base\UsersVenuesRatings as BaseUsersVenuesRatings;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -12,12 +15,23 @@ use yii\helpers\ArrayHelper;
 class UsersVenuesRatings extends BaseUsersVenuesRatings
 {
 
+    public static function create(){
+        return new self;
+    }
+
     public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => TimestampBehavior::className(),
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['venue_rating_date']
+                    ],
+                    // using datetime instead of UNIX timestamp:
+                    'value' => new Expression('NOW()'),
+                ]
             ]
         );
     }
@@ -27,7 +41,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         return ArrayHelper::merge(
             parent::rules(),
             [
-                # custom validation rules
+                [['user_id','venue_id','venue_rating'],'required'],
+                ['venue_rating', 'integer','min'=> 1, 'max'=> 5],
             ]
         );
     }

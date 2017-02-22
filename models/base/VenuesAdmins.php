@@ -23,6 +23,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -72,7 +73,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('venuesAdmins');
     }
 
     /**
@@ -80,7 +81,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('venuesAdmins');
     }
 
     /**
@@ -88,10 +89,11 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenuesCoupons()
     {
-        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id']);
+        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id'])->inverseOf('venueAdmin');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesAdminsQuery the active query used by this AR class.
