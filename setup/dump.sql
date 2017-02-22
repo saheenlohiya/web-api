@@ -138,6 +138,7 @@ CREATE TABLE `venues` (
   `venue_name` varchar(100) DEFAULT NULL,
   `venue_google_place_id` varchar(100) DEFAULT NULL,
   `venue_date_added` datetime DEFAULT NULL,
+  `venue_date_modified` datetime DEFAULT NULL,
   `venue_image_url` text,
   `venue_address_1` varchar(100) DEFAULT NULL,
   `venue_address_2` varchar(100) DEFAULT NULL,

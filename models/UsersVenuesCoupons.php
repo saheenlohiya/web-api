@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 class UsersVenuesCoupons extends BaseUsersVenuesCoupons
 {
 
-    public function behaviors()
+public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
@@ -25,10 +25,10 @@ class UsersVenuesCoupons extends BaseUsersVenuesCoupons
     public function rules()
     {
         return ArrayHelper::merge(
-            parent::rules(),
-            [
-                # custom validation rules
-            ]
+             parent::rules(),
+             [
+                  # custom validation rules
+             ]
         );
     }
 }

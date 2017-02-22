@@ -24,6 +24,7 @@ abstract class UsersVenuesRatingsResponses extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -67,10 +68,11 @@ abstract class UsersVenuesRatingsResponses extends \yii\db\ActiveRecord
      */
     public function getUserVenueRating()
     {
-        return $this->hasOne(\app\models\UsersVenuesRatings::className(), ['id' => 'user_venue_rating_id']);
+        return $this->hasOne(\app\models\UsersVenuesRatings::className(), ['id' => 'user_venue_rating_id'])->inverseOf('usersVenuesRatingsResponses');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesRatingsResponsesQuery the active query used by this AR class.

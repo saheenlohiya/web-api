@@ -23,6 +23,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -53,18 +54,8 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
             'id' => 'ID',
             'venue_id' => 'Venue ID',
             'user_id' => 'User ID',
-            'venue_admin_level' => '1000 is the highest level.',
+            'venue_admin_level' => 'Venue Admin Level',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeHints()
-    {
-        return array_merge(parent::attributeHints(), [
-            'venue_admin_level' => '1000 is the highest level.',
-        ]);
     }
 
     /**
@@ -72,7 +63,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('venuesAdmins');
     }
 
     /**
@@ -80,7 +71,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('venuesAdmins');
     }
 
     /**
@@ -88,10 +79,11 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenuesCoupons()
     {
-        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id']);
+        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id'])->inverseOf('venueAdmin');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesAdminsQuery the active query used by this AR class.

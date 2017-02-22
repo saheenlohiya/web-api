@@ -22,6 +22,7 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -63,10 +64,11 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord
      */
     public function getVenues()
     {
-        return $this->hasMany(\app\models\Venues::className(), ['venue_type_id' => 'id']);
+        return $this->hasMany(\app\models\Venues::className(), ['venue_type_id' => 'id'])->inverseOf('venueType');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesTypesQuery the active query used by this AR class.

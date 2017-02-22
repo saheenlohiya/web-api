@@ -45,13 +45,13 @@ abstract class Users extends \yii\db\ActiveRecord
 {
 
 
+
     /**
-     * ENUM field values
-     */
+    * ENUM field values
+    */
     const USER_GENDER_M = 'M';
     const USER_GENDER_F = 'F';
     var $enum_labels = false;
-
     /**
      * @inheritdoc
      */
@@ -81,9 +81,9 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_verification_code'], 'string', 'max' => 32],
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
             ['user_gender', 'in', 'range' => [
-                self::USER_GENDER_M,
-                self::USER_GENDER_F,
-            ]
+                    self::USER_GENDER_M,
+                    self::USER_GENDER_F,
+                ]
             ]
         ];
     }
@@ -126,7 +126,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesCoupons()
     {
-        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id']);
+        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
@@ -134,7 +134,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesFollows()
     {
-        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id']);
+        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
@@ -142,7 +142,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesRatings()
     {
-        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id']);
+        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
@@ -150,7 +150,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getVenues()
     {
-        return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id']);
+        return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
@@ -158,10 +158,11 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getVenuesAdmins()
     {
-        return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id']);
+        return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\UsersQuery the active query used by this AR class.
@@ -177,10 +178,9 @@ abstract class Users extends \yii\db\ActiveRecord
      * @param string $value
      * @return string
      */
-    public static function getUserGenderValueLabel($value)
-    {
+    public static function getUserGenderValueLabel($value){
         $labels = self::optsUserGender();
-        if (isset($labels[$value])) {
+        if(isset($labels[$value])){
             return $labels[$value];
         }
         return $value;

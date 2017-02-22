@@ -14,6 +14,7 @@ use Yii;
  * @property string $venue_name
  * @property string $venue_google_place_id
  * @property string $venue_date_added
+ * @property string $venue_date_modified
  * @property string $venue_image_url
  * @property string $venue_address_1
  * @property string $venue_address_2
@@ -43,6 +44,7 @@ abstract class Venues extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -59,7 +61,7 @@ abstract class Venues extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active'], 'integer'],
-            [['venue_date_added', 'venue_claim_date', 'venue_claim_code_exp'], 'safe'],
+            [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp'], 'safe'],
             [['venue_image_url'], 'string'],
             [['venue_lat', 'venue_lon'], 'number'],
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
@@ -84,6 +86,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_name' => 'Venue Name',
             'venue_google_place_id' => 'Venue Google Place ID',
             'venue_date_added' => 'Venue Date Added',
+            'venue_date_modified' => 'Venue Date Modified',
             'venue_image_url' => 'Venue Image Url',
             'venue_address_1' => 'Venue Address 1',
             'venue_address_2' => 'Venue Address 2',
@@ -108,7 +111,7 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesFollows()
     {
-        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['venue_id' => 'id']);
+        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['venue_id' => 'id'])->inverseOf('venue');
     }
 
     /**
@@ -116,7 +119,7 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesRatings()
     {
-        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['venue_id' => 'id']);
+        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['venue_id' => 'id'])->inverseOf('venue');
     }
 
     /**
@@ -124,7 +127,7 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('venues');
     }
 
     /**
@@ -132,7 +135,7 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getVenueType()
     {
-        return $this->hasOne(\app\models\VenuesTypes::className(), ['id' => 'venue_type_id']);
+        return $this->hasOne(\app\models\VenuesTypes::className(), ['id' => 'venue_type_id'])->inverseOf('venues');
     }
 
     /**
@@ -140,7 +143,7 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getVenuesAdmins()
     {
-        return $this->hasMany(\app\models\VenuesAdmins::className(), ['venue_id' => 'id']);
+        return $this->hasMany(\app\models\VenuesAdmins::className(), ['venue_id' => 'id'])->inverseOf('venue');
     }
 
     /**
@@ -148,10 +151,11 @@ abstract class Venues extends \yii\db\ActiveRecord
      */
     public function getVenuesCoupons()
     {
-        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_id' => 'id']);
+        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_id' => 'id'])->inverseOf('venue');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesQuery the active query used by this AR class.

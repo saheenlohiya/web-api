@@ -26,6 +26,7 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
 {
 
 
+
     /**
      * @inheritdoc
      */
@@ -72,7 +73,7 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('usersVenuesCoupons');
     }
 
     /**
@@ -80,10 +81,11 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getVenueCoupon()
     {
-        return $this->hasOne(\app\models\VenuesCoupons::className(), ['id' => 'venue_coupon_id']);
+        return $this->hasOne(\app\models\VenuesCoupons::className(), ['id' => 'venue_coupon_id'])->inverseOf('usersVenuesCoupons');
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesCouponsQuery the active query used by this AR class.
