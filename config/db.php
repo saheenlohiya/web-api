@@ -1,6 +1,5 @@
 <?php
-
-if(YII_ENV_DEV){
+if(YII_ENV_DEV || YII_ENV == 'dev' || YII_ENV == 'test'){
     return [
         'class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=127.0.0.1;dbname=tellus_tests',
