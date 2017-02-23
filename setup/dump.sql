@@ -139,7 +139,6 @@ CREATE TABLE `venues` (
   `venue_google_place_id` varchar(100) DEFAULT NULL,
   `venue_date_added` datetime DEFAULT NULL,
   `venue_date_modified` datetime DEFAULT NULL,
-  `venue_image_url` text,
   `venue_address_1` varchar(100) DEFAULT NULL,
   `venue_address_2` varchar(100) DEFAULT NULL,
   `venue_city` varchar(20) DEFAULT NULL,
@@ -204,6 +203,18 @@ CREATE TABLE `venues_coupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues_coupons` */
+
+/*Table structure for table `venues_images` */
+
+CREATE TABLE `venues_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `venue_id` int(11) DEFAULT NULL,
+  `venue_image_url` text,
+  `venue_image_date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `venues_images` */
 
 /*Table structure for table `venues_types` */
 
