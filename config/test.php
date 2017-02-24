@@ -1,6 +1,8 @@
 <?php
 $params = require(__DIR__ . '/params.php');
 $dbParams = require(__DIR__ . '/db.php');
+$mail = require(__DIR__ . '/mail.php');
+
 
 /**
  * Application configuration shared by all test types
@@ -11,9 +13,7 @@ return [
     'language' => 'en-US',
     'components' => [
         'db' => $dbParams,
-        'mailer' => [
-            'useFileTransport' => true,
-        ],
+        'mailer' => $mail,
         'assetManager' => [            
             'basePath' => __DIR__ . '/../web/assets',
         ],
@@ -32,7 +32,17 @@ return [
                 'domain' => 'localhost',
             ],
             */
-        ],        
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning', 'info'],
+                    'logFile' => '@app/runtime/logs/tests.log',
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

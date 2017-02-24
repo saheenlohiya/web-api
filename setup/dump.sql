@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (32 bit)
-MySQL - 5.5.42 : Database - tellus_tests
+MySQL - 5.6.35 : Database - tellus_tests
 *********************************************************************
 */
 
@@ -39,6 +39,8 @@ CREATE TABLE `users` (
   `user_verification_code` varchar(32) DEFAULT NULL,
   `user_active` tinyint(1) DEFAULT '1',
   `user_is_verified` tinyint(1) DEFAULT '0',
+  `user_access_token` varchar(255) DEFAULT NULL,
+  `user_auth_key` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -5,6 +5,7 @@ use app\models\UsersVenuesFollows;
 use app\models\Venues;
 use app\models\Users;
 use Yii;
+use yii\base\Exception;
 
 class UsersVenuesFollowsTest extends \Codeception\Test\Unit
 {
@@ -61,11 +62,14 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
     {
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
-        $this->user->user_email = 'test2@gmail.com';
+        $this->user->user_email = 'test22@gmail.com';
         $this->user->user_phone = '8192189988';
         $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
 
-        $this->user->save();
+        if(!$this->user->save()){
+            Throw new Exception("Could not save user");
+        }
+
     }
 
     private function _createVenue()
@@ -75,19 +79,16 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
 
         $this->venue->user_id = $this->user->id;
         $this->venue->venue_name = "Test Venue";
-        $this->venue->venue_email = "test_venue_email@testvenue.com";
+        $this->venue->venue_email = "test_venue_email2@testvenue.com";
         $this->venue->venue_address_1 = "9185 Research Blvd";
         $this->venue->venue_city = "Austin";
         $this->venue->venue_state = "TX";
         $this->venue->venue_zip = "78758";
         $this->venue->venue_type_id = 1;
 
-        $this->venue->address = [
-            'street_address' => $this->venue->venue_address_1,
-            'postal_code' => $this->venue->venue_zip
-        ];
-
-        $this->venue->save();
+        if(!$this->venue->save(FALSE)){
+            Throw new Exception("Could not save venue");
+        }
     }
 
 }

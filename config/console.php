@@ -2,6 +2,7 @@
 
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
+$mail = require(__DIR__ . '/mail.php');
 
 $config = [
     'id' => 'basic-console',
@@ -16,10 +17,11 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','info'],
                 ],
             ],
         ],
+        'mailer' => $mail,
         'db' => $db,
     ],
     'params' => $params,
