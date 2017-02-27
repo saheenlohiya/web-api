@@ -4,6 +4,7 @@ machine:
 
 database:
   override:
+    - mysql -u ubuntu -e "create database tellus_tests"
     - mysql -u ubuntu tellus_tests < setup/dump.sql
 
 test:
