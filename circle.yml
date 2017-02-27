@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - php codecept run unit
+    - php vendor/codeception/codeception/codecept run
