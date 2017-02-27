@@ -9,4 +9,4 @@ database:
 
 test:
   override:
-    - php vendor/codeception/base/codecept run unit
+    - php vendor/bin/codecept run unit
