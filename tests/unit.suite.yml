@@ -9,8 +9,8 @@ modules:
       - Asserts
       - Db:
                dsn: 'mysql:host=127.0.0.1;dbname=tellus_tests'
-               user: 'root'
-               password: 'password'
+               user: 'ubuntu'
+               password: ''
                dump: 'setup/dump.sql'
                populate: true
                cleanup: true
