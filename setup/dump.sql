@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (32 bit)
-MySQL - 5.5.42 : Database - tellus_tests
+MySQL - 5.6.35 : Database - tellus_tests
 *********************************************************************
 */
 
@@ -39,6 +39,8 @@ CREATE TABLE `users` (
   `user_verification_code` varchar(32) DEFAULT NULL,
   `user_active` tinyint(1) DEFAULT '1',
   `user_is_verified` tinyint(1) DEFAULT '0',
+  `user_access_token` varchar(255) DEFAULT NULL,
+  `user_auth_key` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -139,7 +141,6 @@ CREATE TABLE `venues` (
   `venue_google_place_id` varchar(100) DEFAULT NULL,
   `venue_date_added` datetime DEFAULT NULL,
   `venue_date_modified` datetime DEFAULT NULL,
-  `venue_image_url` text,
   `venue_address_1` varchar(100) DEFAULT NULL,
   `venue_address_2` varchar(100) DEFAULT NULL,
   `venue_city` varchar(20) DEFAULT NULL,
@@ -204,6 +205,18 @@ CREATE TABLE `venues_coupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues_coupons` */
+
+/*Table structure for table `venues_images` */
+
+CREATE TABLE `venues_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `venue_id` int(11) DEFAULT NULL,
+  `venue_image_url` text,
+  `venue_image_date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `venues_images` */
 
 /*Table structure for table `venues_types` */
 

@@ -1,6 +1,7 @@
 <?php
 $db = require(__DIR__ . '/../../config/db.php');
-$params = require(__DIR__ . '/params.php');
+$mail = require(__DIR__ . '/../../config/mail.php');
+$params = require(__DIR__ . '/../../config/params.php');
 
 $config = [
     'id' => 'basic',
@@ -27,6 +28,7 @@ $config = [
                 ],
             ],
         ],
+        'mailer'=>$mail,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
@@ -35,6 +37,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings']],
             ],
         ],
         'db' => $db,

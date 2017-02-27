@@ -33,9 +33,8 @@ class IPAddressBehavior extends Behavior
      */
     public function beforeSave()
     {
-        //$ip_address = gethostbynamel(gethostname())[0];
         $ip = getenv('REMOTE_ADDR');
-        $this->owner->{$this->column} = isset($ip_address)?$ip_address:'0.0.0.0';
+        $this->owner->{$this->column} = (isset($ip) && !empty($ip))?$ip:'0.0.0.0';
     }
 
 }

@@ -15,7 +15,6 @@ use Yii;
  * @property string $venue_google_place_id
  * @property string $venue_date_added
  * @property string $venue_date_modified
- * @property string $venue_image_url
  * @property string $venue_address_1
  * @property string $venue_address_2
  * @property string $venue_city
@@ -62,7 +61,6 @@ abstract class Venues extends \yii\db\ActiveRecord
         return [
             [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active'], 'integer'],
             [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp'], 'safe'],
-            [['venue_image_url'], 'string'],
             [['venue_lat', 'venue_lon'], 'number'],
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
             [['venue_city'], 'string', 'max' => 20],
@@ -87,7 +85,6 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_google_place_id' => 'Venue Google Place ID',
             'venue_date_added' => 'Venue Date Added',
             'venue_date_modified' => 'Venue Date Modified',
-            'venue_image_url' => 'Venue Image Url',
             'venue_address_1' => 'Venue Address 1',
             'venue_address_2' => 'Venue Address 2',
             'venue_city' => 'Venue City',
