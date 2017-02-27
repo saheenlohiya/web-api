@@ -68,7 +68,7 @@ class UsersTest extends \Codeception\Test\Unit
         $this->specify("Can save user", function () {
             $this->user->user_firstname = 'Dwamian';
             $this->user->user_lastname = 'Mcleish';
-            $this->user->user_email = 'test2@gmail.com';
+            $this->user->user_email = 'dmcleish@gmail.com';
             $this->user->user_phone = '8192189988';
             $this->user->user_password = 'password';
             $this->assertTrue($this->user->save());
@@ -76,9 +76,6 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertNotNull($this->user->user_verification_code);
             $this->assertNotNull($this->user->uuid);
             $this->assertNotNull($this->user->user_ip_address);
-            //$this->assertNotNull($this->user->user_lat);
-            //$this->assertNotNull($this->user->user_lon);
-            $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_modified);
         });
 
