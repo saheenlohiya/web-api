@@ -1,7 +1,7 @@
 TellUs Project
 ============================
 
-[![Build Status](https://circleci.com/gh/dwamianm/tellusv2.svg?style=shield&circle-token=44fcbab8861fd5fdae0081de6350c4b76b3cb0f8)]
+![Build Status](https://circleci.com/gh/dwamianm/tellusv2.svg?style=shield&circle-token=44fcbab8861fd5fdae0081de6350c4b76b3cb0f8)
 
 DIRECTORY STRUCTURE
 -------------------
