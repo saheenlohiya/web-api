@@ -1,0 +1,12 @@
+machine:
+  php:
+    version: 7.1.0
+
+database:
+  override:
+    - mysql -u ubuntu -e "create database tellus_tests"
+    - mysql -u ubuntu tellus_tests < setup/dump.sql
+
+test:
+  override:
+    - php vendor/bin/codecept run unit
