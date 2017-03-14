@@ -66,7 +66,6 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
         $this->user->user_phone = '8192189988';
         $this->user->user_zip = '78758';
         $this->user->user_dob = '10/08/1978';
-        $this->user->user_password = 'password';
         $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
 
         if(!$this->user->save()){
