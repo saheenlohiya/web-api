@@ -6,6 +6,7 @@ use app\components\behaviors\IPAddressBehavior;
 use app\components\behaviors\UUIDBehavior;
 use app\components\Mailer;
 use \app\models\base\Users as BaseUsers;
+use app\components\behaviors\GeocodeBehavior;
 
 use Yii;
 use yii\base\Exception;
@@ -128,6 +129,17 @@ class Users extends BaseUsers implements IdentityInterface
                 [
                     'class' => IPAddressBehavior::className(),
                     'column' => 'user_ip_address'
+                ],
+                [
+                    'class' => GeocodeBehavior::className(),
+
+                    'address' => [
+                        'postal_code' => $this->user_zip,
+                        'country' =>'United States'
+                    ],
+                    'latitudeAttribute' => 'user_lat',
+                    'longitudeAttribute' => 'user_lon'
+
                 ]
 
             ]
@@ -140,7 +152,8 @@ class Users extends BaseUsers implements IdentityInterface
             parent::rules(),
             [
                 # custom validation rules
-                [['user_firstname', 'user_lastname', 'user_email', 'user_phone', 'user_password'], 'required'],
+                [['user_firstname', 'user_lastname', 'user_email', 'user_password','user_zip','user_dob'], 'required'],
+                ['user_dob','date','format'=>'M/d/yyyy'],
                 ['user_email', 'email'],
             ]
         );
@@ -149,7 +162,10 @@ class Users extends BaseUsers implements IdentityInterface
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
+            //encrypt the password
             $this->user_password = Yii::$app->getSecurity()->generatePasswordHash($this->user_password);
+            //change the date format
+            $this->user_dob = Yii::$app->formatter->asDate($this->user_dob, 'yyyy-MM-dd');
             return true;
         } else {
             return false;
@@ -168,6 +184,17 @@ class Users extends BaseUsers implements IdentityInterface
             Throw new Exception("Could not send welcome email");
         }
 
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+
+        //make sure we return the date in its original ISO/ICU format
+        $this->user_dob = Yii::$app->formatter->asDate($this->user_dob, 'short');
     }
 
 

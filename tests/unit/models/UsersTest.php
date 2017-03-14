@@ -45,9 +45,10 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertFalse($this->user->validate(['user_email']));
         });
 
+        //Use to be required. Not anymore.
         $this->specify("Phone is required", function () {
             $this->user->user_phone = null;
-            $this->assertFalse($this->user->validate(['user_phone']));
+            $this->assertTrue($this->user->validate(['user_phone']));
         });
 
         $this->specify("Password is required", function () {
@@ -65,11 +66,30 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertTrue($this->user->validate(['user_email']));
         });
 
+        $this->specify("Zipcode is required", function () {
+            $this->user->user_zip = null;
+            $this->assertFalse($this->user->validate(['user_zip']));
+        });
+
+        $this->specify("DOB is required", function () {
+            $this->user->user_dob = null;
+            $this->assertFalse($this->user->validate(['user_dob']));
+        });
+
+        $this->specify("DOB must be in the required format", function () {
+            $this->user->user_dob = '778987';
+            $this->assertFalse($this->user->validate(['user_dob']));
+            $this->user->user_dob = '10/08/1978';
+            $this->assertTrue($this->user->validate(['user_dob']));
+        });
+
         $this->specify("Can save user", function () {
             $this->user->user_firstname = 'Dwamian';
             $this->user->user_lastname = 'Mcleish';
             $this->user->user_email = 'dmcleish@gmail.com';
             $this->user->user_phone = '8192189988';
+            $this->user->user_zip = '78758';
+            $this->user->user_dob = '10/08/1978';
             $this->user->user_password = 'password';
             $this->assertTrue($this->user->save());
             $this->assertNotNull($this->user->user_date_joined);
