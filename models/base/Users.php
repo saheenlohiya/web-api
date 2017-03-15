@@ -85,6 +85,7 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_verification_code'], 'string', 'max' => 32],
             [['user_access_token', 'user_auth_key'], 'string', 'max' => 255],
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
+            [['user_username'], 'unique'],
             ['user_gender', 'in', 'range' => [
                     self::USER_GENDER_M,
                     self::USER_GENDER_F,

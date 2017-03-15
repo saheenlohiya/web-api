@@ -43,7 +43,8 @@ CREATE TABLE `users` (
   `user_access_token` varchar(255) DEFAULT NULL,
   `user_auth_key` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_email` (`user_email`,`user_phone`)
+  UNIQUE KEY `user_email` (`user_email`,`user_phone`),
+  UNIQUE KEY `user_username` (`user_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
