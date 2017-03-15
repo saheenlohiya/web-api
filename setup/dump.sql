@@ -20,6 +20,7 @@ CREATE TABLE `users` (
   `user_firstname` varchar(50) DEFAULT NULL,
   `user_lastname` varchar(50) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
+  `user_username` varchar(25) DEFAULT NULL,
   `user_phone` varchar(20) DEFAULT NULL,
   `user_gender` enum('M','F') DEFAULT NULL,
   `user_dob` date DEFAULT NULL,
