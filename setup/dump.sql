@@ -20,6 +20,7 @@ CREATE TABLE `users` (
   `user_firstname` varchar(50) DEFAULT NULL,
   `user_lastname` varchar(50) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
+  `user_username` varchar(25) DEFAULT NULL,
   `user_phone` varchar(20) DEFAULT NULL,
   `user_gender` enum('M','F') DEFAULT NULL,
   `user_dob` date DEFAULT NULL,
@@ -42,7 +43,8 @@ CREATE TABLE `users` (
   `user_access_token` varchar(255) DEFAULT NULL,
   `user_auth_key` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_email` (`user_email`,`user_phone`)
+  UNIQUE KEY `user_email` (`user_email`,`user_phone`),
+  UNIQUE KEY `user_username` (`user_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */

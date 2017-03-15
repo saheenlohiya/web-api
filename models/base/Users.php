@@ -14,6 +14,7 @@ use Yii;
  * @property string $user_firstname
  * @property string $user_lastname
  * @property string $user_email
+ * @property string $user_username
  * @property string $user_phone
  * @property string $user_gender
  * @property string $user_dob
@@ -75,6 +76,7 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_active', 'user_is_verified'], 'integer'],
             [['uuid', 'user_email', 'user_password', 'user_address_1', 'user_address_2'], 'string', 'max' => 100],
             [['user_firstname', 'user_lastname', 'user_facebook_account_id'], 'string', 'max' => 50],
+            [['user_username'], 'string', 'max' => 25],
             [['user_phone'], 'string', 'max' => 20],
             [['user_city'], 'string', 'max' => 30],
             [['user_state'], 'string', 'max' => 2],
@@ -83,6 +85,7 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_verification_code'], 'string', 'max' => 32],
             [['user_access_token', 'user_auth_key'], 'string', 'max' => 255],
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
+            [['user_username'], 'unique'],
             ['user_gender', 'in', 'range' => [
                     self::USER_GENDER_M,
                     self::USER_GENDER_F,
@@ -102,6 +105,7 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_firstname' => 'User Firstname',
             'user_lastname' => 'User Lastname',
             'user_email' => 'User Email',
+            'user_username' => 'User Username',
             'user_phone' => 'User Phone',
             'user_gender' => 'User Gender',
             'user_dob' => 'User Dob',
