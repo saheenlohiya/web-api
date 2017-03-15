@@ -103,6 +103,7 @@ class VenuesTest extends \Codeception\Test\Unit
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
         $this->user->user_email = 'dmcleish554@gmail.com';
+        $this->user->user_username = 'dwamianm';
         $this->user->user_phone = '8192189988';
         $this->user->user_zip = '78758';
         $this->user->user_dob = '10/08/1978';

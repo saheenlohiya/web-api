@@ -45,6 +45,11 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertFalse($this->user->validate(['user_email']));
         });
 
+        $this->specify("Username is required", function () {
+            $this->user->user_username = null;
+            $this->assertFalse($this->user->validate(['user_username']));
+        });
+
         //Use to be required. Not anymore.
         $this->specify("Phone is required", function () {
             $this->user->user_phone = null;
@@ -87,6 +92,7 @@ class UsersTest extends \Codeception\Test\Unit
             $this->user->user_firstname = 'Dwamian';
             $this->user->user_lastname = 'Mcleish';
             $this->user->user_email = 'dmcleish@gmail.com';
+            $this->user->user_username = 'dwamianm';
             $this->user->user_phone = '8192189988';
             $this->user->user_zip = '78758';
             $this->user->user_dob = '10/08/1978';
