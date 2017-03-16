@@ -47,11 +47,6 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
             $this->assertFalse($this->rating->validate(['venue_id']));
         });
 
-        $this->specify("Venue rating is required",function(){
-            $this->rating->venue_rating_cat_1 = null;
-            $this->assertFalse($this->rating->validate(['venue_rating_cat_1']));
-        });
-
         $this->specify("Venue rating must be an integer between 1 and 5 ",function(){
             $this->rating->venue_rating_cat_1 = 6;
             $this->assertFalse($this->rating->validate(['venue_rating_cat_1']));
@@ -65,9 +60,11 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
             $this->rating->user_id = $this->user->id;
             $this->rating->venue_id = $this->venue->id;
             $this->rating->venue_rating_comment = 'Test comment';
+
             $this->assertTrue($this->rating->save());
 
             $this->assertNotNull($this->rating->venue_rating_date);
+            $this->assertNotNull($this->rating->venue_rating_average);
         });
     }
 
@@ -92,7 +89,7 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
 
         $this->venue->user_id = $this->user->id;
         $this->venue->venue_name = "Test Venue";
-        $this->venue->venue_email = "test_venue_email@testvenue.com";
+        $this->venue->venue_email = "test_venue_email2@testvenue.com";
         $this->venue->venue_address_1 = "9185 Research Blvd";
         $this->venue->venue_city = "Austin";
         $this->venue->venue_state = "TX";

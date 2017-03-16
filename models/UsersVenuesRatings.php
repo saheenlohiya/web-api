@@ -41,9 +41,45 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['user_id','venue_id','venue_rating_cat_1'],'required'],
-                ['venue_rating_cat_1', 'integer','min'=> 1, 'max'=> 5],
+                [['user_id','venue_id'],'required'],
+                [['venue_rating_cat_1','venue_rating_cat_2','venue_rating_cat_3','venue_rating_cat_4','venue_rating_cat_4','venue_rating_cat_5','venue_rating_cat_6'], 'integer','min'=> 1, 'max'=> 5],
             ]
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+
+            $this->_calcRatingAverage();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    private function _calcRatingAverage(){
+        $sum = 0;
+        $count = 0;
+
+        //we have 6 categories so lets just do a simple loop to check them and update the average
+        //we dont want to use any 0 value cats
+        for($i=1;$i<=6;$i++){
+            $cat = 'venue_rating_cat_'.$i;
+            if($this->$cat > 0){
+                $sum += $this->$cat;
+                $count++;
+            }
+        }
+
+        //now calculate the average to save
+        $this->venue_rating_average = $sum/$count;
+    }
+
+
 }

@@ -82,13 +82,13 @@ class VenuesTest extends \Codeception\Test\Unit
 
             $this->venue->user_id = $this->user->id;
             $this->venue->venue_name = "Test Venue";
-            $this->venue->venue_email = "test_venue_email@testvenue.com";
+            $this->venue->venue_email = "test_venue_email23@testvenue.com";
             $this->venue->venue_address_1 = "9185 Research Blvd";
             $this->venue->venue_city = "Austin";
             $this->venue->venue_state = "TX";
             $this->venue->venue_zip = "78758";
             $this->venue->venue_type_id = 1;
-            
+
             $this->assertTrue($this->venue->save());
 
             $this->assertNotNull($this->venue->venue_lat);

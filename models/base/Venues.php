@@ -30,6 +30,9 @@ use Yii;
  * @property integer $venue_claimed
  * @property integer $venue_type_id
  * @property integer $venue_active
+ * @property integer $venue_verified
+ * @property string $venue_verified_date
+ * @property string $venue_last_verified_date
  *
  * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
  * @property \app\models\UsersVenuesRatings[] $usersVenuesRatings
@@ -60,8 +63,8 @@ abstract class Venues extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active'], 'integer'],
-            [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp'], 'safe'],
+            [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active', 'venue_verified'], 'integer'],
+            [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp', 'venue_verified_date', 'venue_last_verified_date'], 'safe'],
             [['venue_lat', 'venue_lon'], 'number'],
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
             [['venue_city'], 'string', 'max' => 20],
@@ -101,6 +104,9 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_claimed' => 'Venue Claimed',
             'venue_type_id' => 'Venue Type ID',
             'venue_active' => 'Venue Active',
+            'venue_verified' => 'Venue Verified',
+            'venue_verified_date' => 'Venue Verified Date',
+            'venue_last_verified_date' => 'Venue Last Verified Date',
         ];
     }
 
