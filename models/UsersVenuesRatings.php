@@ -41,8 +41,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['user_id','venue_id','venue_rating'],'required'],
-                ['venue_rating', 'integer','min'=> 1, 'max'=> 5],
+                [['user_id','venue_id','venue_rating_cat_1'],'required'],
+                ['venue_rating_cat_1', 'integer','min'=> 1, 'max'=> 5],
             ]
         );
     }

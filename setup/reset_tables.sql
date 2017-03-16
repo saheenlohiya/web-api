@@ -9,4 +9,5 @@ TRUNCATE TABLE venues;
 TRUNCATE TABLE venues_admins;
 TRUNCATE TABLE venues_coupons;
 TRUNCATE TABLE venues_images;
+TRUNCATE TABLE venues_settings;
 SET FOREIGN_KEY_CHECKS = 1;

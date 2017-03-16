@@ -48,20 +48,20 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
         });
 
         $this->specify("Venue rating is required",function(){
-            $this->rating->venue_rating = null;
-            $this->assertFalse($this->rating->validate(['venue_rating']));
+            $this->rating->venue_rating_cat_1 = null;
+            $this->assertFalse($this->rating->validate(['venue_rating_cat_1']));
         });
 
         $this->specify("Venue rating must be an integer between 1 and 5 ",function(){
-            $this->rating->venue_rating = 6;
-            $this->assertFalse($this->rating->validate(['venue_rating']));
+            $this->rating->venue_rating_cat_1 = 6;
+            $this->assertFalse($this->rating->validate(['venue_rating_cat_1']));
         });
 
         $this->specify("Can save rating",function(){
 
             $this->_createVenue();
 
-            $this->rating->venue_rating = 5;
+            $this->rating->venue_rating_cat_1 = 5;
             $this->rating->user_id = $this->user->id;
             $this->rating->venue_id = $this->venue->id;
             $this->rating->venue_rating_comment = 'Test comment';
