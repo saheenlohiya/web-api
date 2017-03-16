@@ -12,10 +12,20 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property integer $venue_id
- * @property integer $venue_rating
+ * @property integer $venue_rating_cat_1
+ * @property integer $venue_rating_cat_2
+ * @property integer $venue_rating_cat_3
+ * @property integer $venue_rating_cat_4
+ * @property integer $venue_rating_cat_5
+ * @property integer $venue_rating_cat_6
+ * @property string $venue_rating_average
  * @property string $venue_rating_comment
  * @property string $venue_rating_date
  * @property integer $venue_rating_acknowledged
+ * @property integer $venue_rating_resolved
+ * @property string $venue_rating_date_resolved
+ * @property string $venue_rating_resolve_expiration
+ * @property integer $venues_updated
  *
  * @property \app\models\Users $user
  * @property \app\models\Venues $venue
@@ -43,9 +53,10 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'venue_id', 'venue_rating', 'venue_rating_acknowledged'], 'integer'],
+            [['user_id', 'venue_id', 'venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6', 'venue_rating_acknowledged', 'venue_rating_resolved', 'venues_updated'], 'integer'],
+            [['venue_rating_average'], 'number'],
             [['venue_rating_comment'], 'string'],
-            [['venue_rating_date'], 'safe'],
+            [['venue_rating_date', 'venue_rating_date_resolved', 'venue_rating_resolve_expiration'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['venue_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Venues::className(), 'targetAttribute' => ['venue_id' => 'id']]
         ];
@@ -60,11 +71,36 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'venue_id' => 'Venue ID',
-            'venue_rating' => 'Venue Rating',
+            'venue_rating_cat_1' => 'Venue Rating Cat 1',
+            'venue_rating_cat_2' => 'Venue Rating Cat 2',
+            'venue_rating_cat_3' => 'Venue Rating Cat 3',
+            'venue_rating_cat_4' => 'Venue Rating Cat 4',
+            'venue_rating_cat_5' => 'Venue Rating Cat 5',
+            'venue_rating_cat_6' => 'Venue Rating Cat 6',
+            'venue_rating_average' => 'Venue Rating Average',
             'venue_rating_comment' => 'Venue Rating Comment',
             'venue_rating_date' => 'Venue Rating Date',
             'venue_rating_acknowledged' => 'Venue Rating Acknowledged',
+            'venue_rating_resolved' => 'Venue Rating Resolved',
+            'venue_rating_date_resolved' => 'Venue Rating Date Resolved',
+            'venue_rating_resolve_expiration' => 'Venue Rating Resolve Expiration',
+            'venues_updated' => 'Venues Updated',
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return array_merge(parent::attributeHints(), [
+            'venue_rating_cat_1' => 'Default: Service',
+            'venue_rating_cat_2' => 'Default: Staff',
+            'venue_rating_cat_3' => 'Default: Facility',
+            'venue_rating_cat_4' => 'Default: Custom 1',
+            'venue_rating_cat_5' => 'Default: Custom 2',
+            'venue_rating_cat_6' => 'Default: Custom 3',
+        ]);
     }
 
     /**

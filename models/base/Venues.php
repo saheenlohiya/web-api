@@ -37,6 +37,7 @@ use Yii;
  * @property \app\models\VenuesTypes $venueType
  * @property \app\models\VenuesAdmins[] $venuesAdmins
  * @property \app\models\VenuesCoupons[] $venuesCoupons
+ * @property \app\models\VenuesSettings $venuesSettings
  * @property string $aliasModel
  */
 abstract class Venues extends \yii\db\ActiveRecord
@@ -149,6 +150,14 @@ abstract class Venues extends \yii\db\ActiveRecord
     public function getVenuesCoupons()
     {
         return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_id' => 'id'])->inverseOf('venue');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVenuesSettings()
+    {
+        return $this->hasOne(\app\models\VenuesSettings::className(), ['venue_id' => 'id'])->inverseOf('venue');
     }
 
 
