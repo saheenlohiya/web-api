@@ -4,6 +4,7 @@ namespace tests\models;
 
 use app\models\Venues;
 use app\models\Users;
+use dosamigos\google\places\Search;
 use Yii;
 
 
@@ -95,6 +96,11 @@ class VenuesTest extends \Codeception\Test\Unit
             $this->assertNotNull($this->venue->venue_lon);
         });
 
+    }
+
+    public function testCanSearchGooglePlaces(){
+        $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
+        $this->assertArrayHasKey('html_attributions',$search->text('lowes in leander texas'));
     }
 
 

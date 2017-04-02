@@ -45,9 +45,9 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertFalse($this->user->validate(['user_email']));
         });
 
-        $this->specify("Username is required", function () {
+        $this->specify("Username is no longer required", function () {
             $this->user->user_username = null;
-            $this->assertFalse($this->user->validate(['user_username']));
+            $this->assertTrue($this->user->validate(['user_username']));
         });
 
         //Use to be required. Not anymore.

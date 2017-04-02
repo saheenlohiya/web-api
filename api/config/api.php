@@ -34,7 +34,12 @@ $config = [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users']],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => ['v1/users'],
+                    'extraPatterns' => [
+                        'GET email-exists' => 'email-exists',
+                    ]
+                ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings']],
@@ -42,7 +47,7 @@ $config = [
         ],
         'db' => $db,
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => false,
         ],
     ],
