@@ -135,7 +135,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesCoupons()
     {
-        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id'])->inverseOf('user');
+        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -143,7 +143,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesFollows()
     {
-        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id'])->inverseOf('user');
+        return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -151,7 +151,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesRatings()
     {
-        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id'])->inverseOf('user');
+        return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -159,7 +159,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getVenues()
     {
-        return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id'])->inverseOf('user');
+        return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class Users extends \yii\db\ActiveRecord
      */
     public function getVenuesAdmins()
     {
-        return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id'])->inverseOf('user');
+        return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id']);
     }
 
 

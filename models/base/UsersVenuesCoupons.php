@@ -73,7 +73,7 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('usersVenuesCoupons');
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getVenueCoupon()
     {
-        return $this->hasOne(\app\models\VenuesCoupons::className(), ['id' => 'venue_coupon_id'])->inverseOf('usersVenuesCoupons');
+        return $this->hasOne(\app\models\VenuesCoupons::className(), ['id' => 'venue_coupon_id']);
     }
 
 

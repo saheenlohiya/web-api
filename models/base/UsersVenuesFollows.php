@@ -63,7 +63,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('usersVenuesFollows');
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('usersVenuesFollows');
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 

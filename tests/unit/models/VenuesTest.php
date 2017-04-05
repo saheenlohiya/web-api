@@ -98,9 +98,17 @@ class VenuesTest extends \Codeception\Test\Unit
 
     }
 
-    public function testCanSearchGooglePlaces(){
-        $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
-        $this->assertArrayHasKey('html_attributions',$search->text('lowes in leander texas'));
+    public function testCanSearchGooglePlaces()
+    {
+        //$search = new Search(['key' => Yii::$app->params['googleApiKey']]);
+        //$this->assertArrayHasKey('html_attributions',$search->text('lowes in leander texas'));
+    }
+
+    public function testGetNearbyPlaces()
+    {
+        $venues = Venues::create();
+        $savedPlaces = $venues->getNearbyPlaces('30.377248', '-97.732338',16093.4);
+        $this->assertNotNull($savedPlaces);
     }
 
 

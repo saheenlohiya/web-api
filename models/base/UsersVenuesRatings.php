@@ -71,12 +71,12 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'venue_id' => 'Venue ID',
-            'venue_rating_cat_1' => 'Venue Rating Cat 1',
-            'venue_rating_cat_2' => 'Venue Rating Cat 2',
-            'venue_rating_cat_3' => 'Venue Rating Cat 3',
-            'venue_rating_cat_4' => 'Venue Rating Cat 4',
-            'venue_rating_cat_5' => 'Venue Rating Cat 5',
-            'venue_rating_cat_6' => 'Venue Rating Cat 6',
+            'venue_rating_cat_1' => 'Default: Service',
+            'venue_rating_cat_2' => 'Default: Staff',
+            'venue_rating_cat_3' => 'Default: Facility',
+            'venue_rating_cat_4' => 'Default: Custom 1',
+            'venue_rating_cat_5' => 'Default: Custom 2',
+            'venue_rating_cat_6' => 'Default: Custom 3',
             'venue_rating_average' => 'Venue Rating Average',
             'venue_rating_comment' => 'Venue Rating Comment',
             'venue_rating_date' => 'Venue Rating Date',
@@ -108,7 +108,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('usersVenuesRatings');
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('usersVenuesRatings');
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
     /**
@@ -124,7 +124,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesRatingsImages()
     {
-        return $this->hasMany(\app\models\UsersVenuesRatingsImages::className(), ['user_venue_rating_id' => 'id'])->inverseOf('userVenueRating');
+        return $this->hasMany(\app\models\UsersVenuesRatingsImages::className(), ['user_venue_rating_id' => 'id']);
     }
 
     /**
@@ -132,7 +132,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesRatingsResponses()
     {
-        return $this->hasMany(\app\models\UsersVenuesRatingsResponses::className(), ['user_venue_rating_id' => 'id'])->inverseOf('userVenueRating');
+        return $this->hasMany(\app\models\UsersVenuesRatingsResponses::className(), ['user_venue_rating_id' => 'id']);
     }
 
 

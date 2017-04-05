@@ -42,19 +42,25 @@ class SetupController extends Controller
             'doctor',
             'electrician',
             'electronics_store',
+            'establishment',
             'embassy',
             'fire_station',
             'florist',
             'funeral_home',
             'furniture_store',
+            'food',
+            'finance',
             'gas_station',
             'grocery',
+            'general_contractor',
+            'grocery_or_supermarket',
             'gym',
             'hair_care',
             'hardware_store',
             'hindu_temple',
             'home_goods_store',
             'hospital',
+            'health',
             'insurance_agency',
             'jewelry_store',
             'laundry',
@@ -81,6 +87,7 @@ class SetupController extends Controller
             'plumber',
             'police',
             'post_office',
+            'place_of_worship',
             'real_estate_agency',
             'restaurant',
             'roofing_contractor',
@@ -108,6 +115,7 @@ class SetupController extends Controller
             Yii::$app->db->createCommand()->insert('venues_types', [
                 'venue_type_slug' => $type,
                 'venue_type_name' => ucwords(str_replace('_',' ',$type)),
+                'venue_type_active' => 1
             ])->execute();
         }
     }

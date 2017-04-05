@@ -13,6 +13,8 @@ use Yii;
  * @property integer $venue_id
  * @property string $venue_image_url
  * @property string $venue_image_date_added
+ *
+ * @property \app\models\Venues $venue
  * @property string $aliasModel
  */
 abstract class VenuesImages extends \yii\db\ActiveRecord
@@ -37,7 +39,8 @@ abstract class VenuesImages extends \yii\db\ActiveRecord
         return [
             [['venue_id'], 'integer'],
             [['venue_image_url'], 'string'],
-            [['venue_image_date_added'], 'safe']
+            [['venue_image_date_added'], 'safe'],
+            [['venue_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Venues::className(), 'targetAttribute' => ['venue_id' => 'id']]
         ];
     }
 
@@ -52,6 +55,14 @@ abstract class VenuesImages extends \yii\db\ActiveRecord
             'venue_image_url' => 'Venue Image Url',
             'venue_image_date_added' => 'Venue Image Date Added',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVenue()
+    {
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 

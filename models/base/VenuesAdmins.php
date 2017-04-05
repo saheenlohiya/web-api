@@ -54,7 +54,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
             'id' => 'ID',
             'venue_id' => 'Venue ID',
             'user_id' => 'User ID',
-            'venue_admin_level' => 'Venue Admin Level',
+            'venue_admin_level' => '1000 is the highest level.',
         ];
     }
 
@@ -73,7 +73,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('venuesAdmins');
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id'])->inverseOf('venuesAdmins');
+        return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -89,7 +89,7 @@ abstract class VenuesAdmins extends \yii\db\ActiveRecord
      */
     public function getVenuesCoupons()
     {
-        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id'])->inverseOf('venueAdmin');
+        return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_admin_id' => 'id']);
     }
 
 

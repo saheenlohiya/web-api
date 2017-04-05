@@ -68,7 +68,7 @@ abstract class UsersVenuesRatingsResponses extends \yii\db\ActiveRecord
      */
     public function getUserVenueRating()
     {
-        return $this->hasOne(\app\models\UsersVenuesRatings::className(), ['id' => 'user_venue_rating_id'])->inverseOf('usersVenuesRatingsResponses');
+        return $this->hasOne(\app\models\UsersVenuesRatings::className(), ['id' => 'user_venue_rating_id']);
     }
 
 

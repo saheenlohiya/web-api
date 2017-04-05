@@ -82,7 +82,7 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getUsersVenuesCoupons()
     {
-        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['venue_coupon_id' => 'id'])->inverseOf('venueCoupon');
+        return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['venue_coupon_id' => 'id']);
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('venuesCoupons');
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord
      */
     public function getVenueAdmin()
     {
-        return $this->hasOne(\app\models\VenuesAdmins::className(), ['id' => 'venue_admin_id'])->inverseOf('venuesCoupons');
+        return $this->hasOne(\app\models\VenuesAdmins::className(), ['id' => 'venue_admin_id']);
     }
 
 

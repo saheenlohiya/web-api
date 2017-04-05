@@ -61,7 +61,7 @@ abstract class VenuesSettings extends \yii\db\ActiveRecord
      */
     public function getVenue()
     {
-        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id'])->inverseOf('venuesSettings');
+        return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 

@@ -64,7 +64,7 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord
      */
     public function getVenues()
     {
-        return $this->hasMany(\app\models\Venues::className(), ['venue_type_id' => 'id'])->inverseOf('venueType');
+        return $this->hasMany(\app\models\Venues::className(), ['venue_type_id' => 'id']);
     }
 
 
