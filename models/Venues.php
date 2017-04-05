@@ -11,7 +11,6 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use app\components\behaviors\GeocodeBehavior;
-use yii\helpers\Json;
 
 /**
  * This is the model class for table "venues".
