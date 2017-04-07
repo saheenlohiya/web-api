@@ -40,7 +40,12 @@ $config = [
                         'GET email-exists' => 'email-exists',
                     ]
                 ],
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues']],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues'],
+                    'extraPatterns' => [
+                        'GET get-nearby-venues' => 'get-nearby-venues'
+                    ],
+                ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings']],
             ],

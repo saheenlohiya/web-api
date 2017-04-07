@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Conversions;
 use dosamigos\google\places\Place;
 use dosamigos\google\places\Search;
 use Yii;
@@ -99,12 +100,12 @@ class Venues extends BaseVenues
             - radians(:lon)) 
             + sin(radians(:lat)) 
             * sin(radians(venue_lat)))
-        ) AS distance FROM venues HAVING distance <= :radius";
+        ) AS distance FROM venues HAVING distance <= :radius ORDER BY distance ASC ";
 
         $params = [
             ':lat'=>$latitude,
             ':lon' => $longitude,
-            ':radius' => $radius
+            ':radius' => Conversions::meters_to_miles($radius)
         ];
 
         //return active record instead
@@ -219,6 +220,7 @@ class Venues extends BaseVenues
                     $venueImage = new VenuesImages();
                     $venueImage->venue_id = $id;
                     $venueImage->venue_image_url = "https://maps.googleapis.com/maps/api/place/photo?key=" . Yii::$app->params['googleApiKey'] . "&photoreference=" . $photo['photo_reference'] . "&maxwidth=800";
+                    $venueImage->venue_image_date_added = date('Y-m-d H:i:s');
                     $venueImage->save();
                 }
             }
