@@ -105,7 +105,7 @@ class Venues extends BaseVenues
         $params = [
             ':lat'=>$latitude,
             ':lon' => $longitude,
-            ':radius' => Conversions::meters_to_miles($radius)
+            ':radius' => $radius
         ];
 
         //return active record instead

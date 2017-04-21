@@ -1,0 +1,3848 @@
+Codeception PHP Testing Framework v2.2.7
+Powered by PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+[1mUnit Tests (3) [22m----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- [35;1mVenuesTest:[39;22m Validate new venue[32;1m✔[39;22m [35;1mVenuesTest:[39;22m Validate new venue [32m(1.73s)[39m
+- [35;1mVenuesTest:[39;22m Can search google places[32;1m✔[39;22m [35;1mVenuesTest:[39;22m Can search google places [32m(0.01s)[39m
+- [35;1mVenuesTest:[39;22m Get nearby placesarray(16) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 750-0063"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(60) "https://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png"
+  ["id"]=>
+  string(40) "6c6e43c45e2c344429d2cf65b9f1fb7cabc936b8"
+  ["international_phone_number"]=>
+  string(15) "+1 512-750-0063"
+  ["name"]=>
+  string(20) "Glyn and sandra meek"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRXSw4Kkqgy-s"
+  ["reference"]=>
+  string(190) "CmRSAAAAu0cGF1cYTfgJfyDsUE0paOBqG5-WVjIrG6yWVRBSaaioSNYjXiA5RkFyHixS3tzpRO8MCfI51238HbsVkbv3shLalnjY2XzVE3LqhU2R0hryxywrhRlIj4BTKrzx5jasEhD12BIuJrvfjtiStpr87je_GhSPExNY5iLljypOHVGvOpfsAj8vsQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(3) "bar"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=16990850259581676637"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(14) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(68) "https://maps.gstatic.com/mapfiles/place_api/icons/bank_dollar-71.png"
+  ["id"]=>
+  string(40) "43873bac382e5cfe0b479ed3e02315ad16fe5752"
+  ["name"]=>
+  string(12) "Seacoas Bank"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRH_wSimkl2uM"
+  ["reference"]=>
+  string(190) "CmRSAAAAsfKAiMHEhg--S2s9St97clG6rMcBCI5MJnwap-GXDNiA40-g9U1FROQy0W36lakaD0k6EHpS_her86yr46As1gOomYz3NCQ7QMn8wH1L2dKHXTezxVJP45LfQq7UEboREhDQCojxu916gBvy__DOYCOBGhRA_g0N5IgOfojErrkUAwFKwbtTVg"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(4) {
+    [0]=>
+    string(4) "bank"
+    [1]=>
+    string(7) "finance"
+    [2]=>
+    string(17) "point_of_interest"
+    [3]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=16418476526750858271"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(15) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "b06cbe1f8714f17d51b4cdb9baf247bbfa7d4915"
+  ["name"]=>
+  string(41) "Saint Mary Medical Center In Austin Texas"
+  ["photos"]=>
+  array(1) {
+    [0]=>
+    array(4) {
+      ["height"]=>
+      int(2160)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(92) "<a href="https://maps.google.com/maps/contrib/104300442877756687018/photos">Osman Bayram</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAALkrt9S-8lJRvimAJYs0ulsYyqZ75VR0F0SiPk9u_frzttM9aU7RVIJvk4ub0YZlc6MhEiVnHniWde8AMxLaUQfbGnEV0OCEhKW9ESeK5NHdPwgN-M_XCcGMYc6idqPqmAHOMXP1Yg6YpQ60WFg1geXuKMYSzneIvaVO_O8DhCYBEhBraIOvgsKvW6Y4S0N3SnukGhRwbymIJrYu5Xe5s9_34raktPR7fw"
+      ["width"]=>
+      int(3840)
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYREX_p8Sb5UtY"
+  ["reference"]=>
+  string(190) "CmRSAAAAX1bacY2n4MxD0TEsd7HYj5yxnhfSD_NftxH15w6PavUlOZHg_XWDo69iwNS2KBMHncZvAXS5TK6lZVQWhwp676qzJYR5U0dGuuQZm0_k6UM15UBn06kqEnzZ6K_f8YS4EhB1Hz93Mu4LXT5f8oENdqZwGhQKN4GrIX_yw3EZYy6SUxYGgWl5ng"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(4) {
+    [0]=>
+    string(6) "doctor"
+    [1]=>
+    string(6) "health"
+    [2]=>
+    string(17) "point_of_interest"
+    [3]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=15443680017869537041"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(14) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(67) "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"
+  ["id"]=>
+  string(40) "335138d949b130657477a02bd84e710949b3fa2e"
+  ["name"]=>
+  string(19) "La Fonda San Miguel"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRhu3RWlp3UNY"
+  ["reference"]=>
+  string(190) "CmRSAAAACmO_8GS9sLg1BkDvroodYIJFKgx7Ei7YoblWwHOWpMZT7PqdszmiSKliMwhC5WfuYv_mzNHRXZuqB7_sPTgEHAGp2ANcG9D7Hzc4NUNVWTkuGkRGKSuysBO6Tdvxh_kDEhB8dMnpbTXhjbsyxWRu8FqaGhTO7Wrirm_We78cO52ZSbAsIUHF0Q"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(4) {
+    [0]=>
+    string(10) "restaurant"
+    [1]=>
+    string(4) "food"
+    [2]=>
+    string(17) "point_of_interest"
+    [3]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=15442974352207900038"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(14) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(60) "https://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png"
+  ["id"]=>
+  string(40) "4edad70be42813a7d61cfb2b3f8168fd1859a6c0"
+  ["name"]=>
+  string(14) "Knife and fork"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRMe1YEMMLBco"
+  ["reference"]=>
+  string(190) "CmRSAAAAQ0YGgoNqLEVno003njmvyX0IbASa5WVa4dyOikzFJoL7FUpXVga29eCM0JhK7DMXnvLji8wdfuXUxsFiUdTaSI_1Uic41T-i6lcrw5xEXtr6AMut_lclzmBX5ss7bHrXEhApD4NciY7-h4aeaTwd92HJGhSYJZLZUcbYTWJzeACLcxjLCgj6Zw"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(3) "bar"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=14557054302965787953"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(14) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(65) "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png"
+  ["id"]=>
+  string(40) "3bd392457df960613d5149ad6979d5daeabb1f8c"
+  ["name"]=>
+  string(9) "Food Bank"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRmTexWXmIJMU"
+  ["reference"]=>
+  string(190) "CmRSAAAAcND05ZrORMpTDqNUAq434kSTIgbNHa_BmiLnZ2_MOR8stIG7okhwq4mf0oTFTrDwvDzRDOQfbENP8IshyBkXBbkF-XWjLn0uk9PZNmF4ufX7AKXq8xHnY1O-t6JuycEyEhA6vNUCAbdPNx0B2CHGZk65GhTXmOqOOmH0PvcP2kGgyWowVkKyJA"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(5) "store"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=14205629179410593689"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(17) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 537-9098"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "159cde1513d173484cf8747a592133500410fa6b"
+  ["international_phone_number"]=>
+  string(15) "+1 512-537-9098"
+  ["name"]=>
+  string(23) "A To Z Translators, LLC"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRxSIdYb1n2sQ"
+  ["reference"]=>
+  string(190) "CmRSAAAAQeBaGojh52KbqqW-b9lQ9dpsUA7vMq5s0rHFVBzstPbQkrZOMz6-lgkT6hxG6yTtkO4RnbWWcDOxQEilolE36BE_hSTVzatzazi8vFN4v9gprlvGMI1SOIsvwzMMklIrEhBQF5vNf1I_CzlS0P6m0_vhGhQuWQh-f84QWEF_XlemF8UB69zCFQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=14184764039432577733"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(27) "http://atoztranslators.com/"
+}
+array(21) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 547-5712"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "23667484929c6a894717fdd1912c9554433a8d22"
+  ["international_phone_number"]=>
+  string(15) "+1 512-547-5712"
+  ["name"]=>
+  string(19) "Texas Granite Group"
+  ["opening_hours"]=>
+  array(3) {
+    ["open_now"]=>
+    bool(false)
+    ["periods"]=>
+    array(5) {
+      [0]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "1800"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "0700"
+        }
+      }
+      [1]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "1800"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "0700"
+        }
+      }
+      [2]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "1800"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "0700"
+        }
+      }
+      [3]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "1800"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "0700"
+        }
+      }
+      [4]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "1800"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "0700"
+        }
+      }
+    }
+    ["weekday_text"]=>
+    array(7) {
+      [0]=>
+      string(27) "Monday: 7:00 AM – 6:00 PM"
+      [1]=>
+      string(28) "Tuesday: 7:00 AM – 6:00 PM"
+      [2]=>
+      string(30) "Wednesday: 7:00 AM – 6:00 PM"
+      [3]=>
+      string(29) "Thursday: 7:00 AM – 6:00 PM"
+      [4]=>
+      string(27) "Friday: 7:00 AM – 6:00 PM"
+      [5]=>
+      string(16) "Saturday: Closed"
+      [6]=>
+      string(14) "Sunday: Closed"
+    }
+  }
+  ["photos"]=>
+  array(10) {
+    [0]=>
+    array(4) {
+      ["height"]=>
+      int(881)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAPp1bmeS6I_ju-3kHVcdL3IGSfg86NO7RiXbw6McGjD4iUnTPor5nT9UJ5a8uHypxDlebrkCcKhr24vFaMb8Q39CsLSxxSaCiW7BabZqiG4rEqwTPiGan2Pr5n-2DDeeTSLT-Fi1LGLpwR2DR5DHQrSQ0uhSXs5OaKEIG2TBPStwEhBv0PuglltX4AeA5mZYaFNyGhTct0iyr5fKp3lO-KJU-UUhUpys7Q"
+      ["width"]=>
+      int(888)
+    }
+    [1]=>
+    array(4) {
+      ["height"]=>
+      int(598)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAOWlTIx2Iy8uXmSGcSJrI7i-vIjlpfy6Sr5mH9E22FzRIdkCA-eN4UTOXg12dSNBeFy7ZZDx8LKJQV5n0d9rb_gmwgtmWxfa0fg9J-cW1zc3yxC7o_P4JrbG77O4UylaEPo2mQ7UtrdytH1tzEwkwyHmigyzXnx3_v3o7U7ePHj0EhDE0PJwJM4QeyS16c8dt7CLGhTmXL6lBkm6cyBNQdSoVHR3tKHrqQ"
+      ["width"]=>
+      int(900)
+    }
+    [2]=>
+    array(4) {
+      ["height"]=>
+      int(1536)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAMsN5ay0gVIQL81xsW1d5R9ZfDFuWJVwB6XwzNRbJTh3Y17z8S25X1PYxrl51eNlCGQwrQV7axt8GkJu5fYCqtQ9UgrCYtzF9AJfiUCAoB6daCZxQj_dZRv-gTfYKNou-5mh8L5m9r891QrgrDkhIAYQ6WJ9mnxYzJzM2SKOkMI2EhAIsbxmiEeL249Ho3QHuu4dGhQZARBawgDGanrrN5YVNimmID84hQ"
+      ["width"]=>
+      int(2048)
+    }
+    [3]=>
+    array(4) {
+      ["height"]=>
+      int(4430)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAANw5hejhXQqBx-UsjfAfNNQ_ODpQHDFvLcN0BPVs3_3Lhw3IyCAO-qRKzESj5amfKl5yVRc6VCYUoIKrFDApaKeHUQDvrLTOAsKDrzOLL7uocD6y3yw-Xyh0n9FEKt3pwSpG0EfneGaOrGXmU-GQAW4ocmqwCtxhjR7_HJ2OK0qjEhAlOLJ91vKISHxYveteBJgYGhR2AxdseFAmgU2g1k1twTNhvwjM2A"
+      ["width"]=>
+      int(5834)
+    }
+    [4]=>
+    array(4) {
+      ["height"]=>
+      int(450)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAL_81Yd5GUZtzF8lxxYFfFEx2o4TFiXBmfJDfAe--_TF5TvHDLtllMuSdkmU3SzVGy4tlcddktQy0FCFhXZjsnHg_4BzIa72TSuZVNwtk9X06IyZSdsvpaysXL6j55RU_D0JBNssPHk60Id4uG9PU01tCxACFlEdKkflgsL7dkjbEhBcFgmVzkX-Tz1Ibqp6rC7lGhS-WHpCw_-I_V9ieHTkOj82e8iJKw"
+      ["width"]=>
+      int(640)
+    }
+    [5]=>
+    array(4) {
+      ["height"]=>
+      int(976)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAFx2_SmIyy9Q9SkVB2vl9q1SBNVLa9msiaVz1MLTKZzNTtQfGwMo38A8F-I0nnmBLRvbtFGIR9tONJGbpCSjIcbEDeNS1FFDlfx77DCfKRbFBC6ibSMViikD6Sd0a2vlcqVuP6NhjEMBUY9EvlQaU5D-UCh9LYVlMWTEGVLFmBveEhBP5TSkWbDnJkr01QqGF_JEGhRZVBd0UMc-ngKEJNotd9oR70DE2w"
+      ["width"]=>
+      int(1632)
+    }
+    [6]=>
+    array(4) {
+      ["height"]=>
+      int(720)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAANJXubtZAVdS_aHW-2Ch1wUWErMQWh8cZ986mlB9rAT87gkKliDI1oiPGvalFjP0XcopEstZPUu8ixvGjwMUFKxOnrQExGWGFFF0suFsULOFxOqShnHE7rFLRUmwp9Q3YwspuySsSz-PD08SxBQC9N-pgcczzNS1rCBcuFHL1aPuEhBA6p-iefTHwhXJsCh-3uCEGhSC3-ruEwTvTlJGFyF0GDkd_4Mafw"
+      ["width"]=>
+      int(720)
+    }
+    [7]=>
+    array(4) {
+      ["height"]=>
+      int(3264)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAO5VTrEL467uipxoO6vrF5CP5WP2fcIUsmYoNCk_UDhbhiRmpU_atFd1nJJ-MBWjlNwWr1nXVwy210Ddg9xvNI9dy4Ein75VExcGfSxkPUYSwGyv406bGv5uUFBSYPxWauen22FbUymkQQs8voBZJWwzIkpcQv4OQnHhJ5i1ZjMVEhCvV8NE75U_IuW3k0WmFlvwGhRfrI4SlEBXnvHvLZe_TqOlNLhaDA"
+      ["width"]=>
+      int(4928)
+    }
+    [8]=>
+    array(4) {
+      ["height"]=>
+      int(375)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(99) "<a href="https://maps.google.com/maps/contrib/107253092546663487680/photos">Texas Granite Group</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAADfp8KkV7OvzKNNy9a8V5Fx5HvHmAomKupH5yXaX5AcxnwNJQkAkJMO24QAq8fLU9qguWEXyGDGAalZS4FzkUkzDPa-xCq9pHMi8rzGUBZrx3h9SYVztoYtaF_n1etz5-ITz9QhSfDBfi32vJSWrfeyys_kjga2-36P7ukWouVuaEhCPLuoTjhzI-gJZuGD1sHfbGhTpl_SYf7XnK6Gvjx1H_wmNlQeuwQ"
+      ["width"]=>
+      int(500)
+    }
+    [9]=>
+    array(4) {
+      ["height"]=>
+      int(2988)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(91) "<a href="https://maps.google.com/maps/contrib/103352330579151119375/photos">Jose Garcia</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAIS6dqvbnNHd63xEhBJ1THD2A75ht1VcsACaGQToNCFpcmCxQALdCjBk0A7FlS8rqNlY8xRQt1yrH0EmF2ibdMx649FUmfjKwwPwGhPARkh8Xxy-iPKie6Vh3qesKhOeuzLktiFn3YrqI73HWxGosXTGnNezBcGLqJ_lTEkowkHtEhDXa56WJrIlvBOFBLH2Qv_IGhQzVoUli56a6y8Vquhhm4s8jEsgfA"
+      ["width"]=>
+      int(5312)
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRjDL7Q7PZN7k"
+  ["rating"]=>
+  int(5)
+  ["reference"]=>
+  string(190) "CmRSAAAABVMn0UNvIYWbsdMa9OQrYqnPTO_rIq-OAXrdVbi8fTSBYpJb_2MnIPuAjkoACxo6v1hmCn82GtkAtt_b_4EwbEDNcIdD9E9avkGPc7axqImtAjytmhXTCtlZGD1JFEOGEhDnedXLWqC6fo3ZytM9DG-gGhQrlB-NeKYXut6kMJLJRpLQU55ePw"
+  ["reviews"]=>
+  array(5) {
+    [0]=>
+    array(9) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(13) "Melanie Smith"
+      ["author_url"]=>
+      string(65) "https://www.google.com/maps/contrib/114512801537949942857/reviews"
+      ["language"]=>
+      string(2) "en"
+      ["profile_photo_url"]=>
+      string(141) "https://lh6.googleusercontent.com/-KciZFq8Z5FA/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi-EqDZMQmwqSKMkk2FlSRyqP5D09A/s128-c0x00000000-cc-rp-mo/photo.jpg"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(13) "10 months ago"
+      ["text"]=>
+      string(520) ""I was looking for a company who would give me the best price around without taking away quality.
+When my wife and I went to Texas Granite Group we felt we had found the right one, they were patient with us explaining all our doubts, they showed us their workshop, machines, and process of cutting and polishing.
+My wife and I felt confident with a company that is willing to show you every single step of the way!
+Great job Quality , we love our Juparana counter tops!"
+
+Kevin & Melanie Smith
+Round Rock, TX 
+jun 6 2016"
+      ["time"]=>
+      int(1465240642)
+    }
+    [1]=>
+    array(9) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(9) "J Morales"
+      ["author_url"]=>
+      string(65) "https://www.google.com/maps/contrib/101286339157187555395/reviews"
+      ["language"]=>
+      string(2) "en"
+      ["profile_photo_url"]=>
+      string(141) "https://lh4.googleusercontent.com/-DqnEdBjV1qo/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi_GSePmov-wEI2iD3sY_0Xn3k6X-Q/s128-c0x00000000-cc-rp-mo/photo.jpg"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(13) "10 months ago"
+      ["text"]=>
+      string(478) "I contacted Jose from Texas Granite Group to give me a quote on my kitchen upgrade.  He showed up exactly at the time we had previously arranged and the quote was much better than others.  He then had my counter top installed by Pedro and I couldn't be any happier with his work.  The attention to detail and professionalism displayed by Pedro is rarely seen in this line of work.  
+
+I would recommend Texas Granite Group to  anyone looking to upgrade their kitchen or bathroom."
+      ["time"]=>
+      int(1464998315)
+    }
+    [2]=>
+    array(9) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(13) "Andrea Muller"
+      ["author_url"]=>
+      string(65) "https://www.google.com/maps/contrib/116281214681788304375/reviews"
+      ["language"]=>
+      string(2) "en"
+      ["profile_photo_url"]=>
+      string(141) "https://lh3.googleusercontent.com/-AZCzAC140sA/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi9UWd4jPApPv3yqnCkEv0LwLCgB-w/s128-c0x00000000-cc-rp-mo/photo.jpg"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(12) "9 months ago"
+      ["text"]=>
+      string(380) "Texas Granite Group did a wonderful job, I would recommend them to anyone who's thinking on remodeling their kitchen
+with granite counter-tops!
+I feel I chose the best company to perform this project, the craftsmanship is awesome, and they look superb in my new house,
+If you want quality on your counter tops call Texas Granite Group first!"
+
+Stephanie Clark
+Northwest Austin, Tx"
+      ["time"]=>
+      int(1465910790)
+    }
+    [3]=>
+    array(9) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(11) "steve hirsh"
+      ["author_url"]=>
+      string(65) "https://www.google.com/maps/contrib/110781895532208852319/reviews"
+      ["language"]=>
+      string(2) "en"
+      ["profile_photo_url"]=>
+      string(141) "https://lh3.googleusercontent.com/-VkXGs62KkNE/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi_30JCEWDLWWX5RbOyBcs089NUw0A/s128-c0x00000000-cc-rp-mo/photo.jpg"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(13) "10 months ago"
+      ["text"]=>
+      string(310) ""I want to thank all the folks at Texas Granite Group for their great service and the excellent work they did at my home.
+The granite countertops fit to perfection in my kitchen, the free sink really came in handy, the workmanship is impeccable!
+Big Kudos to Texas Granite Group!"
+
+Thanks 
+Steve 
+Round Rock Tx"
+      ["time"]=>
+      int(1465000755)
+    }
+    [4]=>
+    array(9) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(15) "Carol Robertson"
+      ["author_url"]=>
+      string(65) "https://www.google.com/maps/contrib/111008059889145997181/reviews"
+      ["language"]=>
+      string(2) "en"
+      ["profile_photo_url"]=>
+      string(141) "https://lh6.googleusercontent.com/-EE2tQ3-_dZY/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi8PnsHR30TFW-wNILpRg5059jY3Qg/s128-c0x00000000-cc-rp-mo/photo.jpg"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(12) "9 months ago"
+      ["text"]=>
+      string(155) "Had my kitchen remodeled and granite installed there and in the bathrooms.  Joe and his crew did a wonderful job and I wouldn't hesitate to recommend them."
+      ["time"]=>
+      int(1467113094)
+    }
+  }
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=13346375384698663564"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(33) "http://www.texasgranitegroup.com/"
+}
+array(18) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 710-7722"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(65) "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png"
+  ["id"]=>
+  string(40) "edd5364021a322b3a19375b6c8ad9046a9c72847"
+  ["international_phone_number"]=>
+  string(15) "+1 512-710-7722"
+  ["name"]=>
+  string(20) "Good & Fair Clothing"
+  ["opening_hours"]=>
+  array(3) {
+    ["open_now"]=>
+    bool(false)
+    ["periods"]=>
+    array(5) {
+      [0]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "1700"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "1000"
+        }
+      }
+      [1]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "1700"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "1000"
+        }
+      }
+      [2]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "1700"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "1000"
+        }
+      }
+      [3]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "1700"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "1000"
+        }
+      }
+      [4]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "1700"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "1000"
+        }
+      }
+    }
+    ["weekday_text"]=>
+    array(7) {
+      [0]=>
+      string(28) "Monday: 10:00 AM – 5:00 PM"
+      [1]=>
+      string(29) "Tuesday: 10:00 AM – 5:00 PM"
+      [2]=>
+      string(31) "Wednesday: 10:00 AM – 5:00 PM"
+      [3]=>
+      string(30) "Thursday: 10:00 AM – 5:00 PM"
+      [4]=>
+      string(28) "Friday: 10:00 AM – 5:00 PM"
+      [5]=>
+      string(16) "Saturday: Closed"
+      [6]=>
+      string(14) "Sunday: Closed"
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJGTddLt61RIYRR3HE_m1LorA"
+  ["reference"]=>
+  string(190) "CmRSAAAA5NwWj8rtJ0HOZyNKYMzo9y_53uLGlYJRdBOF-wRnpIfE_uX-Gzb_tq3lOmjaAZPa2sYHoPLQtUJbsKR_8afiSWYcgZ5AVulXKhTuryAdVv2p9bbF1hVp6B1UKecVjXbwEhCPwhZkas8KFvSDBggrB_1UGhSyW1Hvsg7I4zocW0VklcTDDlaMbQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(4) {
+    [0]=>
+    string(14) "clothing_store"
+    [1]=>
+    string(5) "store"
+    [2]=>
+    string(17) "point_of_interest"
+    [3]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=12727818432700248391"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(31) "http://goodandfairclothing.com/"
+}
+array(15) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(64) "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png"
+  ["id"]=>
+  string(40) "91cc7bb72048bbf5aee7445f06a26b550c3da4db"
+  ["name"]=>
+  string(11) "Hyatt Hotel"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRkzhROLYL760"
+  ["reference"]=>
+  string(190) "CmRSAAAAOVIeMG2YCEp5Skt1CCeytlh0jYtfFrBEov5HkFW2PBou3Nm2rqtFyWKdR2cVSSFIU4NKj4yAksgNMiKNzym7kdKBU7XzXnplqzbMmwHCGf1peuispCPVbDaB5VnfbhOXEhC8RzzkNNYtJIflCgWNtC7UGhQIq13QUFhF1TZNlhgsZo4jaj3slQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(7) "lodging"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=12533249165252180115"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(22) "https://www.hyatt.com/"
+}
+array(17) {
+  ["address_components"]=>
+  array(4) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(117) "<span class="locality">Austin</span>, <span class="region">TX</span>, <span class="country-name">United States</span>"
+  ["formatted_address"]=>
+  string(25) "Austin, TX, United States"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 850-7736"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "07743be04eb228e7868891386beb933a5b55f3d4"
+  ["international_phone_number"]=>
+  string(15) "+1 512-850-7736"
+  ["name"]=>
+  string(35) "The Magical World Of Jeffrey Jester"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRuqskwfLWt6g"
+  ["reference"]=>
+  string(190) "CmRSAAAA_qQZVd-ond09sKVFleBTTPQiP1XUfpuXvWx_-nxTeFDEtAeQht7z_9Sw1YF9A6PzHT5elDA1YlvAUE__jFHGYe0vc3MhSwE1tTEGdnEhyvVXX1LN_qqA4RlfR4h_ga30EhDsY7JvxQPB4TJ1z_R5JsT2GhTUPDVMJ76YpxitZqhbm2kO-Td7Lw"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=12157422057220778938"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(25) "http://jeffreyjester.com/"
+}
+array(15) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "169a6658ec15df0ce42fb548431a044673f64fcb"
+  ["name"]=>
+  string(15) "One Ounce Opera"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRRDSkOpgYeJs"
+  ["reference"]=>
+  string(190) "CmRSAAAAM5cmhwQUtexLHF5BcO1opkuOBEtJzjLnYibqXK04522Q4pTluwv7R-Orf8wanrqbG06_EgJ8IUwlJdBM-uowf1MuNGfWb8pZGjjtEbkAKWk_dunviH_7pgWo9ynkOTHqEhAlPm7TtkWS1pVD8wSLgJFDGhQAdPmmMQwSODCWAnvizC_tZsCiVg"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=11202731115182044228"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(41) "http://oneounceopera.com/events/audition/"
+}
+array(14) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "032e961e66769716292b082289a2f3c7ad662931"
+  ["name"]=>
+  string(19) "hka enterprises inc"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRIrkGJ7NAvJo"
+  ["reference"]=>
+  string(190) "CmRSAAAATalS_m8PCZSw8b8_Z-9S3r4MeJ1L17nLkNpvdq8YqkZKr1cArC9R-YmqVeX_E3XaY_ecREPZ3Jp6QOUfWFUdo2VtvmGIF-hl2yR0mwkN-EsAB4xHN6VjIb6-vyYOPjr4EhCDdeQgyOpPlZ580mBlUSZtGhQEL2wNgimurHj4M4J3FEd1zZDtLw"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=11149857915660581154"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(16) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "bcff5194338d467e40a83e46acfb988e39acd443"
+  ["name"]=>
+  string(25) "Genesis 7 Consulting, LLC"
+  ["opening_hours"]=>
+  array(3) {
+    ["open_now"]=>
+    bool(true)
+    ["periods"]=>
+    array(1) {
+      [0]=>
+      array(1) {
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(0)
+          ["time"]=>
+          string(4) "0000"
+        }
+      }
+    }
+    ["weekday_text"]=>
+    array(7) {
+      [0]=>
+      string(21) "Monday: Open 24 hours"
+      [1]=>
+      string(22) "Tuesday: Open 24 hours"
+      [2]=>
+      string(24) "Wednesday: Open 24 hours"
+      [3]=>
+      string(23) "Thursday: Open 24 hours"
+      [4]=>
+      string(21) "Friday: Open 24 hours"
+      [5]=>
+      string(23) "Saturday: Open 24 hours"
+      [6]=>
+      string(21) "Sunday: Open 24 hours"
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRhThTv3giD5c"
+  ["reference"]=>
+  string(190) "CmRSAAAAfZTAkGCEsmfPS2ku9x_NnzkXhSSbn3GQ4wcQnx2o1V8EWjbCwlLps-arwh6tjZqmYW5prGQqnlO56HurnphIRqR7BWceYssAW6yYMJhJ_MwGScCtJjfzcvA14oX-LmU8EhBSd88880zOAqUdO4mMpeRDGhR5Q-1FEO39p3J0-9EjadqMTtQfuA"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(49) "https://maps.google.com/?cid=10884956726379100293"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(30) "http://genesis7consulting.com/"
+}
+array(17) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78782"
+      ["short_name"]=>
+      string(5) "78782"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(169) "16420 N Int&#39;l Hwy, <span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78782</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(40) "16420 N Int'l Hwy, Austin, TX 78782, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(866) 889-3567"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "78af1590fe2dc0142473d5a74b0f0f0eab15b881"
+  ["international_phone_number"]=>
+  string(15) "+1 866-889-3567"
+  ["name"]=>
+  string(36) "Ozarka Bottled Water Delivery Austin"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRJ_sw8jbEW28"
+  ["reference"]=>
+  string(190) "CmRRAAAA5xYlNBat1VUS5OYdRdn-VrvaMoUcHWl8Jl1anfCIe7-LFg8as1QLkURiXLqlklkfVkJUeSdWDLe89KwDD9D0AnYaeGBI9ZdGntuP0P0dfmXjkaaIRGP2Py11YObOrcz6EhBXRRKoDrWv0g9m3Z889ytmGhQNtO5SdTrYJFZ1rfVl20XV2cJuWA"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(4) "food"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=8024222901361244967"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(25) "16420 N Int'l Hwy, Austin"
+  ["website"]=>
+  string(32) "http://delivery.ozarkawater.com/"
+}
+array(17) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(713) 969-8594"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "61f55ff3286b4d14785275c915c26872722f10e1"
+  ["international_phone_number"]=>
+  string(15) "+1 713-969-8594"
+  ["name"]=>
+  string(38) "TNT Professional Cleaning Services LLC"
+  ["opening_hours"]=>
+  array(3) {
+    ["open_now"]=>
+    bool(false)
+    ["periods"]=>
+    array(7) {
+      [0]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(0)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(0)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [1]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [2]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [3]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [4]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [5]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+      [6]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(6)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(6)
+          ["time"]=>
+          string(4) "0615"
+        }
+      }
+    }
+    ["weekday_text"]=>
+    array(7) {
+      [0]=>
+      string(27) "Monday: 6:15 AM – 8:00 PM"
+      [1]=>
+      string(28) "Tuesday: 6:15 AM – 8:00 PM"
+      [2]=>
+      string(30) "Wednesday: 6:15 AM – 8:00 PM"
+      [3]=>
+      string(29) "Thursday: 6:15 AM – 8:00 PM"
+      [4]=>
+      string(27) "Friday: 6:15 AM – 8:00 PM"
+      [5]=>
+      string(29) "Saturday: 6:15 AM – 8:00 PM"
+      [6]=>
+      string(27) "Sunday: 6:15 AM – 8:00 PM"
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRoFOwg6weNm0"
+  ["reference"]=>
+  string(190) "CmRRAAAAsicmL05rO-XUOZDNfQam2QoJp29dmDEN2jExvXX70AsIXWpAetdH6DrAYc2XTbQgfeloLFmFabxmiDWBJyUfd0N6fyS4qB2Rg6D2jLlT1PWzUQSLr1svLzHuMdlprFIGEhD1DBdwA8KY2UC6lpj9v-IvGhQejlYNR-DjHgCvZD9N8AvOuxe7Vg"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=7869511125169099680"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(20) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(502) 459-8565"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "d8049d2bdaffd421dbbf1e2ec55bd9e25e3e5680"
+  ["international_phone_number"]=>
+  string(15) "+1 502-459-8565"
+  ["name"]=>
+  string(37) "Ideal Life--Stacey Vicari, Life Coach"
+  ["photos"]=>
+  array(2) {
+    [0]=>
+    array(4) {
+      ["height"]=>
+      int(251)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(117) "<a href="https://maps.google.com/maps/contrib/101519035574025628764/photos">Ideal Life--Stacey Vicari, Life Coach</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdwAAAB8q0iV3p3d7WhmwvxeJ9YAHcdnRdNEMX-u4ZLho7TN6ygDM_jFv6SHWZir6EURrW3W-IzbJZNgnCDOGC3V6OMPupyuwA7ZauDsBemwDf0Fdrqv1e129Kmz23uvRdRnFy4ORb69sxvYUR_f90wn-TvftiURJRA5f-ZQEeeALv5lcEhB67chVC6YD9TXzMQAY-Tt0GhTFj0IZiAKi06axj-teATGsKbkJ5Q"
+      ["width"]=>
+      int(200)
+    }
+    [1]=>
+    array(4) {
+      ["height"]=>
+      int(135)
+      ["html_attributions"]=>
+      array(1) {
+        [0]=>
+        string(117) "<a href="https://maps.google.com/maps/contrib/101519035574025628764/photos">Ideal Life--Stacey Vicari, Life Coach</a>"
+      }
+      ["photo_reference"]=>
+      string(234) "CoQBdgAAAGaOAgr6E-O4-Myy7aot8M4ebPpejZSk1Tb8TEI2-TAflVjHf5VyCO4dM5WI6UhOhD5scqkZ4ZuUNglvlBFT02X_n3mfq7J1Gjup4CXEufgTLODBPz1SnqeiRycpbygV_EwuM51StEva_eNiGLAPuyhKfQC41y0IyQzV5yAGpg8mEhBhYEoNfrr6tDj7R6mFeX7yGhRuiQDR_VD_RXRiZIzKUgtFA0ytDg"
+      ["width"]=>
+      int(123)
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJheoPj7cMaYgRPCe_QQ0XlWs"
+  ["rating"]=>
+  int(5)
+  ["reference"]=>
+  string(190) "CmRRAAAAPiXA2USYashkq3TOthKsTnzTTkl-E0iLsQrXNQQWfzNuSZOtSUaytpl9bzNTUOZCSraJ6Gbc5RLCbhLMnZRnoBZc25Hvsop7SDp-eYmTAOE0itVMFloUq1UHAbIaZKgIEhDcBZ5Yx4jcahwXCpfmYJZAGhTXJ_r0hJo7UWjBaxRi0mzQFBSbLA"
+  ["reviews"]=>
+  array(1) {
+    [0]=>
+    array(7) {
+      ["aspects"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["rating"]=>
+          int(3)
+          ["type"]=>
+          string(7) "overall"
+        }
+      }
+      ["author_name"]=>
+      string(13) "A Google User"
+      ["language"]=>
+      string(2) "en"
+      ["rating"]=>
+      int(5)
+      ["relative_time_description"]=>
+      string(11) "7 years ago"
+      ["text"]=>
+      string(491) "How many of us go through each day just in survival mode?  Too many.   Stacey helps people step back from their busy lives and assess where they are, where they want to be, and what is getting in the way of them living the life today they might only dream about.   If you have not attended her "Power Hour" then you owe it to yourself to invest in yourself and take 75 minutes for you.  I've known her for nearly two decades and she has unique ability to help people make substantial change!"
+      ["time"]=>
+      int(1250789641)
+    }
+  }
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(3) {
+    [0]=>
+    string(6) "health"
+    [1]=>
+    string(17) "point_of_interest"
+    [2]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=7752127679293237052"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(27) "http://www.myideallife.com/"
+}
+array(15) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "3ca8dbf9f8be6048e42926c754aa28e4ded58c14"
+  ["name"]=>
+  string(20) "Lt Dustless Blasting"
+  ["opening_hours"]=>
+  array(3) {
+    ["open_now"]=>
+    bool(false)
+    ["periods"]=>
+    array(6) {
+      [0]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(1)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+      [1]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(2)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+      [2]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(3)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+      [3]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(4)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+      [4]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(5)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+      [5]=>
+      array(2) {
+        ["close"]=>
+        array(2) {
+          ["day"]=>
+          int(6)
+          ["time"]=>
+          string(4) "2000"
+        }
+        ["open"]=>
+        array(2) {
+          ["day"]=>
+          int(6)
+          ["time"]=>
+          string(4) "0730"
+        }
+      }
+    }
+    ["weekday_text"]=>
+    array(7) {
+      [0]=>
+      string(27) "Monday: 7:30 AM – 8:00 PM"
+      [1]=>
+      string(28) "Tuesday: 7:30 AM – 8:00 PM"
+      [2]=>
+      string(30) "Wednesday: 7:30 AM – 8:00 PM"
+      [3]=>
+      string(29) "Thursday: 7:30 AM – 8:00 PM"
+      [4]=>
+      string(27) "Friday: 7:30 AM – 8:00 PM"
+      [5]=>
+      string(29) "Saturday: 7:30 AM – 8:00 PM"
+      [6]=>
+      string(14) "Sunday: Closed"
+    }
+  }
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYReUDrthIyyWU"
+  ["reference"]=>
+  string(190) "CmRRAAAAVMqeIIGLaNSsMPeE3vb6kSnC1dl2DuQGHiESjcXqK8n9MJq6iyRmTKY77hNJubd8dmQUxrjfduzbfMFC7LJemPOdJTFLUB99jTmPZiAqS4ErQiFg4OatUyUvEahw-KLQEhAW1R1em2tQaVJKo0y9LZW4GhSL7r0I4fDn9YXDk5EkSuR4lap4UQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=7334448524109234297"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+}
+array(17) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 766-7716"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "25d2602527bd3d052055106a55a5a4b012bc8249"
+  ["international_phone_number"]=>
+  string(15) "+1 512-766-7716"
+  ["name"]=>
+  string(9) "UrbanLoop"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRSRQP6D9HjmA"
+  ["reference"]=>
+  string(190) "CmRRAAAA0R8Ov3-WBb11b_2nZUmHBuSuhNRK3MEvXcsPGtpUTJt6bqXtvsfR17qMUKa5AqCLsmv2lfSWknBF_hpN-LkX00T8XWlTAt37A2p5Fp_lZXLyhk8UuttZmU8clhzxphB0EhA0VoVww5qjhzNIJ69vvesUGhTwwzn4QztbdpWpKjz-lWoDgBTspQ"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=6957576814135809097"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(25) "http://www.urbanloop.net/"
+}
+array(17) {
+  ["address_components"]=>
+  array(6) {
+    [0]=>
+    array(3) {
+      ["long_name"]=>
+      string(6) "Austin"
+      ["short_name"]=>
+      string(6) "Austin"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(8) "locality"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [1]=>
+    array(3) {
+      ["long_name"]=>
+      string(8) "Downtown"
+      ["short_name"]=>
+      string(8) "Downtown"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(12) "neighborhood"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [2]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "Travis County"
+      ["short_name"]=>
+      string(13) "Travis County"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_2"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [3]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "Texas"
+      ["short_name"]=>
+      string(2) "TX"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(27) "administrative_area_level_1"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [4]=>
+    array(3) {
+      ["long_name"]=>
+      string(13) "United States"
+      ["short_name"]=>
+      string(2) "US"
+      ["types"]=>
+      array(2) {
+        [0]=>
+        string(7) "country"
+        [1]=>
+        string(9) "political"
+      }
+    }
+    [5]=>
+    array(3) {
+      ["long_name"]=>
+      string(5) "78701"
+      ["short_name"]=>
+      string(5) "78701"
+      ["types"]=>
+      array(1) {
+        [0]=>
+        string(11) "postal_code"
+      }
+    }
+  }
+  ["adr_address"]=>
+  string(146) "<span class="locality">Austin</span>, <span class="region">TX</span> <span class="postal-code">78701</span>, <span class="country-name">USA</span>"
+  ["formatted_address"]=>
+  string(21) "Austin, TX 78701, USA"
+  ["formatted_phone_number"]=>
+  string(14) "(512) 630-2451"
+  ["geometry"]=>
+  array(2) {
+    ["location"]=>
+    array(2) {
+      ["lat"]=>
+      float(30.267153)
+      ["lng"]=>
+      float(-97.7430608)
+    }
+    ["viewport"]=>
+    array(2) {
+      ["northeast"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.268501980292)
+        ["lng"]=>
+        float(-97.741711819708)
+      }
+      ["southwest"]=>
+      array(2) {
+        ["lat"]=>
+        float(30.265804019709)
+        ["lng"]=>
+        float(-97.744409780292)
+      }
+    }
+  }
+  ["icon"]=>
+  string(73) "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png"
+  ["id"]=>
+  string(40) "dd8b68c576dd21df02cca52a15e23fee6d7fd345"
+  ["international_phone_number"]=>
+  string(15) "+1 512-630-2451"
+  ["name"]=>
+  string(16) "JR Digital Video"
+  ["place_id"]=>
+  string(27) "ChIJXyyaSgi1RIYRYGeIMpyO6E0"
+  ["reference"]=>
+  string(190) "CmRRAAAAIcDJWzLIVAcV6VCvGNVSdy0dnz6oOsZKyKmz496A4TFTVEZHKEG8AexDlI890jgl58bYxmodfN_635selYm3NNl5sI8tIZleoubqJj0kNoUZQ7AN0Pcf85ThESiwLnv0EhAgynTM1EgEXsO0hwv7brlLGhQWun7UDxAXckiKeE84342hc_5EJg"
+  ["scope"]=>
+  string(6) "GOOGLE"
+  ["types"]=>
+  array(2) {
+    [0]=>
+    string(17) "point_of_interest"
+    [1]=>
+    string(13) "establishment"
+  }
+  ["url"]=>
+  string(48) "https://maps.google.com/?cid=5613893737031165792"
+  ["utc_offset"]=>
+  int(-300)
+  ["vicinity"]=>
+  string(6) "Austin"
+  ["website"]=>
+  string(30) "http://www.jrdigitalvideo.com/"
+}
