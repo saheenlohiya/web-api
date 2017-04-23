@@ -26,6 +26,7 @@ class UsersController extends TuBaseApiController
 
             return ['exists' => $emailExists];
         }
+        
     }
 
     /**
