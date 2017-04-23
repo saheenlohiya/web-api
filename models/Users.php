@@ -34,6 +34,9 @@ class Users extends BaseUsers implements IdentityInterface
     const BEFORE_CONFIRM = 'beforeConfirm';
     const AFTER_CONFIRM = 'afterConfirm';
 
+    public $username;
+    public $password;
+
     /**
      * @inheritDoc
      */
@@ -47,7 +50,7 @@ class Users extends BaseUsers implements IdentityInterface
      */
     public static function findIdentityByAccessToken($user_access_token, $type = null)
     {
-        throw new NotSupportedException('Method "' . __CLASS__ . '::' . __METHOD__ . '" is not implemented.');
+        return static::findOne(['user_access_token' => $user_access_token]);
     }
 
     /**
@@ -76,14 +79,13 @@ class Users extends BaseUsers implements IdentityInterface
 
 
     /**
-     * Finds user by email
-     * @param $email
-     * @throws NotSupportedException
+     * * Finds user by email
+     * @param $user_email
+     * @return static
      */
-    public static function findByEmail($email)
+    public static function findByEmail($user_email)
     {
-        throw new NotSupportedException('Method "' . __CLASS__ . '::' . __METHOD__ . '" is not implemented.');
-
+        return static::findOne(['user_email' => $user_email]);
     }
 
     /**
@@ -166,6 +168,9 @@ class Users extends BaseUsers implements IdentityInterface
             $this->user_password = Yii::$app->getSecurity()->generatePasswordHash($this->user_password);
             //change the date format
             $this->user_dob = Yii::$app->formatter->asDate($this->user_dob, 'yyyy-MM-dd');
+            //set an api access token... why not
+            $this->user_access_token = \Yii::$app->security->generateRandomString();
+
             return true;
         } else {
             return false;

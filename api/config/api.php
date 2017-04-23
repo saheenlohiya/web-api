@@ -38,6 +38,7 @@ $config = [
                     'class' => 'yii\rest\UrlRule', 'controller' => ['v1/users'],
                     'extraPatterns' => [
                         'GET email-exists' => 'email-exists',
+                        'POST login' => 'login',
                     ]
                 ],
                 [
@@ -54,6 +55,8 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\Users',
             'enableAutoLogin' => false,
+            'enableSession' => false,
+            'loginUrl' => null
         ],
     ],
     'modules' => [
