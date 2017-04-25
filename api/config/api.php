@@ -44,7 +44,8 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule', 'controller' => ['v1/venues'],
                     'extraPatterns' => [
-                        'GET get-nearby-venues' => 'get-nearby-venues'
+                        'GET get-nearby-venues' => 'get-nearby-venues',
+                        'GET search-nearby-venues' => 'search-nearby-venues'
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
