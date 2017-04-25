@@ -17,4 +17,8 @@ class VenuesController extends TuBaseApiController
         return Venues::create()->getNearbyPlaces($lat,$lon,$radius);
     }
 
+    public function actionSearchNearbyVenues($keyword,$lat,$lon,$radius=5){
+        return Venues::create()->getSearchPlaces($keyword,$lat,$lon,$radius);
+    }
+
 }
