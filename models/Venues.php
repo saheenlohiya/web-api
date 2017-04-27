@@ -140,13 +140,12 @@ class Venues extends BaseVenues
             + sin(radians(:lat)) 
             * sin(radians(venue_lat)))
         ) AS distance FROM venues 
-        WHERE id IN (:ids)
+        WHERE id IN (".$ids.")
         ORDER BY distance ASC ";
 
         $params = [
             ':lat' => $latitude,
-            ':lon' => $longitude,
-            ':ids' => $ids,
+            ':lon' => $longitude
         ];
 
         //return active record instead
@@ -202,39 +201,48 @@ class Venues extends BaseVenues
     private function _saveNewGooglePlace($item)
     {
 
+        $venue = Venues::find()->where(['venue_google_place_id' => $item['place_id']])->one();
+        $venue_id = null;
+
         //first we have to make sure we dont have a place that exists with the same venue_google_place_id
-        if (!Venues::find()->where(['venue_google_place_id' => $item['place_id']])->exists()) {
+        if (!isset($venue->id)) {
             //we wont use active records because we dont want to trigger the
             //geolocation behavior
             //need to get the details for this place...
             $place = new Place(['key' => Yii::$app->params['googleApiKey']]);
             $details = $place->details($item['place_id']);
 
-            if ($details['status'] == 'OK') {
-                $details = $details['result'];
+            if(!isset($details['permanently_closed']) || !$details['permanently_closed']){
+                if ($details['status'] == 'OK') {
+                    $details = $details['result'];
 
-                $address_components = $this->_getAddressComponents($details);
+                    $address_components = $this->_getAddressComponents($details);
 
-                if (count($address_components)) {
-                    Yii::$app->db->createCommand()->insert('venues', array_merge([
-                        'venue_name' => $details['name'],
-                        'venue_google_place_id' => $details['place_id'],
-                        'venue_lat' => $details['geometry']['location']['lat'],
-                        'venue_lon' => $details['geometry']['location']['lng'],
-                        'venue_phone' => isset($details['formatted_phone_number']) ? $details['formatted_phone_number'] : null,
-                        'venue_type_id' => isset($details['types']) ? $this->_getVenueTypeID($details['types'][0]) : null,
-                        'venue_date_added' => date('Y-m-d H:i:s')
-                    ], $address_components))->execute();
+                    if (count($address_components)) {
+                        Yii::$app->db->createCommand()->insert('venues', array_merge([
+                            'venue_name' => $details['name'],
+                            'venue_google_place_id' => $details['place_id'],
+                            'venue_lat' => $details['geometry']['location']['lat'],
+                            'venue_lon' => $details['geometry']['location']['lng'],
+                            'venue_phone' => isset($details['formatted_phone_number']) ? $details['formatted_phone_number'] : null,
+                            'venue_type_id' => isset($details['types']) ? $this->_getVenueTypeID($details['types'][0]) : null,
+                            'venue_date_added' => date('Y-m-d H:i:s')
+                        ], $address_components))->execute();
 
-                    $id = Yii::$app->db->getLastInsertId();
-                    $this->_saveGooglePlacesPhotos($id, $details);
+                        $id = Yii::$app->db->getLastInsertId();
+                        $this->_saveGooglePlacesPhotos($id, $details);
 
-                    return $id;
+                        $venue_id = $id;
+                    }
                 }
             }
         }
 
-        return null;
+        else{
+            $venue_id = $venue->id;
+        }
+
+        return $venue_id;
 
     }
 
