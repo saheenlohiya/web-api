@@ -22,6 +22,7 @@ use Yii;
  * @property string $venue_zip
  * @property string $venue_phone
  * @property string $venue_email
+ * @property string $venue_website
  * @property string $venue_lat
  * @property string $venue_lon
  * @property string $venue_claim_date
@@ -66,6 +67,7 @@ abstract class Venues extends \yii\db\ActiveRecord
         return [
             [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active', 'venue_verified'], 'integer'],
             [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp', 'venue_verified_date', 'venue_last_verified_date'], 'safe'],
+            [['venue_website'], 'string'],
             [['venue_lat', 'venue_lon'], 'number'],
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
             [['venue_city'], 'string', 'max' => 20],
@@ -97,6 +99,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_zip' => 'Venue Zip',
             'venue_phone' => 'Venue Phone',
             'venue_email' => 'Venue Email',
+            'venue_website' => 'Venue Website',
             'venue_lat' => 'Venue Lat',
             'venue_lon' => 'Venue Lon',
             'venue_claim_date' => 'Venue Claim Date',

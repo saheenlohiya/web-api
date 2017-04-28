@@ -75,33 +75,33 @@ class Venues extends BaseVenues
         }
     }
 
-    public function getNearbyPlaces($latitude, $longitude, $radius = 30)
+    public function getNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20)
     {
 
         //we will run a nearby places update first
-        $updatePlaces = $this->_updateNearbyPlaces($latitude, $longitude, $radius);
+        $updatePlaces = $this->_updateNearbyPlaces($latitude, $longitude, $radius, $limit);
         if ($updatePlaces) {
             //now search again assuming we now have an updated list
-            $this->results = $this->getNearbySavedPlaces($latitude, $longitude, $radius);
+            $this->results = $this->getNearbySavedPlaces($latitude, $longitude, $radius, $limit);
         }
 
         return $this->results;
 
     }
 
-    public function getSearchPlaces($text,$latitude, $longitude,$radius=30)
+    public function getSearchPlaces($text, $latitude, $longitude, $radius = 5, $limit = 20)
     {
         //we will run a nearby places update first
-        $ids = $this->_updateSearchedPlaces($text,$latitude, $longitude,$radius);
+        $ids = $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
         if (count($ids) > 0) {
             //now search again assuming we now have an updated list
-            $this->results = $this->getSearchedSavedPlaces($ids,$latitude, $longitude);
+            $this->results = $this->getSearchedSavedPlaces($ids, $latitude, $longitude, $limit);
         }
 
         return $this->results;
     }
 
-    public function getNearbySavedPlaces($latitude, $longitude, $radius = 30)
+    public function getNearbySavedPlaces($latitude, $longitude, $radius = 5, $limit = 20, $offset = 0)
     {
         $sql = "
         SELECT *,
@@ -112,7 +112,7 @@ class Venues extends BaseVenues
             - radians(:lon)) 
             + sin(radians(:lat)) 
             * sin(radians(venue_lat)))
-        ) AS distance FROM venues HAVING distance <= :radius ORDER BY distance ASC ";
+        ) AS distance FROM venues HAVING distance <= :radius ORDER BY distance ASC LIMIT " . $offset . ", " . $limit;
 
         $params = [
             ':lat' => $latitude,
@@ -125,7 +125,7 @@ class Venues extends BaseVenues
 
     }
 
-    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude)
+    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 20, $offset = 0)
     {
 
         $ids = implode(",", $ids);
@@ -140,8 +140,8 @@ class Venues extends BaseVenues
             + sin(radians(:lat)) 
             * sin(radians(venue_lat)))
         ) AS distance FROM venues 
-        WHERE id IN (".$ids.")
-        ORDER BY distance ASC ";
+        WHERE id IN (" . $ids . ")
+        ORDER BY distance ASC LIMIT " . $offset . ", " . $limit;
 
         $params = [
             ':lat' => $latitude,
@@ -152,20 +152,24 @@ class Venues extends BaseVenues
         return Venues::findBySql($sql, $params)->with(['venuesImages'])->asArray()->all();
     }
 
-    private function _updateNearbyPlaces($latitude, $longitude, $radius = 30)
+    private function _updateNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20)
     {
 
         $radius = Conversions::meters_to_miles($radius);
 
         $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
-        $results = $search->nearby($latitude . "," . $longitude, ['rankby' => 'distance', 'types' => [],'radius'=>$radius]);
+        $results = $search->nearby($latitude . "," . $longitude, ['rankby' => 'distance', 'types' => [], 'radius' => $radius]);
+
+        $count = 0;
 
         //we only want to issue a db update when the results we get back is
         //greater than the results we have on file!
         if (isset($results['results']) && count($results['results'])) {
             //loop through the results and save to venues
             foreach ($results['results'] as $result) {
+                if ($count >= $limit) break;
                 $this->_saveNewGooglePlace($result);
+                $count++;
             }
         }
 
@@ -173,24 +177,29 @@ class Venues extends BaseVenues
 
     }
 
-    private function _updateSearchedPlaces($keyword,$latitude, $longitude,$radius=30)
+    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 5, $limit = 20)
     {
 
         $radius = Conversions::meters_to_miles($radius);
 
         $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
-        $results = $search->radar($latitude . "," . $longitude,$radius, ['rankby' => 'distance','keyword'=>$keyword]);
+        $results = $search->radar($latitude . "," . $longitude, $radius, ['rankby' => 'distance', 'keyword' => $keyword]);
         $ids = [];
+
+        //use a count to keep track of the limit so we dont overuse the places API
+        $count = 0;
 
         //we only want to issue a db update when the results we get back is
         //greater than the results we have on file!
         if (isset($results['results']) && count($results['results'])) {
             //loop through the results and save to venues
             foreach ($results['results'] as $result) {
+                if ($count >= $limit) break;
                 $id = $this->_saveNewGooglePlace($result);
                 if (!is_null($id)) {
                     array_push($ids, $id);
                 }
+                $count++;
             }
         }
 
@@ -212,7 +221,7 @@ class Venues extends BaseVenues
             $place = new Place(['key' => Yii::$app->params['googleApiKey']]);
             $details = $place->details($item['place_id']);
 
-            if(!isset($details['permanently_closed']) || !$details['permanently_closed']){
+            if (!isset($details['permanently_closed']) || !$details['permanently_closed']) {
                 if ($details['status'] == 'OK') {
                     $details = $details['result'];
 
@@ -224,9 +233,14 @@ class Venues extends BaseVenues
                             'venue_google_place_id' => $details['place_id'],
                             'venue_lat' => $details['geometry']['location']['lat'],
                             'venue_lon' => $details['geometry']['location']['lng'],
-                            'venue_phone' => isset($details['formatted_phone_number']) ? $details['formatted_phone_number'] : null,
+                            'venue_phone' => $details['formatted_phone_number'] ?? null,
                             'venue_type_id' => isset($details['types']) ? $this->_getVenueTypeID($details['types'][0]) : null,
-                            'venue_date_added' => date('Y-m-d H:i:s')
+                            'venue_date_added' => date('Y-m-d H:i:s'),
+                            'venue_website' => $details['website'] ?? $details['url'],
+                            'venue_active' => 1,
+                            'venue_verified' => 1,
+                            'venue_verified_date' => date('Y-m-d H:i:s'),
+                            'venue_last_verified_date' => date('Y-m-d H:i:s')
                         ], $address_components))->execute();
 
                         $id = Yii::$app->db->getLastInsertId();
@@ -236,9 +250,7 @@ class Venues extends BaseVenues
                     }
                 }
             }
-        }
-
-        else{
+        } else {
             $venue_id = $venue->id;
         }
 
