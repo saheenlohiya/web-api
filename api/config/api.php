@@ -49,7 +49,11 @@ $config = [
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings'],
+                    'extraPatterns' => [
+                        'GET list-by-venue' => 'list-by-venue',
+                    ],
+                ],
             ],
         ],
         'db' => $db,

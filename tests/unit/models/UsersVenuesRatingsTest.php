@@ -68,6 +68,10 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
         });
     }
 
+    public function testListByVenue(){
+        //var_dump(UsersVenuesRatings::create()->getRatingsByVenue(1,1));
+    }
+
     private function _createTestUser()
     {
         $this->user->user_firstname = 'Dwamian';

@@ -62,6 +62,17 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         }
     }
 
+    public function getRatingsByVenue($user_id,$venue_id){
+        if(isset($user_id) && isset($venue_id)){
+            return UsersVenuesRatings::find()
+                ->where(['user_id'=>$user_id,'venue_id'=>$venue_id])
+                ->with('usersVenuesRatingsResponses')
+                ->orderBy(['venue_rating_date'=>SORT_DESC])
+                ->all()
+                ;
+        }
+    }
+
 
     private function _calcRatingAverage(){
         $sum = 0;
