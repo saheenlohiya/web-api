@@ -2,6 +2,7 @@
 namespace tests\models;
 
 
+use app\models\UsersVenuesFollows;
 use app\models\UsersVenuesRatings;
 use app\models\Venues;
 use app\models\Users;
@@ -63,13 +64,23 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
 
             $this->assertTrue($this->rating->save());
 
+            //make sure the auto follow worked
+            $this->assertNotNull(
+                UsersVenuesFollows::create()->find()->where(['user_id'=>$this->user->id,'venue_id'=>$this->venue->id])->one()
+            );
+
             $this->assertNotNull($this->rating->venue_rating_date);
             $this->assertNotNull($this->rating->venue_rating_average);
+
         });
     }
 
     public function testListByVenue(){
-        //var_dump(UsersVenuesRatings::create()->getRatingsByVenue(1,1));
+        $this->_createVenue();
+        $results = UsersVenuesRatings::create()->getRatingsByVenue($this->user->id,$this->venue->id);
+        $this->assertNotNull(
+            $results
+        );
     }
 
     private function _createTestUser()

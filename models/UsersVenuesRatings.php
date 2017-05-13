@@ -15,7 +15,11 @@ use yii\helpers\ArrayHelper;
 class UsersVenuesRatings extends BaseUsersVenuesRatings
 {
 
+    const EVENT_RATINGS_ADDED = 'ratingsAdded';
+
+
     public static function create(){
+        //setup event handlers
         return new self;
     }
 
@@ -60,6 +64,17 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         } else {
             return false;
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        //auto follow
+        UsersVenuesFollows::create()->follow($this->user_id,$this->venue_id);
     }
 
     public function getRatingsByVenue($user_id,$venue_id){

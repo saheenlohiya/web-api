@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use \app\models\base\UsersVenuesFollows as BaseUsersVenuesFollows;
+use yii\base\ModelEvent;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -14,6 +15,9 @@ use yii\helpers\ArrayHelper;
  */
 class UsersVenuesFollows extends BaseUsersVenuesFollows
 {
+
+    //events
+    const EVENT_USER_FOLLOW_SUCCESS = 'userFollowSuccess';
 
     public static function create()
     {
@@ -46,5 +50,26 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
 
             ]
         );
+    }
+
+    public function follow($user_id,$venue_id){
+        //make sure params are not empty
+        if(!is_null($user_id) && !is_null($venue_id)){
+            //make sure user is not already following this venue
+            if(!UsersVenuesFollows::find()->where(['user_id'=>$user_id,'venue_id'=>$venue_id])->exists()){
+                $newFollow = UsersVenuesFollows::create();
+                $newFollow->user_id = $user_id;
+                $newFollow->venue_id = $venue_id;
+
+                $result = $newFollow->save();
+
+                if($result){
+                    $this->trigger(self::EVENT_USER_FOLLOW_SUCCESS);
+                    return $result;
+                }
+            }
+        }
+
+        return false;
     }
 }
