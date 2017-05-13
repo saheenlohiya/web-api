@@ -1,5 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE users;
+TRUNCATE TABLE users_venues_claims;
 TRUNCATE TABLE users_venues_coupons;
 TRUNCATE TABLE users_venues_follows;
 TRUNCATE TABLE users_venues_ratings;

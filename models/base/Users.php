@@ -37,6 +37,7 @@ use Yii;
  * @property string $user_access_token
  * @property string $user_auth_key
  *
+ * @property \app\models\UsersVenuesClaims[] $usersVenuesClaims
  * @property \app\models\UsersVenuesCoupons[] $usersVenuesCoupons
  * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
  * @property \app\models\UsersVenuesRatings[] $usersVenuesRatings
@@ -128,6 +129,14 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_access_token' => 'User Access Token',
             'user_auth_key' => 'User Auth Key',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesClaims()
+    {
+        return $this->hasMany(\app\models\UsersVenuesClaims::className(), ['user_id' => 'id']);
     }
 
     /**

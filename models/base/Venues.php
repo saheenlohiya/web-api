@@ -35,6 +35,7 @@ use Yii;
  * @property string $venue_verified_date
  * @property string $venue_last_verified_date
  *
+ * @property \app\models\UsersVenuesClaims[] $usersVenuesClaims
  * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
  * @property \app\models\UsersVenuesRatings[] $usersVenuesRatings
  * @property \app\models\Users $user
@@ -112,6 +113,14 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_verified_date' => 'Venue Verified Date',
             'venue_last_verified_date' => 'Venue Last Verified Date',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersVenuesClaims()
+    {
+        return $this->hasMany(\app\models\UsersVenuesClaims::className(), ['venue_id' => 'id']);
     }
 
     /**
