@@ -70,7 +70,7 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
             );
 
             $this->assertNotNull($this->rating->venue_rating_date);
-            $this->assertNotNull($this->rating->venue_rating_average);
+            $this->assertNotNull($this->rating->venue_rating_resolve_expiration);
 
         });
     }
