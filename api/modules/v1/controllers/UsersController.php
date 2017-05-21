@@ -43,10 +43,9 @@ class UsersController extends TuBaseApiController
             $user = Users::findByEmail($params['user_email']);
 
             if($user){
-                if (Yii::$app->getSecurity()->validatePassword($params['user_password'], $user->user_password)) {
-                    $response = $user->toArray();
-                    unset($response['user_password']);
-                    return $response;
+                if (Yii::$app->getSecurity()->validatePassword($params['user_password'], $user['user_password'])) {
+                    unset($user['user_password']);
+                    return $user;
                 }
             }
         }

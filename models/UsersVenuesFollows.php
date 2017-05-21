@@ -46,24 +46,25 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['user_id','venue_id'], 'required']
+                [['user_id', 'venue_id'], 'required']
 
             ]
         );
     }
 
-    public function follow($user_id,$venue_id){
+    public function follow($user_id, $venue_id)
+    {
         //make sure params are not empty
-        if(!is_null($user_id) && !is_null($venue_id)){
+        if (!is_null($user_id) && !is_null($venue_id)) {
             //make sure user is not already following this venue
-            if(!UsersVenuesFollows::find()->where(['user_id'=>$user_id,'venue_id'=>$venue_id])->exists()){
+            if (!UsersVenuesFollows::find()->where(['user_id' => $user_id, 'venue_id' => $venue_id])->exists()) {
                 $newFollow = UsersVenuesFollows::create();
                 $newFollow->user_id = $user_id;
                 $newFollow->venue_id = $venue_id;
 
                 $result = $newFollow->save();
 
-                if($result){
+                if ($result) {
                     $this->trigger(self::EVENT_USER_FOLLOW_SUCCESS);
                     return $result;
                 }
@@ -71,5 +72,16 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         }
 
         return false;
+    }
+
+    public function getVenueFollowsByUser($user_id)
+    {
+        return UsersVenuesFollows::find()
+            ->where(['user_id' => $user_id])
+            ->with(['venue'])
+            ->orderBy(['user_venue_follow_date' => 'DESC'])
+            ->asArray(true)
+            ->all()
+            ;
     }
 }

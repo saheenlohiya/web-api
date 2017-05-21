@@ -85,7 +85,7 @@ class Users extends BaseUsers implements IdentityInterface
      */
     public static function findByEmail($user_email)
     {
-        return static::findOne(['user_email' => $user_email]);
+        return static::find()->where(['user_email' => $user_email])->with(['usersVenuesFollows.venue'])->asArray(true)->one();
     }
 
     /**

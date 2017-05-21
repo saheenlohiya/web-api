@@ -28,7 +28,7 @@ $config = [
                 ],
             ],
         ],
-        'mailer'=>$mail,
+        'mailer' => $mail,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
@@ -48,7 +48,11 @@ $config = [
                         'GET search-nearby-venues' => 'search-nearby-venues'
                     ],
                 ],
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows'],
+                    'extraPatterns' => [
+                        'GET list-by-user' => 'list-by-user',
+                    ],
+                ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings'],
                     'extraPatterns' => [
                         'GET list-by-venue' => 'list-by-venue',
