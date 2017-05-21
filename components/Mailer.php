@@ -4,6 +4,8 @@ namespace app\components;
 
 use app\helpers\Password;
 use app\models\Users;
+use app\models\UsersVenuesRatings;
+use app\models\Venues;
 use Yii;
 use yii\base\Component;
 
@@ -33,6 +35,9 @@ class Mailer extends Component
 
     /** @var string */
     protected $recoverySubject;
+
+    /** @var string */
+    protected $ratingNotifySubject;
 
     /**
      * @return string
@@ -134,6 +139,24 @@ class Mailer extends Component
         $this->recoverySubject = $recoverySubject;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRatingNotifySubject(){
+        if ($this->ratingNotifySubject == null) {
+            $this->setRatingNotifySubject('You have a new rating');
+        }
+
+        return $this->ratingNotifySubject;
+    }
+
+    /**
+     * @param $ratingNotifySubject
+     */
+    public function setRatingNotifySubject($ratingNotifySubject){
+        $this->ratingNotifySubject = $ratingNotifySubject;
+    }
+
     /** @inheritdoc */
     public function init()
     {
@@ -154,6 +177,23 @@ class Mailer extends Component
             $this->getWelcomeSubject(),
             'user-account-welcome',
             ['user' => $user]
+        );
+    }
+
+    /**
+     * Sends an email to the venue manager when a new rating is submitted
+     * @param UsersVenuesRatings $rating
+     * @param Venues $venue
+     * @param Users $user
+     * @return bool
+     */
+
+    public function sendRatingNotification(UsersVenuesRatings $rating,Venues $venue, Users $user){
+        return $this->sendMessage(
+            $user->user_email,
+            $this->getRatingNotifySubject(),
+            'rating-notify',
+            ['user' => $user,'rating' => $rating, 'venue' => $venue]
         );
     }
 

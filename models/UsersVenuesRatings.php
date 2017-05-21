@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use \app\models\base\UsersVenuesRatings as BaseUsersVenuesRatings;
+use app\components\Mailer;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -11,6 +12,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "users_venues_ratings".
+ *  @property-read Mailer $mailer
  */
 class UsersVenuesRatings extends BaseUsersVenuesRatings
 {
@@ -18,6 +20,14 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
     const MAX_RATING_AVG = 5;
     const DEFAULT_RESOLUTION_EXP_DAYS = 30;
 
+    /**
+     * @return Mailer
+     * @throws \yii\base\InvalidConfigException
+     */
+    protected function getMailer()
+    {
+        return \Yii::$container->get(Mailer::className());
+    }
 
     public static function create()
     {
@@ -78,6 +88,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
         //auto follow
         UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
+        //send notification fo venue managers
+        $this->_notifyVenueManager();
     }
 
     public function getRatingsByVenue($user_id, $venue_id)
@@ -125,6 +137,20 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         // we need to give 30 days to respond anyway
         $this->venue_rating_resolve_expiration = date('Y-m-d', strtotime(date('Y-m-d') . '+ '.self::DEFAULT_RESOLUTION_EXP_DAYS.' days'));
         
+    }
+
+    private function _notifyVenueManager(){
+        //find the manager
+        $venue = Venues::find()->where(['id'=>$this->venue_id])->with(['user'])->one();
+        if(!is_null($venue)){
+            //see if the venue is claimed
+            if(!is_null($venue->user->id)){
+                //send welcome message
+                if(!$this->mailer->sendRatingNotification($this,$venue,$venue->user)){
+                    Throw new Exception("Could not send welcome email");
+                }
+            }
+        }
     }
 
 
