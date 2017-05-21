@@ -10,13 +10,11 @@ use app\components\behaviors\GeocodeBehavior;
 
 use Yii;
 use yii\base\Exception;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
-//use app\components\behaviors\GeocodeBehavior;
 use yii\web\IdentityInterface;
 
 /**

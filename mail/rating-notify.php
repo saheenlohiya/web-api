@@ -1,5 +1,5 @@
 <?php
-    //Sent to new users on account registration
+    //Sent to new venue manager
 ?>
 
-<h1>Welcome <?php echo $user->user_firstname; ?> </h1>
+<h1>You have a new rating for <?php echo $venue->venue_name; ?> </h1>
