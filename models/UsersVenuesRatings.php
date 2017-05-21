@@ -152,6 +152,5 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             }
         }
     }
-
-
+    
 }
