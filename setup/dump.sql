@@ -14,6 +14,8 @@ MySQL - 5.6.35 : Database - tellus_tests
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `users` */
 
+DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(100) DEFAULT NULL,
@@ -51,6 +53,8 @@ CREATE TABLE `users` (
 
 /*Table structure for table `users_venues_claims` */
 
+DROP TABLE IF EXISTS `users_venues_claims`;
+
 CREATE TABLE `users_venues_claims` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -70,6 +74,8 @@ CREATE TABLE `users_venues_claims` (
 /*Data for the table `users_venues_claims` */
 
 /*Table structure for table `users_venues_coupons` */
+
+DROP TABLE IF EXISTS `users_venues_coupons`;
 
 CREATE TABLE `users_venues_coupons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -91,6 +97,8 @@ CREATE TABLE `users_venues_coupons` (
 
 /*Table structure for table `users_venues_follows` */
 
+DROP TABLE IF EXISTS `users_venues_follows`;
+
 CREATE TABLE `users_venues_follows` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -106,6 +114,8 @@ CREATE TABLE `users_venues_follows` (
 /*Data for the table `users_venues_follows` */
 
 /*Table structure for table `users_venues_ratings` */
+
+DROP TABLE IF EXISTS `users_venues_ratings`;
 
 CREATE TABLE `users_venues_ratings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,6 +146,8 @@ CREATE TABLE `users_venues_ratings` (
 
 /*Table structure for table `users_venues_ratings_images` */
 
+DROP TABLE IF EXISTS `users_venues_ratings_images`;
+
 CREATE TABLE `users_venues_ratings_images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_venue_rating_id` int(11) DEFAULT NULL,
@@ -148,6 +160,8 @@ CREATE TABLE `users_venues_ratings_images` (
 /*Data for the table `users_venues_ratings_images` */
 
 /*Table structure for table `users_venues_ratings_responses` */
+
+DROP TABLE IF EXISTS `users_venues_ratings_responses`;
 
 CREATE TABLE `users_venues_ratings_responses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -165,6 +179,8 @@ CREATE TABLE `users_venues_ratings_responses` (
 /*Data for the table `users_venues_ratings_responses` */
 
 /*Table structure for table `venues` */
+
+DROP TABLE IF EXISTS `venues`;
 
 CREATE TABLE `venues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -207,6 +223,8 @@ CREATE TABLE `venues` (
 
 /*Table structure for table `venues_admins` */
 
+DROP TABLE IF EXISTS `venues_admins`;
+
 CREATE TABLE `venues_admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `venue_id` int(11) DEFAULT NULL,
@@ -222,6 +240,8 @@ CREATE TABLE `venues_admins` (
 /*Data for the table `venues_admins` */
 
 /*Table structure for table `venues_coupons` */
+
+DROP TABLE IF EXISTS `venues_coupons`;
 
 CREATE TABLE `venues_coupons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -247,6 +267,8 @@ CREATE TABLE `venues_coupons` (
 
 /*Table structure for table `venues_images` */
 
+DROP TABLE IF EXISTS `venues_images`;
+
 CREATE TABLE `venues_images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `venue_id` int(11) DEFAULT NULL,
@@ -261,6 +283,8 @@ CREATE TABLE `venues_images` (
 
 /*Table structure for table `venues_settings` */
 
+DROP TABLE IF EXISTS `venues_settings`;
+
 CREATE TABLE `venues_settings` (
   `venue_id` int(11) NOT NULL,
   `venue_rating_category_mapping` text,
@@ -272,6 +296,8 @@ CREATE TABLE `venues_settings` (
 /*Data for the table `venues_settings` */
 
 /*Table structure for table `venues_types` */
+
+DROP TABLE IF EXISTS `venues_types`;
 
 CREATE TABLE `venues_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -290,6 +316,8 @@ insert  into `venues_types`(`id`,`venue_type_slug`,`venue_type_name`,`venue_type
 
 DELIMITER $$
 
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_insert` */$$
+
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_insert` AFTER INSERT ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(NEW.venue_id);
     END */$$
@@ -300,6 +328,8 @@ DELIMITER ;
 /* Trigger structure for table `users_venues_ratings` */
 
 DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_update` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_update` AFTER UPDATE ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(NEW.venue_id);
@@ -312,6 +342,8 @@ DELIMITER ;
 
 DELIMITER $$
 
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_delete` */$$
+
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_delete` AFTER DELETE ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(OLD.venue_id);
     END */$$
@@ -323,6 +355,8 @@ DELIMITER ;
 
 DELIMITER $$
 
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `venues_settings__add_default_values__on_insert` */$$
+
 /*!50003 CREATE */  /*!50003 TRIGGER `venues_settings__add_default_values__on_insert` AFTER INSERT ON `venues` FOR EACH ROW BEGIN
 	INSERT INTO venues_settings (venue_id,venue_rating_category_mapping) VALUES (NEW.id,'{"venue_rating_cat_1":"Service","venue_rating_cat_2":"Staff","venue_rating_cat_3":"Facility","venue_rating_cat_4":"Custom 1","venue_rating_cat_5":"Custom 2","venue_rating_cat_6":"Custom 3"}');
     END */$$
@@ -332,6 +366,7 @@ DELIMITER ;
 
 /* Function  structure for function  `fx_venues_total_ratings` */
 
+/*!50003 DROP FUNCTION IF EXISTS `fx_venues_total_ratings` */;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_ratings`(vid int) RETURNS int(32)
@@ -344,6 +379,7 @@ DELIMITER ;
 
 /* Function  structure for function  `fx_venues_total_resolved_ratings` */
 
+/*!50003 DROP FUNCTION IF EXISTS `fx_venues_total_resolved_ratings` */;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_resolved_ratings`(vid int) RETURNS int(32)
@@ -355,6 +391,8 @@ BEGIN
 DELIMITER ;
 
 /* Procedure structure for procedure `venues_update_satisfaction_stats` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `venues_update_satisfaction_stats` */;
 
 DELIMITER $$
 
