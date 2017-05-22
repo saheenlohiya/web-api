@@ -20,6 +20,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
     const MAX_RATING_AVG = 5;
     const DEFAULT_RESOLUTION_EXP_DAYS = 30;
 
+
     /**
      * @return Mailer
      * @throws \yii\base\InvalidConfigException

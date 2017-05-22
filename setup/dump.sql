@@ -192,6 +192,9 @@ CREATE TABLE `venues` (
   `venue_verified` tinyint(4) DEFAULT '0',
   `venue_verified_date` datetime DEFAULT NULL,
   `venue_last_verified_date` datetime DEFAULT NULL,
+  `venue_rating_avg` decimal(3,2) DEFAULT NULL,
+  `venue_rating_percent` decimal(5,2) DEFAULT NULL,
+  `venue_satisfaction_percent` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `venue_google_place_id` (`venue_google_place_id`),
   KEY `user_id` (`user_id`),
@@ -283,6 +286,39 @@ CREATE TABLE `venues_types` (
 
 insert  into `venues_types`(`id`,`venue_type_slug`,`venue_type_name`,`venue_type_description`,`venue_type_active`) values (1,'accounting','Accounting',NULL,1),(2,'art_gallery','Art Gallery',NULL,1),(3,'aquarium','Aquarium',NULL,1),(4,'airport','Airport',NULL,1),(5,'amusement_park','Amusement Park',NULL,1),(6,'atm','Atm',NULL,1),(7,'bakery','Bakery',NULL,1),(8,'bank','Bank',NULL,1),(9,'bar','Bar',NULL,1),(10,'beauty_salon','Beauty Salon',NULL,1),(11,'bicycle_store','Bicycle Store',NULL,1),(12,'book_store','Book Store',NULL,1),(13,'bowling_alley','Bowling Alley',NULL,1),(14,'bus_station','Bus Station',NULL,1),(15,'cafe','Cafe',NULL,1),(16,'campground','Campground',NULL,1),(17,'car_dealer','Car Dealer',NULL,1),(18,'car_rental','Car Rental',NULL,1),(19,'car_repair','Car Repair',NULL,1),(20,'car_wash','Car Wash',NULL,1),(21,'casino','Casino',NULL,1),(22,'cemetery','Cemetery',NULL,1),(23,'church','Church',NULL,1),(24,'city_hall','City Hall',NULL,1),(25,'clothing_store','Clothing Store',NULL,1),(26,'convenience_store','Convenience Store',NULL,1),(27,'courthouse','Courthouse',NULL,1),(28,'dentist','Dentist',NULL,1),(29,'department_store','Department Store',NULL,1),(30,'doctor','Doctor',NULL,1),(31,'electrician','Electrician',NULL,1),(32,'electronics_store','Electronics Store',NULL,1),(33,'establishment','Establishment',NULL,1),(34,'embassy','Embassy',NULL,1),(35,'fire_station','Fire Station',NULL,1),(36,'florist','Florist',NULL,1),(37,'funeral_home','Funeral Home',NULL,1),(38,'furniture_store','Furniture Store',NULL,1),(39,'food','Food',NULL,1),(40,'finance','Finance',NULL,1),(41,'gas_station','Gas Station',NULL,1),(42,'grocery','Grocery',NULL,1),(43,'general_contractor','General Contractor',NULL,1),(44,'grocery_or_supermark','Grocery Or Supermarket',NULL,1),(45,'gym','Gym',NULL,1),(46,'hair_care','Hair Care',NULL,1),(47,'hardware_store','Hardware Store',NULL,1),(48,'hindu_temple','Hindu Temple',NULL,1),(49,'home_goods_store','Home Goods Store',NULL,1),(50,'hospital','Hospital',NULL,1),(51,'health','Health',NULL,1),(52,'insurance_agency','Insurance Agency',NULL,1),(53,'jewelry_store','Jewelry Store',NULL,1),(54,'laundry','Laundry',NULL,1),(55,'lawyer','Lawyer',NULL,1),(56,'library','Library',NULL,1),(57,'liquor_store','Liquor Store',NULL,1),(58,'local_government_off','Local Government Office',NULL,1),(59,'locksmith','Locksmith',NULL,1),(60,'lodging','Lodging',NULL,1),(61,'meal_delivery','Meal Delivery',NULL,1),(62,'meal_takeaway','Meal Takeaway',NULL,1),(63,'mosque','Mosque',NULL,1),(64,'movie_rental','Movie Rental',NULL,1),(65,'movie_theater','Movie Theater',NULL,1),(66,'moving_company','Moving Company',NULL,1),(67,'museum','Museum',NULL,1),(68,'night_club','Night Club',NULL,1),(69,'painter','Painter',NULL,1),(70,'park','Park',NULL,1),(71,'parking','Parking',NULL,1),(72,'pet_store','Pet Store',NULL,1),(73,'pharmacy','Pharmacy',NULL,1),(74,'physiotherapist','Physiotherapist',NULL,1),(75,'plumber','Plumber',NULL,1),(76,'police','Police',NULL,1),(77,'post_office','Post Office',NULL,1),(78,'place_of_worship','Place Of Worship',NULL,1),(79,'real_estate_agency','Real Estate Agency',NULL,1),(80,'restaurant','Restaurant',NULL,1),(81,'roofing_contractor','Roofing Contractor',NULL,1),(82,'rv_park','Rv Park',NULL,1),(83,'school','School',NULL,1),(84,'shoe_store','Shoe Store',NULL,1),(85,'shopping_mall','Shopping Mall',NULL,1),(86,'spa','Spa',NULL,1),(87,'stadium','Stadium',NULL,1),(88,'storage','Storage',NULL,1),(89,'store','Store',NULL,1),(90,'subway_station','Subway Station',NULL,1),(91,'synagogue','Synagogue',NULL,1),(92,'taxi_stand','Taxi Stand',NULL,1),(93,'train_station','Train Station',NULL,1),(94,'transit_station','Transit Station',NULL,1),(95,'travel_agency','Travel Agency',NULL,1),(96,'university','University',NULL,1),(97,'veterinary_care','Veterinary Care',NULL,1),(98,'zoo','Zoo',NULL,1);
 
+/* Trigger structure for table `users_venues_ratings` */
+
+DELIMITER $$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_insert` AFTER INSERT ON `users_venues_ratings` FOR EACH ROW BEGIN
+	call venues_update_satisfaction_stats(NEW.venue_id);
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `users_venues_ratings` */
+
+DELIMITER $$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_update` AFTER UPDATE ON `users_venues_ratings` FOR EACH ROW BEGIN
+	call venues_update_satisfaction_stats(NEW.venue_id);
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `users_venues_ratings` */
+
+DELIMITER $$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_delete` AFTER DELETE ON `users_venues_ratings` FOR EACH ROW BEGIN
+	call venues_update_satisfaction_stats(OLD.venue_id);
+    END */$$
+
+
+DELIMITER ;
+
 /* Trigger structure for table `venues` */
 
 DELIMITER $$
@@ -292,6 +328,69 @@ DELIMITER $$
     END */$$
 
 
+DELIMITER ;
+
+/* Function  structure for function  `fx_venues_total_ratings` */
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_ratings`(vid int) RETURNS int(32)
+BEGIN
+	declare total_ratings int(32);
+	SELECT COUNT(*) INTO total_ratings FROM users_venues_ratings vr WHERE vr.venue_id = vid;
+	return total_ratings;
+    END */$$
+DELIMITER ;
+
+/* Function  structure for function  `fx_venues_total_resolved_ratings` */
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_resolved_ratings`(vid int) RETURNS int(32)
+BEGIN
+	declare total_resolved_ratings int(32);
+	SELECT COUNT(*) INTO total_resolved_ratings FROM users_venues_ratings vr WHERE vr.venue_id = vid and venue_rating_resolved is true;
+	return total_resolved_ratings;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `venues_update_satisfaction_stats` */
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `venues_update_satisfaction_stats`(vid INT)
+BEGIN
+    
+    #store the venue raitng aggreagate in a variable
+    DECLARE venue_rating_avg_adjusted DECIMAL(3,2);
+    declare venue_total_ratings int(11);
+    declare venue_total_resolved_ratings int(11);
+    declare venue_resolved_percent decimal(5,2);
+    declare venue_rating_percent_adjusted decimal(5,2);
+    declare venue_satisfaction decimal(5,2);
+    
+    #calculate the venue rating average aggregate
+    select AVG(`venue_rating_average`) into venue_rating_avg_adjusted FROM users_venues_ratings vr where vr.venue_id = vid;
+    
+    #get total ratings
+    select fx_venues_total_ratings(vid) into venue_total_ratings;
+    #get total resolved ratings
+    SELECT fx_venues_total_resolved_ratings(vid) INTO venue_total_resolved_ratings;
+    
+    #calc the rating_percent_aggregate
+    set venue_resolved_percent = (venue_total_resolved_ratings/venue_total_ratings) * 100;
+    #calc the venue rating percent
+    set venue_rating_percent_adjusted = (venue_rating_avg_adjusted/5)*100;
+    #calc the venue satisfaction rating
+    set venue_satisfaction = (venue_resolved_percent * 0.2) + (venue_rating_percent_adjusted * 0.8);
+    
+    #update the venue aggregate rating
+    UPDATE venues SET 
+    `venue_rating_avg` = venue_rating_avg_adjusted,
+    `venue_rating_percent` = venue_rating_percent_adjusted,
+    `venue_satisfaction_percent` = venue_satisfaction
+    where id = vid;
+    END */$$
 DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -34,6 +34,9 @@ use Yii;
  * @property integer $venue_verified
  * @property string $venue_verified_date
  * @property string $venue_last_verified_date
+ * @property string $venue_rating_avg
+ * @property string $venue_rating_percent
+ * @property string $venue_satisfaction_percent
  *
  * @property \app\models\UsersVenuesClaims[] $usersVenuesClaims
  * @property \app\models\UsersVenuesFollows[] $usersVenuesFollows
@@ -69,7 +72,7 @@ abstract class Venues extends \yii\db\ActiveRecord
             [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active', 'venue_verified'], 'integer'],
             [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp', 'venue_verified_date', 'venue_last_verified_date'], 'safe'],
             [['venue_website'], 'string'],
-            [['venue_lat', 'venue_lon'], 'number'],
+            [['venue_lat', 'venue_lon', 'venue_rating_avg', 'venue_rating_percent', 'venue_satisfaction_percent'], 'number'],
             [['venue_name', 'venue_google_place_id', 'venue_address_1', 'venue_address_2', 'venue_email'], 'string', 'max' => 100],
             [['venue_city'], 'string', 'max' => 20],
             [['venue_state'], 'string', 'max' => 2],
@@ -112,6 +115,9 @@ abstract class Venues extends \yii\db\ActiveRecord
             'venue_verified' => 'Venue Verified',
             'venue_verified_date' => 'Venue Verified Date',
             'venue_last_verified_date' => 'Venue Last Verified Date',
+            'venue_rating_avg' => 'Venue Rating Avg',
+            'venue_rating_percent' => 'Venue Rating Percent',
+            'venue_satisfaction_percent' => 'Venue Satisfaction Percent',
         ];
     }
 
