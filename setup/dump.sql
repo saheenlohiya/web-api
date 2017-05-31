@@ -398,32 +398,19 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `venues_update_satisfaction_stats`(vid INT)
 BEGIN
-    
-    #store the venue raitng aggreagate in a variable
     DECLARE venue_rating_avg_adjusted DECIMAL(3,2);
     declare venue_total_ratings int(11);
     declare venue_total_resolved_ratings int(11);
     declare venue_resolved_percent decimal(5,2);
     declare venue_rating_percent_adjusted decimal(5,2);
     declare venue_satisfaction decimal(5,2);
-    
-    #calculate the venue rating average aggregate
     select AVG(`venue_rating_average`) into venue_rating_avg_adjusted FROM users_venues_ratings vr where vr.venue_id = vid;
-    
-    #get total ratings
     select fx_venues_total_ratings(vid) into venue_total_ratings;
-    #get total resolved ratings
     SELECT fx_venues_total_resolved_ratings(vid) INTO venue_total_resolved_ratings;
-    
-    #calc the rating_percent_aggregate
     set venue_resolved_percent = (venue_total_resolved_ratings/venue_total_ratings) * 100;
-    #calc the venue rating percent
     set venue_rating_percent_adjusted = (venue_rating_avg_adjusted/5)*100;
-    #calc the venue satisfaction rating
     set venue_satisfaction = (venue_resolved_percent * 0.2) + (venue_rating_percent_adjusted * 0.8);
-    
-    #update the venue aggregate rating
-    UPDATE venues SET 
+    UPDATE venues SET
     `venue_rating_avg` = venue_rating_avg_adjusted,
     `venue_rating_percent` = venue_rating_percent_adjusted,
     `venue_satisfaction_percent` = venue_satisfaction
