@@ -12,12 +12,15 @@ class UsersController extends TuBaseApiController
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Users';
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists'],
+            'except' => ['email-exists','login'],
             'optional' => []
         ];
         return $behaviors;
