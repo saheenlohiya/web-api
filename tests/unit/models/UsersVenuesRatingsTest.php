@@ -4,6 +4,7 @@ namespace tests\models;
 
 use app\models\UsersVenuesFollows;
 use app\models\UsersVenuesRatings;
+use app\models\UsersVenuesRatingsResponses;
 use app\models\Venues;
 use app\models\Users;
 
@@ -67,6 +68,11 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
             //make sure the auto follow worked
             $this->assertNotNull(
                 UsersVenuesFollows::create()->find()->where(['user_id'=>$this->user->id,'venue_id'=>$this->venue->id])->one()
+            );
+
+            //see if the auto thread was created
+            $this->assertNotNull(
+                UsersVenuesRatingsResponses::create()->find()->where(['user_venue_rating_responding_user_id'=>$this->user->id,'user_venue_rating_id'=>$this->rating->id])->one()
             );
 
             $this->assertNotNull($this->rating->venue_rating_date);

@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "users_venues_ratings".
- *  @property-read Mailer $mailer
+ * @property-read Mailer $mailer
  */
 class UsersVenuesRatings extends BaseUsersVenuesRatings
 {
@@ -89,6 +89,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
         //auto follow
         UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
+        //auto create thread
+        UsersVenuesRatingsResponses::create()->respond($this->id,$this->user_id,$this->venue_rating_comment);
         //send notification fo venue managers
         $this->_notifyVenueManager();
     }
@@ -136,22 +138,23 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         }
 
         // we need to give 30 days to respond anyway
-        $this->venue_rating_resolve_expiration = date('Y-m-d', strtotime(date('Y-m-d') . '+ '.self::DEFAULT_RESOLUTION_EXP_DAYS.' days'));
-        
+        $this->venue_rating_resolve_expiration = date('Y-m-d', strtotime(date('Y-m-d') . '+ ' . self::DEFAULT_RESOLUTION_EXP_DAYS . ' days'));
+
     }
 
-    private function _notifyVenueManager(){
+    private function _notifyVenueManager()
+    {
         //find the manager
-        $venue = Venues::find()->where(['id'=>$this->venue_id])->with(['user'])->one();
-        if(!is_null($venue)){
+        $venue = Venues::find()->where(['id' => $this->venue_id])->with(['user'])->one();
+        if (!is_null($venue)) {
             //see if the venue is claimed
-            if(!is_null($venue->user) && count($venue->user) > 0){
+            if (!is_null($venue->user) && count($venue->user) > 0) {
                 //send welcome message
-                if(!$this->mailer->sendRatingNotification($this,$venue,$venue->user)){
+                if (!$this->mailer->sendRatingNotification($this, $venue, $venue->user)) {
                     Throw new Exception("Could not send welcome email");
                 }
             }
         }
     }
-    
+
 }

@@ -12,7 +12,15 @@ use yii\helpers\ArrayHelper;
 class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
 {
 
-public function behaviors()
+    //events
+    const EVENT_VENUE_RATING_RESPONSE_SUCCESS = 'userVenueRatingResponseSuccess';
+
+    public static function create()
+    {
+        return new self;
+    }
+
+    public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
@@ -25,10 +33,30 @@ public function behaviors()
     public function rules()
     {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
+    }
+
+    public function respond($venue_rating_id, $user_id, $response_comment)
+    {
+        //make sure params are not empty and are set
+        if (!is_null($user_id) && !is_null($venue_rating_id) && !is_null($response_comment) && !empty($response_comment)) {
+            $newResponse = self::create();
+            $newResponse->user_venue_rating_id = $venue_rating_id;
+            $newResponse->user_venue_rating_responding_user_id = $user_id;
+            $newResponse->user_venue_rating_response = $response_comment;
+
+            $result = $newResponse->save();
+
+            if ($result) {
+                $this->trigger(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS);
+                return $result;
+            }
+        }
+
+        return false;
     }
 }
