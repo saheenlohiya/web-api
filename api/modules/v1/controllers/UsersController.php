@@ -2,6 +2,7 @@
 
 namespace app\api\modules\v1\controllers;
 
+use app\filters\TuQueryParamAuth;
 use yii;
 use app\models\Users;
 use yii\web\Response;
@@ -10,6 +11,17 @@ class UsersController extends TuBaseApiController
 {
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Users';
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => TuQueryParamAuth::className(),
+            'except' => ['email-exists'],
+            'optional' => []
+        ];
+        return $behaviors;
+    }
 
     /**
      * Checks to see if the supplied email address exists in the DB
@@ -55,15 +67,16 @@ class UsersController extends TuBaseApiController
 
     /**
      * Get the user's profile information
-     * @param $user_token
+     * @param $user_access_token
      * @return mixed
      */
-    public function actionMe($user_token)
+    public function actionMe($user_access_token)
     {
-        $user = Users::findIdentityByAccessToken($user_token);
+        $user = Users::findIdentityByAccessToken($user_access_token);
 
         if ($user) {
-            return $this->_getUserObject($user);
+            $me = Users::me($user->id);
+            return $this->_getUserObject($me);
         }
     }
 

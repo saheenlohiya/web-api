@@ -20,7 +20,7 @@ use yii\web\IdentityInterface;
 /**
  * This is the model class for table "users".
  *
- *  @property-read Mailer $mailer
+ * @property-read Mailer $mailer
  */
 class Users extends BaseUsers implements IdentityInterface
 {
@@ -48,12 +48,23 @@ class Users extends BaseUsers implements IdentityInterface
      */
     public static function findIdentityByAccessToken($user_access_token, $type = null)
     {
-        return static::find()->where(['user_access_token' => $user_access_token])->with(
+        return static::findOne(['user_access_token' => $user_access_token]);
+    }
+
+    /**
+     * Get user profile information
+     * @param $user_id
+     * @return Users|array|null
+     */
+    public static function me($user_id)
+    {
+        return static::find()->where(['id' => $user_id])->with(
             self::_getUserProfileRelations()
         )->asArray(true)->one();
     }
 
-    private static function _getUserProfileRelations(){
+    private static function _getUserProfileRelations()
+    {
         return [
             'usersVenuesFollows.venue',
             'usersVenuesRatings.venue',
@@ -147,7 +158,7 @@ class Users extends BaseUsers implements IdentityInterface
 
                     'address' => [
                         'postal_code' => $this->user_zip,
-                        'country' =>'United States'
+                        'country' => 'United States'
                     ],
                     'latitudeAttribute' => 'user_lat',
                     'longitudeAttribute' => 'user_lon'
@@ -164,8 +175,8 @@ class Users extends BaseUsers implements IdentityInterface
             parent::rules(),
             [
                 # custom validation rules
-                [['user_firstname', 'user_lastname', 'user_email', 'user_password','user_zip','user_dob'], 'required'],
-                ['user_dob','date','format'=>'M/d/yyyy'],
+                [['user_firstname', 'user_lastname', 'user_email', 'user_password', 'user_zip', 'user_dob'], 'required'],
+                ['user_dob', 'date', 'format' => 'M/d/yyyy'],
                 ['user_email', 'email'],
             ]
         );
@@ -193,9 +204,9 @@ class Users extends BaseUsers implements IdentityInterface
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        
+
         //send welcome message
-        if(!$this->mailer->sendWelcomeMessage($this)){
+        if (!$this->mailer->sendWelcomeMessage($this)) {
             Throw new Exception("Could not send welcome email");
         }
 
