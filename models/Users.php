@@ -48,7 +48,17 @@ class Users extends BaseUsers implements IdentityInterface
      */
     public static function findIdentityByAccessToken($user_access_token, $type = null)
     {
-        return static::findOne(['user_access_token' => $user_access_token]);
+        return static::find()->where(['user_access_token' => $user_access_token])->with(
+            self::_getUserProfileRelations()
+        )->asArray(true)->one();
+    }
+
+    private static function _getUserProfileRelations(){
+        return [
+            'usersVenuesFollows.venue',
+            'usersVenuesRatings.venue',
+            'usersVenuesRatings.usersVenuesRatingsResponses'
+        ];
     }
 
     /**
@@ -83,7 +93,9 @@ class Users extends BaseUsers implements IdentityInterface
      */
     public static function findByEmail($user_email)
     {
-        return static::find()->where(['user_email' => $user_email])->with(['usersVenuesFollows.venue'])->asArray(true)->one();
+        return static::find()->where(['user_email' => $user_email])->with(
+            self::_getUserProfileRelations()
+        )->asArray(true)->one();
     }
 
     /**

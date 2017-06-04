@@ -38,6 +38,7 @@ $config = [
                     'class' => 'yii\rest\UrlRule', 'controller' => ['v1/users'],
                     'extraPatterns' => [
                         'GET email-exists' => 'email-exists',
+                        'GET me' => 'me',
                         'POST login' => 'login',
                     ]
                 ],
