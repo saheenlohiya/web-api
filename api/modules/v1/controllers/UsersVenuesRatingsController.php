@@ -34,4 +34,9 @@ class UsersVenuesRatingsController extends TuBaseApiController
         \Yii::$app->response->format = Response::FORMAT_JSON;
         return UsersVenuesRatings::create()->getRatingsByVenue($user_id,$venue_id);
     }
+
+    public function actionListByUser($user_id){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        return UsersVenuesRatings::create()->getRatingsByUser($user_id);
+    }
 }

@@ -51,6 +51,16 @@ class Users extends BaseUsers implements IdentityInterface
         return static::findOne(['user_access_token' => $user_access_token]);
     }
 
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        // remove fields that contain sensitive information
+        unset($fields['user_password'], $fields['user_verification_code'],$fields['uuid']);
+
+        return $fields;
+    }
+
     /**
      * Get user profile information
      * @param $user_id
@@ -67,8 +77,8 @@ class Users extends BaseUsers implements IdentityInterface
     {
         return [
             'usersVenuesFollows.venue',
-            'usersVenuesRatings.venue',
-            'usersVenuesRatings.usersVenuesRatingsResponses'
+//            'usersVenuesRatings.venue',
+//            'usersVenuesRatings.usersVenuesRatingsResponses'
         ];
     }
 

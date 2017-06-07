@@ -57,6 +57,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings'],
                     'extraPatterns' => [
                         'GET list-by-venue' => 'list-by-venue',
+                        'GET list-by-user' => 'list-by-user',
                     ],
                 ],
             ],

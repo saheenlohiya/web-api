@@ -100,12 +100,24 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         if (isset($user_id) && isset($venue_id)) {
             return UsersVenuesRatings::find()
                 ->where(['user_id' => $user_id, 'venue_id' => $venue_id])
-                ->with('usersVenuesRatingsResponses')
+                ->with(['usersVenuesRatingsResponses','venue','user'])
                 ->orderBy(['venue_rating_date' => SORT_DESC])
+                ->asArray(true)
                 ->all();
         }
     }
 
+    public function getRatingsByUser($user_id)
+    {
+        if (isset($user_id)) {
+            return UsersVenuesRatings::find()
+                ->where(['user_id' => $user_id])
+                ->with(['usersVenuesRatingsResponses','venue','user'])
+                ->orderBy(['venue_rating_date' => SORT_DESC])
+                ->asArray(true)
+                ->all();
+        }
+    }
 
     private function _calcRatingAverage()
     {
