@@ -60,14 +60,14 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         return false;
     }
 
-    public function viewResponses($user_id,$user_venue_rating_id){
+    public function viewResponses($user_venue_rating_id){
         //make sure params are not empty and are set
-        if (!is_null($user_id) && !is_null($user_venue_rating_id)) {
-                 var_dump(UsersVenuesRatingsResponses::find()
-                    ->where(['user_venue_rating_responding_user_id' => $user_id,'user_venue_rating_id'=>$user_venue_rating_id])
+        if (!is_null($user_venue_rating_id)) {
+                 return UsersVenuesRatingsResponses::find()
+                    ->where(['user_venue_rating_id'=>$user_venue_rating_id])
                     ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
                     ->asArray(true)
-                    ->all());
+                    ->all();
         }
 
         return false;

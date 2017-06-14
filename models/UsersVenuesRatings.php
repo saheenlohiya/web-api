@@ -59,9 +59,16 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             parent::rules(),
             [
                 [['user_id', 'venue_id'], 'required'],
+                [['user_id'],'hasOpenTicketValidator'],
                 [['venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6'], 'integer', 'min' => 1, 'max' => 5],
             ]
         );
+    }
+
+    public function hasOpenTicketValidator(){
+        if(self::find()->where(['user_id'=>$this->user_id,'venue_id'=>$this->venue_id,'venue_rating_resolved' => 0])->one()){
+            $this->addError('user_id','There is an unresolved ticket.');
+        }
     }
 
     /**
