@@ -61,7 +61,9 @@ $config = [
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings-responses'],
-                    'extraPatterns' => [],
+                    'extraPatterns' => [
+                        'GET view-responses' => 'view-responses'
+                    ],
                 ],
             ],
         ],

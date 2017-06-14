@@ -109,6 +109,10 @@ class Venues extends BaseVenues
 
     }
 
+    public function venue($venue_id){
+        return self::find()->where(['id'=>$venue_id])->with(['venuesImages'])->asArray()->one();
+    }
+
     /**
      * @param $text
      * @param $latitude

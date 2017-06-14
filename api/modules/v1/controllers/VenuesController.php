@@ -11,6 +11,13 @@ class VenuesController extends TuBaseApiController
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Venues';
 
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['view']);
+        return $actions;
+    }
+
     /**
      * @return array
      */
@@ -19,7 +26,7 @@ class VenuesController extends TuBaseApiController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['get-nearby-venues','search-nearby-venues'],
+            'except' => ['get-nearby-venues','search-nearby-venues','view'],
             'optional' => []
         ];
         return $behaviors;
@@ -44,6 +51,10 @@ class VenuesController extends TuBaseApiController
      */
     public function actionSearchNearbyVenues($keyword,$lat,$lon,$radius=5){
         return Venues::create()->getSearchPlaces($keyword,$lat,$lon,$radius);
+    }
+
+    public function actionView($id){
+        return Venues::create()->venue($id);
     }
 
 }
