@@ -76,9 +76,7 @@ class Users extends BaseUsers implements IdentityInterface
     private static function _getUserProfileRelations()
     {
         return [
-            'usersVenuesFollows.venue',
-//            'usersVenuesRatings.venue',
-//            'usersVenuesRatings.usersVenuesRatingsResponses'
+            'usersVenuesFollows.venue.venuesImages',
         ];
     }
 

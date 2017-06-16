@@ -78,7 +78,7 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
     {
         return UsersVenuesFollows::find()
             ->where(['user_id' => $user_id])
-            ->with(['venue'])
+            ->with(['venue.venuesImages'])
             ->orderBy(['user_venue_follow_date' => 'DESC'])
             ->asArray(true)
             ->all()
