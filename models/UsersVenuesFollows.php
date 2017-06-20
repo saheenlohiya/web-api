@@ -46,7 +46,8 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['user_id', 'venue_id'], 'required']
+                [['user_id', 'venue_id'], 'required'],
+                ['user_id', 'unique', 'targetAttribute' => ['user_id', 'venue_id']]
 
             ]
         );

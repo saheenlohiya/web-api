@@ -56,6 +56,13 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
         $this->assertTrue($this->users_venues_follows->save());
         $this->assertNotNull($this->users_venues_follows->user_venue_follow_date);
 
+        //now test that you can only follow a venue only once
+        $newVenueFollow = UsersVenuesFollows::create();
+        $newVenueFollow->user_id = $this->user->id;
+        $newVenueFollow->venue_id = $this->venue->id;
+
+        $this->assertFalse($newVenueFollow->save());
+
     }
 
     private function _createTestUser()
