@@ -217,9 +217,11 @@ CREATE TABLE `venues` (
   KEY `venue_type_id` (`venue_type_id`),
   CONSTRAINT `venues_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `venues_ibfk_2` FOREIGN KEY (`venue_type_id`) REFERENCES `venues_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues` */
+
+insert  into `venues`(`id`,`user_id`,`venue_name`,`venue_google_place_id`,`venue_date_added`,`venue_date_modified`,`venue_address_1`,`venue_address_2`,`venue_city`,`venue_state`,`venue_zip`,`venue_phone`,`venue_email`,`venue_website`,`venue_lat`,`venue_lon`,`venue_claim_date`,`venue_claim_code`,`venue_claim_code_exp`,`venue_claimed`,`venue_type_id`,`venue_active`,`venue_verified`,`venue_verified_date`,`venue_last_verified_date`,`venue_rating_avg`,`venue_rating_percent`,`venue_satisfaction_percent`) values (1,NULL,'Mountain View Hotel','ChIJXyyaSgi1RIYRrMCfHH8yvfw','2017-06-22 00:38:38',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=18211767989678620844','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,60,1,1,'2017-06-22 00:38:38','2017-06-22 00:38:38',NULL,NULL,NULL),(2,NULL,'Glyn and sandra meek','ChIJXyyaSgi1RIYRXSw4Kkqgy-s','2017-06-22 00:38:38',NULL,'',NULL,'Austin','TX','78701','(512) 750-0063',NULL,'https://maps.google.com/?cid=16990850259581676637','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,9,1,1,'2017-06-22 00:38:38','2017-06-22 00:38:38',NULL,NULL,NULL),(3,NULL,'Seacoas Bank','ChIJXyyaSgi1RIYRH_wSimkl2uM','2017-06-22 00:38:38',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=16418476526750858271','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,8,1,1,'2017-06-22 00:38:38','2017-06-22 00:38:38',NULL,NULL,NULL),(4,NULL,'Saint Mary Medical Center In Austin Texas','ChIJXyyaSgi1RIYREX_p8Sb5UtY','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=15443680017869537041','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,30,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(5,NULL,'La Fonda San Miguel','ChIJXyyaSgi1RIYRhu3RWlp3UNY','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=15442974352207900038','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,80,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(6,NULL,'Marriott','ChIJXyyaSgi1RIYRsJYBrZxKddQ','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=15309224545093785264','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,60,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(7,NULL,'Knife and fork','ChIJXyyaSgi1RIYRMe1YEMMLBco','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=14557054302965787953','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,9,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(8,NULL,'Food Bank','ChIJXyyaSgi1RIYRmTexWXmIJMU','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=14205629179410593689','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,89,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(9,NULL,'A To Z Translators, LLC','ChIJXyyaSgi1RIYRxSIdYb1n2sQ','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701','(512) 537-9098',NULL,'http://atoztranslators.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(10,NULL,'Texas Granite Group','ChIJXyyaSgi1RIYRjDL7Q7PZN7k','2017-06-22 00:38:39',NULL,'',NULL,'Austin','TX','78701','(512) 547-5712',NULL,'http://www.texasgranitegroup.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(11,NULL,'Sanora','ChIJXyyaSgi1RIYRPu_0SuuTn7M','2017-06-22 00:38:39',NULL,'501 Congress Avenue',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=12943226492870258494','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:39','2017-06-22 00:38:39',NULL,NULL,NULL),(12,NULL,'Good & Fair Clothing','ChIJGTddLt61RIYRR3HE_m1LorA','2017-06-22 00:38:40',NULL,'',NULL,'Austin','TX','78701','(512) 710-7722',NULL,'http://goodandfairclothing.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,25,1,1,'2017-06-22 00:38:40','2017-06-22 00:38:40',NULL,NULL,NULL),(13,NULL,'The Magical World Of Jeffrey Jester','ChIJXyyaSgi1RIYRuqskwfLWt6g','2017-06-22 00:38:40',NULL,'',NULL,'Austin','TX','78701','(512) 850-7736',NULL,'http://jeffreyjester.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:40','2017-06-22 00:38:40',NULL,NULL,NULL),(14,NULL,'One Ounce Opera','ChIJXyyaSgi1RIYRRDSkOpgYeJs','2017-06-22 00:38:40',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'http://oneounceopera.com/events/audition/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:40','2017-06-22 00:38:40',NULL,NULL,NULL),(15,NULL,'hka enterprises inc','ChIJXyyaSgi1RIYRIrkGJ7NAvJo','2017-06-22 00:38:40',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=11149857915660581154','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:40','2017-06-22 00:38:40',NULL,NULL,NULL),(16,NULL,'Genesis 7 Consulting, LLC','ChIJXyyaSgi1RIYRhThTv3giD5c','2017-06-22 00:38:40',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'http://genesis7consulting.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:40','2017-06-22 00:38:40',NULL,NULL,NULL),(17,NULL,'Hilton','ChIJXyyaSgi1RIYRMxSO1fHuHpI','2017-06-22 00:38:41',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'https://maps.google.com/?cid=10529115701276185651','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,60,1,1,'2017-06-22 00:38:41','2017-06-22 00:38:41',NULL,NULL,NULL),(18,NULL,'ZarZam Body Art & Face Painting','ChIJXyyaSgi1RIYRoFhWqOtVI44','2017-06-22 00:38:41',NULL,'',NULL,'Austin','TX','78701','(512) 736-9357',NULL,'http://www.zarzambodyart.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:41','2017-06-22 00:38:41',NULL,NULL,NULL),(19,NULL,'Rebecca Eller Photography','ChIJXyyaSgi1RIYRvz1F7UWAT3Y','2017-06-22 00:38:41',NULL,'',NULL,'Austin','TX','78701',NULL,NULL,'http://www.rebeccaellerphotography.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,NULL,1,1,'2017-06-22 00:38:41','2017-06-22 00:38:41',NULL,NULL,NULL),(20,NULL,'Ozarka Bottled Water Delivery Austin','ChIJXyyaSgi1RIYRJ_sw8jbEW28','2017-06-22 00:38:41',NULL,'',NULL,'Austin','TX','78782','(866) 889-3567',NULL,'http://delivery.ozarkawater.com/','30.2671530','-97.7430608',NULL,NULL,NULL,NULL,39,1,1,'2017-06-22 00:38:41','2017-06-22 00:38:41',NULL,NULL,NULL);
 
 /*Table structure for table `venues_admins` */
 
@@ -277,9 +279,11 @@ CREATE TABLE `venues_images` (
   PRIMARY KEY (`id`),
   KEY `venue_id` (`venue_id`),
   CONSTRAINT `venues_images_ibfk_1` FOREIGN KEY (`venue_id`) REFERENCES `venues` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues_images` */
+
+insert  into `venues_images`(`id`,`venue_id`,`venue_image_url`,`venue_image_date_added`) values (1,4,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAANOZ4kLfxNV1TgLo0mMoQWjZ9QdEZxF3vg3K3YQ6m0bEdTawy5CKZ979XZLF7Md-U8NfBSHSa5LfzCmL1SW0nbbe-EEVVkQHWnm4zit-OXETaFPyVP8osR1t49RN3lOSSEhDY-ctZobx4xcm9GYMsxAS1GhQ6RBZHB_C-0O983Q8PX-IH-33bGQ&maxwidth=800','2017-06-22 00:38:39'),(2,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAMPqo_KZBwwtIy2mN1BAyBiri0ohQaU0TzdcZDQiJ_nYU-am2FRHFf0LFUfSXoeqnqkzviNFX1fHph3atiOb55vKNcl1W5zDIUjMNbb_yzNUSl8S95LLLmo4oXBLIOrJwEhAl8oOBCVGjDMkljfgIvyfwGhQ8KCqNjNthL3XppHvBC07140dvaw&maxwidth=800','2017-06-22 00:38:39'),(3,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAINJnJ3chWrWsrWNjMXrkTxTFqVKiKz4Y3DfaY_ZdunhJs0Nzz9w31s7V3Ylkx7QBN8T1HQcpT75C3JCqwuEGPJPowAIgw13SYGucnfBfEgK-zJBm51yFoSr54giMj4rdEhDKLEF0-p8KYC-ewumCsFjiGhQSi2x-oY2SAoqW5ftPIHplzYuSvw&maxwidth=800','2017-06-22 00:38:39'),(4,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAGA3eQW6vdW1gx64QMfKMXRMQfzti_Fk_4tQdkIb2MyE9NPjs3rxvIBGvPUX9ZVDthqYdFkb5uiRBpiFJKnjIBTPoIeF3XxBcZLAu6M16WyTrQPWqIDiOW7U99a23xswnEhAn7vE82b3TFi6ezeAcs6lTGhSuJ81FG5QTFCE4cYRIjJBVQ-U3IA&maxwidth=800','2017-06-22 00:38:39'),(5,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAA2cegssLgVvItSMRSerhMNJov51sgvRxrHiDOl2k-k1VyzTgqrXIsM_gquTtqc9iZNPsCidVB0z50-cGYs1Qgs-eJ9352JqOjRxYnaGcVMHzA2JH2PMpuAjDJZKJXPnK7EhBJ6AnzWiHassOvViIJbJylGhTjDlY9adzu5Zyvn7q3pVfNv22lJw&maxwidth=800','2017-06-22 00:38:39'),(6,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAny-5NUTICoChOfCGWrTuRLgUHzbDqCqlB0PFIFLxrso1q03M5hnWaCCY20pZp5g753OPLqE1UwMW2K1-FPeO44U92GT3g2Ttt4zAQwozJJPWXog9AmOfp4asA0FoDo_sEhBuAD941MMgAROQgfi7i7tSGhS1FSxB0N8VB3ZCIdggQt5gsoNBnA&maxwidth=800','2017-06-22 00:38:39'),(7,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAih5ODTTLIjl1kSkDdf0d1uxmT0hZof2tb2pMlg8cDbpOrrXj1nPUIJs9N8KYIPS-eXne5rCJ4g9Y7-ojmcMQOM2Xa9mGF8whYfMh2ereRXp0eOWo_650ob_DtF8hiPxjEhDGJYzDMpI6KWIXjplTBit1GhTAU0u2hNJYsurmCx5-y2O5imBMIw&maxwidth=800','2017-06-22 00:38:39'),(8,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAGGt2EiygX68AC2txNQg65QFIM40q9x3PL_OM7HrKqcyZiAOCUL717EduictrYG6Z28E9eItTaGDEBdvmKRBruw0mWeBvtAp-3FJzArwApoYWbVrvMFdueXVOnFxlkue0EhBiJM-FFeM4nY5b_GVQZDBiGhRc9yjB6HOn8OEN8hiKlppXLpUpdg&maxwidth=800','2017-06-22 00:38:39'),(9,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAApP2oqwaT-4tOaEWRDyRRZ0LqXb4wiU2d3d_mrRijRd-nidrb6ZYiyL0CMxtakd5U5dTfDsh73mbVgNl5WIm_RlVqYAafbR6U7318A6QswksQ0VNEesduK1EUcNU8YcZ0EhBwIwB296GBAyU_wCyo1elmGhSPgTajP9LkdelwekWH_usQDnEurw&maxwidth=800','2017-06-22 00:38:39'),(10,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAE4VR5Diw8Xeg8AK4hFY5vhaKhdrgy2K30N1Tt5lkCk0Hzdi_kKs6MDEKqJaAIQ8NvL4YZglx4-Zc3cDQvy7VJjnsdTfskwFWgS31CyGFqruhJB1umpq5tiYiWVL8bj07EhAF9Qe4LFNxlq8DGWfHu5kFGhShlNZdIIGG4lpCT-HwJRfe2H6ieA&maxwidth=800','2017-06-22 00:38:39'),(11,10,'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc&photoreference=CmRaAAAAB5T2A6t3ck2bhNECk6kTrT3G6Xf8lRE1uTtroiR2kx1_Ac7Ng90e3zZeXGYj9QcZ1m0ZSo9CMCQ7Re0E9s2D14Ah8v3zssp-_l2suwVz0De96uIy6DnVcWCRj4_QtIUfEhBsEKkPTENMzyU8lQIdBQsWGhSQ0kp14ZB_NOpBqyAcdkc-lTS1PA&maxwidth=800','2017-06-22 00:38:39');
 
 /*Table structure for table `venues_settings` */
 
@@ -294,6 +298,8 @@ CREATE TABLE `venues_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues_settings` */
+
+insert  into `venues_settings`(`venue_id`,`venue_rating_category_mapping`,`venue_rating_resolve_exp_days`) values (1,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(2,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(3,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(4,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(5,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(6,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(7,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(8,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(9,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(10,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(11,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(12,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(13,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(14,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(15,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(16,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(17,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(18,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(19,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31),(20,'{\"venue_rating_cat_1\":\"Service\",\"venue_rating_cat_2\":\"Staff\",\"venue_rating_cat_3\":\"Facility\",\"venue_rating_cat_4\":\"Custom 1\",\"venue_rating_cat_5\":\"Custom 2\",\"venue_rating_cat_6\":\"Custom 3\"}',31);
 
 /*Table structure for table `venues_types` */
 
@@ -318,7 +324,7 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_insert` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_insert` AFTER INSERT ON `users_venues_ratings` FOR EACH ROW BEGIN
+/*!50003 CREATE */ /*!50003 TRIGGER `users_venues_ratings_on_insert` AFTER INSERT ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(NEW.venue_id);
     END */$$
 
@@ -331,7 +337,7 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_update` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_update` AFTER UPDATE ON `users_venues_ratings` FOR EACH ROW BEGIN
+/*!50003 CREATE */ /*!50003 TRIGGER `users_venues_ratings_on_update` AFTER UPDATE ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(NEW.venue_id);
     END */$$
 
@@ -344,7 +350,7 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `users_venues_ratings_on_delete` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `users_venues_ratings_on_delete` AFTER DELETE ON `users_venues_ratings` FOR EACH ROW BEGIN
+/*!50003 CREATE */ /*!50003 TRIGGER `users_venues_ratings_on_delete` AFTER DELETE ON `users_venues_ratings` FOR EACH ROW BEGIN
 	call venues_update_satisfaction_stats(OLD.venue_id);
     END */$$
 
@@ -357,7 +363,7 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `venues_settings__add_default_values__on_insert` */$$
 
-/*!50003 CREATE */  /*!50003 TRIGGER `venues_settings__add_default_values__on_insert` AFTER INSERT ON `venues` FOR EACH ROW BEGIN
+/*!50003 CREATE */ /*!50003 TRIGGER `venues_settings__add_default_values__on_insert` AFTER INSERT ON `venues` FOR EACH ROW BEGIN
 	INSERT INTO venues_settings (venue_id,venue_rating_category_mapping) VALUES (NEW.id,'{"venue_rating_cat_1":"Service","venue_rating_cat_2":"Staff","venue_rating_cat_3":"Facility","venue_rating_cat_4":"Custom 1","venue_rating_cat_5":"Custom 2","venue_rating_cat_6":"Custom 3"}');
     END */$$
 
@@ -369,7 +375,7 @@ DELIMITER ;
 /*!50003 DROP FUNCTION IF EXISTS `fx_venues_total_ratings` */;
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_ratings`(vid int) RETURNS int(32)
+/*!50003 CREATE FUNCTION `fx_venues_total_ratings`(vid int) RETURNS int(32)
 BEGIN
 	declare total_ratings int(32);
 	SELECT COUNT(*) INTO total_ratings FROM users_venues_ratings vr WHERE vr.venue_id = vid;
@@ -382,7 +388,7 @@ DELIMITER ;
 /*!50003 DROP FUNCTION IF EXISTS `fx_venues_total_resolved_ratings` */;
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `fx_venues_total_resolved_ratings`(vid int) RETURNS int(32)
+/*!50003 CREATE FUNCTION `fx_venues_total_resolved_ratings`(vid int) RETURNS int(32)
 BEGIN
 	declare total_resolved_ratings int(32);
 	SELECT COUNT(*) INTO total_resolved_ratings FROM users_venues_ratings vr WHERE vr.venue_id = vid and venue_rating_resolved is true;
@@ -396,7 +402,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `venues_update_satisfaction_stats`(vid INT)
+/*!50003 CREATE PROCEDURE `venues_update_satisfaction_stats`(vid INT)
 BEGIN
     DECLARE venue_rating_avg_adjusted DECIMAL(3,2);
     declare venue_total_ratings int(11);
