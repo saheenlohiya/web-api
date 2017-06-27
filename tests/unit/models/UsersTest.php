@@ -28,8 +28,6 @@ class UsersTest extends \Codeception\Test\Unit
     public function testValidateNewUsers()
     {
 
-
-
         $this->specify("Firstname is required", function () {
             $this->user->user_firstname = null;
             $this->assertFalse($this->user->validate(['user_firstname']));
@@ -76,6 +74,11 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertFalse($this->user->validate(['user_zip']));
         });
 
+        $this->specify("Gender is required", function () {
+            $this->user->user_gender = null;
+            $this->assertFalse($this->user->validate(['user_gender']));
+        });
+
         $this->specify("DOB is required", function () {
             $this->user->user_dob = null;
             $this->assertFalse($this->user->validate(['user_dob']));
@@ -95,6 +98,7 @@ class UsersTest extends \Codeception\Test\Unit
             $this->user->user_username = 'dwamianm';
             $this->user->user_phone = '8192189988';
             $this->user->user_zip = '78758';
+            $this->user->user_gender = 'M';
             $this->user->user_dob = '10/08/1978';
             $this->user->user_password = 'password';
             $this->assertTrue($this->user->save());

@@ -109,8 +109,8 @@ class VenuesTest extends \Codeception\Test\Unit
 
     public function testGetNearbyPlaces()
     {
-        $venues = Venues::create();
-        $savedPlaces = $venues->getNearbyPlaces('30.267153', '-97.743061',16093.4);
+        //$venues = Venues::create();
+        //$savedPlaces = $venues->getNearbyPlaces('30.267153', '-97.743061',16093.4);
         //var_dump($savedPlaces);
         //exit;
         //$this->assertNotNull($savedPlaces);
@@ -126,6 +126,7 @@ class VenuesTest extends \Codeception\Test\Unit
         $this->user->user_username = 'dwamianm';
         $this->user->user_phone = '8192189988';
         $this->user->user_zip = '78758';
+        $this->user->user_gender = 'M';
         $this->user->user_dob = '10/08/1978';
         $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
 
