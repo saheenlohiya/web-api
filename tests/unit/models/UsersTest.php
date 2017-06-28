@@ -74,10 +74,10 @@ class UsersTest extends \Codeception\Test\Unit
             $this->assertFalse($this->user->validate(['user_zip']));
         });
 
-//        $this->specify("Gender is required", function () {
-//            $this->user->user_gender = null;
-//            $this->assertFalse($this->user->validate(['user_gender']));
-//        });
+        $this->specify("Gender is required", function () {
+            $this->user->user_gender = null;
+            $this->assertFalse($this->user->validate(['user_gender']));
+        });
 
         $this->specify("DOB is required", function () {
             $this->user->user_dob = null;
