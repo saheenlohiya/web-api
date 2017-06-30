@@ -71,8 +71,10 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
 
-            $this->_calcRatingAverage();
-            $this->_setResolution();
+            if($insert){
+                $this->_calcRatingAverage();
+                $this->_setAutoResolution();
+            }
 
             return true;
         } else {
@@ -86,12 +88,15 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
-        //auto follow
-        UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
-        //auto create thread
-        UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $this->venue_rating_comment);
-        //send notification fo venue managers
-        $this->_notifyVenueManager();
+        if($insert){
+            //auto follow
+            UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
+            //auto create thread
+            UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $this->venue_rating_comment);
+            //send notification fo venue managers
+            $this->_notifyVenueManager();
+        }
+
     }
 
     public function getRatingsByVenue($user_id, $venue_id) {
@@ -134,7 +139,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         $this->venue_rating_average = $sum / $count;
     }
 
-    private function _setResolution() {
+    private function _setAutoResolution() {
         if (is_null($this->venue_rating_average)) {
             $this->_calcRatingAverage();
         }
