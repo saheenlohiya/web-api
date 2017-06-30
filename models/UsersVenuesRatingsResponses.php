@@ -15,6 +15,9 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     //events
     const EVENT_VENUE_RATING_RESPONSE_SUCCESS = 'userVenueRatingResponseSuccess';
 
+    //response keywords
+    const RESPONSE_KEYWORD_CLOSE = '#close';
+
     public static function create()
     {
         return new self;
@@ -35,10 +38,22 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         return ArrayHelper::merge(
             parent::rules(),
             [
-                # custom validation rules
+               [['user_venue_rating_id','user_venue_rating_responding_user_id','user_venue_rating_response'],'required']
             ]
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $this->_parseResponseKeywords();
+    }
+
+
 
     public function respond($venue_rating_id, $user_id, $response_comment)
     {
@@ -71,5 +86,20 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         }
 
         return false;
+    }
+
+    /**
+     * will parse any keywords in the response comment
+     */
+    private function _parseResponseKeywords(){
+        $comment_string = strtolower($this->user_venue_rating_response);
+        $comment_string_array = explode(' ',$comment_string);
+
+        if(in_array(self::RESPONSE_KEYWORD_CLOSE,$comment_string_array)){
+            if($this->user_venue_rating_responding_user_id == $this->userVenueRating->user_id){
+                $this->userVenueRating->venue_rating_resolved = true;
+                $this->userVenueRating->save(FALSE);
+            }
+        }
     }
 }
