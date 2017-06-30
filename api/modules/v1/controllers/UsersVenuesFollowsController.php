@@ -6,16 +6,14 @@ use app\filters\TuQueryParamAuth;
 use app\models\UsersVenuesFollows;
 use yii\web\Response;
 
-class UsersVenuesFollowsController extends TuBaseApiController
-{
+class UsersVenuesFollowsController extends TuBaseApiController {
     // We are using the regular web app modules:
     public $modelClass = 'app\models\UsersVenuesFollows';
 
     /**
      * @return array
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
@@ -29,7 +27,7 @@ class UsersVenuesFollowsController extends TuBaseApiController
      * @param $user_id
      * @return \app\models\UsersVenuesFollows[]|array
      */
-    public function actionListByUser($user_id){
+    public function actionListByUser($user_id) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         return UsersVenuesFollows::create()->getVenueFollowsByUser($user_id);
     }

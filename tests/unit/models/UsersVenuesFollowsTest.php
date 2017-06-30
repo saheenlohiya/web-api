@@ -1,14 +1,14 @@
 <?php
+
 namespace tests\models;
 
+use app\models\Users;
 use app\models\UsersVenuesFollows;
 use app\models\Venues;
-use app\models\Users;
 use Yii;
 use yii\base\Exception;
 
-class UsersVenuesFollowsTest extends \Codeception\Test\Unit
-{
+class UsersVenuesFollowsTest extends \Codeception\Test\Unit {
 
     use \Codeception\Specify;
 
@@ -21,21 +21,18 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
     private $user;
     private $users_venues_follows;
 
-    protected function _before()
-    {
+    protected function _before() {
         $this->user = Users::create();
         $this->venue = Venues::create();
         $this->users_venues_follows = UsersVenuesFollows::create();
 
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
-    public function testValidateNewUserVenueFollow()
-    {
+    public function testValidateNewUserVenueFollow() {
         //create the test venue
 
         $this->specify("ID of following user is required", function () {
@@ -65,8 +62,7 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
 
     }
 
-    private function _createTestUser()
-    {
+    private function _createTestUser() {
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
         $this->user->user_email = 'dmcleish323@gmail.com';
@@ -77,14 +73,13 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
         $this->user->user_dob = '10/08/1978';
         $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
 
-        if(!$this->user->save()){
+        if (!$this->user->save()) {
             Throw new Exception("Could not save user");
         }
 
     }
 
-    private function _createVenue()
-    {
+    private function _createVenue() {
         //we need to create a user first
         $this->_createTestUser();
 
@@ -97,7 +92,7 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit
         $this->venue->venue_zip = "78758";
         $this->venue->venue_type_id = 1;
 
-        if(!$this->venue->save(FALSE)){
+        if (!$this->venue->save(FALSE)) {
             Throw new Exception("Could not save venue");
         }
     }

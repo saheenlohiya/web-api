@@ -1,17 +1,16 @@
 <?php
+
 namespace tests\models;
 
 
+use app\models\Users;
 use app\models\UsersVenuesFollows;
 use app\models\UsersVenuesRatings;
 use app\models\UsersVenuesRatingsResponses;
 use app\models\Venues;
-use app\models\Users;
-
 use Yii;
 
-class UsersVenuesRatingsTest extends \Codeception\Test\Unit
-{
+class UsersVenuesRatingsTest extends \Codeception\Test\Unit {
 
     use \Codeception\Specify;
 
@@ -25,36 +24,33 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
     private $rating;
 
 
-    protected function _before()
-    {
+    protected function _before() {
         $this->user = Users::create();
         $this->venue = Venues::create();
         $this->rating = UsersVenuesRatings::create();
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
-    public function testValidateAddNewRating()
-    {
-        $this->specify("User ID is required",function(){
+    public function testValidateAddNewRating() {
+        $this->specify("User ID is required", function () {
             $this->rating->user_id = null;
             $this->assertFalse($this->rating->validate(['user_id']));
         });
 
-        $this->specify("Venue ID is required",function(){
+        $this->specify("Venue ID is required", function () {
             $this->rating->venue_id = null;
             $this->assertFalse($this->rating->validate(['venue_id']));
         });
 
-        $this->specify("Venue rating must be an integer between 1 and 5 ",function(){
+        $this->specify("Venue rating must be an integer between 1 and 5 ", function () {
             $this->rating->venue_rating_cat_1 = 6;
             $this->assertFalse($this->rating->validate(['venue_rating_cat_1']));
         });
 
-        $this->specify("Can save rating",function(){
+        $this->specify("Can save rating", function () {
 
             $this->_createVenue();
 
@@ -67,12 +63,12 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
 
             //make sure the auto follow worked
             $this->assertNotNull(
-                UsersVenuesFollows::create()->find()->where(['user_id'=>$this->user->id,'venue_id'=>$this->venue->id])->one()
+                UsersVenuesFollows::create()->find()->where(['user_id' => $this->user->id, 'venue_id' => $this->venue->id])->one()
             );
 
             //see if the auto thread was created
             $this->assertNotNull(
-                UsersVenuesRatingsResponses::create()->find()->where(['user_venue_rating_responding_user_id'=>$this->user->id,'user_venue_rating_id'=>$this->rating->id])->one()
+                UsersVenuesRatingsResponses::create()->find()->where(['user_venue_rating_responding_user_id' => $this->user->id, 'user_venue_rating_id' => $this->rating->id])->one()
             );
 
             $this->assertNotNull($this->rating->venue_rating_date);
@@ -81,16 +77,15 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
         });
     }
 
-    public function testListByVenue(){
+    public function testListByVenue() {
         $this->_createVenue();
-        $results = UsersVenuesRatings::create()->getRatingsByVenue($this->user->id,$this->venue->id);
+        $results = UsersVenuesRatings::create()->getRatingsByVenue($this->user->id, $this->venue->id);
         $this->assertNotNull(
             $results
         );
     }
 
-    private function _createTestUser()
-    {
+    private function _createTestUser() {
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
         $this->user->user_email = 'dmcleish112@gmail.com';
@@ -104,8 +99,7 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit
         $this->user->save();
     }
 
-    private function _createVenue()
-    {
+    private function _createVenue() {
         //we need to create a user first
         $this->_createTestUser();
 

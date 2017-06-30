@@ -6,13 +6,11 @@ use app\filters\TuQueryParamAuth;
 use app\models\Venues;
 
 
-class VenuesController extends TuBaseApiController
-{
+class VenuesController extends TuBaseApiController {
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Venues';
 
-    public function actions()
-    {
+    public function actions() {
         $actions = parent::actions();
         unset($actions['view']);
         return $actions;
@@ -21,12 +19,11 @@ class VenuesController extends TuBaseApiController
     /**
      * @return array
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['get-nearby-venues','search-nearby-venues','view'],
+            'except' => ['get-nearby-venues', 'search-nearby-venues', 'view'],
             'optional' => []
         ];
         return $behaviors;
@@ -38,8 +35,8 @@ class VenuesController extends TuBaseApiController
      * @param int $radius
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function actionGetNearbyVenues($lat,$lon,$radius=5){
-        return Venues::create()->getNearbyPlaces($lat,$lon,$radius);
+    public function actionGetNearbyVenues($lat, $lon, $radius = 5) {
+        return Venues::create()->getNearbyPlaces($lat, $lon, $radius);
     }
 
     /**
@@ -49,11 +46,11 @@ class VenuesController extends TuBaseApiController
      * @param int $radius
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function actionSearchNearbyVenues($keyword,$lat,$lon,$radius=5){
-        return Venues::create()->getSearchPlaces($keyword,$lat,$lon,$radius);
+    public function actionSearchNearbyVenues($keyword, $lat, $lon, $radius = 5) {
+        return Venues::create()->getSearchPlaces($keyword, $lat, $lon, $radius);
     }
 
-    public function actionView($id){
+    public function actionView($id) {
         return Venues::create()->venue($id);
     }
 

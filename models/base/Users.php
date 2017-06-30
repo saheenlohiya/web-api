@@ -4,8 +4,6 @@
 
 namespace app\models\base;
 
-use Yii;
-
 /**
  * This is the base-model class for table "users".
  *
@@ -45,22 +43,20 @@ use Yii;
  * @property \app\models\VenuesAdmins[] $venuesAdmins
  * @property string $aliasModel
  */
-abstract class Users extends \yii\db\ActiveRecord
-{
-
+abstract class Users extends \yii\db\ActiveRecord {
 
 
     /**
-    * ENUM field values
-    */
+     * ENUM field values
+     */
     const USER_GENDER_M = 'M';
     const USER_GENDER_F = 'F';
     var $enum_labels = false;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'users';
     }
 
@@ -68,8 +64,7 @@ abstract class Users extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['user_gender', 'user_photo_url'], 'string'],
             [['user_dob', 'user_date_joined', 'user_date_modified'], 'safe'],
@@ -88,9 +83,9 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
             [['user_username'], 'unique'],
             ['user_gender', 'in', 'range' => [
-                    self::USER_GENDER_M,
-                    self::USER_GENDER_F,
-                ]
+                self::USER_GENDER_M,
+                self::USER_GENDER_F,
+            ]
             ]
         ];
     }
@@ -98,8 +93,7 @@ abstract class Users extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'uuid' => 'Uuid',
@@ -134,59 +128,51 @@ abstract class Users extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesClaims()
-    {
+    public function getUsersVenuesClaims() {
         return $this->hasMany(\app\models\UsersVenuesClaims::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesCoupons()
-    {
+    public function getUsersVenuesCoupons() {
         return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesFollows()
-    {
+    public function getUsersVenuesFollows() {
         return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesRatings()
-    {
+    public function getUsersVenuesRatings() {
         return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenues()
-    {
+    public function getVenues() {
         return $this->hasMany(\app\models\Venues::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenuesAdmins()
-    {
+    public function getVenuesAdmins() {
         return $this->hasMany(\app\models\VenuesAdmins::className(), ['user_id' => 'id']);
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\UsersQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new \app\models\UsersQuery(get_called_class());
     }
 
@@ -196,9 +182,9 @@ abstract class Users extends \yii\db\ActiveRecord
      * @param string $value
      * @return string
      */
-    public static function getUserGenderValueLabel($value){
+    public static function getUserGenderValueLabel($value) {
         $labels = self::optsUserGender();
-        if(isset($labels[$value])){
+        if (isset($labels[$value])) {
             return $labels[$value];
         }
         return $value;
@@ -208,8 +194,7 @@ abstract class Users extends \yii\db\ActiveRecord
      * column user_gender ENUM value labels
      * @return array
      */
-    public static function optsUserGender()
-    {
+    public static function optsUserGender() {
         return [
             self::USER_GENDER_M => self::USER_GENDER_M,
             self::USER_GENDER_F => self::USER_GENDER_F,

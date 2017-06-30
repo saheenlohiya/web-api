@@ -2,15 +2,13 @@
 
 namespace app\models;
 
-use Yii;
-use \app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
+use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
  */
-class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
-{
+class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 
     //events
     const EVENT_VENUE_RATING_RESPONSE_SUCCESS = 'userVenueRatingResponseSuccess';
@@ -18,13 +16,11 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     //response keywords
     const RESPONSE_KEYWORD_CLOSE = '#close';
 
-    public static function create()
-    {
+    public static function create() {
         return new self;
     }
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -33,12 +29,11 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         );
     }
 
-    public function rules()
-    {
+    public function rules() {
         return ArrayHelper::merge(
             parent::rules(),
             [
-               [['user_venue_rating_id','user_venue_rating_responding_user_id','user_venue_rating_response'],'required']
+                [['user_venue_rating_id', 'user_venue_rating_responding_user_id', 'user_venue_rating_response'], 'required']
             ]
         );
     }
@@ -46,17 +41,14 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     /**
      * @inheritDoc
      */
-    public function afterSave($insert, $changedAttributes)
-    {
+    public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
         $this->_parseResponseKeywords();
     }
 
 
-
-    public function respond($venue_rating_id, $user_id, $response_comment)
-    {
+    public function respond($venue_rating_id, $user_id, $response_comment) {
         //make sure params are not empty and are set
         if (!is_null($user_id) && !is_null($venue_rating_id) && !is_null($response_comment) && !empty($response_comment)) {
             $newResponse = self::create();
@@ -75,14 +67,14 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         return false;
     }
 
-    public function viewResponses($user_venue_rating_id){
+    public function viewResponses($user_venue_rating_id) {
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
-                 return UsersVenuesRatingsResponses::find()
-                    ->where(['user_venue_rating_id'=>$user_venue_rating_id])
-                    ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
-                    ->asArray(true)
-                    ->all();
+            return UsersVenuesRatingsResponses::find()
+                ->where(['user_venue_rating_id' => $user_venue_rating_id])
+                ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
+                ->asArray(true)
+                ->all();
         }
 
         return false;
@@ -91,12 +83,12 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     /**
      * will parse any keywords in the response comment
      */
-    private function _parseResponseKeywords(){
+    private function _parseResponseKeywords() {
         $comment_string = strtolower($this->user_venue_rating_response);
-        $comment_string_array = explode(' ',$comment_string);
+        $comment_string_array = explode(' ', $comment_string);
 
-        if(in_array(self::RESPONSE_KEYWORD_CLOSE,$comment_string_array)){
-            if($this->user_venue_rating_responding_user_id == $this->userVenueRating->user_id){
+        if (in_array(self::RESPONSE_KEYWORD_CLOSE, $comment_string_array)) {
+            if ($this->user_venue_rating_responding_user_id == $this->userVenueRating->user_id) {
                 $this->userVenueRating->venue_rating_resolved = true;
                 $this->userVenueRating->save(FALSE);
             }

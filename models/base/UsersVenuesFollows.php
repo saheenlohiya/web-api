@@ -4,8 +4,6 @@
 
 namespace app\models\base;
 
-use Yii;
-
 /**
  * This is the base-model class for table "users_venues_follows".
  *
@@ -18,16 +16,13 @@ use Yii;
  * @property \app\models\Venues $venue
  * @property string $aliasModel
  */
-abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
-{
-
+abstract class UsersVenuesFollows extends \yii\db\ActiveRecord {
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'users_venues_follows';
     }
 
@@ -35,8 +30,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['user_id', 'venue_id'], 'integer'],
             [['user_venue_follow_date'], 'safe'],
@@ -48,8 +42,7 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -61,27 +54,23 @@ abstract class UsersVenuesFollows extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue()
-    {
+    public function getVenue() {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesFollowsQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new \app\models\UsersVenuesFollowsQuery(get_called_class());
     }
 

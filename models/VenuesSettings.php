@@ -2,18 +2,15 @@
 
 namespace app\models;
 
-use Yii;
-use \app\models\base\VenuesSettings as BaseVenuesSettings;
+use app\models\base\VenuesSettings as BaseVenuesSettings;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "venues_settings".
  */
-class VenuesSettings extends BaseVenuesSettings
-{
+class VenuesSettings extends BaseVenuesSettings {
 
-public function behaviors()
-    {
+    public function behaviors() {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -22,13 +19,12 @@ public function behaviors()
         );
     }
 
-    public function rules()
-    {
+    public function rules() {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
     }
 }

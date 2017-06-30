@@ -2,14 +2,12 @@
 
 namespace tests\models;
 
-use app\models\Venues;
 use app\models\Users;
-use dosamigos\google\places\Search;
+use app\models\Venues;
 use Yii;
 
 
-class VenuesTest extends \Codeception\Test\Unit
-{
+class VenuesTest extends \Codeception\Test\Unit {
 
     use \Codeception\Specify;
 
@@ -20,19 +18,16 @@ class VenuesTest extends \Codeception\Test\Unit
     private $user;
     protected $tester;
 
-    protected function _before()
-    {
+    protected function _before() {
         $this->user = Users::create();
         $this->venue = Venues::create();
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
-    public function testValidateNewVenue()
-    {
+    public function testValidateNewVenue() {
 
 
         $this->specify("ID of creating user is required", function () {
@@ -98,8 +93,7 @@ class VenuesTest extends \Codeception\Test\Unit
 
     }
 
-    public function testCanSearchPlaces()
-    {
+    public function testCanSearchPlaces() {
         //$venues = Venues::create();
         //$savedPlaces = $venues->getSearchPlaces('lowes','30.267153', '-97.743061');
 
@@ -107,8 +101,7 @@ class VenuesTest extends \Codeception\Test\Unit
         //exit;
     }
 
-    public function testGetNearbyPlaces()
-    {
+    public function testGetNearbyPlaces() {
         //$venues = Venues::create();
         //$savedPlaces = $venues->getNearbyPlaces('30.267153', '-97.743061',16093.4);
         //var_dump($savedPlaces);
@@ -118,8 +111,7 @@ class VenuesTest extends \Codeception\Test\Unit
     }
 
 
-    private function _createTestUser()
-    {
+    private function _createTestUser() {
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
         $this->user->user_email = 'dmcleish554@gmail.com';

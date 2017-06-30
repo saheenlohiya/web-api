@@ -4,8 +4,6 @@
 
 namespace app\models\base;
 
-use Yii;
-
 /**
  * This is the base-model class for table "venues".
  *
@@ -49,16 +47,13 @@ use Yii;
  * @property \app\models\VenuesSettings $venuesSettings
  * @property string $aliasModel
  */
-abstract class Venues extends \yii\db\ActiveRecord
-{
-
+abstract class Venues extends \yii\db\ActiveRecord {
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'venues';
     }
 
@@ -66,8 +61,7 @@ abstract class Venues extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['user_id', 'venue_claim_code', 'venue_claimed', 'venue_type_id', 'venue_active', 'venue_verified'], 'integer'],
             [['venue_date_added', 'venue_date_modified', 'venue_claim_date', 'venue_claim_code_exp', 'venue_verified_date', 'venue_last_verified_date'], 'safe'],
@@ -87,8 +81,7 @@ abstract class Venues extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -124,83 +117,72 @@ abstract class Venues extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesClaims()
-    {
+    public function getUsersVenuesClaims() {
         return $this->hasMany(\app\models\UsersVenuesClaims::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesFollows()
-    {
+    public function getUsersVenuesFollows() {
         return $this->hasMany(\app\models\UsersVenuesFollows::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesRatings()
-    {
+    public function getUsersVenuesRatings() {
         return $this->hasMany(\app\models\UsersVenuesRatings::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenueType()
-    {
+    public function getVenueType() {
         return $this->hasOne(\app\models\VenuesTypes::className(), ['id' => 'venue_type_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenuesAdmins()
-    {
+    public function getVenuesAdmins() {
         return $this->hasMany(\app\models\VenuesAdmins::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenuesCoupons()
-    {
+    public function getVenuesCoupons() {
         return $this->hasMany(\app\models\VenuesCoupons::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenuesImages()
-    {
+    public function getVenuesImages() {
         return $this->hasMany(\app\models\VenuesImages::className(), ['venue_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenuesSettings()
-    {
+    public function getVenuesSettings() {
         return $this->hasOne(\app\models\VenuesSettings::className(), ['venue_id' => 'id']);
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\VenuesQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new \app\models\VenuesQuery(get_called_class());
     }
 

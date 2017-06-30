@@ -1,11 +1,10 @@
 <?php
+
 namespace tests\models;
 
 use app\models\Users;
-use Yii;
 
-class UsersTest extends \Codeception\Test\Unit
-{
+class UsersTest extends \Codeception\Test\Unit {
 
     use \Codeception\Specify;
 
@@ -15,18 +14,15 @@ class UsersTest extends \Codeception\Test\Unit
     private $user;
     protected $tester;
 
-    protected function _before()
-    {
+    protected function _before() {
         $this->user = Users::create();
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
-    public function testValidateNewUsers()
-    {
+    public function testValidateNewUsers() {
 
         $this->specify("Firstname is required", function () {
             $this->user->user_firstname = null;

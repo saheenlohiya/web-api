@@ -4,8 +4,6 @@
 
 namespace app\models\base;
 
-use Yii;
-
 /**
  * This is the base-model class for table "users_venues_ratings".
  *
@@ -33,16 +31,13 @@ use Yii;
  * @property \app\models\UsersVenuesRatingsResponses[] $usersVenuesRatingsResponses
  * @property string $aliasModel
  */
-abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
-{
-
+abstract class UsersVenuesRatings extends \yii\db\ActiveRecord {
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'users_venues_ratings';
     }
 
@@ -50,8 +45,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['user_id', 'venue_id', 'venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6', 'venue_rating_acknowledged', 'venue_rating_resolved', 'venues_updated'], 'integer'],
             [['venue_rating_average'], 'number'],
@@ -65,8 +59,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -91,8 +84,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeHints()
-    {
+    public function attributeHints() {
         return array_merge(parent::attributeHints(), [
             'venue_rating_cat_1' => 'Default: Service',
             'venue_rating_cat_2' => 'Default: Staff',
@@ -106,43 +98,37 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue()
-    {
+    public function getVenue() {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesRatingsImages()
-    {
+    public function getUsersVenuesRatingsImages() {
         return $this->hasMany(\app\models\UsersVenuesRatingsImages::className(), ['user_venue_rating_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesRatingsResponses()
-    {
+    public function getUsersVenuesRatingsResponses() {
         return $this->hasMany(\app\models\UsersVenuesRatingsResponses::className(), ['user_venue_rating_id' => 'id']);
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesRatingsQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new \app\models\UsersVenuesRatingsQuery(get_called_class());
     }
 

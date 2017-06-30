@@ -3,24 +3,22 @@
 namespace app\api\modules\v1\controllers;
 
 use app\filters\TuQueryParamAuth;
-use yii;
 use app\models\Users;
+use yii;
 use yii\web\Response;
 
-class UsersController extends TuBaseApiController
-{
+class UsersController extends TuBaseApiController {
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Users';
 
     /**
      * @return array
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists','login','create'],
+            'except' => ['email-exists', 'login', 'create'],
             'optional' => []
         ];
         return $behaviors;
@@ -31,8 +29,7 @@ class UsersController extends TuBaseApiController
      * @param $email
      * @return array
      */
-    public function actionEmailExists($email)
-    {
+    public function actionEmailExists($email) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         if (!is_null($email) && !empty($email)) {
             $emailExists = Users::find()
@@ -49,8 +46,7 @@ class UsersController extends TuBaseApiController
      * @return array
      * @throws yii\web\UnauthorizedHttpException
      */
-    public function actionLogin()
-    {
+    public function actionLogin() {
 
         $params = Yii::$app->request->post();
 
@@ -73,8 +69,7 @@ class UsersController extends TuBaseApiController
      * @param $user_access_token
      * @return mixed
      */
-    public function actionMe($user_access_token)
-    {
+    public function actionMe($user_access_token) {
         $user = Users::findIdentityByAccessToken($user_access_token);
 
         if ($user) {
@@ -88,8 +83,7 @@ class UsersController extends TuBaseApiController
      * @param $userData
      * @return mixed
      */
-    private function _getUserObject($userData)
-    {
+    private function _getUserObject($userData) {
         unset($userData['user_password']);
         unset($userData['user_auth_key']);
         return $userData;

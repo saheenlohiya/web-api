@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use Yii;
-use \app\models\base\UsersVenuesFollows as BaseUsersVenuesFollows;
-use yii\base\ModelEvent;
+use app\models\base\UsersVenuesFollows as BaseUsersVenuesFollows;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -13,19 +11,16 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "users_venues_follows".
  */
-class UsersVenuesFollows extends BaseUsersVenuesFollows
-{
+class UsersVenuesFollows extends BaseUsersVenuesFollows {
 
     //events
     const EVENT_USER_FOLLOW_SUCCESS = 'userFollowSuccess';
 
-    public static function create()
-    {
+    public static function create() {
         return new self;
     }
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -41,8 +36,7 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         );
     }
 
-    public function rules()
-    {
+    public function rules() {
         return ArrayHelper::merge(
             parent::rules(),
             [
@@ -53,8 +47,7 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         );
     }
 
-    public function follow($user_id, $venue_id)
-    {
+    public function follow($user_id, $venue_id) {
         //make sure params are not empty
         if (!is_null($user_id) && !is_null($venue_id)) {
             //make sure user is not already following this venue
@@ -75,14 +68,12 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows
         return false;
     }
 
-    public function getVenueFollowsByUser($user_id)
-    {
+    public function getVenueFollowsByUser($user_id) {
         return UsersVenuesFollows::find()
             ->where(['user_id' => $user_id])
             ->with(['venue.venuesImages'])
             ->orderBy(['user_venue_follow_date' => 'DESC'])
             ->asArray(true)
-            ->all()
-            ;
+            ->all();
     }
 }

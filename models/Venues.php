@@ -2,37 +2,34 @@
 
 namespace app\models;
 
+use app\components\behaviors\GeocodeBehavior;
 use app\components\Conversions;
+use app\models\base\Venues as BaseVenues;
 use dosamigos\google\places\Place;
 use dosamigos\google\places\Search;
 use Yii;
-use \app\models\base\Venues as BaseVenues;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
-use app\components\behaviors\GeocodeBehavior;
 
 /**
  * This is the model class for table "venues".
  */
-class Venues extends BaseVenues
-{
+class Venues extends BaseVenues {
     public $results = [];
 
     /**
      * @return Venues
      */
-    public static function create()
-    {
+    public static function create() {
         return new self;
     }
 
     /**
      * @return array
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -63,8 +60,7 @@ class Venues extends BaseVenues
     /**
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return ArrayHelper::merge(
             parent::rules(),
             [
@@ -78,8 +74,7 @@ class Venues extends BaseVenues
      * @param bool $insert
      * @return bool
      */
-    public function beforeSave($insert)
-    {
+    public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
 
             return true;
@@ -95,8 +90,7 @@ class Venues extends BaseVenues
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20)
-    {
+    public function getNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20) {
 
         //we will run a nearby places update first
         $updatePlaces = $this->_updateNearbyPlaces($latitude, $longitude, $radius, $limit);
@@ -109,8 +103,8 @@ class Venues extends BaseVenues
 
     }
 
-    public function venue($venue_id){
-        return self::find()->where(['id'=>$venue_id])->with(['venuesImages'])->asArray()->one();
+    public function venue($venue_id) {
+        return self::find()->where(['id' => $venue_id])->with(['venuesImages'])->asArray()->one();
     }
 
     /**
@@ -121,8 +115,7 @@ class Venues extends BaseVenues
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchPlaces($text, $latitude, $longitude, $radius = 5, $limit = 20)
-    {
+    public function getSearchPlaces($text, $latitude, $longitude, $radius = 5, $limit = 20) {
         //we will run a nearby places update first
         $ids = $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
         if (count($ids) > 0) {
@@ -141,8 +134,7 @@ class Venues extends BaseVenues
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbySavedPlaces($latitude, $longitude, $radius = 5, $limit = 20, $offset = 0)
-    {
+    public function getNearbySavedPlaces($latitude, $longitude, $radius = 5, $limit = 20, $offset = 0) {
         $sql = "
         SELECT *,
         (
@@ -173,8 +165,7 @@ class Venues extends BaseVenues
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 20, $offset = 0)
-    {
+    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 20, $offset = 0) {
 
         $ids = implode(",", $ids);
 
@@ -207,8 +198,7 @@ class Venues extends BaseVenues
      * @param int $limit
      * @return bool
      */
-    private function _updateNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20)
-    {
+    private function _updateNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20) {
 
         $radius = Conversions::meters_to_miles($radius);
 
@@ -240,8 +230,7 @@ class Venues extends BaseVenues
      * @param int $limit
      * @return array
      */
-    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 5, $limit = 20)
-    {
+    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 5, $limit = 20) {
 
         $radius = Conversions::meters_to_miles($radius);
 
@@ -275,8 +264,7 @@ class Venues extends BaseVenues
      * @return int|null|string
      * @throws \yii\db\Exception
      */
-    private function _saveNewGooglePlace($item)
-    {
+    private function _saveNewGooglePlace($item) {
 
         $venue = Venues::find()->where(['venue_google_place_id' => $item['place_id']])->one();
         $venue_id = null;
@@ -330,8 +318,7 @@ class Venues extends BaseVenues
      * @param $type
      * @return int|null
      */
-    private function _getVenueTypeID($type)
-    {
+    private function _getVenueTypeID($type) {
         $type = VenuesTypes::find()->where(['venue_type_slug' => $type])->one();
         if ($type) {
             return $type->id;
@@ -344,8 +331,7 @@ class Venues extends BaseVenues
      * @param $details
      * @return array
      */
-    private function _getAddressComponents($details)
-    {
+    private function _getAddressComponents($details) {
 
         $addr = [];
         $addr['venue_address_1'] = "";
@@ -384,8 +370,7 @@ class Venues extends BaseVenues
      * @param $id
      * @param $detail
      */
-    private function _saveGooglePlacesPhotos($id, $detail)
-    {
+    private function _saveGooglePlacesPhotos($id, $detail) {
         if (isset($detail) && isset($detail['photos']) && count($detail['photos'])) {
             foreach ($detail['photos'] as $photo) {
                 if (count($photo) && isset($photo['photo_reference']) && count($photo['photo_reference'])) {
@@ -401,30 +386,30 @@ class Venues extends BaseVenues
 
     //The following is handled by the 'venues_update_satisfaction_stats' stored procedure
     /**
-    Satisfaction is calculated using 2 factors.
-
-    % resolved tickets (20% of satisfaction)
-    Avg rating % (80% of satisfaction)
-
-    % Resolved tickets
-
-    Get all ratings (total_ratings)
-    Get resolved ratings (total_resolved_ratings)
-    (total_resolved_ratings/total_ratings) * 100
-    - note: 0/0 is 100% resolved tickets (we need to decide)
-
-    Avg rating %
-
-    (Avg ratings/5) * 100
-    - 0/0 is 100% avg rating (we need to decide)
-    Satisfaction
-    ((% resolved tickets * 0.2) + (Avg rating % * 0.8))
-
-    e.g.
-    % Resolved tickets = 60%
-    % avg ratings = 80%
-
-    (60 * .2) + (80 * .8) = 12 + 64 = 76% Satisfaction
+     * Satisfaction is calculated using 2 factors.
+     *
+     * % resolved tickets (20% of satisfaction)
+     * Avg rating % (80% of satisfaction)
+     *
+     * % Resolved tickets
+     *
+     * Get all ratings (total_ratings)
+     * Get resolved ratings (total_resolved_ratings)
+     * (total_resolved_ratings/total_ratings) * 100
+     * - note: 0/0 is 100% resolved tickets (we need to decide)
+     *
+     * Avg rating %
+     *
+     * (Avg ratings/5) * 100
+     * - 0/0 is 100% avg rating (we need to decide)
+     * Satisfaction
+     * ((% resolved tickets * 0.2) + (Avg rating % * 0.8))
+     *
+     * e.g.
+     * % Resolved tickets = 60%
+     * % avg ratings = 80%
+     *
+     * (60 * .2) + (80 * .8) = 12 + 64 = 76% Satisfaction
      */
 
 }

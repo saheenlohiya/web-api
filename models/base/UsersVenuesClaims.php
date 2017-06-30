@@ -4,8 +4,6 @@
 
 namespace app\models\base;
 
-use Yii;
-
 /**
  * This is the base-model class for table "users_venues_claims".
  *
@@ -22,23 +20,21 @@ use Yii;
  * @property \app\models\Venues $venue
  * @property string $aliasModel
  */
-abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
-{
-
+abstract class UsersVenuesClaims extends \yii\db\ActiveRecord {
 
 
     /**
-    * ENUM field values
-    */
+     * ENUM field values
+     */
     const VENUE_CLAIM_STATUS_PENDING = 'pending';
     const VENUE_CLAIM_STATUS_ACTIVE = 'active';
     const VENUE_CLAIM_STATUS_SUSPENDED = 'suspended';
     var $enum_labels = false;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'users_venues_claims';
     }
 
@@ -46,8 +42,7 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['user_id', 'venue_id', 'venue_claim_verify_admin', 'venue_claim_update_date'], 'integer'],
             [['venue_claim_date', 'venue_claim_verified_date'], 'safe'],
@@ -55,10 +50,10 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['venue_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Venues::className(), 'targetAttribute' => ['venue_id' => 'id']],
             ['venue_claim_status', 'in', 'range' => [
-                    self::VENUE_CLAIM_STATUS_PENDING,
-                    self::VENUE_CLAIM_STATUS_ACTIVE,
-                    self::VENUE_CLAIM_STATUS_SUSPENDED,
-                ]
+                self::VENUE_CLAIM_STATUS_PENDING,
+                self::VENUE_CLAIM_STATUS_ACTIVE,
+                self::VENUE_CLAIM_STATUS_SUSPENDED,
+            ]
             ]
         ];
     }
@@ -66,8 +61,7 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -83,27 +77,23 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue()
-    {
+    public function getVenue() {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 
-    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesClaimsQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new \app\models\UsersVenuesClaimsQuery(get_called_class());
     }
 
@@ -113,9 +103,9 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
      * @param string $value
      * @return string
      */
-    public static function getVenueClaimStatusValueLabel($value){
+    public static function getVenueClaimStatusValueLabel($value) {
         $labels = self::optsVenueClaimStatus();
-        if(isset($labels[$value])){
+        if (isset($labels[$value])) {
             return $labels[$value];
         }
         return $value;
@@ -125,8 +115,7 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
      * column venue_claim_status ENUM value labels
      * @return array
      */
-    public static function optsVenueClaimStatus()
-    {
+    public static function optsVenueClaimStatus() {
         return [
             self::VENUE_CLAIM_STATUS_PENDING => self::VENUE_CLAIM_STATUS_PENDING,
             self::VENUE_CLAIM_STATUS_ACTIVE => self::VENUE_CLAIM_STATUS_ACTIVE,

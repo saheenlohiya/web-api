@@ -8,8 +8,7 @@ use app\models\UsersVenuesRatingsResponses;
 use app\models\Venues;
 use Yii;
 
-class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
-{
+class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit {
 
     use \Codeception\Specify;
 
@@ -24,36 +23,33 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
     private $rating_response;
 
 
-    protected function _before()
-    {
+    protected function _before() {
         $this->user = Users::create();
         $this->venue = Venues::create();
         $this->rating = UsersVenuesRatings::create();
         $this->rating_response = UsersVenuesRatingsResponses::create();
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
-    public function testCanCreateResponse()
-    {
+    public function testCanCreateResponse() {
         $this->_rateVenue();
 
         $this->assertNotNull($this->rating);
 
-        $this->specify("Venue rating id is required",function(){
+        $this->specify("Venue rating id is required", function () {
             $this->rating_response->user_venue_rating_id = null;
             $this->assertFalse($this->rating_response->validate(['user_venue_rating_id']));
         });
 
-        $this->specify("Responding user id is required",function(){
+        $this->specify("Responding user id is required", function () {
             $this->rating_response->user_venue_rating_responding_user_id = null;
             $this->assertFalse($this->rating_response->validate(['user_venue_rating_responding_user_id']));
         });
 
-        $this->specify("Comment is required",function(){
+        $this->specify("Comment is required", function () {
             $this->rating_response->user_venue_rating_response = null;
             $this->assertFalse($this->rating_response->validate(['user_venue_rating_response']));
         });
@@ -67,7 +63,7 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
 
     }
 
-    public function testCanCloseTicketWithCloseKeyword(){
+    public function testCanCloseTicketWithCloseKeyword() {
 
         $this->_rateVenue();
 
@@ -81,16 +77,15 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
         $this->assertTrue($this->rating_response->save());
 
         //we will need to look up the rating again to see if the resolution is set
-        $rating_updated = UsersVenuesRatings::find()->where(['id'=>$this->rating->id])->one();
+        $rating_updated = UsersVenuesRatings::find()->where(['id' => $this->rating->id])->one();
 
-        $this->assertEquals(1,$rating_updated->venue_rating_resolved);
+        $this->assertEquals(1, $rating_updated->venue_rating_resolved);
 
     }
 
 
     //setup required model setups
-    private function _createTestUser()
-    {
+    private function _createTestUser() {
         $this->user->user_firstname = 'Dwamian';
         $this->user->user_lastname = 'Mcleish';
         $this->user->user_email = 'dmcleish112@gmail.com';
@@ -104,8 +99,7 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
         $this->user->save();
     }
 
-    private function _createVenue()
-    {
+    private function _createVenue() {
         //we need to create a user first
         $this->_createTestUser();
 
@@ -126,8 +120,7 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit
         $this->venue->save();
     }
 
-    private function _rateVenue()
-    {
+    private function _rateVenue() {
         $this->_createVenue();
 
         $this->rating->venue_rating_cat_1 = 5;

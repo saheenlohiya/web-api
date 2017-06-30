@@ -7,8 +7,7 @@ namespace app\models;
  *
  * @see UsersVenuesRatingsResponses
  */
-class UsersVenuesRatingsResponsesQuery extends \yii\db\ActiveQuery
-{
+class UsersVenuesRatingsResponsesQuery extends \yii\db\ActiveQuery {
     /*public function active()
     {
         $this->andWhere('[[status]]=1');
@@ -19,8 +18,7 @@ class UsersVenuesRatingsResponsesQuery extends \yii\db\ActiveQuery
      * @inheritdoc
      * @return UsersVenuesRatingsResponses[]|array
      */
-    public function all($db = null)
-    {
+    public function all($db = null) {
         return parent::all($db);
     }
 
@@ -28,8 +26,7 @@ class UsersVenuesRatingsResponsesQuery extends \yii\db\ActiveQuery
      * @inheritdoc
      * @return UsersVenuesRatingsResponses|array|null
      */
-    public function one($db = null)
-    {
+    public function one($db = null) {
         return parent::one($db);
     }
 }

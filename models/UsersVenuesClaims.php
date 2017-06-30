@@ -2,18 +2,15 @@
 
 namespace app\models;
 
-use Yii;
-use \app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
+use app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "users_venues_claims".
  */
-class UsersVenuesClaims extends BaseUsersVenuesClaims
-{
+class UsersVenuesClaims extends BaseUsersVenuesClaims {
 
-public function behaviors()
-    {
+    public function behaviors() {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -22,13 +19,12 @@ public function behaviors()
         );
     }
 
-    public function rules()
-    {
+    public function rules() {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
     }
 }
