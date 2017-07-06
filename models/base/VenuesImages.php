@@ -4,6 +4,8 @@
 
 namespace app\models\base;
 
+use Yii;
+
 /**
  * This is the base-model class for table "venues_images".
  *
@@ -15,13 +17,16 @@ namespace app\models\base;
  * @property \app\models\Venues $venue
  * @property string $aliasModel
  */
-abstract class VenuesImages extends \yii\db\ActiveRecord {
+abstract class VenuesImages extends \yii\db\ActiveRecord
+{
+
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'venues_images';
     }
 
@@ -29,7 +34,8 @@ abstract class VenuesImages extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['venue_id'], 'integer'],
             [['venue_image_url'], 'string'],
@@ -41,7 +47,8 @@ abstract class VenuesImages extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'venue_id' => 'Venue ID',
@@ -53,16 +60,19 @@ abstract class VenuesImages extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue() {
+    public function getVenue()
+    {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesImagesQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new \app\models\VenuesImagesQuery(get_called_class());
     }
 

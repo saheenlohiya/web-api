@@ -4,6 +4,8 @@
 
 namespace app\models\base;
 
+use Yii;
+
 /**
  * This is the base-model class for table "venues_settings".
  *
@@ -14,13 +16,16 @@ namespace app\models\base;
  * @property \app\models\Venues $venue
  * @property string $aliasModel
  */
-abstract class VenuesSettings extends \yii\db\ActiveRecord {
+abstract class VenuesSettings extends \yii\db\ActiveRecord
+{
+
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'venues_settings';
     }
 
@@ -28,7 +33,8 @@ abstract class VenuesSettings extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['venue_id'], 'required'],
             [['venue_id', 'venue_rating_resolve_exp_days'], 'integer'],
@@ -41,7 +47,8 @@ abstract class VenuesSettings extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'venue_id' => 'Venue ID',
             'venue_rating_category_mapping' => 'Venue Rating Category Mapping',
@@ -52,16 +59,19 @@ abstract class VenuesSettings extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue() {
+    public function getVenue()
+    {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesSettingsQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new \app\models\VenuesSettingsQuery(get_called_class());
     }
 

@@ -4,6 +4,8 @@
 
 namespace app\models\base;
 
+use Yii;
+
 /**
  * This is the base-model class for table "venues_coupons".
  *
@@ -25,13 +27,16 @@ namespace app\models\base;
  * @property \app\models\VenuesAdmins $venueAdmin
  * @property string $aliasModel
  */
-abstract class VenuesCoupons extends \yii\db\ActiveRecord {
+abstract class VenuesCoupons extends \yii\db\ActiveRecord
+{
+
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'venues_coupons';
     }
 
@@ -39,7 +44,8 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['venue_id', 'venue_admin_id', 'coupon_use_limit', 'coupon_redeemed', 'coupon_active'], 'integer'],
             [['coupon_redeem_date', 'coupon_expiration', 'coupon_created_date', 'coupon_modified_date'], 'safe'],
@@ -53,7 +59,8 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'venue_id' => 'Venue ID',
@@ -73,30 +80,35 @@ abstract class VenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsersVenuesCoupons() {
+    public function getUsersVenuesCoupons()
+    {
         return $this->hasMany(\app\models\UsersVenuesCoupons::className(), ['venue_coupon_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenue() {
+    public function getVenue()
+    {
         return $this->hasOne(\app\models\Venues::className(), ['id' => 'venue_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenueAdmin() {
+    public function getVenueAdmin()
+    {
         return $this->hasOne(\app\models\VenuesAdmins::className(), ['id' => 'venue_admin_id']);
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesCouponsQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new \app\models\VenuesCouponsQuery(get_called_class());
     }
 

@@ -4,6 +4,8 @@
 
 namespace app\models\base;
 
+use Yii;
+
 /**
  * This is the base-model class for table "users_venues_coupons".
  *
@@ -20,13 +22,16 @@ namespace app\models\base;
  * @property \app\models\VenuesCoupons $venueCoupon
  * @property string $aliasModel
  */
-abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord {
+abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord
+{
+
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'users_venues_coupons';
     }
 
@@ -34,7 +39,8 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['user_id', 'venue_coupon_id', 'user_venue_coupon_active'], 'integer'],
             [['user_venue_coupon_award_date', 'user_venue_coupon_exp'], 'safe'],
@@ -48,7 +54,8 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -64,23 +71,27 @@ abstract class UsersVenuesCoupons extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(\app\models\Users::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenueCoupon() {
+    public function getVenueCoupon()
+    {
         return $this->hasOne(\app\models\VenuesCoupons::className(), ['id' => 'venue_coupon_id']);
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\UsersVenuesCouponsQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new \app\models\UsersVenuesCouponsQuery(get_called_class());
     }
 

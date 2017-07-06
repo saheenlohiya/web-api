@@ -4,6 +4,8 @@
 
 namespace app\models\base;
 
+use Yii;
+
 /**
  * This is the base-model class for table "venues_types".
  *
@@ -16,13 +18,16 @@ namespace app\models\base;
  * @property \app\models\Venues[] $venues
  * @property string $aliasModel
  */
-abstract class VenuesTypes extends \yii\db\ActiveRecord {
+abstract class VenuesTypes extends \yii\db\ActiveRecord
+{
+
 
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'venues_types';
     }
 
@@ -30,7 +35,8 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['venue_type_active'], 'integer'],
             [['venue_type_slug'], 'string', 'max' => 20],
@@ -42,7 +48,8 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'venue_type_slug' => 'Venue Type Slug',
@@ -55,16 +62,19 @@ abstract class VenuesTypes extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVenues() {
+    public function getVenues()
+    {
         return $this->hasMany(\app\models\Venues::className(), ['venue_type_id' => 'id']);
     }
 
 
+    
     /**
      * @inheritdoc
      * @return \app\models\VenuesTypesQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new \app\models\VenuesTypesQuery(get_called_class());
     }
 
