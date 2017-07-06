@@ -32,8 +32,7 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['venue_id', 'user_id'], 'required']
-            ]
+                [['venue_id', 'user_id'], 'required']]
         );
     }
 
@@ -79,6 +78,21 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
                 $this->_notifyAdmins();
             }
         }
+    }
+
+    public function claim($user_id,$venue_id){
+        //make sure another claim doesnt exist
+        if(!self::find()->where(['user_id'=>$user_id,'venue_id'=>$venue_id])->exists()){
+            $newClaim = self::create();
+            $newClaim->venue_id = $venue_id;
+            $newClaim->user_id = $user_id;
+
+            if($newClaim->save()){
+                return $newClaim;
+            }
+        }
+
+        return false;
     }
 
     private function _notifyAdmins() {

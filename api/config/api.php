@@ -65,6 +65,11 @@ $config = [
                         'GET view-responses' => 'view-responses'
                     ],
                 ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-claims'],
+                    'extraPatterns' => [
+                        'GET claim' => 'claim'
+                    ],
+                ],
             ],
         ],
         'db' => $db,

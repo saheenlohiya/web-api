@@ -72,6 +72,10 @@ class UsersVenuesClaimsTest extends \Codeception\Test\Unit {
 
     }
 
+    public function testCannotReclaimVenue(){
+        //make sure the venue is not already claimed
+    }
+
     //setup required model setups
     private function _createTestUser() {
         $this->user->user_firstname = 'Dwamian';
