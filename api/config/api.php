@@ -67,7 +67,8 @@ $config = [
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-claims'],
                     'extraPatterns' => [
-                        'GET claim' => 'claim'
+                        'GET claim' => 'claim',
+                        'GET approve-claim' => 'approve-claim'
                     ],
                 ],
             ],

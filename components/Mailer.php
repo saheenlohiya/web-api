@@ -39,9 +39,10 @@ class Mailer extends Component {
     /** @var string */
     protected $ratingNotifySubject;
 
-    /**
-     * @var string
-     */
+    /**  @var string */
+    protected $claimNotifyAdminSubject;
+
+    /**  @var string */
     protected $claimNotifySubject;
 
     /**
@@ -155,21 +156,39 @@ class Mailer extends Component {
     /**
      * @return mixed
      */
-    public function getClaimNotifySubject() {
-        if ($this->claimNotifySubject == null) {
-            $this->setClaimNotifySubject('A user has claimed a venue');
+    public function getClaimNotifyAdminSubject() {
+        if ($this->claimNotifyAdminSubject == null) {
+            $this->setClaimNotifyAdminSubject('A User Has Claimed a Venue');
         }
 
-        return $this->ratingNotifySubject;
+        return $this->claimNotifyAdminSubject;
+    }
+
+    /**
+     * @param $claimNotifyAdminSubject
+     */
+    public function setClaimNotifyAdminSubject($claimNotifyAdminSubject) {
+        $this->claimNotifyAdminSubject = $claimNotifyAdminSubject;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getClaimNotifySubject() {
+        if ($this->claimNotifySubject == null) {
+            $this->setClaimNotifySubject('Response to your TellUs Venue claim');
+        }
+
+        return $this->claimNotifySubject;
     }
 
     /**
      * @param $claimNotifySubject
      */
     public function setClaimNotifySubject($claimNotifySubject) {
-        $this->$claimNotifySubject = $claimNotifySubject;
+        $this->claimNotifySubject = $claimNotifySubject;
     }
-
 
 
     /** @inheritdoc */
@@ -200,9 +219,24 @@ class Mailer extends Component {
     public function notifyAdminOfClaim(UsersVenuesClaims $claim) {
         return $this->sendMessage(
             Yii::$app->params['adminEmail'],
-            $this->getClaimNotifySubject(),
+            $this->getClaimNotifyAdminSubject(),
             'user-venue-claim-admin-notify',
             ['claim' => $claim]
+        );
+    }
+
+    /**
+     * @param $approved
+     * @param $user
+     * @param $venue
+     * @return bool
+     */
+    public function notifyOfClaimApproval($approved,$user,$venue) {
+        return $this->sendMessage(
+            $user->user_email,
+            $this->getClaimNotifySubject(),
+            'user-venue-claim-notify',
+            ['approved' => $approved,'user'=>$user,'venue'=>$venue]
         );
     }
 

@@ -23,8 +23,11 @@ class UsersVenuesClaimsController extends TuBaseApiController {
     }
 
     public function actionClaim($user_id, $venue_id) {
-        $claim = UsersVenuesClaims::create()->claim($user_id, $venue_id);
+        return UsersVenuesClaims::create()->claim($user_id, $venue_id);
+    }
 
-        return $claim->attributes;
+    public function actionApproveClaim($approved = false, $claim_hash, $claim_code) {
+        return UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code);
+
     }
 }
