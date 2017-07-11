@@ -119,11 +119,22 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             $claim->venue_claim_status = self::VENUE_CLAIM_STATUS_ACTIVE;
             $claim->venue_claim_verified_date = date('Y-m-d H:i:s');
             $claim->venue_claim_update_date = date('Y-m-d H:i:s');
-            //update the user id for the venue
-            $claim->venue->user_id = $claim->user_id;
 
-            if ($claim->save()) {
+
+            if ($this->_updateVenueWithUser($claim->user_id, $claim->venue_id) && $claim->save()) {
                 $this->_notifyOfClaimApproval(true, $claim->user, $claim->venue);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function _updateVenueWithUser($user_id, $venue_id) {
+        $venue = Venues::find()->where(['id' => $venue_id])->one();
+        if (!is_null($venue)) {
+            $venue->user_id = $user_id;
+            if($venue->save(FALSE)){
                 return true;
             }
         }
