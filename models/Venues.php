@@ -17,7 +17,14 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "venues".
  */
 class Venues extends BaseVenues {
+
+
     public $results = [];
+
+    public function extraFields()
+    {
+        return ['venuesImages'];
+    }
 
     /**
      * @return Venues

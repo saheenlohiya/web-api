@@ -32,6 +32,11 @@ class Users extends BaseUsers implements IdentityInterface {
     public $username;
     public $password;
 
+    public function extraFields()
+    {
+        return ['usersVenuesFollows'];
+    }
+
     /**
      * @inheritDoc
      */
@@ -48,6 +53,8 @@ class Users extends BaseUsers implements IdentityInterface {
 
     public function fields() {
         $fields = parent::fields();
+
+        $fields['user_dob'] = Yii::$app->formatter->asDate($fields['user_dob'], 'short');
 
         // remove fields that contain sensitive information
         unset($fields['user_password'], $fields['user_verification_code'], $fields['uuid']);

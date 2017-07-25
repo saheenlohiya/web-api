@@ -16,6 +16,11 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows {
     //events
     const EVENT_USER_FOLLOW_SUCCESS = 'userFollowSuccess';
 
+    public function extraFields()
+    {
+        return ['venue'];
+    }
+
     public static function create() {
         return new self;
     }
