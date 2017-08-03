@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Common;
 use app\components\Mailer;
 use app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
 use yii\helpers\ArrayHelper;
@@ -40,7 +41,11 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['venue_id', 'user_id'], 'required']]
+                [['venue_id', 'user_id',
+                    'venue_claim_claimer_name',
+                    'venue_claim_claimer_email',
+                    'venue_claim_claimer_phone'
+                ], 'required']]
         );
     }
 
@@ -54,7 +59,6 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
                 //stuff to happen before save
                 $this->venue_claim_date = date('Y-m-d H:i:s');
                 $this->venue_claim_status = self::VENUE_CLAIM_STATUS_PENDING;
-
 
                 $this->venue_claim_code = rand(1000, 9999999);
                 $this->venue_claim_hash = \Yii::$app->security->generateRandomString();
@@ -70,6 +74,10 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
                 }
 
             }
+
+            //always format phone
+            $this->venue_claim_claimer_phone = Common::formatPhoneNumber($this->venue_claim_claimer_phone);
+
             return true;
         } else {
             return false;
@@ -88,12 +96,15 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         }
     }
 
-    public function claim($user_id, $venue_id) {
+    public function claim($user_id, $venue_id,$venue_claim_claimer_name,$venue_claim_claimer_email,$venue_claim_claimer_phone) {
         //make sure another claim doesnt exist
         if (!self::find()->where(['user_id' => $user_id, 'venue_id' => $venue_id])->exists()) {
             $newClaim = self::create();
             $newClaim->venue_id = $venue_id;
             $newClaim->user_id = $user_id;
+            $newClaim->venue_claim_claimer_name = $venue_claim_claimer_name;
+            $newClaim->venue_claim_claimer_email = $venue_claim_claimer_email;
+            $newClaim->venue_claim_claimer_phone = $venue_claim_claimer_phone;
 
             if ($newClaim->save()) {
                 return $newClaim;
@@ -134,7 +145,7 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         $venue = Venues::find()->where(['id' => $venue_id])->one();
         if (!is_null($venue)) {
             $venue->user_id = $user_id;
-            if($venue->save(FALSE)){
+            if ($venue->save(FALSE)) {
                 return true;
             }
         }

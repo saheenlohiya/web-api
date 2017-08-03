@@ -5,6 +5,7 @@ namespace app\models;
 use app\components\behaviors\GeocodeBehavior;
 use app\components\behaviors\IPAddressBehavior;
 use app\components\behaviors\UUIDBehavior;
+use app\components\Common;
 use app\components\Mailer;
 use app\models\base\Users as BaseUsers;
 use Yii;
@@ -32,8 +33,7 @@ class Users extends BaseUsers implements IdentityInterface {
     public $username;
     public $password;
 
-    public function extraFields()
-    {
+    public function extraFields() {
         return ['usersVenuesFollows'];
     }
 
@@ -54,7 +54,9 @@ class Users extends BaseUsers implements IdentityInterface {
     public function fields() {
         $fields = parent::fields();
 
-        $fields['user_dob'] = Yii::$app->formatter->asDate($fields['user_dob'], 'short');
+        $fields['user_dob'] = function($model){
+            return date('m/d/Y', strtotime($model->user_dob));
+        };
 
         // remove fields that contain sensitive information
         unset($fields['user_password'], $fields['user_verification_code'], $fields['uuid']);
@@ -182,13 +184,18 @@ class Users extends BaseUsers implements IdentityInterface {
     }
 
     public function beforeSave($insert) {
+
         if (parent::beforeSave($insert)) {
+            if ($insert) {
+                //set an api access token... why not
+                $this->user_access_token = \Yii::$app->security->generateRandomString();
+            }
             //encrypt the password
             $this->user_password = Yii::$app->getSecurity()->generatePasswordHash($this->user_password);
             //change the date format
-            $this->user_dob = Yii::$app->formatter->asDate($this->user_dob, 'yyyy-MM-dd');
-            //set an api access token... why not
-            $this->user_access_token = \Yii::$app->security->generateRandomString();
+            $this->user_dob = date('Y-m-d', strtotime($this->user_dob));
+
+            $this->user_phone = Common::formatPhoneNumber($this->user_phone);
 
             return true;
         } else {
@@ -202,10 +209,13 @@ class Users extends BaseUsers implements IdentityInterface {
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
-        //send welcome message
-        if (!$this->mailer->sendWelcomeMessage($this)) {
-            Throw new Exception("Could not send welcome email");
+        if ($insert) {
+            //send welcome message
+            if (!$this->mailer->sendWelcomeMessage($this)) {
+                Throw new Exception("Could not send welcome email");
+            }
         }
+
 
     }
 
@@ -216,7 +226,7 @@ class Users extends BaseUsers implements IdentityInterface {
         parent::afterFind();
 
         //make sure we return the date in its original ISO/ICU format
-        $this->user_dob = Yii::$app->formatter->asDate($this->user_dob, 'short');
+        $this->user_dob = date('m/d/Y', strtotime($this->user_dob));
     }
 
 

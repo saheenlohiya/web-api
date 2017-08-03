@@ -6,7 +6,6 @@ use app\models\Users;
 use app\models\UsersVenuesClaims;
 use app\models\Venues;
 use Codeception\Specify;
-
 use Yii;
 
 class UsersVenuesClaimsTest extends \Codeception\Test\Unit {
@@ -40,16 +39,37 @@ class UsersVenuesClaimsTest extends \Codeception\Test\Unit {
         //let specify the required fields
         $this->specify("Venue ID is required", function () {
             $this->user_venue_claim->venue_id = null;
-            $this->assertFalse( $this->user_venue_claim->validate(['venue_id']));
+            $this->assertFalse($this->user_venue_claim->validate(['venue_id']));
         });
 
         $this->specify("User ID is required", function () {
             $this->user_venue_claim->user_id = null;
-            $this->assertFalse( $this->user_venue_claim->validate(['user_id']));
+            $this->assertFalse($this->user_venue_claim->validate(['user_id']));
+        });
+
+        $this->specify("User Full Name is required", function () {
+
+            $this->user_venue_claim->venue_claim_claimer_name = null;
+            $this->assertFalse($this->user_venue_claim->validate(['venue_claim_claimer_name']));
+        });
+
+        $this->specify("User Email is required", function () {
+
+            $this->user_venue_claim->venue_claim_claimer_email = null;
+            $this->assertFalse($this->user_venue_claim->validate(['venue_claim_claimer_email']));
+        });
+
+        $this->specify("User Phone is required", function () {
+
+            $this->user_venue_claim->venue_claim_claimer_phone = null;
+            $this->assertFalse($this->user_venue_claim->validate(['venue_claim_claimer_phone']));
         });
 
         $this->user_venue_claim->venue_id = $this->venue->id;
         $this->user_venue_claim->user_id = $this->user->id;
+        $this->user_venue_claim->venue_claim_claimer_name = $this->user->user_firstname . " " . $this->user->user_lastname;
+        $this->user_venue_claim->venue_claim_claimer_email = $this->user->user_email;
+        $this->user_venue_claim->venue_claim_claimer_phone = '888-888-8888';
 
         $this->user_venue_claim->save();
 
@@ -57,7 +77,7 @@ class UsersVenuesClaimsTest extends \Codeception\Test\Unit {
         $this->assertNotNull($this->user_venue_claim->venue_claim_date);
         //make sure initial status is set and it == pending
         $this->assertNotNull($this->user_venue_claim->venue_claim_status);
-        $this->assertEquals(UsersVenuesClaims::VENUE_CLAIM_STATUS_PENDING,$this->user_venue_claim->venue_claim_status);
+        $this->assertEquals(UsersVenuesClaims::VENUE_CLAIM_STATUS_PENDING, $this->user_venue_claim->venue_claim_status);
 
         //make sure the claim hash is set
         $this->assertNotNull($this->user_venue_claim->venue_claim_hash);
@@ -68,11 +88,11 @@ class UsersVenuesClaimsTest extends \Codeception\Test\Unit {
     }
 
 
-    public function testClaimNotifiesAdmins(){
+    public function testClaimNotifiesAdmins() {
 
     }
 
-    public function testCannotReclaimVenue(){
+    public function testCannotReclaimVenue() {
         //make sure the venue is not already claimed
     }
 

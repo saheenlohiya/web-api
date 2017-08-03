@@ -47,7 +47,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone`),
   UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
 
@@ -59,6 +59,9 @@ CREATE TABLE `users_venues_claims` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `venue_id` int(11) DEFAULT NULL,
+  `venue_claim_claimer_name` varchar(255) DEFAULT NULL,
+  `venue_claim_claimer_email` varchar(100) DEFAULT NULL,
+  `venue_claim_claimer_phone` varchar(20) DEFAULT NULL,
   `venue_claim_date` datetime DEFAULT NULL,
   `venue_claim_status` enum('pending','active','suspended') DEFAULT 'pending',
   `venue_claim_verified_date` datetime DEFAULT NULL,
@@ -219,7 +222,7 @@ CREATE TABLE `venues` (
   KEY `venue_type_id` (`venue_type_id`),
   CONSTRAINT `venues_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `venues_ibfk_2` FOREIGN KEY (`venue_type_id`) REFERENCES `venues_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues` */
 

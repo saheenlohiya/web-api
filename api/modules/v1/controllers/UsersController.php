@@ -11,6 +11,14 @@ class UsersController extends TuBaseApiController {
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Users';
 
+    public function actions() {
+        $actions = parent::actions();
+        $actions['options'] = [
+            'class' => 'app\components\OptionsAction',
+        ];
+        return $actions;
+    }
+
     /**
      * @return array
      */
@@ -18,9 +26,22 @@ class UsersController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists', 'login', 'create'],
+            'except' => ['email-exists', 'login', 'create','options'],
             'optional' => []
         ];
+        // remove authentication filter
+        $auth = $behaviors['authenticator'];
+        unset($behaviors['authenticator']);
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+
         return $behaviors;
     }
 

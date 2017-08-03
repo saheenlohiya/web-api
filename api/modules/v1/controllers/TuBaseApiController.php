@@ -7,5 +7,4 @@ use yii\rest\ActiveController;
 
 class TuBaseApiController extends ActiveController {
 
-
 }
