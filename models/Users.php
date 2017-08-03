@@ -189,12 +189,12 @@ class Users extends BaseUsers implements IdentityInterface {
             if ($insert) {
                 //set an api access token... why not
                 $this->user_access_token = \Yii::$app->security->generateRandomString();
+                //encrypt the password
+                $this->user_password = Yii::$app->getSecurity()->generatePasswordHash($this->user_password);
             }
-            //encrypt the password
-            $this->user_password = Yii::$app->getSecurity()->generatePasswordHash($this->user_password);
+
             //change the date format
             $this->user_dob = date('Y-m-d', strtotime($this->user_dob));
-
             $this->user_phone = Common::formatPhoneNumber($this->user_phone);
 
             return true;
@@ -224,7 +224,6 @@ class Users extends BaseUsers implements IdentityInterface {
      */
     public function afterFind() {
         parent::afterFind();
-
         //make sure we return the date in its original ISO/ICU format
         $this->user_dob = date('m/d/Y', strtotime($this->user_dob));
     }
