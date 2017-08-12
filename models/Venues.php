@@ -97,7 +97,7 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20) {
+    public function getNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50) {
 
         //we will run a nearby places update first
         $updatePlaces = $this->_updateNearbyPlaces($latitude, $longitude, $radius, $limit);
@@ -122,7 +122,7 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchPlaces($text, $latitude, $longitude, $radius = 5, $limit = 20) {
+    public function getSearchPlaces($text, $latitude, $longitude, $radius = 20, $limit =50) {
         //we will run a nearby places update first
         $ids = $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
         if (count($ids) > 0) {
@@ -141,7 +141,7 @@ class Venues extends BaseVenues {
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbySavedPlaces($latitude, $longitude, $radius = 5, $limit = 20, $offset = 0) {
+    public function getNearbySavedPlaces($latitude, $longitude, $radius = 20, $limit = 50, $offset = 0) {
         $sql = "
         SELECT *,
         (
@@ -172,7 +172,7 @@ class Venues extends BaseVenues {
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 20, $offset = 0) {
+    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 50, $offset = 0) {
 
         $ids = implode(",", $ids);
 
@@ -205,7 +205,7 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return bool
      */
-    private function _updateNearbyPlaces($latitude, $longitude, $radius = 5, $limit = 20) {
+    private function _updateNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50) {
 
         $radius = Conversions::meters_to_miles($radius);
 
@@ -237,7 +237,7 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array
      */
-    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 5, $limit = 20) {
+    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 20, $limit = 50) {
 
         $radius = Conversions::meters_to_miles($radius);
 

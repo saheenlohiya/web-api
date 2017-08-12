@@ -36,7 +36,7 @@ class VenuesController extends TuBaseApiController {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function actionGetNearbyVenues($lat, $lon, $radius = 5, $limit = 20) {
+    public function actionGetNearbyVenues($lat, $lon, $radius = 20, $limit = 50) {
         return Venues::create()->getNearbyPlaces($lat, $lon, $radius,$limit);
     }
 
@@ -48,7 +48,7 @@ class VenuesController extends TuBaseApiController {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function actionSearchNearbyVenues($keyword, $lat, $lon, $radius = 5, $limit = 20) {
+    public function actionSearchNearbyVenues($keyword, $lat, $lon, $radius = 20, $limit = 50) {
         return Venues::create()->getSearchPlaces($keyword, $lat, $lon, $radius, $limit);
     }
 
