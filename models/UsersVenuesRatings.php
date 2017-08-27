@@ -112,12 +112,31 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
 
     public function getRatingsByUser($user_id) {
         if (isset($user_id)) {
-            return UsersVenuesRatings::find()
-                ->where(['user_id' => $user_id])
+
+            //we will combine both the users own ratings
+            //and ratings submitted to the claimed venue
+
+            //ratings I submitted
+            $myRatings = UsersVenuesRatings::find()
+                ->alias('uvr1')
+                ->where(['uvr1.user_id' => $user_id])
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
                 ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
-                ->asArray(true)
-                ->all();
+                ->asArray(true);
+
+            //ratings submitted to my claimed venues
+            $myClaimedVenueRatings = UsersVenuesRatings::find()
+                ->alias('uvr2')
+                ->where(['venues.user_id' => $user_id])
+                ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
+                ->join('JOIN','venues','venues.id = uvr2.venue_id')
+                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
+                ->asArray(true);
+
+
+            return $myRatings->union($myClaimedVenueRatings)->all();
+
+
         }
     }
 
