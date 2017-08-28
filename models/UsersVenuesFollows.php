@@ -73,6 +73,14 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows {
         return false;
     }
 
+    public function unfollow($user_id,$venue_id){
+        if (!is_null($user_id) && !is_null($venue_id)) {
+           return (UsersVenuesFollows::deleteAll(['user_id'=>$user_id,'venue_id'=>$venue_id]) > 0);
+        }
+
+        return false;
+    }
+
     public function getVenueFollowsByUser($user_id) {
         return UsersVenuesFollows::find()
             ->where(['user_id' => $user_id])

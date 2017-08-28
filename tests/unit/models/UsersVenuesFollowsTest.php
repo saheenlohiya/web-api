@@ -60,6 +60,9 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit {
 
         $this->assertFalse($newVenueFollow->save());
 
+        //now test if we can unfollow this venue
+        $this->assertTrue($this->users_venues_follows->unfollow($this->user->id,$this->venue->id));
+
     }
 
     private function _createTestUser() {
