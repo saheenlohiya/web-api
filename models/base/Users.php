@@ -36,6 +36,7 @@ use Yii;
  * @property integer $user_is_verified
  * @property string $user_access_token
  * @property string $user_auth_key
+ * @property string $user_device_token
  *
  * @property \app\models\UsersVenuesClaims[] $usersVenuesClaims
  * @property \app\models\UsersVenuesCoupons[] $usersVenuesCoupons
@@ -84,7 +85,7 @@ abstract class Users extends \yii\db\ActiveRecord
             [['user_zip'], 'string', 'max' => 10],
             [['user_ip_address'], 'string', 'max' => 16],
             [['user_verification_code'], 'string', 'max' => 32],
-            [['user_access_token', 'user_auth_key'], 'string', 'max' => 255],
+            [['user_access_token', 'user_auth_key', 'user_device_token'], 'string', 'max' => 255],
             [['user_email', 'user_phone'], 'unique', 'targetAttribute' => ['user_email', 'user_phone'], 'message' => 'The combination of User Email and User Phone has already been taken.'],
             [['user_username'], 'unique'],
             ['user_gender', 'in', 'range' => [
@@ -128,6 +129,7 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_is_verified' => 'User Is Verified',
             'user_access_token' => 'User Access Token',
             'user_auth_key' => 'User Auth Key',
+            'user_device_token' => 'User Device Token',
         ];
     }
 

@@ -44,10 +44,11 @@ CREATE TABLE `users` (
   `user_is_verified` tinyint(1) DEFAULT '0',
   `user_access_token` varchar(255) DEFAULT NULL,
   `user_auth_key` varchar(255) DEFAULT NULL,
+  `user_device_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone`),
   UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
 
@@ -222,7 +223,7 @@ CREATE TABLE `venues` (
   KEY `venue_type_id` (`venue_type_id`),
   CONSTRAINT `venues_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `venues_ibfk_2` FOREIGN KEY (`venue_type_id`) REFERENCES `venues_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `venues` */
 

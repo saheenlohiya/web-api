@@ -13,8 +13,8 @@ use Yii;
  * @property integer $user_id
  * @property integer $venue_id
  * @property string $venue_claim_claimer_name
- * @property string $venue_claim_claimer_phone
  * @property string $venue_claim_claimer_email
+ * @property string $venue_claim_claimer_phone
  * @property string $venue_claim_date
  * @property string $venue_claim_status
  * @property string $venue_claim_verified_date
@@ -58,8 +58,8 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
             [['venue_claim_date', 'venue_claim_verified_date', 'venue_claim_update_date'], 'safe'],
             [['venue_claim_status'], 'string'],
             [['venue_claim_claimer_name'], 'string', 'max' => 255],
-            [['venue_claim_claimer_phone'], 'string', 'max' => 20],
             [['venue_claim_claimer_email'], 'string', 'max' => 100],
+            [['venue_claim_claimer_phone'], 'string', 'max' => 20],
             [['venue_claim_hash'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['venue_id'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Venues::className(), 'targetAttribute' => ['venue_id' => 'id']],
@@ -82,8 +82,8 @@ abstract class UsersVenuesClaims extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'venue_id' => 'Venue ID',
             'venue_claim_claimer_name' => 'Venue Claim Claimer Name',
-            'venue_claim_claimer_phone' => 'Venue Claim Claimer Phone',
             'venue_claim_claimer_email' => 'Venue Claim Claimer Email',
+            'venue_claim_claimer_phone' => 'Venue Claim Claimer Phone',
             'venue_claim_date' => 'Venue Claim Date',
             'venue_claim_status' => 'Venue Claim Status',
             'venue_claim_verified_date' => 'Venue Claim Verified Date',

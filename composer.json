@@ -33,7 +33,8 @@
         "schmunk42/yii2-giiant": "@stable",
         "willdurand/geocoder": "^3.3",
         "frostealth/yii2-aws-s3": "~2.0",
-        "2amigos/yii2-google-places-library" : "dev-master"
+        "2amigos/yii2-google-places-library" : "dev-master",
+        "urbanairship/urbanairship": "^0.3.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
