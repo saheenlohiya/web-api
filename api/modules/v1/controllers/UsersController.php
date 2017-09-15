@@ -26,7 +26,7 @@ class UsersController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists', 'login', 'create','options'],
+            'except' => ['email-exists', 'login', 'create', 'options'],
             'optional' => []
         ];
         // remove authentication filter
@@ -97,6 +97,19 @@ class UsersController extends TuBaseApiController {
             $me = Users::me($user->id);
             return $this->_getUserObject($me);
         }
+    }
+
+    public function actionUpdateDeviceToken($user_access_token, $device_token) {
+        $user = Users::findIdentityByAccessToken($user_access_token);
+
+        if ($user) {
+            $user->user_device_token = $device_token;
+            if ($user->save(FALSE)) {
+                $me = Users::me($user->id);
+                return $this->_getUserObject($me);
+            }
+        }
+
     }
 
     /**

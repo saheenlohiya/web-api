@@ -39,6 +39,7 @@ $config = [
                     'extraPatterns' => [
                         'GET email-exists' => 'email-exists',
                         'GET me' => 'me',
+                        'GET update-device-token' => 'update-device-token',
                         'POST login' => 'login',
                     ]
                 ],
