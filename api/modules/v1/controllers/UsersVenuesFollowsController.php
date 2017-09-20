@@ -3,6 +3,7 @@
 namespace app\api\modules\v1\controllers;
 
 use app\filters\TuQueryParamAuth;
+use app\models\Users;
 use app\models\UsersVenuesFollows;
 use yii\web\Response;
 
@@ -29,6 +30,8 @@ class UsersVenuesFollowsController extends TuBaseApiController {
      */
     public function actionListByUser($user_id) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        return UsersVenuesFollows::create()->getVenueFollowsByUser($user_id);
+        if($this->checkAuthorization($user_id)){
+            return UsersVenuesFollows::create()->getVenueFollowsByUser($user_id);
+        }
     }
 }
