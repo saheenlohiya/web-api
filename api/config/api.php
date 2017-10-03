@@ -53,6 +53,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-follows'],
                     'extraPatterns' => [
                         'GET list-by-user' => 'list-by-user',
+                        'POST unfollow' => 'unfollow',
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings'],

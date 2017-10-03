@@ -3,7 +3,6 @@
 namespace app\api\modules\v1\controllers;
 
 use app\filters\TuQueryParamAuth;
-use app\models\Users;
 use app\models\UsersVenuesFollows;
 use yii\web\Response;
 
@@ -22,6 +21,23 @@ class UsersVenuesFollowsController extends TuBaseApiController {
             'optional' => []
         ];
         return $behaviors;
+    }
+
+    /**
+     * @return bool
+     */
+    public function actionUnfollow(){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = \Yii::$app->request->post();
+
+        if($this->checkAuthorization($params['user_id'])) {
+            if (!is_null($params['user_id']) && !is_null($params['venue_id'])) {
+                $result = UsersVenuesFollows::create()->unfollow($params['user_id'], $params['venue_id']);
+
+               return $result;
+
+            }
+        }
     }
 
     /**
