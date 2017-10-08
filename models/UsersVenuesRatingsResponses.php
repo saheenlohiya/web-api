@@ -95,7 +95,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     private function _pushNotify() {
         try {
             $this->userDeviceToken = $this->userVenueRating->user->user_device_token;
-            TUPushNotifications::create($this->user_venue_rating_response, '205FB895CF44611E7D1B24609238355399FA303810804C8D819499C2EEA287ED')
+            TUPushNotifications::create($this->user_venue_rating_response, 'E8783E28A8A95C664C53C6920AD5503D4B60B761F00BBD9E0BB6DCF762EE709B')
                 ->send();
         } catch (Exception $e) {
 
