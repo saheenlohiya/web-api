@@ -42,6 +42,11 @@ $config = [
             ],
         ],
         */
+        'firebase' => [
+            'class'=>'grptx\Firebase\Firebase',
+            'credential_file'=>'service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
+            'database_uri'=>'https://tellus-1491106170726.firebaseio.com', // (optional)
+        ]
     ],
     'params' => $params,
 ];
