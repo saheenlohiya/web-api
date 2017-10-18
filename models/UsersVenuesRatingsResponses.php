@@ -105,7 +105,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
                 if ($owner_device_token != null || $this->userVenueRating->user->user_device_token != null) {
 
                     //build the append message for the notification
-                    $append = $this->userVenueRating->user->user_firstname." responded to a tellUs thread and said: ";
+                    $append = $this->userVenueRating->user->user_firstname." responded to a tellUs thread for ".$this->userVenueRating->venue->venue_name.", and said: ";
 
                     if ($owner_user_id != $this->user_venue_rating_responding_user_id) {
                         TUPushNotifications::create($append.$this->user_venue_rating_response, $owner_device_token)
