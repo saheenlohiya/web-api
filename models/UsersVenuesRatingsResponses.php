@@ -15,8 +15,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     //events
     const EVENT_VENUE_RATING_RESPONSE_SUCCESS = 'userVenueRatingResponseSuccess';
 
-    //response keywords
     const RESPONSE_KEYWORD_CLOSE = '#close';
+    const RESPONSE_NOTIFICATION_APPEND = '';
 
     private $userDeviceToken = null;
 
@@ -97,9 +97,27 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 
     private function _pushNotify() {
         try {
-            $this->userDeviceToken = $this->userVenueRating->user->user_device_token;
-            TUPushNotifications::create($this->user_venue_rating_response, 'E8783E28A8A95C664C53C6920AD5503D4B60B761F00BBD9E0BB6DCF762EE709B')
-                ->send();
+            //get the user id of the venue owner
+            $owner_user_id = $this->userVenueRating->venue->user_id;
+            //only do stuff if there is an owner
+            if ($owner_user_id != null) {
+                //now get the device token
+                $owner_device_token = $this->userVenueRating->venue->user->user_device_token;
+                $this->userDeviceToken = $this->userVenueRating->user->user_device_token;
+                //and only proceed if either the owner of the responding user has a device token
+                if ($owner_device_token != null || $this->userDeviceToken != null) {
+                    if ($owner_user_id != $this->user_venue_rating_responding_user_id) {
+                        TUPushNotifications::create($this->user_venue_rating_response, $owner_device_token)
+                            ->send();
+                    } else {
+                        TUPushNotifications::create($this->user_venue_rating_response, $this->userDeviceToken)
+                            ->send();
+                    }
+                }
+
+
+            }
+
         } catch (Exception $e) {
 
         }
