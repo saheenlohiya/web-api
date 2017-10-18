@@ -54,6 +54,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
+        $this->trigger(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS);
         $this->_parseResponseKeywords();
     }
 
@@ -69,7 +70,6 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
             $result = $this->save();
 
             if ($result) {
-                $this->trigger(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS);
                 return $result;
             }
         }
