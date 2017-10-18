@@ -20,10 +20,13 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 
     private $userDeviceToken = null;
 
+    public function init() {
+        parent::init();
+        $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'notify']);
+    }
+
     public static function create() {
         $instance = new self;
-        $instance->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$instance, 'notify']);
-
         return $instance;
     }
 
