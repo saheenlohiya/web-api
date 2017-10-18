@@ -103,11 +103,15 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
                 $owner_device_token = $this->userVenueRating->venue->user->user_device_token;
                 //and only proceed if either the owner of the responding user has a device token
                 if ($owner_device_token != null || $this->userVenueRating->user->user_device_token != null) {
+
+                    //build the append message for the notification
+                    $append = $this->userVenueRating->user->user_firstname." responded to a tellUs thread and said: ";
+
                     if ($owner_user_id != $this->user_venue_rating_responding_user_id) {
-                        TUPushNotifications::create($this->user_venue_rating_response, $owner_device_token)
+                        TUPushNotifications::create($append.$this->user_venue_rating_response, $owner_device_token)
                             ->send();
                     } else {
-                        TUPushNotifications::create($this->user_venue_rating_response, $this->userVenueRating->user->user_device_token)
+                        TUPushNotifications::create($append. $this->user_venue_rating_response, $this->userVenueRating->user->user_device_token)
                             ->send();
                     }
                 }
