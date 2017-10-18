@@ -18,8 +18,6 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     const RESPONSE_KEYWORD_CLOSE = '#close';
     const RESPONSE_NOTIFICATION_APPEND = '';
 
-    private $userDeviceToken = null;
-
     public function init() {
         parent::init();
         $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'notify']);
@@ -103,14 +101,13 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
             if ($owner_user_id != null) {
                 //now get the device token
                 $owner_device_token = $this->userVenueRating->venue->user->user_device_token;
-                $this->userDeviceToken = $this->userVenueRating->user->user_device_token;
                 //and only proceed if either the owner of the responding user has a device token
-                if ($owner_device_token != null || $this->userDeviceToken != null) {
+                if ($owner_device_token != null || $this->userVenueRating->user->user_device_token != null) {
                     if ($owner_user_id != $this->user_venue_rating_responding_user_id) {
                         TUPushNotifications::create($this->user_venue_rating_response, $owner_device_token)
                             ->send();
                     } else {
-                        TUPushNotifications::create($this->user_venue_rating_response, $this->userDeviceToken)
+                        TUPushNotifications::create($this->user_venue_rating_response, $this->userVenueRating->user->user_device_token)
                             ->send();
                     }
                 }
