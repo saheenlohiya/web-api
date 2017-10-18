@@ -179,7 +179,9 @@ CREATE TABLE `users_venues_ratings_responses` (
   `user_venue_rating_response_read_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_venue_rating_id` (`user_venue_rating_id`),
-  CONSTRAINT `users_venues_ratings_responses_ibfk_1` FOREIGN KEY (`user_venue_rating_id`) REFERENCES `users_venues_ratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `user_venue_rating_responding_user_id` (`user_venue_rating_responding_user_id`),
+  CONSTRAINT `users_venues_ratings_responses_ibfk_1` FOREIGN KEY (`user_venue_rating_id`) REFERENCES `users_venues_ratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `users_venues_ratings_responses_ibfk_2` FOREIGN KEY (`user_venue_rating_responding_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users_venues_ratings_responses` */

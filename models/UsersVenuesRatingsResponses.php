@@ -95,25 +95,23 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 
     private function _pushNotify() {
         try {
-            //get the user id of the venue owner
-            $owner_user_id = $this->userVenueRating->venue->user_id;
             //only do stuff if there is an owner
-            if ($owner_user_id != null) {
+            if ($this->userVenueRating->user->id != null) {
+                //get the information for the responding user
+                $responding_user = Users::findOne(['id' => $this->user_venue_rating_responding_user_id]);
+
                 //now get the device token
-                $owner_device_token = $this->userVenueRating->venue->user->user_device_token;
-                //and only proceed if either the owner of the responding user has a device token
-                if ($owner_device_token != null || $this->userVenueRating->user->user_device_token != null) {
+                $owner_device_token = $this->userVenueRating->user->user_device_token;
 
-                    //build the append message for the notification
-                    $append = $this->userVenueRating->user->user_firstname." responded to a tellUs thread for ".$this->userVenueRating->venue->venue_name.", and said: ";
+                //build the append message for the notification
+                $append = $responding_user->user_firstname . " responded to a tellUs thread for " . $this->userVenueRating->venue->venue_name . ", and said: ";
 
-                    if ($owner_user_id != $this->user_venue_rating_responding_user_id) {
-                        TUPushNotifications::create($append.$this->user_venue_rating_response, $owner_device_token)
-                            ->send();
-                    } else {
-                        TUPushNotifications::create($append. $this->user_venue_rating_response, $this->userVenueRating->user->user_device_token)
-                            ->send();
-                    }
+                if (($this->userVenueRating->user->id != $responding_user->id) && $owner_device_token != null) {
+                    TUPushNotifications::create($append . $this->user_venue_rating_response, $owner_device_token)
+                        ->send();
+                } else if ($responding_user->user_device_token != null) {
+                    TUPushNotifications::create($append . $this->user_venue_rating_response, $responding_user->user_device_token)
+                        ->send();
                 }
 
 
