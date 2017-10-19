@@ -104,7 +104,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
             return UsersVenuesRatings::find()
                 ->where(['user_id' => $user_id, 'venue_id' => $venue_id])
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
+                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
                 ->asArray(true)
                 ->all();
         }
