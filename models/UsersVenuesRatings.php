@@ -71,7 +71,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
 
-            if($insert){
+            if ($insert) {
                 $this->_calcRatingAverage();
                 $this->_setAutoResolution();
             }
@@ -88,7 +88,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
-        if($insert){
+        if ($insert) {
             //auto follow
             UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
             //auto create thread
@@ -116,28 +116,28 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
             //we will combine both the users own ratings
             //and ratings submitted to the claimed venue
 
+            $unionQuery = "SELECT * FROM (
+                                (SELECT * FROM users_venues_ratings uvr1 WHERE uvr1.user_id=:user_id) 
+                                 UNION 
+                                (SELECT uvr2.* FROM users_venues_ratings uvr2 JOIN venues ON venues.id = uvr2.venue_id WHERE venues.user_id=:user_id )
+                            ) u ORDER BY venue_rating_date DESC, venue_rating_resolved";
+
             //ratings I submitted
-            $myRatings = UsersVenuesRatings::find()
-                ->alias('uvr1')
-                ->where(['uvr1.user_id' => $user_id])
+            return UsersVenuesRatings::findBySql($unionQuery)
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
-                ->asArray(true);
-
-            //ratings submitted to my claimed venues
-            $myClaimedVenueRatings = UsersVenuesRatings::find()
-                ->alias('uvr2')
-                ->where(['venues.user_id' => $user_id])
-                ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->join('JOIN','venues','venues.id = uvr2.venue_id')
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
-                ->asArray(true);
-
-
-            return $myRatings->union($myClaimedVenueRatings)->all();
+                ->params(['user_id' => $user_id])
+                ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
+                ->asArray()
+                ->all()
+                ;
 
 
         }
+    }
+
+    public function getUsersVenuesRatingsResponses()
+    {
+        return $this->hasMany(UsersVenuesRatingsResponses::className(), ['user_venue_rating_id' => 'id'])->orderBy(['user_venue_rating_response_date' => SORT_ASC]);
     }
 
     private function _calcRatingAverage() {

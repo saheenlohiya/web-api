@@ -29,4 +29,9 @@ class UsersVenuesRatingsResponsesQuery extends \yii\db\ActiveQuery {
     public function one($db = null) {
         return parent::one($db);
     }
+
+    public function orderByNewest(){
+        $this->orderBy(['user_venue_rating_response_date'=>SORT_DESC]);
+        return $this;
+    }
 }
