@@ -49,6 +49,22 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     /**
      * @inheritDoc
      */
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+
+            if($insert){
+                $this->user_venue_rating_response_date = date('Y-m-d H:i:s');
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 

@@ -104,7 +104,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
             return UsersVenuesRatings::find()
                 ->where(['user_id' => $user_id, 'venue_id' => $venue_id])
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
+                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
                 ->asArray(true)
                 ->all();
         }
@@ -121,7 +121,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
                 ->alias('uvr1')
                 ->where(['uvr1.user_id' => $user_id])
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
+                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
                 ->asArray(true);
 
             //ratings submitted to my claimed venues
@@ -130,7 +130,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
                 ->where(['venues.user_id' => $user_id])
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
                 ->join('JOIN','venues','venues.id = uvr2.venue_id')
-                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
+                ->orderBy(['venue_rating_resolved' => SORT_ASC, 'usersVenuesRatingsResponses.user_venue_rating_response_date' => SORT_DESC])
                 ->asArray(true);
 
 

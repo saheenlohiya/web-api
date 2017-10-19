@@ -61,6 +61,8 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit {
 
         $this->assertTrue($this->rating_response->save());
 
+        $this->assertNotNull($this->rating_response->user_venue_rating_response_date,"The response date was not set");
+
     }
 
     public function testCanCloseTicketWithCloseKeyword() {
