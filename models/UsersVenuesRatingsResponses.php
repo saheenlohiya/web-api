@@ -96,7 +96,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
         if (!is_null($user_venue_rating_id)) {
             return self::find()
                 ->where(['user_venue_rating_id' => $user_venue_rating_id])
-                ->orderBy(['user_venue_rating_response_date' => SORT_ASC])
+                ->orderBy(['id' => SORT_ASC])
                 ->asArray(true)
                 ->all();
         }
