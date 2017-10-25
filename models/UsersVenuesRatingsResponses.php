@@ -112,17 +112,17 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     private function _pushNotify() {
         try {
             //only do stuff if there is an owner
-            if ($this->userVenueRating->user->id != null) {
+            if ($this->userVenueRating->venue->user_id != null) {
                 //get the information for the responding user
                 $responding_user = Users::findOne(['id' => $this->user_venue_rating_responding_user_id]);
 
                 //now get the device token
-                $owner_device_token = $this->userVenueRating->user->user_device_token;
+                $owner_device_token = $this->userVenueRating->venue->user->user_device_token;
 
                 //build the append message for the notification
                 $append = $responding_user->user_firstname . " responded to a tellUs thread for " . $this->userVenueRating->venue->venue_name . ", and said: ";
 
-                if (($this->userVenueRating->user->id != $responding_user->id) && $owner_device_token != null) {
+                if (($this->userVenueRating->venue->user_id != $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
                     TUPushNotifications::create($append . $this->user_venue_rating_response, $owner_device_token)
                         ->send();
                 } else if ($responding_user->user_device_token != null) {

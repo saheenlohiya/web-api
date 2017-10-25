@@ -20,9 +20,9 @@ class Venues extends BaseVenues {
 
 
     public $results = [];
+    private $_ids = [];
 
-    public function extraFields()
-    {
+    public function extraFields() {
         return ['venuesImages'];
     }
 
@@ -122,12 +122,12 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchPlaces($text, $latitude, $longitude, $radius = 20, $limit =50) {
+    public function getSearchPlaces($text, $latitude, $longitude, $radius = 20, $limit = 50) {
         //we will run a nearby places update first
-        $ids = $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
-        if (count($ids) > 0) {
+        $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
+        if (count($this->_ids) > 0) {
             //now search again assuming we now have an updated list
-            $this->results = $this->getSearchedSavedPlaces($ids, $latitude, $longitude, $limit);
+            $this->results = $this->getSearchedSavedPlaces($this->_ids, $latitude, $longitude, $limit);
         }
 
         return $this->results;
@@ -219,8 +219,7 @@ class Venues extends BaseVenues {
         if (isset($results['results']) && count($results['results'])) {
             //loop through the results and save to venues
             foreach ($results['results'] as $result) {
-                if ($count >= $limit) break;
-                $this->_saveNewGooglePlace($result);
+                $this->_saveNewGooglePlaceSummary($result);
                 $count++;
             }
         }
@@ -235,15 +234,17 @@ class Venues extends BaseVenues {
      * @param $longitude
      * @param int $radius
      * @param int $limit
+     * @param $next_page_token
      * @return array
      */
-    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 20, $limit = 50) {
-
+    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 50, $limit = 50,$next_page_token=null) {
         $radius = Conversions::meters_to_miles($radius);
-
         $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
-        $results = $search->radar($latitude . "," . $longitude, $radius, ['rankby' => 'distance', 'keyword' => $keyword]);
-        $ids = [];
+        $this->_nearby($search,$keyword, $latitude, $longitude, $radius, $limit,$next_page_token);
+    }
+
+    private function _nearby($search,$keyword, $latitude, $longitude, $radius = 50, $limit = 50,$next_page_token=null){
+        $results = $search->nearby($latitude . "," . $longitude,['rankby' => 'distance','radius'=>$radius, 'keyword' => $keyword,'pagetoken'=>$next_page_token]);
 
         //use a count to keep track of the limit so we dont overuse the places API
         $count = 0;
@@ -253,16 +254,49 @@ class Venues extends BaseVenues {
         if (isset($results['results']) && count($results['results'])) {
             //loop through the results and save to venues
             foreach ($results['results'] as $result) {
-                if ($count >= $limit) break;
-                $id = $this->_saveNewGooglePlace($result);
+                $id = $this->_saveNewGooglePlaceSummary($result);
                 if (!is_null($id)) {
-                    array_push($ids, $id);
+                    $this->_ids[] = $id;
                 }
                 $count++;
             }
+
+            if(isset($results['next_page_token']) && !is_null($results['next_page_token'])){
+                $this->_nearby($search,$keyword, $latitude, $longitude, $radius, $limit,$results['next_page_token']);
+            }
+        }
+    }
+
+    private function _saveNewGooglePlaceSummary($details) {
+        $venue = Venues::find()->where(['venue_google_place_id' => $details['place_id']])->one();
+        $venue_id = null;
+
+        if (!isset($venue->id)) {
+
+            $address_components = explode(",",$details['vicinity']);
+
+            Yii::$app->db->createCommand()->insert('venues', [
+                'venue_name' => $details['name'],
+                'venue_google_place_id' => $details['place_id'],
+                'venue_lat' => $details['geometry']['location']['lat'],
+                'venue_lon' => $details['geometry']['location']['lng'],
+                'venue_date_added' => date('Y-m-d H:i:s'),
+                'venue_active' => 1,
+                'venue_verified' => 1,
+                'venue_verified_date' => date('Y-m-d H:i:s'),
+                'venue_last_verified_date' => date('Y-m-d H:i:s'),
+                'venue_address_1'=>$address_components[0]??null,
+                'venue_city'=>$address_components[1]??null
+            ])->execute();
+
+            $id = Yii::$app->db->getLastInsertId();
+            $this->_saveGooglePlacesPhotos($id, $details);
+        } else {
+            $venue_id = $venue->id;
         }
 
-        return $ids;
+        return $venue_id;
+
 
     }
 
@@ -271,7 +305,7 @@ class Venues extends BaseVenues {
      * @return int|null|string
      * @throws \yii\db\Exception
      */
-    private function _saveNewGooglePlace($item) {
+    private function _saveNewGooglePlaceDetails($item) {
 
         $venue = Venues::find()->where(['venue_google_place_id' => $item['place_id']])->one();
         $venue_id = null;
@@ -308,6 +342,7 @@ class Venues extends BaseVenues {
 
                         $id = Yii::$app->db->getLastInsertId();
                         $this->_saveGooglePlacesPhotos($id, $details);
+
 
                         $venue_id = $id;
                     }
@@ -379,15 +414,31 @@ class Venues extends BaseVenues {
      */
     private function _saveGooglePlacesPhotos($id, $detail) {
         if (isset($detail) && isset($detail['photos']) && count($detail['photos'])) {
-            foreach ($detail['photos'] as $photo) {
-                if (count($photo) && isset($photo['photo_reference']) && count($photo['photo_reference'])) {
-                    $venueImage = new VenuesImages();
-                    $venueImage->venue_id = $id;
-                    $venueImage->venue_image_url = "https://maps.googleapis.com/maps/api/place/photo?key=" . Yii::$app->params['googleApiKey'] . "&photoreference=" . $photo['photo_reference'] . "&maxwidth=800";
-                    $venueImage->venue_image_date_added = date('Y-m-d H:i:s');
-                    $venueImage->save();
+            $photo_array = [];
+            for ($i = 0; $i < count($detail['photos']); $i++) {
+                if (isset($detail['photos'][$i])) {
+                    $photo = $detail['photos'][$i];
+                    if (count($photo) && isset($photo['photo_reference']) && count($photo['photo_reference'])) {
+                        $photo_array[] = [
+                            'venue_id' => $id,
+                            'venue_image_url' => "https://maps.googleapis.com/maps/api/place/photo?key=" . Yii::$app->params['googleApiKey'] . "&photoreference=" . $photo['photo_reference'] . "&maxwidth=800",
+                            'venue_image_date_added' => date('Y-m-d H:i:s')
+                        ];
+                    }
                 }
             }
+
+            if (count($photo_array)) {
+                $columnNameArray = ['venue_id', 'venue_image_url', 'venue_image_date_added'];
+                // below line insert all your record and return number of rows inserted
+                Yii::$app->db->createCommand()
+                    ->batchInsert(
+                        'venues_images', $columnNameArray, $photo_array
+                    )
+                    ->execute();
+            }
+
+            $photo_array = null;
         }
     }
 
