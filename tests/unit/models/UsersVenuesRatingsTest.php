@@ -114,9 +114,11 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit {
 
         $this->venue->address = [
             'street_address' => $this->venue->venue_address_1,
-            'postal_code' => $this->venue->venue_zip
+            'city' => $this->venue->venue_city
         ];
 
         $this->venue->save();
+
+        $this->assertNotNull($this->venue->venue_lat);
     }
 }

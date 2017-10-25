@@ -16,6 +16,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/dwamianm/yii2-google-places-library.git"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/dwamianm/urbanairship-api.git"
       }
     ],
     "minimum-stability": "stable",
@@ -34,7 +38,7 @@
         "willdurand/geocoder": "^3.3",
         "frostealth/yii2-aws-s3": "~2.0",
         "2amigos/yii2-google-places-library" : "dev-master",
-        "naski/urbanairship-api": "^0.3.1",
+        "naski/urbanairship-api": "dev-master",
         "grptx/yii2-firebase": "~0.3.1"
     },
     "require-dev": {

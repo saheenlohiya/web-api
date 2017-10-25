@@ -45,7 +45,7 @@ class Venues extends BaseVenues {
 
                     'address' => [
                         'street_address' => $this->venue_address_1,
-                        'postal_code' => $this->venue_zip,
+                        'city' => $this->venue_city,
                         'country' => 'United States'
                     ],
                     'latitudeAttribute' => 'venue_lat',

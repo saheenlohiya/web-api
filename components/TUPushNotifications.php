@@ -52,6 +52,7 @@ class TUPushNotifications {
                 return $this->airship->push()
                     ->setAudience($this->audience)
                     ->setNotification(P\notification($this->message))
+                    ->setInAppMessage(P\inAppMessage($this->message,'banner'))
                     ->setDeviceTypes($this->deviceTypes)
                     ->send();
             } catch (AirshipException $e) {
@@ -67,7 +68,7 @@ class TUPushNotifications {
 
         if ($this->message != '') {
             try {
-                $multiPushRequest = new MultiPushRequest($airship);
+                $multiPushRequest = new MultiPushRequest($this->airship);
                 $multiPushRequest->addPushRequest(
                     $this->airship->push()
                         ->setAudience($this->audience)

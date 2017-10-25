@@ -107,9 +107,14 @@ class UsersVenuesFollowsTest extends \Codeception\Test\Unit {
         $this->venue->venue_zip = "78758";
         $this->venue->venue_type_id = 1;
 
-        if (!$this->venue->save(FALSE)) {
-            Throw new Exception("Could not save venue");
-        }
+        $this->venue->address = [
+            'street_address' => $this->venue->venue_address_1,
+            'city' => $this->venue->venue_city
+        ];
+
+        $this->venue->save();
+
+        $this->assertNotNull($this->venue->venue_lat);
     }
 
 }
