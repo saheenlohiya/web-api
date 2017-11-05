@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (32 bit)
-MySQL - 5.6.35 : Database - tellus_tests
+MySQL - 5.6.35 : Database - tellus
 *********************************************************************
 */
 
@@ -380,7 +380,8 @@ DELIMITER $$
 /*!50003 CREATE FUNCTION `fx_venues_total_ratings`(vid int) RETURNS int(32)
 BEGIN
 	declare total_ratings int(32);
-	SELECT COUNT(*) INTO total_ratings FROM users_venues_ratings vr WHERE vr.venue_id = vid;
+	SELECT COUNT(*) INTO total_ratings FROM users_venues_ratings vr 
+	WHERE vr.venue_id = vid and ((CURRENT_DATE() >= vr.venue_rating_resolve_expiration) OR vr.venue_rating_resolved IS TRUE);
 	return total_ratings;
     END */$$
 DELIMITER ;
@@ -412,7 +413,7 @@ BEGIN
     declare venue_resolved_percent decimal(5,2);
     declare venue_rating_percent_adjusted decimal(5,2);
     declare venue_satisfaction decimal(5,2);
-    select AVG(`venue_rating_average`) into venue_rating_avg_adjusted FROM users_venues_ratings vr where vr.venue_id = vid;
+    select AVG(`venue_rating_average`) into venue_rating_avg_adjusted FROM users_venues_ratings vr where vr.venue_id = vid AND ((CURRENT_DATE() >= vr.venue_rating_resolve_expiration) OR vr.venue_rating_resolved IS TRUE);
     select fx_venues_total_ratings(vid) into venue_total_ratings;
     SELECT fx_venues_total_resolved_ratings(vid) INTO venue_total_resolved_ratings;
     set venue_resolved_percent = (venue_total_resolved_ratings/venue_total_ratings) * 100;
