@@ -76,6 +76,11 @@ $config = [
             ],
         ],
         'db' => $db,
+        'firebase' => [
+            'class'=>'grptx\Firebase\Firebase',
+            'credential_file'=>__DIR__ . '/../../config/service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
+            'database_uri'=>'', // (optional)
+        ],
         'user' => [
             'identityClass' => 'app\models\Users',
             'enableAutoLogin' => false,
