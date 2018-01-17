@@ -3,6 +3,7 @@
 $params = require(__DIR__ . '/params.php');
 $mail = require(__DIR__ . '/mail.php');
 
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -44,8 +45,8 @@ $config = [
         */
         'firebase' => [
             'class'=>'grptx\Firebase\Firebase',
-            'credential_file'=>'service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
-            'database_uri'=>'https://tellus-1491106170726.firebaseio.com', // (optional)
+            'credential_file'=>dirname(__FILE__).'/service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
+            'database_uri'=>'', // (optional)
         ]
     ],
     'params' => $params,

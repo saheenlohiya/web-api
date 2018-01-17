@@ -23,6 +23,11 @@ $config = [
         ],
         'mailer' => $mail,
         'db' => $db,
+        'firebase' => [
+            'class'=>'grptx\Firebase\Firebase',
+            'credential_file'=>dirname(__FILE__).'/service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
+            'database_uri'=>'', // (optional)
+        ]
     ],
     'params' => $params,
     /*

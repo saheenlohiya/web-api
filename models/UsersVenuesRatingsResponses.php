@@ -6,6 +6,8 @@ use app\components\TUPushNotifications;
 use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
+use Yii;
+use yii\log\Logger;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
@@ -21,6 +23,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     public function init() {
         parent::init();
         $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'notify']);
+        $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'updateFirebaseDB']);
     }
 
     public static function create() {
@@ -107,6 +110,30 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     public function notify() {
         //send push notification
         $this->_pushNotify();
+    }
+
+    public function updateFirebaseDB(){
+        $this->_sendResponseToFirebase();
+    }
+
+    private function _sendResponseToFirebase(){
+        $database = Yii::$app->firebase->getDatabase();
+        $reference = $database->getReference('/users_venues_ratings_responses/'.$this->user_venue_rating_id."/".$this->id);
+
+        $data = $this->getAttributes();
+        $data['user'] = $this->userVenueRating->user->getAttributes();
+        $data['venue'] = $this->userVenueRating->venue->getAttributes();
+
+
+        unset($data['user']['user_access_token']);
+        unset($data['user']['user_password']);
+        unset($data['user']['user_facebook_account_id']);
+        unset($data['user']['user_ip_address']);
+        unset($data['user']['user_auth_key']);
+        unset($data['user']['user_device_token']);
+        unset($data['user']['user_is_verified']);
+
+        $reference->set($data);
     }
 
     private function _pushNotify() {
