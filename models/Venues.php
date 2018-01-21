@@ -418,7 +418,7 @@ class Venues extends BaseVenues {
             for ($i = 0; $i < count($detail['photos']); $i++) {
                 if (isset($detail['photos'][$i])) {
                     $photo = $detail['photos'][$i];
-                    if (count($photo) && isset($photo['photo_reference']) && count($photo['photo_reference'])) {
+                    if (count($photo) && isset($photo['photo_reference']) || count($photo['photo_reference'])) {
                         $photo_array[] = [
                             'venue_id' => $id,
                             'venue_image_url' => "https://maps.googleapis.com/maps/api/place/photo?key=" . Yii::$app->params['googleApiKey'] . "&photoreference=" . $photo['photo_reference'] . "&maxwidth=800",
