@@ -39,6 +39,7 @@ You can then install this project template using the following command:
 ~~~
 php composer.phar global require "fxp/composer-asset-plugin:^1.2.0"
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+php composer.phar install --ignore-platform-reqs
 ~~~
 
 Now you should be able to access the application through the following URL, assuming `basic` is the directory
