@@ -7,11 +7,13 @@ use app\models\Users;
 use yii;
 use yii\web\Response;
 
-class UsersController extends TuBaseApiController {
+class UsersController extends TuBaseApiController
+{
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Users';
 
-    public function actions() {
+    public function actions()
+    {
         $actions = parent::actions();
         $actions['options'] = [
             'class' => 'app\components\OptionsAction',
@@ -22,7 +24,8 @@ class UsersController extends TuBaseApiController {
     /**
      * @return array
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
@@ -50,7 +53,8 @@ class UsersController extends TuBaseApiController {
      * @param $email
      * @return array
      */
-    public function actionEmailExists($email) {
+    public function actionEmailExists($email)
+    {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         if (!is_null($email) && !empty($email)) {
             $emailExists = Users::find()
@@ -62,16 +66,22 @@ class UsersController extends TuBaseApiController {
 
     }
 
+
     /**
      * Finds the user by email and password and return their account information if found
-     * @return array
+     * @return mixed
+     * @throws yii\base\InvalidConfigException
      * @throws yii\web\UnauthorizedHttpException
      */
-    public function actionLogin() {
+    public function actionLogin()
+    {
 
         $params = Yii::$app->request->post();
 
+        //var_dump($params);
+
         if (array_key_exists('user_email', $params) && array_key_exists('user_password', $params)) {
+
             $user = Users::findByEmail($params['user_email']);
 
             if ($user) {
@@ -85,12 +95,15 @@ class UsersController extends TuBaseApiController {
 
     }
 
+
     /**
      * Get the user's profile information
      * @param $user_access_token
      * @return mixed
+     * @throws yii\base\InvalidConfigException
      */
-    public function actionMe($user_access_token) {
+    function actionMe($user_access_token)
+    {
         $user = Users::findIdentityByAccessToken($user_access_token);
 
         if ($user) {
@@ -99,7 +112,8 @@ class UsersController extends TuBaseApiController {
         }
     }
 
-    public function actionUpdateDeviceToken($user_access_token, $device_token) {
+    public function actionUpdateDeviceToken($user_access_token, $device_token)
+    {
         $user = Users::findIdentityByAccessToken($user_access_token);
 
         if ($user) {
@@ -112,12 +126,15 @@ class UsersController extends TuBaseApiController {
 
     }
 
+
     /**
      * Prepare the user's profile object to send back
      * @param $userData
      * @return mixed
+     * @throws yii\base\InvalidConfigException
      */
-    private function _getUserObject($userData) {
+    private function _getUserObject($userData)
+    {
         $userData['user_dob'] = Yii::$app->formatter->asDate($userData['user_dob'], 'MM/dd/yyyy');
         unset($userData['user_password']);
         unset($userData['user_auth_key']);
