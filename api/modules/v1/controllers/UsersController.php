@@ -37,9 +37,9 @@ class UsersController extends TuBaseApiController
         unset($behaviors['authenticator']);
 
         // add CORS filter
-        $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
-        ];
+//        $behaviors['corsFilter'] = [
+//            'class' => \yii\filters\Cors::className(),
+//        ];
 
         // re-add authentication filter
         $behaviors['authenticator'] = $auth;
