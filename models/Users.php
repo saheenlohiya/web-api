@@ -176,7 +176,7 @@ class Users extends BaseUsers implements IdentityInterface {
             parent::rules(),
             [
                 # custom validation rules
-                [['user_firstname', 'user_lastname', 'user_email', 'user_password', 'user_zip', 'user_dob', 'user_gender'], 'required'],
+                [['user_firstname', 'user_lastname', 'user_email', 'user_password', 'user_zip', 'user_dob'], 'required'],
                 ['user_dob', 'date', 'format' => 'M/d/yyyy'],
                 ['user_email', 'email'],
             ]
