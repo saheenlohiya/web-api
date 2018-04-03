@@ -179,6 +179,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
         //now calculate the average to save
         $this->venue_rating_average = $sum / $count;
+        $this->venue_rating_average = number_format((float) $this->venue_rating_average, 2, '.', '');
     }
 
     private function _setAutoResolution()
