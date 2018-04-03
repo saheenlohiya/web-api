@@ -108,11 +108,11 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
 
             //auto create thread...but add all the ratings to the thread
-            $comments .= self::VENUE_RATING_CAT_1.":".$this->venue_rating_cat_1 . "\n" ;
-            $comments .= self::VENUE_RATING_CAT_2.":".$this->venue_rating_cat_2 . "\n" ;
-            $comments .= self::VENUE_RATING_CAT_3.":".$this->venue_rating_cat_3 . "\n" ;
-            $comments .= "Average Rating:".number_format((float) $this->venue_rating_average, 2, '.', '') . "\n\n" ;
-            $comments .= "Comments:\n".$this->venue_rating_comment ;
+            $comments .= self::VENUE_RATING_CAT_1.": ".$this->venue_rating_cat_1 . "\n" ;
+            $comments .= self::VENUE_RATING_CAT_2.": ".$this->venue_rating_cat_2 . "\n" ;
+            $comments .= self::VENUE_RATING_CAT_3.": ".$this->venue_rating_cat_3 . "\n" ;
+            $comments .= "Average Rating: ".number_format((float) $this->venue_rating_average, 2, '.', '') . "\n\n" ;
+            $comments .= "Comments: \n".$this->venue_rating_comment ;
 
 
                 UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $comments);
