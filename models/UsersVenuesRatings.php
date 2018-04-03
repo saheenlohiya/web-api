@@ -13,26 +13,35 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "users_venues_ratings".
  * @property-read Mailer $mailer
  */
-class UsersVenuesRatings extends BaseUsersVenuesRatings {
+class UsersVenuesRatings extends BaseUsersVenuesRatings
+{
 
     const MAX_RATING_AVG = 5;
     const DEFAULT_RESOLUTION_EXP_DAYS = 30;
+    const VENUE_RATING_CAT_1 = 'Service';
+    const VENUE_RATING_CAT_2 = 'Staff';
+    const VENUE_RATING_CAT_3 = 'Facility';
+    const VENUE_RATING_CAT_4 = 'Not Applicable';
+    const VENUE_RATING_CAT_5 = 'Not Applicable';
 
 
     /**
      * @return Mailer
      * @throws \yii\base\InvalidConfigException
      */
-    protected function getMailer() {
+    protected function getMailer()
+    {
         return \Yii::$container->get(Mailer::className());
     }
 
-    public static function create() {
+    public static function create()
+    {
         //setup event handlers
         return new self;
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -48,7 +57,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         );
     }
 
-    public function rules() {
+    public function rules()
+    {
         return ArrayHelper::merge(
             parent::rules(),
             [
@@ -59,7 +69,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         );
     }
 
-    public function hasOpenTicketValidator() {
+    public function hasOpenTicketValidator()
+    {
         if (self::find()->where(['user_id' => $this->user_id, 'venue_id' => $this->venue_id, 'venue_rating_resolved' => 0])->one()) {
             $this->addError('user_id', 'There is an unresolved ticket.');
         }
@@ -68,7 +79,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     /**
      * @inheritDoc
      */
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
 
             if ($insert) {
@@ -85,21 +97,33 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
     /**
      * @inheritDoc
      */
-    public function afterSave($insert, $changedAttributes) {
+    public function afterSave($insert, $changedAttributes)
+    {
         parent::afterSave($insert, $changedAttributes);
+
+        $comments = "";
 
         if ($insert) {
             //auto follow
             UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
-            //auto create thread
-            UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $this->venue_rating_comment);
+
+            //auto create thread...but add all the ratings to the thread
+            $comments .= self::VENUE_RATING_CAT_1.":".$this->venue_rating_cat_1 . "\n" ;
+            $comments .= self::VENUE_RATING_CAT_2.":".$this->venue_rating_cat_2 . "\n" ;
+            $comments .= self::VENUE_RATING_CAT_3.":".$this->venue_rating_cat_3 . "\n" ;
+            $comments .= "Average Rating:".$this->venue_rating_average . "\n\n" ;
+            $comments .= "Comments:".$this->venue_rating_comment ;
+
+
+                UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $comments);
             //send notification fo venue managers
             $this->_notifyVenueManager();
         }
 
     }
 
-    public function getRatingsByVenue($user_id, $venue_id) {
+    public function getRatingsByVenue($user_id, $venue_id)
+    {
         if (isset($user_id) && isset($venue_id)) {
             return UsersVenuesRatings::find()
                 ->where(['user_id' => $user_id, 'venue_id' => $venue_id])
@@ -110,7 +134,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         }
     }
 
-    public function getRatingsByUser($user_id) {
+    public function getRatingsByUser($user_id)
+    {
         if (isset($user_id)) {
 
             //we will combine both the users own ratings
@@ -128,10 +153,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
                 ->params(['user_id' => $user_id])
                 ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
                 ->asArray()
-                ->all()
-                ;
-
-
+                ->all();
         }
     }
 
@@ -140,7 +162,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         return $this->hasMany(UsersVenuesRatingsResponses::className(), ['user_venue_rating_id' => 'id'])->orderBy(['user_venue_rating_response_date' => SORT_ASC]);
     }
 
-    private function _calcRatingAverage() {
+    private function _calcRatingAverage()
+    {
         $sum = 0;
         $count = 0;
 
@@ -158,7 +181,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
         $this->venue_rating_average = $sum / $count;
     }
 
-    private function _setAutoResolution() {
+    private function _setAutoResolution()
+    {
         if (is_null($this->venue_rating_average)) {
             $this->_calcRatingAverage();
         }
@@ -173,7 +197,8 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings {
 
     }
 
-    private function _notifyVenueManager() {
+    private function _notifyVenueManager()
+    {
         //find the manager
         $venue = Venues::find()->where(['id' => $this->venue_id])->with(['user'])->one();
         if (!is_null($venue)) {
