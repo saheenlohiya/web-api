@@ -13,6 +13,16 @@ class UsersVenuesFollowsController extends TuBaseApiController {
     /**
      * @return array
      */
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['create']);
+        return $actions;
+    }
+
+    /**
+     * @return array
+     */
     public function behaviors() {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -24,7 +34,25 @@ class UsersVenuesFollowsController extends TuBaseApiController {
     }
 
     /**
-     * @return bool
+     * @return UsersVenuesFollows[]|array
+     */
+    public function actionCreate(){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = \Yii::$app->request->post();
+
+        if($this->checkAuthorization($params['user_id'])) {
+            if (!is_null($params['user_id']) && !is_null($params['venue_id'])) {
+                $result = UsersVenuesFollows::create()->follow($params['user_id'], $params['venue_id']);
+
+                //return the list of user follows
+                return $this->actionListByUser($params['user_id']);
+
+            }
+        }
+    }
+
+    /**
+     * @return UsersVenuesFollows[]|array
      */
     public function actionUnfollow(){
         \Yii::$app->response->format = Response::FORMAT_JSON;
@@ -34,7 +62,8 @@ class UsersVenuesFollowsController extends TuBaseApiController {
             if (!is_null($params['user_id']) && !is_null($params['venue_id'])) {
                 $result = UsersVenuesFollows::create()->unfollow($params['user_id'], $params['venue_id']);
 
-               return $result;
+                //return the list of user follows
+                return $this->actionListByUser($params['user_id']);
 
             }
         }
