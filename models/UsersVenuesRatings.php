@@ -204,7 +204,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         $venue = Venues::find()->where(['id' => $this->venue_id])->with(['user'])->one();
         if (!is_null($venue)) {
             //see if the venue is claimed
-            if (!is_null($venue->user) && count($venue->user) > 0) {
+            if (!is_null($venue->user) && is_array($venue->user) && count($venue->user) > 0) {
                 //send welcome message
                 if (!$this->mailer->sendRatingNotification($this, $venue, $venue->user)) {
                     Throw new Exception("Could not send welcome email");
