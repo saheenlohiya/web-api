@@ -16,6 +16,7 @@ use yii\base\ErrorException;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
 use yii\db\BaseActiveRecord;
+use Geocoder\Query\GeocodeQuery;
 
 /**
  * GeocodeBehavior automatically geocodes the address in the owner model and
@@ -123,11 +124,11 @@ class GeocodeBehavior extends Behavior
     /**
      * @var string The HTTP adapter
      */
-    public $httpAdapter = 'CurlHttpAdapter';
+    public $httpAdapter = 'Client';
     /**
      * @var string The geocoding service provider
      */
-    public $provider = 'OpenStreetMap';
+    public $provider = 'Nominatim\Nominatim';
 
     private $_geocoder;
 
@@ -141,10 +142,10 @@ class GeocodeBehavior extends Behavior
      */
     public function init()
     {
-        $httpAdapterClass = '\Ivory\HttpAdapter\\'.$this->httpAdapter;
+        $httpAdapterClass = '\Http\Adapter\Guzzle6\\'.$this->httpAdapter;
         $providerClass = '\Geocoder\Provider\\'.$this->provider;
         $adapter = new $httpAdapterClass();
-        $this->_geocoder = new $providerClass($adapter);
+        $this->_geocoder = $providerClass::withOpenStreetMapServer($adapter);
     }
 
     /**
@@ -164,12 +165,12 @@ class GeocodeBehavior extends Behavior
      */
     public function geocode()
     {
-        $result = $this->_geocoder->geocode($this->address());
+        $result = $this->_geocoder->geocodeQuery(GeocodeQuery::create($this->address()));
 
         if ($result instanceof \Geocoder\Model\AddressCollection) {
             $address = $result->first();
 
-            $this->setCoordinates($address->getLatitude(),$address->getLongitude());
+            $this->setCoordinates($address->getCoordinates()->getLatitude(),$address->getCoordinates()->getLongitude());
         }
     }
 

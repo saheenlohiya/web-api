@@ -35,11 +35,16 @@
         "symfony/filesystem": "^3.2",
         "phpunit/php-invoker": "^1.1",
         "schmunk42/yii2-giiant": "@stable",
-        "willdurand/geocoder": "^3.3",
+        "willdurand/geocoder": "^4.0.0",
         "frostealth/yii2-aws-s3": "~2.0",
         "2amigos/yii2-google-places-library" : "dev-master",
         "naski/urbanairship-api": "dev-master",
-        "grptx/yii2-firebase": "~0.3.1"
+        "grptx/yii2-firebase": "~0.3.1",
+        "understeam/yii2-fcm": "~0.1",
+        "php-http/httplug": "^1.1",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message": "^1.6",
+        "geocoder-php/nominatim-provider": "^4.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -11,6 +11,9 @@ $config = [
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
+            'cookieValidationKey' => 'ae1a11e90a45f0a32c2677af47378c6c',
             // Enable JSON Input:
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
@@ -80,6 +83,10 @@ $config = [
             'class'=>'grptx\Firebase\Firebase',
             'credential_file'=>__DIR__ . '/../../config/service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
             'database_uri'=>'https://tellus-live.firebaseio.com', // (optional)
+        ],
+        'fcm' => [
+            'class' => 'understeam\fcm\Client',
+            'apiKey' => 'AIzaSyDyOtE4I9elAGpAAPrxPOzChqTM6k7Z_do',
         ],
         'user' => [
             'identityClass' => 'app\models\Users',
