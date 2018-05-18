@@ -96,7 +96,7 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit {
         $this->user->user_zip = '78758';
         $this->user->user_gender = 'M';
         $this->user->user_dob = '10/08/1978';
-        $this->user->user_device_token = 'e4I1HTLVUYs:APA91bG3_hJnfpQHKI5c6oh2KUlFWA-Q4wOKXvCnjR2vF27h5-BqIdbFk3dXizsD16_SL8rqb1_GcmJZWNh4ETqsQ0Ol-P_o_Q3FjTCcd5Ry5_NlWg-ZTNGftsrJR8HhAAkIIyfpYNmc';
+        $this->user->user_device_token = 'djUwy1BQS6I:APA91bE-4ObhCqIyLAtNq3LemDR5s-LrG2ZStnYXv9pbsiT3QKNTt_I6EcwUYQmkCiXR5oF5yzeb8ztXfDe2j7rl4DdTA5jZJSMrOXNQcz-Xv7FQKud-z-Wq1IdCBLeD3Q5GcH-jRx2l';
         $this->user->user_password = Yii::$app->getSecurity()->generatePasswordHash('password');
 
         $this->user->save();
