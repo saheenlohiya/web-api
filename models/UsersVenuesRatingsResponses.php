@@ -108,6 +108,19 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
         return false;
     }
 
+//    public function setMessagesToRead($user_id,$venue_id,$message_id){
+//        if(!is_null($message_id) && !is_null($user_id) && !is_null($venue_id)){
+//            //check is the user_id is assigned to the venue
+//            $venue = Venues::find()
+//                ->where(['id'=>$venue_id,'user_id'=>$user_id])
+//                ->one();
+//
+//            if($venue){
+//                //now we can set the message to read
+//            }
+//        }
+//    }
+
     public function notify() {
         //send push notification
         $this->_pushNotify();

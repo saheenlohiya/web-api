@@ -87,6 +87,21 @@ class UsersVenuesRatingsResponsesTest extends \Codeception\Test\Unit {
 
     }
 
+//    public function testCanSetResponseToRead(){
+//        $this->_rateVenue();
+//
+//        $this->assertNotNull($this->rating);
+//
+//        //now fill the vales and save
+//        $this->rating_response->user_venue_rating_id = $this->rating->id;
+//        $this->rating_response->user_venue_rating_responding_user_id = $this->rating->user_id;
+//        $this->rating_response->user_venue_rating_response = "Readable Message";
+//
+//        $this->assertTrue($this->rating_response->save());
+//        $this->assertNotNull($this->rating_response->id);
+//        $this->assertTrue($this->rating_response->setMessagesToRead($this->rating_response->id));
+//    }
+
 
     //setup required model setups
     private function _createTestUser() {
