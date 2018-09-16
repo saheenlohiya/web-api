@@ -93,6 +93,7 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         if ($insert) {
             //notify admins
             $this->_notifyAdmins();
+            $this->_notifyUser();
         }
     }
 
@@ -174,6 +175,14 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         //send email
         if (!$this->mailer->notifyAdminOfClaim($this)) {
             Throw new Exception("Could not notify admin");
+        }
+        //send text message
+    }
+
+    private function _notifyUser() {
+        //send email
+        if (!$this->mailer->confirmUserClaimStarted($this)) {
+            Throw new Exception("Could not notify user");
         }
         //send text message
     }

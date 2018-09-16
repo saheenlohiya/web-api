@@ -14,7 +14,8 @@ use yii\base\Component;
  * Mailer.
  *
  */
-class Mailer extends Component {
+class Mailer extends Component
+{
     /** @var string */
     public $viewPath = '@app/mail';
 
@@ -45,10 +46,33 @@ class Mailer extends Component {
     /**  @var string */
     protected $claimNotifySubject;
 
+    protected $claimStartedNotifyUserSubject;
+
+    /**
+     * @return mixed
+     */
+    public function getClaimStartedNotifyUserSubject()
+    {
+        if ($this->claimStartedNotifyUserSubject == null) {
+            $this->setclaimStartedNotifyUserSubject("Your TellUs business claim has been recieved");
+        }
+
+        return $this->claimStartedNotifyUserSubject;
+    }
+
+    /**
+     * @param mixed $claimStartedNotifyUserSubject
+     */
+    public function setclaimStartedNotifyUserSubject($claimStartedNotifyUserSubject)
+    {
+        $this->claimStartedNotifyUserSubject = $claimStartedNotifyUserSubject;
+    }
+
     /**
      * @return string
      */
-    public function getWelcomeSubject() {
+    public function getWelcomeSubject()
+    {
         if ($this->welcomeSubject == null) {
             $this->setWelcomeSubject('Welcome to TellUs');
         }
@@ -59,14 +83,16 @@ class Mailer extends Component {
     /**
      * @param string $welcomeSubject
      */
-    public function setWelcomeSubject($welcomeSubject) {
+    public function setWelcomeSubject($welcomeSubject)
+    {
         $this->welcomeSubject = $welcomeSubject;
     }
 
     /**
      * @return string
      */
-    public function getNewPasswordSubject() {
+    public function getNewPasswordSubject()
+    {
         if ($this->newPasswordSubject == null) {
             $this->setNewPasswordSubject('Your password has been changed');
         }
@@ -77,14 +103,16 @@ class Mailer extends Component {
     /**
      * @param string $newPasswordSubject
      */
-    public function setNewPasswordSubject($newPasswordSubject) {
+    public function setNewPasswordSubject($newPasswordSubject)
+    {
         $this->newPasswordSubject = $newPasswordSubject;
     }
 
     /**
      * @return string
      */
-    public function getConfirmationSubject() {
+    public function getConfirmationSubject()
+    {
         if ($this->confirmationSubject == null) {
             $this->setConfirmationSubject('Confirm account');
         }
@@ -95,14 +123,16 @@ class Mailer extends Component {
     /**
      * @param string $confirmationSubject
      */
-    public function setConfirmationSubject($confirmationSubject) {
+    public function setConfirmationSubject($confirmationSubject)
+    {
         $this->confirmationSubject = $confirmationSubject;
     }
 
     /**
      * @return string
      */
-    public function getReconfirmationSubject() {
+    public function getReconfirmationSubject()
+    {
         if ($this->reconfirmationSubject == null) {
             $this->setReconfirmationSubject('Confirm email change');
         }
@@ -113,14 +143,16 @@ class Mailer extends Component {
     /**
      * @param string $reconfirmationSubject
      */
-    public function setReconfirmationSubject($reconfirmationSubject) {
+    public function setReconfirmationSubject($reconfirmationSubject)
+    {
         $this->reconfirmationSubject = $reconfirmationSubject;
     }
 
     /**
      * @return string
      */
-    public function getRecoverySubject() {
+    public function getRecoverySubject()
+    {
         if ($this->recoverySubject == null) {
             $this->setRecoverySubject('Complete password reset');
         }
@@ -131,14 +163,16 @@ class Mailer extends Component {
     /**
      * @param string $recoverySubject
      */
-    public function setRecoverySubject($recoverySubject) {
+    public function setRecoverySubject($recoverySubject)
+    {
         $this->recoverySubject = $recoverySubject;
     }
 
     /**
      * @return mixed
      */
-    public function getRatingNotifySubject() {
+    public function getRatingNotifySubject()
+    {
         if ($this->ratingNotifySubject == null) {
             $this->setRatingNotifySubject('You have a new rating');
         }
@@ -149,14 +183,16 @@ class Mailer extends Component {
     /**
      * @param $ratingNotifySubject
      */
-    public function setRatingNotifySubject($ratingNotifySubject) {
+    public function setRatingNotifySubject($ratingNotifySubject)
+    {
         $this->ratingNotifySubject = $ratingNotifySubject;
     }
 
     /**
      * @return mixed
      */
-    public function getClaimNotifyAdminSubject() {
+    public function getClaimNotifyAdminSubject()
+    {
         if ($this->claimNotifyAdminSubject == null) {
             $this->setClaimNotifyAdminSubject('A User Has Claimed a Venue');
         }
@@ -167,7 +203,8 @@ class Mailer extends Component {
     /**
      * @param $claimNotifyAdminSubject
      */
-    public function setClaimNotifyAdminSubject($claimNotifyAdminSubject) {
+    public function setClaimNotifyAdminSubject($claimNotifyAdminSubject)
+    {
         $this->claimNotifyAdminSubject = $claimNotifyAdminSubject;
     }
 
@@ -175,7 +212,8 @@ class Mailer extends Component {
     /**
      * @return mixed
      */
-    public function getClaimNotifySubject() {
+    public function getClaimNotifySubject()
+    {
         if ($this->claimNotifySubject == null) {
             $this->setClaimNotifySubject('Response to your TellUs Venue claim');
         }
@@ -186,13 +224,15 @@ class Mailer extends Component {
     /**
      * @param $claimNotifySubject
      */
-    public function setClaimNotifySubject($claimNotifySubject) {
+    public function setClaimNotifySubject($claimNotifySubject)
+    {
         $this->claimNotifySubject = $claimNotifySubject;
     }
 
 
     /** @inheritdoc */
-    public function init() {
+    public function init()
+    {
         parent::init();
     }
 
@@ -203,7 +243,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    public function sendWelcomeMessage(Users $user) {
+    public function sendWelcomeMessage(Users $user)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getWelcomeSubject(),
@@ -216,11 +257,22 @@ class Mailer extends Component {
      * @param UsersVenuesClaims $claim
      * @return bool
      */
-    public function notifyAdminOfClaim(UsersVenuesClaims $claim) {
+    public function notifyAdminOfClaim(UsersVenuesClaims $claim)
+    {
         return $this->sendMessage(
             Yii::$app->params['adminEmail'],
             $this->getClaimNotifyAdminSubject(),
             'user-venue-claim-admin-notify',
+            ['claim' => $claim]
+        );
+    }
+
+    public function confirmUserClaimStarted(UsersVenuesClaims $claim)
+    {
+        return $this->sendMessage(
+            Yii::$app->params['adminEmail'],
+            $this->getClaimStartedNotifyUserSubject(),
+            'user-venue-claim-started-confirmation',
             ['claim' => $claim]
         );
     }
@@ -231,12 +283,13 @@ class Mailer extends Component {
      * @param $venue
      * @return bool
      */
-    public function notifyOfClaimApproval($approved,$user,$venue) {
+    public function notifyOfClaimApproval($approved, $user, $venue)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getClaimNotifySubject(),
             'user-venue-claim-notify',
-            ['approved' => $approved,'user'=>$user,'venue'=>$venue]
+            ['approved' => $approved, 'user' => $user, 'venue' => $venue]
         );
     }
 
@@ -248,7 +301,8 @@ class Mailer extends Component {
      * @return bool
      */
 
-    public function sendRatingNotification(UsersVenuesRatings $rating, Venues $venue, Users $user) {
+    public function sendRatingNotification(UsersVenuesRatings $rating, Venues $venue, Users $user)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getRatingNotifySubject(),
@@ -265,7 +319,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    public function sendGeneratedPassword(Users $user, $password) {
+    public function sendGeneratedPassword(Users $user, $password)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getNewPasswordSubject(),
@@ -281,7 +336,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    public function sendConfirmationMessage(Users $user) {
+    public function sendConfirmationMessage(Users $user)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getConfirmationSubject(),
@@ -297,7 +353,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    public function sendReconfirmationMessage(Users $user) {
+    public function sendReconfirmationMessage(Users $user)
+    {
         $email = $user->user_email;
 
         return $this->sendMessage(
@@ -315,7 +372,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    public function sendRecoveryMessage(Users $user) {
+    public function sendRecoveryMessage(Users $user)
+    {
         return $this->sendMessage(
             $user->user_email,
             $this->getRecoverySubject(),
@@ -332,7 +390,8 @@ class Mailer extends Component {
      *
      * @return bool
      */
-    protected function sendMessage($to, $subject, $view, $params = []) {
+    protected function sendMessage($to, $subject, $view, $params = [])
+    {
 
         /** @var \yii\mail\BaseMailer $mailer */
         $mailer = Yii::$app->mailer;
