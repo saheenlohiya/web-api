@@ -212,10 +212,16 @@ class Mailer extends Component
     /**
      * @return mixed
      */
-    public function getClaimNotifySubject()
+    public function getClaimNotifySubject($approved)
     {
         if ($this->claimNotifySubject == null) {
-            $this->setClaimNotifySubject('Response to your TellUs Venue claim');
+            if($approved){
+                $this->setClaimNotifySubject('Your TellUs Claim Has Been Approved');
+            }
+            else{
+                $this->setClaimNotifySubject('Your Attention is Needed Regarding Your TellUs Claim');
+            }
+
         }
 
         return $this->claimNotifySubject;
@@ -287,7 +293,7 @@ class Mailer extends Component
     {
         return $this->sendMessage(
             $user->user_email,
-            $this->getClaimNotifySubject(),
+            $this->getClaimNotifySubject($approved),
             'user-venue-claim-notify',
             ['approved' => $approved, 'user' => $user, 'venue' => $venue]
         );

@@ -163,6 +163,7 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             $claim->venue_claim_update_date = date('Y-m-d H:i:s');
 
             if ($claim->save()) {
+                $this->_notifyOfClaimApproval(false, $claim->user, $claim->venue);
                 return true;
             }
         }
