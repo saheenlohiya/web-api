@@ -17,7 +17,7 @@ class TUPushNotifications {
         $instance = new self;
 
         $note = Yii::$app->fcm->createNotification("TellUs", $messageBody);
-        $note->setBadge(1);
+        $note->setBadge(0);
 
         $message = Yii::$app->fcm->createMessage();
         $message->addRecipient(new Device($deviceToken));
