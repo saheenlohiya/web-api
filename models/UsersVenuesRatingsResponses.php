@@ -164,7 +164,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
                 $append = $responding_user->user_firstname . " responded to a tellUs thread for " . $this->userVenueRating->venue->venue_name . ", and said: ";
 
                 if (($this->userVenueRating->venue->user_id !== $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
-                    TUPushNotifications::create($append . $this->user_venue_rating_response, $owner_device_token)
+                    TUPushNotifications::create($append." venue owner: " . $this->user_venue_rating_response, $owner_device_token)
                         ->send();
                 } else if ($this->userVenueRating->venue->user_id === $this->user_venue_rating_responding_user_id && ($this->userVenueRating->venue->user_id !== $this->userVenueRating->user_id)) {
                     //lookup the original user who started the thread assuming its not the owner
