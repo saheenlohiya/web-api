@@ -167,12 +167,12 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 //                echo $this->user_venue_rating_responding_user_id.PHP_EOL;
 //                exit;
 
-                if (($this->userVenueRating->venue->user_id !== $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
+                if (($this->userVenueRating->venue->user_id != $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
                     echo "Here";
 //                    TUPushNotifications::create($append." venue owner: " . $this->user_venue_rating_response, $owner_device_token)
 //                        ->send();
                     exit;
-                } else if ($this->userVenueRating->venue->user_id === $this->user_venue_rating_responding_user_id && ($this->userVenueRating->venue->user_id !== $this->userVenueRating->user_id)) {
+                } else if ($this->userVenueRating->venue->user_id == $this->user_venue_rating_responding_user_id && ($this->userVenueRating->venue->user_id !== $this->userVenueRating->user_id)) {
                     //lookup the original user who started the thread assuming its not the owner
                     $original_rating_user = Users::findOne(['id'=>$this->userVenueRating->user_id]);
                     TUPushNotifications::create($append . $this->user_venue_rating_response, $original_rating_user->user_device_token)
