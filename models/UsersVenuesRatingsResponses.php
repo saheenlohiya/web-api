@@ -164,7 +164,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
                 $append = $responding_user->user_firstname . " responded to a tellUs thread for " . $this->userVenueRating->venue->venue_name . ", and said: ";
 
                 echo $this->userVenueRating->venue->user_id.PHP_EOL;
-                echo $this->user_venue_rating_responding_user_id;
+                echo $this->user_venue_rating_responding_user_id.PHP_EOL;
+                echo $this->userVenueRating->venue->user->id;
                 exit;
 
                 if (($this->userVenueRating->venue->user_id !== $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
