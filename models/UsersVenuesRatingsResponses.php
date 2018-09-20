@@ -4,15 +4,15 @@ namespace app\models;
 
 use app\components\TUPushNotifications;
 use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
+use Yii;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
-use Yii;
-use yii\log\Logger;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
  */
-class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
+class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
+{
 
     //events
     const EVENT_VENUE_RATING_RESPONSE_SUCCESS = 'userVenueRatingResponseSuccess';
@@ -20,18 +20,21 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     const RESPONSE_KEYWORD_CLOSE = '#close';
     const RESPONSE_NOTIFICATION_APPEND = '';
 
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'notify']);
         $this->on(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS, [$this, 'updateFirebaseDB']);
     }
 
-    public static function create() {
+    public static function create()
+    {
         $instance = new self;
         return $instance;
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -40,7 +43,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
         );
     }
 
-    public function rules() {
+    public function rules()
+    {
         return ArrayHelper::merge(
             parent::rules(),
             [
@@ -52,10 +56,11 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     /**
      * @inheritDoc
      */
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
 
-            if($insert){
+            if ($insert) {
                 $this->user_venue_rating_response_read = false;
                 $this->user_venue_rating_response_date = date('Y-m-d H:i:s');
             }
@@ -69,7 +74,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     /**
      * @inheritDoc
      */
-    public function afterSave($insert, $changedAttributes) {
+    public function afterSave($insert, $changedAttributes)
+    {
         parent::afterSave($insert, $changedAttributes);
 
         $this->trigger(self::EVENT_VENUE_RATING_RESPONSE_SUCCESS);
@@ -77,7 +83,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     }
 
 
-    public function respond($venue_rating_id, $user_id, $response_comment) {
+    public function respond($venue_rating_id, $user_id, $response_comment)
+    {
         //make sure params are not empty and are set
         if (!is_null($user_id) && !is_null($venue_rating_id) && !is_null($response_comment) && !empty($response_comment)) {
 
@@ -95,7 +102,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
         return false;
     }
 
-    public function viewResponses($user_venue_rating_id) {
+    public function viewResponses($user_venue_rating_id)
+    {
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
             return self::find()
@@ -121,18 +129,21 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
 //        }
 //    }
 
-    public function notify() {
+    public function notify()
+    {
         //send push notification
         $this->_pushNotify();
     }
 
-    public function updateFirebaseDB(){
+    public function updateFirebaseDB()
+    {
         $this->_sendResponseToFirebase();
     }
 
-    private function _sendResponseToFirebase(){
+    private function _sendResponseToFirebase()
+    {
         $database = Yii::$app->firebase->getDatabase();
-        $reference = $database->getReference('/users_venues_ratings_responses/'.$this->user_venue_rating_id."/".$this->id);
+        $reference = $database->getReference('/users_venues_ratings_responses/' . $this->user_venue_rating_id . "/" . $this->id);
 
         $data = $this->getAttributes();
         $data['user'] = $this->userVenueRating->user->getAttributes();
@@ -150,7 +161,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
         $reference->set($data);
     }
 
-    private function _pushNotify() {
+    private function _pushNotify()
+    {
         try {
             //only do stuff if there is an owner
             if ($this->userVenueRating->venue->user_id != null) {
@@ -163,18 +175,12 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
                 //build the append message for the notification
                 $append = $responding_user->user_firstname . " responded to a tellUs thread for " . $this->userVenueRating->venue->venue_name . ", and said: ";
 
-//                echo $this->userVenueRating->venue->user_id.PHP_EOL;
-//                echo $this->user_venue_rating_responding_user_id.PHP_EOL;
-//                exit;
-
                 if (($this->userVenueRating->venue->user_id != $this->user_venue_rating_responding_user_id) && $owner_device_token != null) {
-                    echo "Here";
-//                    TUPushNotifications::create($append." venue owner: " . $this->user_venue_rating_response, $owner_device_token)
-//                        ->send();
-                    exit;
+                    TUPushNotifications::create($append . " venue owner: " . $this->user_venue_rating_response, $owner_device_token)
+                        ->send();
                 } else if ($this->userVenueRating->venue->user_id == $this->user_venue_rating_responding_user_id && ($this->userVenueRating->venue->user_id !== $this->userVenueRating->user_id)) {
                     //lookup the original user who started the thread assuming its not the owner
-                    $original_rating_user = Users::findOne(['id'=>$this->userVenueRating->user_id]);
+                    $original_rating_user = Users::findOne(['id' => $this->userVenueRating->user_id]);
                     TUPushNotifications::create($append . $this->user_venue_rating_response, $original_rating_user->user_device_token)
                         ->send();
                 }
@@ -191,7 +197,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses {
     /**
      * will parse any keywords in the response comment
      */
-    private function _parseResponseKeywords() {
+    private function _parseResponseKeywords()
+    {
         $comment_string = strtolower($this->user_venue_rating_response);
         $comment_string_array = explode(' ', $comment_string);
 
