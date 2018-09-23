@@ -72,7 +72,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
     public function hasOpenTicketValidator()
     {
         if (self::find()->where(['user_id' => $this->user_id, 'venue_id' => $this->venue_id, 'venue_rating_resolved' => 0])->one()) {
-            $this->addError('user_id', 'There is an unresolved ticket.');
+            $this->addError('user_id', 'You currently have an open ticket with this company. Please add to your ongoing conversation using the current ticket.');
         }
     }
 
