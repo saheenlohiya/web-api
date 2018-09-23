@@ -141,16 +141,31 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             //we will combine both the users own ratings
             //and ratings submitted to the claimed venue
 
-            $unionQuery = "SELECT * FROM (
-                                (SELECT * FROM users_venues_ratings uvr1 WHERE uvr1.user_id=:user_id) 
-                                 UNION 
-                                (SELECT uvr2.* FROM users_venues_ratings uvr2 JOIN venues ON venues.id = uvr2.venue_id WHERE venues.user_id=:user_id )
-                            ) u ORDER BY venue_rating_date DESC, venue_rating_resolved";
+            $unionQuery = "SELECT
+                          *,
+                          (SELECT MAX(uvr.user_venue_rating_response_date) FROM users_venues_ratings_responses uvr WHERE uvr.`user_venue_rating_id` = u.id ) AS last_response_date
+                        FROM
+                          (
+                            (SELECT
+                              *
+                            FROM
+                              users_venues_ratings uvr1
+                            WHERE uvr1.user_id = :user_id)
+                            UNION
+                            (SELECT
+                              uvr2.*
+                            FROM
+                              users_venues_ratings uvr2
+                              JOIN venues
+                                ON venues.id = uvr2.venue_id
+                            WHERE venues.user_id = :user_id)
+                          ) u
+                        ORDER BY last_response_date DESC";
 
             //ratings I submitted
             return UsersVenuesRatings::findBySql($unionQuery)
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
-                ->params(['user_id' => $user_id])
+                ->params([':user_id' => $user_id])
                 ->orderBy(['user_venue_rating_response_date' => SORT_DESC])
                 ->asArray()
                 ->all();
