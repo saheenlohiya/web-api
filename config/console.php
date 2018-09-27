@@ -26,7 +26,7 @@ $config = [
         'firebase' => [
             'class'=>'grptx\Firebase\Firebase',
             'credential_file'=>dirname(__FILE__).'/service_account.json', // (see https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
-            'database_uri'=>'https://tellus-dev.firebaseio.com', // (optional)
+            'database_uri'=>(YII_ENV == 'dev')?'https://tellus-dev.firebaseio.com':'https://tellus-live.firebaseio.com', // (optional)
         ],
         'fcm' => [
             'class' => 'understeam\fcm\Client',
