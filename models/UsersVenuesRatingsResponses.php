@@ -62,7 +62,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
 
             if ($insert) {
                 $this->user_venue_rating_response_read = false;
-                $this->user_venue_rating_response_date = date('Y-m-d H:i:s');
+                $this->user_venue_rating_response_date = date(DATE_ISO8601);
             }
 
             return true;
