@@ -276,7 +276,7 @@ class Mailer extends Component
     public function confirmUserClaimStarted(UsersVenuesClaims $claim)
     {
         return $this->sendMessage(
-            Yii::$app->params['adminEmail'],
+            $claim->venue_claim_claimer_email,
             $this->getClaimStartedNotifyUserSubject(),
             'user-venue-claim-started-confirmation',
             ['claim' => $claim]
@@ -407,7 +407,7 @@ class Mailer extends Component
         if ($this->sender === null) {
             $this->sender = isset(Yii::$app->params['customerServiceEmail']) ?
                 Yii::$app->params['customerServiceEmail']
-                : 'no-reply@example.com';
+                : 'no-reply@thetellusapp.com';
         }
 
         return $mailer->compose(['html' => $view], $params)

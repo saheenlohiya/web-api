@@ -94,20 +94,20 @@ class VenuesTest extends \Codeception\Test\Unit {
     }
 
     public function testCanSearchPlaces() {
-        //$venues = Venues::create();
-        //$savedPlaces = $venues->getSearchPlaces('lowes','30.267153', '-97.743061');
-
-        //var_dump($savedPlaces);
-        //exit;
+//        $venues = Venues::create();
+//        $savedPlaces = $venues->getSearchPlaces('lowes','30.267153', '-97.743061');
+//
+//        var_dump($savedPlaces);
+//        exit;
     }
 
     public function testGetNearbyPlaces() {
-        //$venues = Venues::create();
-        //$savedPlaces = $venues->getNearbyPlaces('30.267153', '-97.743061',16093.4);
-        //var_dump($savedPlaces);
-        //exit;
-        //$this->assertNotNull($savedPlaces);
-        //exit;
+//        $venues = Venues::create();
+//        $savedPlaces = $venues->getNearbyPlaces('30.267153', '-97.743061',16093.4);
+//        var_dump($savedPlaces);
+//        exit;
+//        $this->assertNotNull($savedPlaces);
+//        exit;
     }
 
 
