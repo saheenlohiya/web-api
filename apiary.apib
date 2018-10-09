@@ -1,0 +1,114 @@
+FORMAT: 1A
+HOST: http://api.tellus.com/v1
+
+# TellUs
+
+Tellus API Documentation
+
+# Group Venues
+A Venue is a business that may be rated in the TellUs System
+
+## Venues Collection [/venues]
+
+### New Venue [POST]
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "venue_name": "Test Venue",
+            "venue_email": "dmcleish@gmail.com",
+            "venue_address_1": "1101 Lions Lair",
+            "venue_city": "Austin",
+            "venue_state": "TX",
+            "venue_zip": "78641",
+            "venue_type_id": "1",
+            "user_id": "1"
+        }
+
++ Response 201 (application/json; charset=UTF-8)
+
+    + Body
+
+            {"venue_name":"Test Venue","venue_email":"dmcleish@gmail.com","venue_address_1":"1101 Lions Lair","venue_city":"Austin","venue_state":"TX","venue_zip":"78641","venue_type_id":"1","user_id":"1","venue_lat":39.7837304,"venue_lon":-100.4458824,"venue_date_added":{"expression":"NOW()","params":[]},"id":1}
+
+
+# Group Users
+A Tellus user is either a business owner or primary consumer. Users may be assigned venues and interact with other users
+
+## Users Collection [/users]
+
+### New User [POST]
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "user_firstname": "Dwamian",
+            "user_lastname": "Mcleish",
+            "user_email": "dmcleish@gmail.com",
+            "user_phone": "8172197761",
+            "user_password": "tester",
+            "user_gender": "M",
+            "user_username": "dwamianm",
+            "uuid": "b89ed2dd-87c8-4bfd-9d86-3c3bc48d64c1",
+            "user_dob": "10/08/1978",
+            "user_address_1": "Test Location St",
+            "user_address_2": "Suite 110",
+            "user_city": "City",
+            "user_state": "TX",
+            "user_zip": "78887",
+            "user_lat": "32.199090",
+            "user_lon": "-96.33098",
+            "user_facebook_account_id": null,
+            "user_photo_url": null,
+            "user_ip_address": "127.0.0.1",
+            "user_date_joined": "",
+            "user_date_modified": "",
+            "user_verification_code": "",
+            "user_active": 0,
+            "user_is_verified": 0,
+            "user_access_token": "+9sdGxiqbAgyS31ktx+3Y3BpDh0=",
+            "user_auth_key": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+
++ Response 201 (application/json; charset=UTF-8)
+
+    + Body
+
+            {"user_firstname":"Dwamian","user_lastname":"Mcleish","user_email":"dwamian@campgladiator.com","user_phone":"8172197761","user_password":"$2y$13$3o5y2F8kgg10s63bz/qQBuLp9NsWY6XNbUc8Us1zDfPsRL4D.fTU2","user_gender":"M","user_date_joined":{"expression":"NOW()","params":[]},"user_date_modified":{"expression":"NOW()","params":[]},"user_verification_code":"62fa8eeef8a811e6a9df8b8e271805ce","uuid":"62fab31af8a811e6a9df8b8e271805ce","user_ip_address":"0.0.0.0","id":1}
+ 
+## Following User Venues [/users-follows-venues]
+
+### Follow A Venue [POST]
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "user_id": "1",
+            "venue_id": "1"
+        }
+
++ Response 201 (application/json; charset=UTF-8)
+
+    + Body
+
+            {"user_id":"1","venue_id":"1","user_venue_follow_date":{"expression":"NOW()","params":[]},"id":1}
+
+
+## Logging into an account [/users/login]
+### Login [POST]
+
++ Request
+
+    + Headers
+
+            content-type: application/json
+
+    + Body
+
+            {"user_email":"dmcleish@gmail.com","user_password":"daemonm"}
+
++ Response 200 (application/json; charset=UTF-8)
+
+    + Body
+
+            {"id":"3","uuid":"c4293e5862c411e799370ae4f13001b8","user_firstname":"DwamianS","user_lastname":"Mcleish","user_email":"dhlyrdwi@sharklasers.com","user_username":null,"user_phone":"8172197761","user_gender":"M","user_dob":"10/08/1978","user_address_1":null,"user_address_2":null,"user_city":null,"user_state":null,"user_zip":"78887","user_lat":"39.7837304","user_lon":"-100.4458825","user_facebook_account_id":null,"user_photo_url":null,"user_ip_address":"10.229.95.34","user_date_joined":"2017-07-07 03:31:31","user_date_modified":"2017-08-03 23:25:24","user_verification_code":"c429025e62c411e799370ae4f13001b8","user_active":"1","user_is_verified":"0","user_access_token":"3B_bCd59JdkAWB54P6rxHdXF9a9jwrYL","user_device_token":null,"usersVenuesFollows":[]}
