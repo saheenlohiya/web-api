@@ -98,8 +98,6 @@ class VenuesTest extends \Codeception\Test\Unit {
         $results = $venues->listActiveVenues();
 
         $this->assertTrue(is_array($results));
-
-        codecept_debug($results);
     }
 
     public function testCanSearchPlaces() {

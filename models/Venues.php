@@ -219,7 +219,7 @@ class Venues extends BaseVenues
     {
 
         $query = new Query();
-        $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed'])
+        $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed','(SELECT COUNT(*) FROM users_venues_ratings uvr WHERE uvr.venue_id = v.id) AS total_messages'])
             ->from('venues v')
             ->join('JOIN', 'users_venues_ratings vr', 'vr.venue_id = v.id')
             ->orderBy('v.venue_name');
