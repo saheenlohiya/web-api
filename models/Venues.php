@@ -11,32 +11,37 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "venues".
  */
-class Venues extends BaseVenues {
+class Venues extends BaseVenues
+{
 
 
     public $results = [];
     private $_ids = [];
 
-    public function extraFields() {
+    public function extraFields()
+    {
         return ['venuesImages'];
     }
 
     /**
      * @return Venues
      */
-    public static function create() {
+    public static function create()
+    {
         return new self;
     }
 
     /**
      * @return array
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
@@ -67,7 +72,8 @@ class Venues extends BaseVenues {
     /**
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return ArrayHelper::merge(
             parent::rules(),
             [
@@ -81,7 +87,8 @@ class Venues extends BaseVenues {
      * @param bool $insert
      * @return bool
      */
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
 
             return true;
@@ -97,7 +104,8 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50) {
+    public function getNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50)
+    {
 
         //we will run a nearby places update first
         $updatePlaces = $this->_updateNearbyPlaces($latitude, $longitude, $radius, $limit);
@@ -110,7 +118,8 @@ class Venues extends BaseVenues {
 
     }
 
-    public function venue($venue_id) {
+    public function venue($venue_id)
+    {
         return self::find()->where(['id' => $venue_id])->with(['venuesImages'])->asArray()->one();
     }
 
@@ -122,7 +131,8 @@ class Venues extends BaseVenues {
      * @param int $limit
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchPlaces($text, $latitude, $longitude, $radius = 20, $limit = 50) {
+    public function getSearchPlaces($text, $latitude, $longitude, $radius = 20, $limit = 50)
+    {
         //we will run a nearby places update first
         $this->_updateSearchedPlaces($text, $latitude, $longitude, $radius, $limit);
         if (count($this->_ids) > 0) {
@@ -141,7 +151,8 @@ class Venues extends BaseVenues {
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getNearbySavedPlaces($latitude, $longitude, $radius = 20, $limit = 50, $offset = 0) {
+    public function getNearbySavedPlaces($latitude, $longitude, $radius = 20, $limit = 50, $offset = 0)
+    {
         $sql = "
         SELECT *,
         (
@@ -172,7 +183,8 @@ class Venues extends BaseVenues {
      * @param int $offset
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 50, $offset = 0) {
+    public function getSearchedSavedPlaces(array $ids, $latitude, $longitude, $limit = 50, $offset = 0)
+    {
 
         $ids = implode(",", $ids);
 
@@ -199,13 +211,36 @@ class Venues extends BaseVenues {
     }
 
     /**
+     * List venues that have activity. Pass in "onlyClaimed to
+     * @param bool $onlyClaimed
+     * @return array
+     */
+    public function listActiveVenues($onlyClaimed = false)
+    {
+
+        $query = new Query();
+        $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed'])
+            ->from('venues v')
+            ->join('JOIN', 'users_venues_ratings vr', 'vr.venue_id = v.id')
+            ->orderBy('v.venue_name');
+
+        if ($onlyClaimed) {
+            $query->having('is_claimed = 1');
+        }
+
+        return $query->all();
+
+    }
+
+    /**
      * @param $latitude
      * @param $longitude
      * @param int $radius
      * @param int $limit
      * @return bool
      */
-    private function _updateNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50) {
+    private function _updateNearbyPlaces($latitude, $longitude, $radius = 20, $limit = 50)
+    {
 
         $radius = Conversions::meters_to_miles($radius);
 
@@ -234,17 +269,18 @@ class Venues extends BaseVenues {
      * @param $longitude
      * @param int $radius
      * @param int $limit
-     * @param $next_page_token
-     * @return array
+     * @param null $next_page_token
      */
-    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 50, $limit = 50,$next_page_token=null) {
+    private function _updateSearchedPlaces($keyword, $latitude, $longitude, $radius = 50, $limit = 50, $next_page_token = null)
+    {
         $radius = Conversions::meters_to_miles($radius);
         $search = new Search(['key' => Yii::$app->params['googleApiKey']]);
-        $this->_nearby($search,$keyword, $latitude, $longitude, $radius, $limit,$next_page_token);
+        $this->_nearby($search, $keyword, $latitude, $longitude, $radius, $limit, $next_page_token);
     }
 
-    private function _nearby($search,$keyword, $latitude, $longitude, $radius = 50, $limit = 50,$next_page_token=null){
-        $results = $search->nearby($latitude . "," . $longitude,['rankby' => 'distance','radius'=>$radius, 'keyword' => $keyword,'pagetoken'=>$next_page_token]);
+    private function _nearby($search, $keyword, $latitude, $longitude, $radius = 50, $limit = 50, $next_page_token = null)
+    {
+        $results = $search->nearby($latitude . "," . $longitude, ['rankby' => 'distance', 'radius' => $radius, 'keyword' => $keyword, 'pagetoken' => $next_page_token]);
 
         //use a count to keep track of the limit so we dont overuse the places API
         $count = 0;
@@ -261,19 +297,20 @@ class Venues extends BaseVenues {
                 $count++;
             }
 
-            if(isset($results['next_page_token']) && !is_null($results['next_page_token'])){
-                $this->_nearby($search,$keyword, $latitude, $longitude, $radius, $limit,$results['next_page_token']);
+            if (isset($results['next_page_token']) && !is_null($results['next_page_token'])) {
+                $this->_nearby($search, $keyword, $latitude, $longitude, $radius, $limit, $results['next_page_token']);
             }
         }
     }
 
-    private function _saveNewGooglePlaceSummary($details) {
+    private function _saveNewGooglePlaceSummary($details)
+    {
         $venue = Venues::find()->where(['venue_google_place_id' => $details['place_id']])->one();
         $venue_id = null;
 
         if (!isset($venue->id)) {
 
-            $address_components = explode(",",$details['vicinity']);
+            $address_components = explode(",", $details['vicinity']);
 
             Yii::$app->db->createCommand()->insert('venues', [
                 'venue_name' => $details['name'],
@@ -285,8 +322,8 @@ class Venues extends BaseVenues {
                 'venue_verified' => 1,
                 'venue_verified_date' => date('Y-m-d H:i:s'),
                 'venue_last_verified_date' => date('Y-m-d H:i:s'),
-                'venue_address_1'=>$address_components[0]??null,
-                'venue_city'=>$address_components[1]??null
+                'venue_address_1' => $address_components[0] ?? null,
+                'venue_city' => $address_components[1] ?? null
             ])->execute();
 
             $id = Yii::$app->db->getLastInsertId();
@@ -305,7 +342,8 @@ class Venues extends BaseVenues {
      * @return int|null|string
      * @throws \yii\db\Exception
      */
-    private function _saveNewGooglePlaceDetails($item) {
+    private function _saveNewGooglePlaceDetails($item)
+    {
 
         $venue = Venues::find()->where(['venue_google_place_id' => $item['place_id']])->one();
         $venue_id = null;
@@ -360,7 +398,8 @@ class Venues extends BaseVenues {
      * @param $type
      * @return int|null
      */
-    private function _getVenueTypeID($type) {
+    private function _getVenueTypeID($type)
+    {
         $type = VenuesTypes::find()->where(['venue_type_slug' => $type])->one();
         if ($type) {
             return $type->id;
@@ -373,7 +412,8 @@ class Venues extends BaseVenues {
      * @param $details
      * @return array
      */
-    private function _getAddressComponents($details) {
+    private function _getAddressComponents($details)
+    {
 
         $addr = [];
         $addr['venue_address_1'] = "";
@@ -411,8 +451,10 @@ class Venues extends BaseVenues {
     /**
      * @param $id
      * @param $detail
+     * @throws \yii\db\Exception
      */
-    private function _saveGooglePlacesPhotos($id, $detail) {
+    private function _saveGooglePlacesPhotos($id, $detail)
+    {
         if (isset($detail) && isset($detail['photos']) && count($detail['photos'])) {
             $photo_array = [];
             for ($i = 0; $i < count($detail['photos']); $i++) {

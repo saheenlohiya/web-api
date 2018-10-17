@@ -93,6 +93,15 @@ class VenuesTest extends \Codeception\Test\Unit {
 
     }
 
+    public function testCanListActiveVenues(){
+        $venues = Venues::create();
+        $results = $venues->listActiveVenues();
+
+        $this->assertTrue(is_array($results));
+
+        codecept_debug($results);
+    }
+
     public function testCanSearchPlaces() {
 //        $venues = Venues::create();
 //        $savedPlaces = $venues->getSearchPlaces('lowes','30.267153', '-97.743061');

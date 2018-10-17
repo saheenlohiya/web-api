@@ -52,6 +52,18 @@ $config = [
             'class' => 'understeam\fcm\Client',
             'apiKey' => 'AIzaSyDyOtE4I9elAGpAAPrxPOzChqTM6k7Z_do',
         ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class'          => 'yii\i18n\PhpMessageSource',
+                    'basePath'       => '@app/messages', // if advanced application, set @frontend/messages
+                    'sourceLanguage' => 'en',
+                    'fileMap'        => [
+                        //'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
