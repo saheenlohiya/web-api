@@ -108,29 +108,39 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             UsersVenuesFollows::create()->follow($this->user_id, $this->venue_id);
 
             //auto create thread...but add all the ratings to the thread
-            $comments .= self::VENUE_RATING_CAT_1.": ".$this->venue_rating_cat_1 . "\n" ;
-            $comments .= self::VENUE_RATING_CAT_2.": ".$this->venue_rating_cat_2 . "\n" ;
-            $comments .= self::VENUE_RATING_CAT_3.": ".$this->venue_rating_cat_3 . "\n" ;
-            $comments .= "Average Rating: ".number_format((float) $this->venue_rating_average, 2, '.', '') . "\n\n" ;
-            $comments .= "Comments: \n".$this->venue_rating_comment ;
+            $comments .= self::VENUE_RATING_CAT_1 . ": " . $this->venue_rating_cat_1 . "\n";
+            $comments .= self::VENUE_RATING_CAT_2 . ": " . $this->venue_rating_cat_2 . "\n";
+            $comments .= self::VENUE_RATING_CAT_3 . ": " . $this->venue_rating_cat_3 . "\n";
+            $comments .= "Average Rating: " . number_format((float)$this->venue_rating_average, 2, '.', '') . "\n\n";
+            $comments .= "Comments: \n" . $this->venue_rating_comment;
 
 
-                UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $comments);
+            UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $comments);
             //send notification fo venue managers
             $this->_notifyVenueManager();
         }
 
     }
 
-    public function getRatingsByVenue($user_id, $venue_id)
+    public function getRatingsByVenue($user_id = "", $venue_id)
     {
-        if (isset($user_id) && isset($venue_id)) {
-            return UsersVenuesRatings::find()
-                ->where(['user_id' => $user_id, 'venue_id' => $venue_id])
-                ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
+
+        $relationships = ['usersVenuesRatingsResponses', 'venue'];
+        $where = ['venue_id' => $venue_id];
+
+        if (isset($user_id) && $user_id !== "") {
+            $relationships[] = 'user';
+            $where['user_id'] = $user_id;
+        }
+
+        if (isset($venue_id)) {
+            $sql = UsersVenuesRatings::find()
+                ->where($where)
+                ->with($relationships)
                 ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
-                ->asArray(true)
-                ->all();
+                ->asArray(true);
+
+            return $sql->all();
         }
     }
 
@@ -194,7 +204,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
         //now calculate the average to save
         $this->venue_rating_average = $sum / $count;
-        $this->venue_rating_average = number_format((float) $this->venue_rating_average, 2, '.', '');
+        $this->venue_rating_average = number_format((float)$this->venue_rating_average, 2, '.', '');
     }
 
     private function _setAutoResolution()

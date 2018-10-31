@@ -28,11 +28,9 @@ class UsersVenuesRatingsController extends TuBaseApiController {
      * @param $venue_id
      * @return \app\models\UsersVenuesRatings[]|array
      */
-    public function actionListByVenue($user_id,$venue_id) {
+    public function actionListByVenue($user_id="",$venue_id) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        if($this->checkAuthorization($user_id)){
-            return UsersVenuesRatings::create()->getRatingsByVenue($user_id,$venue_id);
-        }
+        return UsersVenuesRatings::create()->getRatingsByVenue($user_id,$venue_id);
     }
 
     public function actionListByUser($user_id) {
