@@ -85,7 +85,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
             if ($insert) {
                 $this->_calcRatingAverage();
-                $this->_setAutoResolution();
+//                $this->_setAutoResolution();
             }
 
             return true;
