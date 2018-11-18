@@ -63,6 +63,7 @@ $config = [
                     'extraPatterns' => [
                         'GET list-by-venue' => 'list-by-venue',
                         'GET list-by-user' => 'list-by-user',
+                        'POST acknowledge' =>'acknowledge'
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings-responses'],

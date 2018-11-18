@@ -118,6 +118,13 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             UsersVenuesRatingsResponses::create()->respond($this->id, $this->user_id, $comments);
             //send notification fo venue managers
             $this->_notifyVenueManager();
+
+            if (is_null($this->venue_rating_average)) {
+                $this->_calcRatingAverage();
+            }
+
+            // we need to give 30 days to respond anyway
+            $this->venue_rating_resolve_expiration = date('Y-m-d', strtotime(date('Y-m-d') . '+ ' . self::DEFAULT_RESOLUTION_EXP_DAYS . ' days'));
         }
 
     }
@@ -207,20 +214,15 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         $this->venue_rating_average = number_format((float)$this->venue_rating_average, 2, '.', '');
     }
 
-    private function _setAutoResolution()
-    {
-        if (is_null($this->venue_rating_average)) {
-            $this->_calcRatingAverage();
+    public function setToAcknowledged($user_venue_rating_id){
+        $rating = self::findOne($user_venue_rating_id);
+
+        if(!is_null($rating)){
+            $rating->venue_rating_acknowledged = 1;
+            if($rating->save(FALSE)) return true;
         }
 
-        if ($this->venue_rating_average == self::MAX_RATING_AVG) {
-            $this->venue_rating_resolved = true;
-            $this->venue_rating_date_resolved = date('Y-m-d H:i:s');
-        }
-
-        // we need to give 30 days to respond anyway
-        $this->venue_rating_resolve_expiration = date('Y-m-d', strtotime(date('Y-m-d') . '+ ' . self::DEFAULT_RESOLUTION_EXP_DAYS . ' days'));
-
+        return false;
     }
 
     private function _notifyVenueManager()

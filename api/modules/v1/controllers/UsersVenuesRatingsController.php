@@ -39,4 +39,11 @@ class UsersVenuesRatingsController extends TuBaseApiController {
             return UsersVenuesRatings::create()->getRatingsByUser($user_id);
         }
     }
+
+    public function actionAcknowledge(){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = \Yii::$app->request->post();
+
+        return ['success'=>UsersVenuesRatings::create()->setToAcknowledged($params['user_venue_rating_id'])];
+    }
 }
