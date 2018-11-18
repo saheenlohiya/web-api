@@ -222,7 +222,8 @@ class Venues extends BaseVenues
         $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed','(SELECT COUNT(*) FROM users_venues_ratings uvr WHERE uvr.venue_id = v.id) AS total_messages'])
             ->from('venues v')
             ->join('JOIN', 'users_venues_ratings vr', 'vr.venue_id = v.id')
-            ->orderBy('v.venue_name');
+            ->orderBy('v.venue_name')
+        ;
 
         if ($onlyClaimed) {
             $query->having('is_claimed = 1');
@@ -319,9 +320,9 @@ class Venues extends BaseVenues
                 'venue_lon' => $details['geometry']['location']['lng'],
                 'venue_date_added' => date('Y-m-d H:i:s'),
                 'venue_active' => 1,
-                'venue_verified' => 1,
-                'venue_verified_date' => date('Y-m-d H:i:s'),
-                'venue_last_verified_date' => date('Y-m-d H:i:s'),
+                'venue_verified' => 0,
+                'venue_verified_date' => null,
+                'venue_last_verified_date' => null,
                 'venue_address_1' => $address_components[0] ?? null,
                 'venue_city' => $address_components[1] ?? null
             ])->execute();
