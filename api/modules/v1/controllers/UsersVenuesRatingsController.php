@@ -41,9 +41,22 @@ class UsersVenuesRatingsController extends TuBaseApiController {
     }
 
     public function actionAcknowledge(){
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        $params = \Yii::$app->request->post();
 
-        return ['success'=>UsersVenuesRatings::create()->setToAcknowledged($params['user_venue_rating_id'])];
+        $response = \Yii::$app->response;
+        $request = \Yii::$app->request;
+
+        $response->format = Response::FORMAT_JSON;
+
+        $acknowledged = UsersVenuesRatings::create()->setToAcknowledged($request->post('user_venue_rating_id'));
+
+        if(!$acknowledged){
+            $response->setStatusCode(304);
+            return ['error' => 'Could not modify rating'];
+        }
+        else{
+            return $acknowledged;
+        }
+
+
     }
 }

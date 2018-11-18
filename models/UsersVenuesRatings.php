@@ -214,12 +214,15 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         $this->venue_rating_average = number_format((float)$this->venue_rating_average, 2, '.', '');
     }
 
-    public function setToAcknowledged($user_venue_rating_id){
+    public function setToAcknowledged($user_venue_rating_id)
+    {
         $rating = self::findOne($user_venue_rating_id);
 
-        if(!is_null($rating)){
+        if (!is_null($rating)) {
             $rating->venue_rating_acknowledged = 1;
-            if($rating->save(FALSE)) return true;
+            $rating->venue_rating_acknowledged_date = date('Y-m-d H:i:s');
+
+            if ($rating->save(FALSE)) return $rating->getAttributes();
         }
 
         return false;

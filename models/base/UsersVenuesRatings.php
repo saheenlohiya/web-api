@@ -22,6 +22,7 @@ use Yii;
  * @property string $venue_rating_comment
  * @property string $venue_rating_date
  * @property integer $venue_rating_acknowledged
+ * @property integer $venue_rating_acknowledged_date
  * @property integer $venue_rating_resolved
  * @property string $venue_rating_date_resolved
  * @property string $venue_rating_resolve_expiration
@@ -53,7 +54,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'venue_id', 'venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6', 'venue_rating_acknowledged', 'venue_rating_resolved', 'venues_updated'], 'integer'],
+            [['user_id', 'venue_id', 'venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6', 'venue_rating_acknowledged', 'venue_rating_acknowledged_date', 'venue_rating_resolved', 'venues_updated'], 'integer'],
             [['venue_rating_average'], 'number'],
             [['venue_rating_comment'], 'string'],
             [['venue_rating_date', 'venue_rating_date_resolved', 'venue_rating_resolve_expiration'], 'safe'],
@@ -81,6 +82,7 @@ abstract class UsersVenuesRatings extends \yii\db\ActiveRecord
             'venue_rating_comment' => 'Venue Rating Comment',
             'venue_rating_date' => 'Venue Rating Date',
             'venue_rating_acknowledged' => 'Venue Rating Acknowledged',
+            'venue_rating_acknowledged_date' => 'Venue Rating Acknowledged Date',
             'venue_rating_resolved' => 'Venue Rating Resolved',
             'venue_rating_date_resolved' => 'Venue Rating Date Resolved',
             'venue_rating_resolve_expiration' => 'Venue Rating Resolve Expiration',

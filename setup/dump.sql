@@ -1,9 +1,3 @@
-/*
-SQLyog Ultimate v12.08 (32 bit)
-MySQL - 5.6.35 : Database - tellus
-*********************************************************************
-*/
-
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -12,6 +6,8 @@ MySQL - 5.6.35 : Database - tellus
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`tellus_tests` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -137,6 +133,7 @@ CREATE TABLE `users_venues_ratings` (
   `venue_rating_comment` text,
   `venue_rating_date` datetime DEFAULT NULL,
   `venue_rating_acknowledged` tinyint(1) DEFAULT '0',
+  `venue_rating_acknowledged_date` datetime DEFAULT NULL,
   `venue_rating_resolved` tinyint(1) DEFAULT '0',
   `venue_rating_date_resolved` datetime DEFAULT NULL,
   `venue_rating_resolve_expiration` date DEFAULT NULL,
@@ -318,7 +315,105 @@ CREATE TABLE `venues_types` (
 
 /*Data for the table `venues_types` */
 
-insert  into `venues_types`(`id`,`venue_type_slug`,`venue_type_name`,`venue_type_description`,`venue_type_active`) values (1,'accounting','Accounting',NULL,1),(2,'art_gallery','Art Gallery',NULL,1),(3,'aquarium','Aquarium',NULL,1),(4,'airport','Airport',NULL,1),(5,'amusement_park','Amusement Park',NULL,1),(6,'atm','Atm',NULL,1),(7,'bakery','Bakery',NULL,1),(8,'bank','Bank',NULL,1),(9,'bar','Bar',NULL,1),(10,'beauty_salon','Beauty Salon',NULL,1),(11,'bicycle_store','Bicycle Store',NULL,1),(12,'book_store','Book Store',NULL,1),(13,'bowling_alley','Bowling Alley',NULL,1),(14,'bus_station','Bus Station',NULL,1),(15,'cafe','Cafe',NULL,1),(16,'campground','Campground',NULL,1),(17,'car_dealer','Car Dealer',NULL,1),(18,'car_rental','Car Rental',NULL,1),(19,'car_repair','Car Repair',NULL,1),(20,'car_wash','Car Wash',NULL,1),(21,'casino','Casino',NULL,1),(22,'cemetery','Cemetery',NULL,1),(23,'church','Church',NULL,1),(24,'city_hall','City Hall',NULL,1),(25,'clothing_store','Clothing Store',NULL,1),(26,'convenience_store','Convenience Store',NULL,1),(27,'courthouse','Courthouse',NULL,1),(28,'dentist','Dentist',NULL,1),(29,'department_store','Department Store',NULL,1),(30,'doctor','Doctor',NULL,1),(31,'electrician','Electrician',NULL,1),(32,'electronics_store','Electronics Store',NULL,1),(33,'establishment','Establishment',NULL,1),(34,'embassy','Embassy',NULL,1),(35,'fire_station','Fire Station',NULL,1),(36,'florist','Florist',NULL,1),(37,'funeral_home','Funeral Home',NULL,1),(38,'furniture_store','Furniture Store',NULL,1),(39,'food','Food',NULL,1),(40,'finance','Finance',NULL,1),(41,'gas_station','Gas Station',NULL,1),(42,'grocery','Grocery',NULL,1),(43,'general_contractor','General Contractor',NULL,1),(44,'grocery_or_supermark','Grocery Or Supermarket',NULL,1),(45,'gym','Gym',NULL,1),(46,'hair_care','Hair Care',NULL,1),(47,'hardware_store','Hardware Store',NULL,1),(48,'hindu_temple','Hindu Temple',NULL,1),(49,'home_goods_store','Home Goods Store',NULL,1),(50,'hospital','Hospital',NULL,1),(51,'health','Health',NULL,1),(52,'insurance_agency','Insurance Agency',NULL,1),(53,'jewelry_store','Jewelry Store',NULL,1),(54,'laundry','Laundry',NULL,1),(55,'lawyer','Lawyer',NULL,1),(56,'library','Library',NULL,1),(57,'liquor_store','Liquor Store',NULL,1),(58,'local_government_off','Local Government Office',NULL,1),(59,'locksmith','Locksmith',NULL,1),(60,'lodging','Lodging',NULL,1),(61,'meal_delivery','Meal Delivery',NULL,1),(62,'meal_takeaway','Meal Takeaway',NULL,1),(63,'mosque','Mosque',NULL,1),(64,'movie_rental','Movie Rental',NULL,1),(65,'movie_theater','Movie Theater',NULL,1),(66,'moving_company','Moving Company',NULL,1),(67,'museum','Museum',NULL,1),(68,'night_club','Night Club',NULL,1),(69,'painter','Painter',NULL,1),(70,'park','Park',NULL,1),(71,'parking','Parking',NULL,1),(72,'pet_store','Pet Store',NULL,1),(73,'pharmacy','Pharmacy',NULL,1),(74,'physiotherapist','Physiotherapist',NULL,1),(75,'plumber','Plumber',NULL,1),(76,'police','Police',NULL,1),(77,'post_office','Post Office',NULL,1),(78,'place_of_worship','Place Of Worship',NULL,1),(79,'real_estate_agency','Real Estate Agency',NULL,1),(80,'restaurant','Restaurant',NULL,1),(81,'roofing_contractor','Roofing Contractor',NULL,1),(82,'rv_park','Rv Park',NULL,1),(83,'school','School',NULL,1),(84,'shoe_store','Shoe Store',NULL,1),(85,'shopping_mall','Shopping Mall',NULL,1),(86,'spa','Spa',NULL,1),(87,'stadium','Stadium',NULL,1),(88,'storage','Storage',NULL,1),(89,'store','Store',NULL,1),(90,'subway_station','Subway Station',NULL,1),(91,'synagogue','Synagogue',NULL,1),(92,'taxi_stand','Taxi Stand',NULL,1),(93,'train_station','Train Station',NULL,1),(94,'transit_station','Transit Station',NULL,1),(95,'travel_agency','Travel Agency',NULL,1),(96,'university','University',NULL,1),(97,'veterinary_care','Veterinary Care',NULL,1),(98,'zoo','Zoo',NULL,1);
+insert  into `venues_types`(`id`,`venue_type_slug`,`venue_type_name`,`venue_type_description`,`venue_type_active`) values 
+(1,'accounting','Accounting',NULL,1),
+(2,'art_gallery','Art Gallery',NULL,1),
+(3,'aquarium','Aquarium',NULL,1),
+(4,'airport','Airport',NULL,1),
+(5,'amusement_park','Amusement Park',NULL,1),
+(6,'atm','Atm',NULL,1),
+(7,'bakery','Bakery',NULL,1),
+(8,'bank','Bank',NULL,1),
+(9,'bar','Bar',NULL,1),
+(10,'beauty_salon','Beauty Salon',NULL,1),
+(11,'bicycle_store','Bicycle Store',NULL,1),
+(12,'book_store','Book Store',NULL,1),
+(13,'bowling_alley','Bowling Alley',NULL,1),
+(14,'bus_station','Bus Station',NULL,1),
+(15,'cafe','Cafe',NULL,1),
+(16,'campground','Campground',NULL,1),
+(17,'car_dealer','Car Dealer',NULL,1),
+(18,'car_rental','Car Rental',NULL,1),
+(19,'car_repair','Car Repair',NULL,1),
+(20,'car_wash','Car Wash',NULL,1),
+(21,'casino','Casino',NULL,1),
+(22,'cemetery','Cemetery',NULL,1),
+(23,'church','Church',NULL,1),
+(24,'city_hall','City Hall',NULL,1),
+(25,'clothing_store','Clothing Store',NULL,1),
+(26,'convenience_store','Convenience Store',NULL,1),
+(27,'courthouse','Courthouse',NULL,1),
+(28,'dentist','Dentist',NULL,1),
+(29,'department_store','Department Store',NULL,1),
+(30,'doctor','Doctor',NULL,1),
+(31,'electrician','Electrician',NULL,1),
+(32,'electronics_store','Electronics Store',NULL,1),
+(33,'establishment','Establishment',NULL,1),
+(34,'embassy','Embassy',NULL,1),
+(35,'fire_station','Fire Station',NULL,1),
+(36,'florist','Florist',NULL,1),
+(37,'funeral_home','Funeral Home',NULL,1),
+(38,'furniture_store','Furniture Store',NULL,1),
+(39,'food','Food',NULL,1),
+(40,'finance','Finance',NULL,1),
+(41,'gas_station','Gas Station',NULL,1),
+(42,'grocery','Grocery',NULL,1),
+(43,'general_contractor','General Contractor',NULL,1),
+(44,'grocery_or_supermark','Grocery Or Supermarket',NULL,1),
+(45,'gym','Gym',NULL,1),
+(46,'hair_care','Hair Care',NULL,1),
+(47,'hardware_store','Hardware Store',NULL,1),
+(48,'hindu_temple','Hindu Temple',NULL,1),
+(49,'home_goods_store','Home Goods Store',NULL,1),
+(50,'hospital','Hospital',NULL,1),
+(51,'health','Health',NULL,1),
+(52,'insurance_agency','Insurance Agency',NULL,1),
+(53,'jewelry_store','Jewelry Store',NULL,1),
+(54,'laundry','Laundry',NULL,1),
+(55,'lawyer','Lawyer',NULL,1),
+(56,'library','Library',NULL,1),
+(57,'liquor_store','Liquor Store',NULL,1),
+(58,'local_government_off','Local Government Office',NULL,1),
+(59,'locksmith','Locksmith',NULL,1),
+(60,'lodging','Lodging',NULL,1),
+(61,'meal_delivery','Meal Delivery',NULL,1),
+(62,'meal_takeaway','Meal Takeaway',NULL,1),
+(63,'mosque','Mosque',NULL,1),
+(64,'movie_rental','Movie Rental',NULL,1),
+(65,'movie_theater','Movie Theater',NULL,1),
+(66,'moving_company','Moving Company',NULL,1),
+(67,'museum','Museum',NULL,1),
+(68,'night_club','Night Club',NULL,1),
+(69,'painter','Painter',NULL,1),
+(70,'park','Park',NULL,1),
+(71,'parking','Parking',NULL,1),
+(72,'pet_store','Pet Store',NULL,1),
+(73,'pharmacy','Pharmacy',NULL,1),
+(74,'physiotherapist','Physiotherapist',NULL,1),
+(75,'plumber','Plumber',NULL,1),
+(76,'police','Police',NULL,1),
+(77,'post_office','Post Office',NULL,1),
+(78,'place_of_worship','Place Of Worship',NULL,1),
+(79,'real_estate_agency','Real Estate Agency',NULL,1),
+(80,'restaurant','Restaurant',NULL,1),
+(81,'roofing_contractor','Roofing Contractor',NULL,1),
+(82,'rv_park','Rv Park',NULL,1),
+(83,'school','School',NULL,1),
+(84,'shoe_store','Shoe Store',NULL,1),
+(85,'shopping_mall','Shopping Mall',NULL,1),
+(86,'spa','Spa',NULL,1),
+(87,'stadium','Stadium',NULL,1),
+(88,'storage','Storage',NULL,1),
+(89,'store','Store',NULL,1),
+(90,'subway_station','Subway Station',NULL,1),
+(91,'synagogue','Synagogue',NULL,1),
+(92,'taxi_stand','Taxi Stand',NULL,1),
+(93,'train_station','Train Station',NULL,1),
+(94,'transit_station','Transit Station',NULL,1),
+(95,'travel_agency','Travel Agency',NULL,1),
+(96,'university','University',NULL,1),
+(97,'veterinary_care','Veterinary Care',NULL,1),
+(98,'zoo','Zoo',NULL,1);
 
 /* Trigger structure for table `users_venues_ratings` */
 

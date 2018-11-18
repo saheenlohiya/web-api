@@ -75,7 +75,15 @@ class UsersVenuesRatingsTest extends \Codeception\Test\Unit {
             $this->assertNotNull($this->rating->venue_rating_resolve_expiration);
 
             $this->assertNotNull($this->rating->id);
-            $this->assertTrue($this->rating->setToAcknowledged($this->rating->id));
+
+            $acknowledge = $this->rating->setToAcknowledged($this->rating->id);
+
+            $this->assertNotFalse($acknowledge);
+
+            //check to see if we can set the rating to acknowledged
+            $this->assertTrue($acknowledge['venue_rating_acknowledged'] === 1);
+            $this->assertNotNull($acknowledge['venue_rating_acknowledged_date']);
+            //make sure the acknowledged date is updated
 
         });
     }
