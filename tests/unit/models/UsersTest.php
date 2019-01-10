@@ -65,9 +65,9 @@ class UsersTest extends \Codeception\Test\Unit {
             $this->assertTrue($this->user->validate(['user_email']));
         });
 
-        $this->specify("Zipcode is required", function () {
+        $this->specify("Zipcode is NOT required", function () {
             $this->user->user_zip = null;
-            $this->assertFalse($this->user->validate(['user_zip']));
+            $this->assertTrue($this->user->validate(['user_zip']));
         });
 
         $this->specify("Gender is required", function () {
