@@ -54,9 +54,9 @@ class Users extends BaseUsers implements IdentityInterface {
     public function fields() {
         $fields = parent::fields();
 
-        $fields['user_dob'] = function($model){
-            return date('m/d/Y', strtotime($model->user_dob));
-        };
+        // $fields['user_dob'] = function($model){
+        //     return date('m/d/Y', strtotime($model->user_dob));
+        // };
 
         // remove fields that contain sensitive information
         unset($fields['user_password'], $fields['user_verification_code'], $fields['uuid']);
@@ -176,9 +176,9 @@ class Users extends BaseUsers implements IdentityInterface {
             parent::rules(),
             [
                 # custom validation rules
-                [['user_firstname', 'user_lastname', 'user_email', 'user_password', 'user_dob'], 'required'],
+                [['user_firstname', 'user_email', 'user_password', 'user_dob'], 'required'],
                 [['user_email'], 'unique'],
-                ['user_dob', 'date', 'format' => 'M/d/yyyy'],
+                ['user_dob', 'date', 'format' => 'yyyy'],
                 ['user_email', 'email'],
             ]
         );
@@ -195,7 +195,7 @@ class Users extends BaseUsers implements IdentityInterface {
             }
 
             //change the date format
-            $this->user_dob = date('Y-m-d', strtotime($this->user_dob));
+            // $this->user_dob = date('Y-m-d', strtotime($this->user_dob));
             $this->user_phone = Common::formatPhoneNumber($this->user_phone);
 
             return true;
@@ -226,7 +226,7 @@ class Users extends BaseUsers implements IdentityInterface {
     public function afterFind() {
         parent::afterFind();
         //make sure we return the date in its original ISO/ICU format
-        $this->user_dob = date('m/d/Y', strtotime($this->user_dob));
+        // $this->user_dob = date('m/d/Y', strtotime($this->user_dob));
     }
 
 
