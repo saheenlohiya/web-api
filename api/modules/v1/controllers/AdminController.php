@@ -31,9 +31,4 @@ class AdminController extends Controller
 
         return Venues::create()->listActiveVenues(trim($only_claimed));
     }
-
-    public function actionApproveClaim($approved = false, $claim_hash, $claim_code)
-    {
-        return UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code);
-    }
 }
