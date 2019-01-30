@@ -236,6 +236,15 @@ class Venues extends BaseVenues
 
     /**
      * SELECT v.id,
+        v.venue_name,
+        v.venue_lat,
+        v.venue_lon,
+        v.venue_address_1,
+        v.venue_address_2,
+        v.venue_city,
+        v.venue_state,
+        v.venue_zip,
+        v.venue_website,
         uvc.venue_claim_claimer_name,
         uvc.venue_claim_claimer_email,
         uvc.venue_claim_claimer_phone,
@@ -244,12 +253,23 @@ class Venues extends BaseVenues
         uvc.venue_claim_hash
         FROM users_venues_claims uvc 
         JOIN venues v ON v.id = uvc.venue_id
-        WHERE uvc.venue_claim_status = 'pending';
+        WHERE uvc.venue_claim_status = 'pending'
+        AND v.venue_claimed IS FALSE
      */
 
     public function listPendingClaimedVenues(){
         $query = new Query();
         $query->select([
+            "v.venue_name",
+            "v.venue_lat",
+            "v.venue_lon",
+            "v.venue_address_1",
+            "v.venue_address_2",
+            "v.venue_city",
+            "v.venue_state",
+            "v.venue_zip",
+            "v.venue_website",
+            "v.venue_claimed",
             "uvc.venue_claim_claimer_name",
             "uvc.venue_claim_claimer_email",
             "uvc.venue_claim_claimer_phone",
@@ -259,7 +279,7 @@ class Venues extends BaseVenues
         ])
         ->from('users_venues_claims uvc')
         ->join('JOIN','venues v','v.id = uvc.venue_id')
-        ->where('uvc.venue_claim_status = "pending"');
+        ->where('uvc.venue_claim_status = "pending" AND (v.venue_claimed IS FALSE OR v.venue_claimed IS NULL)');
 
         return $query->all();
 
