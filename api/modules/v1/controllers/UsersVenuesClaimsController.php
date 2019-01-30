@@ -17,7 +17,6 @@ class UsersVenuesClaimsController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['approve-claim'],
             'optional' => []
         ];
         return $behaviors;
@@ -27,11 +26,6 @@ class UsersVenuesClaimsController extends TuBaseApiController {
         if($this->checkAuthorization($user_id)){
             return UsersVenuesClaims::create()->claim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone);
         }
-    }
-
-    public function actionApproveClaim($approved = false, $claim_hash, $claim_code)
-    {
-        return UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code);
     }
 
 }

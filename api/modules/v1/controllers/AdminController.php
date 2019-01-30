@@ -2,7 +2,7 @@
 
 namespace app\api\modules\v1\controllers;
 
-
+use app\filters\TuQueryParamAuth;
 use app\models\UsersVenuesClaims;
 use app\models\Venues;
 use yii\web\Controller;
@@ -13,14 +13,20 @@ class AdminController extends Controller
 {
     public function behaviors()
     {
-        return [
-            [
-                'class' => 'yii\filters\ContentNegotiator',
-                'formats' => [
-                    'application/json' => Response::FORMAT_JSON,
-                ]
-            ],
+        
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Response::FORMAT_JSON
+            ]
         ];
+        $behaviors['authenticator'] = [
+            'class' => TuQueryParamAuth::className(),
+            'except' => ['approve-claim'],
+            'optional' => []
+        ];
+        return $behaviors;
     }
 
     public function actionListActiveVenues($only_claimed = false)
@@ -30,5 +36,14 @@ class AdminController extends Controller
         }
 
         return Venues::create()->listActiveVenues(trim($only_claimed));
+    }
+
+    public function actionListPendingClaimVenues()
+    {
+        return Venues::create()->listPendingClaimedVenues();
+    }
+
+    public function actionApproveClaim($approved = false, $claim_hash, $claim_code){
+        return UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code);
     }
 }

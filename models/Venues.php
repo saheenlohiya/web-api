@@ -235,6 +235,37 @@ class Venues extends BaseVenues
     }
 
     /**
+     * SELECT v.id,
+        uvc.venue_claim_claimer_name,
+        uvc.venue_claim_claimer_email,
+        uvc.venue_claim_claimer_phone,
+        uvc.venue_claim_status,
+        uvc.venue_claim_date,
+        uvc.venue_claim_hash
+        FROM users_venues_claims uvc 
+        JOIN venues v ON v.id = uvc.venue_id
+        WHERE uvc.venue_claim_status = 'pending';
+     */
+
+    public function listPendingClaimedVenues(){
+        $query = new Query();
+        $query->select([
+            "uvc.venue_claim_claimer_name",
+            "uvc.venue_claim_claimer_email",
+            "uvc.venue_claim_claimer_phone",
+            "uvc.venue_claim_status",
+            "uvc.venue_claim_date",
+            "uvc.venue_claim_hash"
+        ])
+        ->from('users_venues_claims uvc')
+        ->join('JOIN','venues v','v.id = uvc.venue_id')
+        ->where('uvc.venue_claim_status = "pending"');
+
+        return $query->all();
+
+    }
+
+    /**
      * @param $latitude
      * @param $longitude
      * @param int $radius
