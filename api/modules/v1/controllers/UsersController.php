@@ -135,7 +135,6 @@ class UsersController extends TuBaseApiController
      */
     private function _getUserObject($userData)
     {
-        $userData['user_dob'] = Yii::$app->formatter->asDate($userData['user_dob'], 'MM/dd/yyyy');
         unset($userData['user_password']);
         unset($userData['user_auth_key']);
         return $userData;
