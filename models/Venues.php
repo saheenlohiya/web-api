@@ -219,7 +219,7 @@ class Venues extends BaseVenues
     {
 
         $query = new Query();
-        $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed','(SELECT COUNT(*) FROM users_venues_ratings uvr WHERE uvr.venue_id = v.id) AS total_messages'])
+        $query->select(['v.*', 'IF(ISNULL(v.user_id),0,1) AS is_claimed','(SELECT COUNT(*) FROM users_venues_ratings uvr WHERE uvr.venue_id = v.id) AS total_messages','MAX(vr.`venue_rating_date`) AS last_rating_date'])
             ->from('venues v')
             ->join('JOIN', 'users_venues_ratings vr', 'vr.venue_id = v.id')
             ->groupBy(['v.id'])
