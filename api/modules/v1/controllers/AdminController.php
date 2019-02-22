@@ -44,6 +44,6 @@ class AdminController extends Controller
     }
 
     public function actionApproveClaim($approved = false, $claim_hash, $claim_code){
-        return UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code);
+        return ['success'=>UsersVenuesClaims::create()->approveClaim($approved, $claim_hash, $claim_code)];
     }
 }
