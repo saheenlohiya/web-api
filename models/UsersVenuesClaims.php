@@ -126,6 +126,9 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
     private function _approveClaim($venue_claim_hash, $venue_claim_code) {
         $claim = self::find()->where(['venue_claim_hash' => $venue_claim_hash, 'venue_claim_code' => $venue_claim_code])->one();
 
+        var_dump($claim);
+        die();
+
         if (!is_null($claim) && $claim->venue_claim_status == self::VENUE_CLAIM_STATUS_PENDING) {
             //first update the claim
             $claim->venue_claim_status = self::VENUE_CLAIM_STATUS_ACTIVE;
