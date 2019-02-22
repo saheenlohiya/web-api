@@ -275,7 +275,8 @@ class Venues extends BaseVenues
             "uvc.venue_claim_claimer_phone",
             "uvc.venue_claim_status",
             "uvc.venue_claim_date",
-            "uvc.venue_claim_hash"
+            "uvc.venue_claim_hash",
+            "uvc.venue_claim_code"
         ])
         ->from('users_venues_claims uvc')
         ->join('JOIN','venues v','v.id = uvc.venue_id')
