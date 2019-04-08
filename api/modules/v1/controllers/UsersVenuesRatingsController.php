@@ -17,7 +17,7 @@ class UsersVenuesRatingsController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => [],
+            'except' => ['create'],
             'optional' => []
         ];
         return $behaviors;

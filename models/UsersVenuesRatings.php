@@ -62,6 +62,7 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
         return ArrayHelper::merge(
             parent::rules(),
             [
+                [['user_id'], 'default', 'value'=> \Yii::$app->params['anonymousUserId']],
                 [['user_id', 'venue_id'], 'required'],
                 [['user_id'], 'hasOpenTicketValidator'],
                 [['venue_rating_cat_1', 'venue_rating_cat_2', 'venue_rating_cat_3', 'venue_rating_cat_4', 'venue_rating_cat_4', 'venue_rating_cat_5', 'venue_rating_cat_6'], 'integer', 'min' => 1, 'max' => 5],
@@ -71,8 +72,10 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
     public function hasOpenTicketValidator()
     {
-        if (self::find()->where(['user_id' => $this->user_id, 'venue_id' => $this->venue_id, 'venue_rating_resolved' => 0])->one()) {
-            $this->addError('user_id', 'You currently have an open ticket with this company. Please add to your ongoing conversation using the current ticket.');
+        if($this->user_id != \Yii::$app->params['anonymousUserId']){
+            if (self::find()->where(['user_id' => $this->user_id, 'venue_id' => $this->venue_id, 'venue_rating_resolved' => 0])->one()) {
+                $this->addError('user_id', 'You currently have an open ticket with this company. Please add to your ongoing conversation using the current ticket.');
+            }
         }
     }
 
