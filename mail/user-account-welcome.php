@@ -4,15 +4,15 @@
 
 <h1>Hi <?php echo $user->user_firstname; ?></h1>
 
-<p>Welcome to Tell Us! Thanks so much for joining us. You’re on your way to helping businesses provide better and more consistent customer service.</p>
+<p>Welcome to Tell Us! Thank you for joining us. You’re on your way to helping businesses provide better and more consistent customer service.</p>
 
 <h3>Using Tell Us is as easy as 1-2-3</h3>
 
-<p>If you want to provide feedback to a business.</p>
+<p>To provide feedback to a business.</p>
 <ol>
     <li>Login to your Tell Us app and search for a business by name (closest matching businesses will show up first)</li>
-    <li>Click the Tell Us button to leave a simple guided feedback.</li>
-    <li>Enjoy the fruits of your 10 second labor. Note. If your feedback indicates that you were not fully satisfied with the service you were provided, A Tell Us ticket will be opened on your behalf and a Tell Us representative will mediate between you and the business. If a favorable resolution is agreed upon, you will be notified of the improvement in the customer service being provided by the business.</li>
+    <li>Click the Tell Us button to leave simple guided feedback.</li>
+    <li>Your feedback will be delivered directly and privately to the business. Note. If your feedback indicates that you were not fully satisfied with the service you were provided, A Tell Us ticket will be opened on your behalf and a Tell Us representative will mediate between you and the business. If a favorable resolution is agreed upon, you will be notified of the improvement in the customer service being provided by the business.</li>
 </ol>
 
 <p>If you are a business wanting to claim a business</p>
