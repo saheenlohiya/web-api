@@ -54,7 +54,7 @@ class Mailer extends Component
     public function getClaimStartedNotifyUserSubject()
     {
         if ($this->claimStartedNotifyUserSubject == null) {
-            $this->setclaimStartedNotifyUserSubject("Your TellUs business claim has been recieved");
+            $this->setclaimStartedNotifyUserSubject("Your Tell Us business claim has been received");
         }
 
         return $this->claimStartedNotifyUserSubject;
@@ -74,7 +74,7 @@ class Mailer extends Component
     public function getWelcomeSubject()
     {
         if ($this->welcomeSubject == null) {
-            $this->setWelcomeSubject('Welcome to TellUs');
+            $this->setWelcomeSubject('Welcome to Tell Us');
         }
 
         return $this->welcomeSubject;
@@ -216,10 +216,10 @@ class Mailer extends Component
     {
         if ($this->claimNotifySubject == null) {
             if($approved){
-                $this->setClaimNotifySubject('Your TellUs Claim Has Been Approved');
+                $this->setClaimNotifySubject('Your Tell Us Claim Has Been Approved');
             }
             else{
-                $this->setClaimNotifySubject('Your Attention is Needed Regarding Your TellUs Claim');
+                $this->setClaimNotifySubject('Your Attention is Needed Regarding Your Tell Us Claim');
             }
 
         }
