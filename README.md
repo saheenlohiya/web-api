@@ -1,10 +1,8 @@
-TellUs Project
-============================
+# Tell Us Project
 
 ![Build Status](https://circleci.com/gh/dwamianm/tellusv2.svg?style=shield&circle-token=44fcbab8861fd5fdae0081de6350c4b76b3cb0f8)
 
-DIRECTORY STRUCTURE
--------------------
+## DIRECTORY STRUCTURE
 
       assets/             contains assets definition
       commands/           contains console commands (controllers)
@@ -18,16 +16,11 @@ DIRECTORY STRUCTURE
       views/              contains view files for the Web application
       web/                contains the entry script and Web resources
 
-
-
-REQUIREMENTS
-------------
+## REQUIREMENTS
 
 The minimum requirement by this project template that your Web server supports PHP 5.4.0.
 
-
-INSTALLATION
-------------
+## INSTALLATION
 
 ### Install via Composer
 
@@ -36,19 +29,18 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
 You can then install this project template using the following command:
 
-~~~
+```
 php composer.phar global require "fxp/composer-asset-plugin:^1.2.0"
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
 php composer.phar install --ignore-platform-reqs
-~~~
+```
 
 Now you should be able to access the application through the following URL, assuming `basic` is the directory
 directly under the Web root.
 
-~~~
+```
 http://localhost/basic/web/
-~~~
-
+```
 
 ### Install from an Archive File
 
@@ -66,13 +58,11 @@ Set cookie validation key in `config/web.php` file to some random secret string:
 
 You can then access the application through the following URL:
 
-~~~
+```
 http://localhost/basic/web/
-~~~
+```
 
-
-CONFIGURATION
--------------
+## CONFIGURATION
 
 ### Database
 
@@ -89,14 +79,12 @@ return [
 ```
 
 **NOTES:**
+
 - Yii won't create the database for you, this has to be done manually before you can access it.
 - Check and edit the other files in the `config/` directory to customize your application as required.
 - Refer to the README in the `tests` directory for information specific to basic application tests.
 
-
-
-TESTING
--------
+## TESTING
 
 Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
 By default there are 3 test suites:
@@ -109,33 +97,32 @@ Tests can be executed by running
 
 ```
 vendor/bin/codecept run
-``` 
+```
 
 The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
 tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
+they perform testing in real browser.
 
+### Running acceptance tests
 
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
+To execute acceptance tests do the following:
 
 1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
 
 2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
    version of Codeception
 
-3. Update dependencies with Composer 
+3. Update dependencies with Composer
 
-    ```
-    composer update  
-    ```
+   ```
+   composer update
+   ```
 
 4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
 
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ``` 
+   ```
+   java -jar ~/selenium-server-standalone-x.xx.x.jar
+   ```
 
 5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
 
@@ -145,14 +132,13 @@ To execute acceptance tests do the following:
 
    The database configuration can be found at `config/test_db.php`.
 
+6) Start web server:
 
-6. Start web server:
+   ```
+   tests/bin/yii serve
+   ```
 
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
+7) Now you can run all available tests
 
    ```
    # run all available tests
