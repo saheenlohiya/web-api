@@ -17,7 +17,7 @@ class UsersVenuesRatingsController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['create'],
+            'except' => ['create', 'user-venue-rating-global'],
             'optional' => []
         ];
         return $behaviors;
@@ -54,6 +54,24 @@ class UsersVenuesRatingsController extends TuBaseApiController {
             return ['error' => 'Could not modify rating'];
         }
         else{
+            return $acknowledged;
+        }
+
+
+    }
+
+    public function actionUserVenueRatingGlobal(){
+
+        $response = \Yii::$app->response;
+        $request = \Yii::$app->request;
+        $response->format = Response::FORMAT_JSON; 
+        $acknowledged = UsersVenuesRatings::create()->sendToSupport();
+        if(!$acknowledged){
+            $response->setStatusCode(304);
+            return ['error' => 'Could not post rating'];
+        }
+        else{
+            $response->setStatusCode(200);
             return $acknowledged;
         }
 
