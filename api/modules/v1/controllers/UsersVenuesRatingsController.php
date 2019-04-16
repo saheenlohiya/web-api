@@ -59,4 +59,22 @@ class UsersVenuesRatingsController extends TuBaseApiController {
 
 
     }
+
+    public function actionUserVenueRatingGlobal(){
+
+        $response = \Yii::$app->response;
+        $request = \Yii::$app->request;
+        $response->format = Response::FORMAT_JSON; 
+        $acknowledged = UsersVenuesRatings::create()->sendToSupport();
+        if(!$acknowledged){
+            $response->setStatusCode(304);
+            return ['error' => 'Could not post rating'];
+        }
+        else{
+            $response->setStatusCode(200);
+            return $acknowledged;
+        }
+
+
+    }
 }

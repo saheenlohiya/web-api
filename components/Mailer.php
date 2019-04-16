@@ -48,6 +48,8 @@ class Mailer extends Component
 
     protected $claimStartedNotifyUserSubject;
 
+    protected $newRatingNotificationSupportSubject;
+
     /**
      * @return mixed
      */
@@ -98,6 +100,20 @@ class Mailer extends Component
         }
 
         return $this->newPasswordSubject;
+    }
+
+    public function getRatingNotificationSupportSubject()
+    {
+        if ($this->newRatingNotificationSupportSubject == null) {
+            $this->setNewRatingNotificationSupportSubject('Global Venue Rating');
+        }
+
+        return $this->newRatingNotificationSupportSubject;
+    }
+
+    public function setNewRatingNotificationSupportSubject($newRatingNotificationSupportSubject)
+    {
+        $this->newRatingNotificationSupportSubject = $newRatingNotificationSupportSubject;
     }
 
     /**
@@ -424,5 +440,23 @@ class Mailer extends Component
             ->send();
         */
 
+    }
+
+    /**
+     * Sends an email to a user with confirmation link.
+     *
+     * @param Users $user
+     *
+     * @return bool
+     */
+    public function sendRatingNotificationSupport($user, $attributes)
+    {
+        return $this->sendMessage(
+            //Yii::$app->params['adminEmail'],
+            "adubinsky@gmail.com",
+            $this->getRatingNotificationSupportSubject(),
+            'rating-notify-support',
+            ['user' => $user, 'attributes'=>$attributes]
+        );
     }
 }

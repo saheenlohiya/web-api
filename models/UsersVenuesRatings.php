@@ -245,5 +245,13 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             }
         }
     }
-
+    public function sendToSupport() {
+        $user = \Yii::$app->user->identity;
+        $attributes = \yii::$app->request->post();
+        if (!$this->mailer->sendRatingNotificationSupport($user, $attributes)) {
+            Throw new Exception("Could not send welcome email");
+            return false;
+        }
+        return ['success' => true, 'message'=>'Email succesfully sent'];
+    }
 }
