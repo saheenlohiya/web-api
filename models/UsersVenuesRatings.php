@@ -247,10 +247,11 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
     }
     public function sendToSupport() {
         $user = \Yii::$app->user->identity;
-        if(!$user) {
-            $user = new stdObject();
-            $user->user_firstname = 'Anonymous';
-            $user->user_email = 'Anonymous';
+        if(is_null($user)) {
+            $user = array();
+            $user['user_firstname'] = 'Anonymous';
+            $user['user_email'] = 'Anonymous@anonymous.com';
+            $user = (object)$user;
         }
         $attributes = \yii::$app->request->post();
         if (!$this->mailer->sendRatingNotificationSupport($user, $attributes)) {

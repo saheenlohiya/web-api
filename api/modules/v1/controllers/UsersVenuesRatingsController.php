@@ -17,8 +17,8 @@ class UsersVenuesRatingsController extends TuBaseApiController {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['create', 'user-venue-rating-global'],
-            'optional' => []
+            'except' => ['create'],
+            'optional' => ['user-venue-rating-global']
         ];
         return $behaviors;
     }
@@ -67,8 +67,8 @@ class UsersVenuesRatingsController extends TuBaseApiController {
         $response->format = Response::FORMAT_JSON; 
         $acknowledged = UsersVenuesRatings::create()->sendToSupport();
         if(!$acknowledged){
-            $response->setStatusCode(304);
-            return ['error' => 'Could not post rating'];
+            $response->setStatusCode(422);
+            return ['success' => false,'error' => 'Could not post rating'];
         }
         else{
             $response->setStatusCode(200);
