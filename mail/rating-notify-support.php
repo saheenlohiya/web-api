@@ -16,6 +16,6 @@
 </div>
 <br><br>
 <p>
-    Reagrds,<br>
+    Regards,<br>
     The Tell Us Team
 </p>
