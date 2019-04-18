@@ -453,7 +453,7 @@ class Mailer extends Component
     {
         return $this->sendMessage(
             //Yii::$app->params['adminEmail'],
-            "adubinsky@gmail.com",
+            "john@tellusintel.com",
             $this->getRatingNotificationSupportSubject(),
             'rating-notify-support',
             ['user' => $user, 'attributes'=>$attributes]
