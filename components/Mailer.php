@@ -48,13 +48,15 @@ class Mailer extends Component
 
     protected $claimStartedNotifyUserSubject;
 
+    protected $newRatingNotificationSupportSubject;
+
     /**
      * @return mixed
      */
     public function getClaimStartedNotifyUserSubject()
     {
         if ($this->claimStartedNotifyUserSubject == null) {
-            $this->setclaimStartedNotifyUserSubject("Your TellUs business claim has been recieved");
+            $this->setclaimStartedNotifyUserSubject("Your Tell Us business claim has been received");
         }
 
         return $this->claimStartedNotifyUserSubject;
@@ -74,7 +76,7 @@ class Mailer extends Component
     public function getWelcomeSubject()
     {
         if ($this->welcomeSubject == null) {
-            $this->setWelcomeSubject('Welcome to TellUs');
+            $this->setWelcomeSubject('Welcome to Tell Us');
         }
 
         return $this->welcomeSubject;
@@ -98,6 +100,20 @@ class Mailer extends Component
         }
 
         return $this->newPasswordSubject;
+    }
+
+    public function getRatingNotificationSupportSubject()
+    {
+        if ($this->newRatingNotificationSupportSubject == null) {
+            $this->setNewRatingNotificationSupportSubject('Global Venue Rating');
+        }
+
+        return $this->newRatingNotificationSupportSubject;
+    }
+
+    public function setNewRatingNotificationSupportSubject($newRatingNotificationSupportSubject)
+    {
+        $this->newRatingNotificationSupportSubject = $newRatingNotificationSupportSubject;
     }
 
     /**
@@ -216,10 +232,10 @@ class Mailer extends Component
     {
         if ($this->claimNotifySubject == null) {
             if($approved){
-                $this->setClaimNotifySubject('Your TellUs Claim Has Been Approved');
+                $this->setClaimNotifySubject('Your Tell Us Claim Has Been Approved');
             }
             else{
-                $this->setClaimNotifySubject('Your Attention is Needed Regarding Your TellUs Claim');
+                $this->setClaimNotifySubject('Your Attention is Needed Regarding Your Tell Us Claim');
             }
 
         }
@@ -424,5 +440,23 @@ class Mailer extends Component
             ->send();
         */
 
+    }
+
+    /**
+     * Sends an email to a user with confirmation link.
+     *
+     * @param Users $user
+     *
+     * @return bool
+     */
+    public function sendRatingNotificationSupport($user, $attributes)
+    {
+        return $this->sendMessage(
+            //Yii::$app->params['adminEmail'],
+            "john@tellusintel.com",
+            $this->getRatingNotificationSupportSubject(),
+            'rating-notify-support',
+            ['user' => $user, 'attributes'=>$attributes]
+        );
     }
 }

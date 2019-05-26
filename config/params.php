@@ -5,5 +5,6 @@ return [
 //    'adminEmail' => ['dmcleish@gmail.com'],
     'customerServiceEmail' => 'support@thetellusapp.com',
     'googleApiKey' => 'AIzaSyBNt6tgm-GSPdU4-sFtmD0o4mbckzTepVc',
-    'urbanairship'=>["key"=>"HCKFvIomS8q8fHD6gy0Cjg","secret"=>"KWJhz-cWRS6ObB9vCJlNEA"]
+    'urbanairship'=>["key"=>"HCKFvIomS8q8fHD6gy0Cjg","secret"=>"KWJhz-cWRS6ObB9vCJlNEA"],
+    'anonymousUserId'=>110
 ];
