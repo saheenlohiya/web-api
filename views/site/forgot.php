@@ -1,4 +1,8 @@
 <?php
+    use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
+?>
+<?php
 //$this->pageTitle=Yii::$app->name . ' - Forgot Password';
 // $this->breadcrumbs=array(
 // 	'Forgot Password',
