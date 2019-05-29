@@ -27,7 +27,7 @@
     
     // ...
     
-    ActiveForm::end();
+    
     ?>
 
 	<div class="row">
@@ -38,7 +38,7 @@
 		<?php echo Html::submitButton('Submit'); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+<?php ActiveForm::end(); ?>
 
 </div><!-- form -->
 
