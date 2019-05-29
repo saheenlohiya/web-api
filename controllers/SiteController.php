@@ -154,10 +154,11 @@ class SiteController extends Controller
         
         public function actionForgot()
 	{
-            $getEmail=$_POST['Lupa']['email'];
-            $getModel= Users::model()->findByAttributes(array('email'=>$getEmail));
+            
             if(isset($_POST['Lupa']))
             {
+                $getEmail=$_POST['Lupa']['email'];
+                $getModel= Users::findByEmail($getEmail);
                 $getToken=rand(0, 99999);
                 $getTime=date("H:i:s");
                 $getModel->resettoken=md5($getToken.$getTime);
