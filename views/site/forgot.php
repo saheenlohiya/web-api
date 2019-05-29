@@ -15,7 +15,7 @@
 <div class="form">
 
 <?php 
-    use yii\widgets\ActiveForm;
+     @import::using('yii\bootstrap\ActiveForm'); 
     $form = ActiveForm::begin([
         'id' => 'forgot-form',
         'enableClientValidation'=>true,
