@@ -7,7 +7,7 @@
 <?php if(Yii::$app->user->hasFlash('forgot')): ?>
 
 <div class="flash-success">
-	<?php echo Yii::$app->user->getFlash('forgot'); ?>
+	<?php echo Yii::$app->session->setFlash('error', 'There has nothing to be uploaded'); ?>
 </div>
 
 <?php else: ?>
