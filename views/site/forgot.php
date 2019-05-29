@@ -4,7 +4,7 @@
 // 	'Forgot Password',
 // );
 ?>
-<?php if(Yii::$app->user->hasFlash('forgot')): ?>
+<?php if(Yii::$app->session->hasFlash('forgot')): ?>
 
 <div class="flash-success">
 	<?php echo Yii::$app->session->setFlash('error', 'There has nothing to be uploaded'); ?>
