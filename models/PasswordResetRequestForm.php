@@ -22,7 +22,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => '\app\models\User',
+                'targetClass' => '\app\models\Users',
                 'filter' => [],
                 'message' => 'There is no user with such email.'
             ],
@@ -37,7 +37,7 @@ class PasswordResetRequestForm extends Model
     public function sendEmail()
     {
         /* @var $user User */
-        $user = User::findOne([
+        $user = Users::findOne([
             'email' => $this->email,
         ]);
  
@@ -45,7 +45,7 @@ class PasswordResetRequestForm extends Model
             return false;
         }
  
-        if (!User::isPasswordResetTokenValid($user->resettoken)) {
+        if (!Users::isPasswordResetTokenValid($user->resettoken)) {
             $user->generatePasswordResetToken();
             if (!$user->save()) {
                 return false;

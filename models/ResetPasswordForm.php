@@ -14,7 +14,7 @@ class ResetPasswordForm extends Model
     public $password;
  
     /**
-     * @var \app\models\User
+     * @var \app\models\Users
      */
     private $_user;
  
@@ -31,7 +31,7 @@ class ResetPasswordForm extends Model
             throw new InvalidParamException('Password reset token cannot be blank.');
         }
  
-        $this->_user = User::findByPasswordResetToken($token);
+        $this->_user = Users::findByPasswordResetToken($token);
  
         if (!$this->_user) {
             throw new InvalidParamException('Wrong password reset token.');
