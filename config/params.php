@@ -8,6 +8,6 @@ return [
     'urbanairship'=>["key"=>"HCKFvIomS8q8fHD6gy0Cjg","secret"=>"KWJhz-cWRS6ObB9vCJlNEA"],
     'anonymousUserId'=>110,
     'user.passwordResetTokenExpire' => 3600,
-    'supportEmail' => 'robot@devreadwrite.com'
+    'supportEmail' => 'support@thetellusapp.com'
     
 ];
