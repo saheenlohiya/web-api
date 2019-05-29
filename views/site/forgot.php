@@ -14,13 +14,18 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'forgot-form',
+<?php 
+     
+    $form = ActiveForm::begin([
+        'id' => 'forgot-form',
         'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
+        'validateOnSubmit' => true, // this is redundant because it true by default
+    ]);
+    
+    // ...
+    
+    ActiveForm::end();
+    ?>
 
 	<div class="row">
             Email : <input name="Lupa[email]" id="ContactForm_email" type="email">
