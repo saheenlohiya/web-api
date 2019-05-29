@@ -10,6 +10,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
 use yii\widgets\ActiveForm;   
+use app\models\PasswordResetRequestForm;
+use app\models\ResetPasswordForm;
 
 class SiteController extends Controller
 {
@@ -124,65 +126,47 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-    public function getToken($token)
-	{
-		$model=Users::model()->findByAttributes(array('resettoken'=>$token));
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-        
-
-        public function actionVerToken($token)
-        {
-            $model=$this->getToken($token);
-            if(isset($_POST['Ganti']))
-            {
-                if($model->token==$_POST['Ganti']['tokenhid']){
-                    $model->password=md5($_POST['Ganti']['password']);
-                    $model->token="null";
-                    $model->save();
-                    Yii::app()->user->setFlash('ganti','<b>Password has been successfully changed! please login</b>');
-                    $this->redirect('?r=site/login');
-                    $this->refresh();
-                }
+    public function actionRequestPasswordReset()
+    {
+        $model = new PasswordResetRequestForm();
+ 
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+ 
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
             }
-            $this->render('verifikasi',array(
-			'model'=>$model,
-		));
+ 
         }
-
-        
-        public function actionForgot()
-	{
-            
-            if(isset($_POST['Lupa']))
-            {
-                $getEmail=$_POST['Lupa']['email'];
-                $getModel= Users::findByEmail($getEmail);
-                $getToken=rand(0, 99999);
-                $getTime=date("H:i:s");
-                $getModel->resettoken=md5($getToken.$getTime);
-                $namaPengirim="The Tell Us App";
-                $emailadmin="info@thetellusapp.com";
-                $subjek="Reset Password";
-                $setpesan="you have successfully reset your password<br/>
-                    <a href='/index.php?r=site/vertoken/view&token=".$getModel->resettoken."'>Click Here to Reset Password</a>";
-                if($getModel->validate())
-			{
-				$name='=?UTF-8?B?'.base64_encode($namaPengirim).'?=';
-				$subject='=?UTF-8?B?'.base64_encode($subjek).'?=';
-				$headers="From: $name <{$emailadmin}>\r\n".
-					"Reply-To: {$emailadmin}\r\n".
-					"MIME-Version: 1.0\r\n".
-					"Content-type: text/html; charset=UTF-8";
-				$getModel->save();
-                                Yii::app()->user->setFlash('forgot','link to reset your password has been sent to your email');
-				mail($getEmail,$subject,$setpesan,$headers);
-				$this->refresh();
-			}
-                
-            }
-		$this->render('forgot');
-	}
+ 
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ]);
+    }
+ 
+    /**
+     * Resets password.
+     *
+     * @param string $token
+     * @return mixed
+     * @throws BadRequestHttpException
+     */
+    public function actionResetPassword($token)
+    {
+        try {
+            $model = new ResetPasswordForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+ 
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+            Yii::$app->session->setFlash('success', 'New password was saved.');
+            return $this->goHome();
+        }
+ 
+        return $this->render('resetPassword', [
+            'model' => $model]);
+      }
 }

@@ -229,5 +229,38 @@ class Users extends BaseUsers implements IdentityInterface {
         // $this->user_dob = date('m/d/Y', strtotime($this->user_dob));
     }
 
+    public static function findByPasswordResetToken($token)
+    {
+ 
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+ 
+        return static::findOne([
+            'resettoken' => $token
+        ]);
+    }
+ 
+    public static function isPasswordResetTokenValid($token)
+    {
+ 
+        if (empty($token)) {
+            return false;
+        }
+ 
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        return $timestamp + $expire >= time();
+    }
+
+    public function generatePasswordResetToken()
+    {
+        $this->resettoken = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+ 
+    public function removePasswordResetToken()
+    {
+        $this->resettoken = null;
+    }
 
 }

@@ -12,9 +12,6 @@ $this->title=Yii::$app->name . ' - Forgot Password';
 
 
 <div class="form">
-<div class="row">
-            Email : <input name="Lupa[email]" id="ContactForm_email" type="email">
-	</div>
 <?php 
     $form = ActiveForm::begin([
         'id' => 'forgot-form',
