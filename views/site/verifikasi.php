@@ -1,5 +1,5 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Change Password';
+$this->pageTitle=Yii::$app->name . ' - Change Password';
 $this->breadcrumbs=array(
 	'Change Password',
 );

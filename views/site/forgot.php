@@ -1,13 +1,13 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Forgot Password';
+$this->pageTitle=Yii::$app->name . ' - Forgot Password';
 $this->breadcrumbs=array(
 	'Forgot Password',
 );
 ?>
-<?php if(Yii::app()->user->hasFlash('forgot')): ?>
+<?php if(Yii::$app->user->hasFlash('forgot')): ?>
 
 <div class="flash-success">
-	<?php echo Yii::app()->user->getFlash('forgot'); ?>
+	<?php echo Yii::$app->user->getFlash('forgot'); ?>
 </div>
 
 <?php else: ?>
