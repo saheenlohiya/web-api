@@ -265,7 +265,7 @@ class Users extends BaseUsers implements IdentityInterface {
 
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->user_password = Yii::$app->security->generatePasswordHash($password);
     }
 
 }
