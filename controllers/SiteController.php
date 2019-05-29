@@ -141,7 +141,7 @@ class SiteController extends Controller
  
         }
  
-        return $this->render('requestPasswordResetToken', [
+        return $this->render('passwordResetRequestForm', [
             'model' => $model,
         ]);
     }
