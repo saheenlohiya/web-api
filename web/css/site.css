@@ -129,3 +129,6 @@ a.desc:after {
     position: relative;
 
 }
+.float-right{
+    float: right;
+}
