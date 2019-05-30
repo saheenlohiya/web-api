@@ -123,3 +123,9 @@ a.desc:after {
 .navbar-inverse .navbar-nav > li > a {
     color: white!important;
 }
+.center-align{
+    float: none;
+    margin: auto;
+    position: relative;
+
+}
