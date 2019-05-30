@@ -12,7 +12,7 @@ class ResetPasswordForm extends Model
 {
  
     public $password;
- 
+    public $password_repeat;
     /**
      * @var \app\models\Users
      */
