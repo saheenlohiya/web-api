@@ -28,7 +28,6 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/logo.png', ['alt'=>'The TellUs App']),
-        ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
