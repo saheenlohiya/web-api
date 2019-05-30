@@ -46,6 +46,7 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
+            ['password_repeat', 'required'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute'=>'password']
