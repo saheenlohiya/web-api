@@ -159,6 +159,7 @@ class SiteController extends Controller
             $model = new ResetPasswordForm($token);
         } catch (\Exception $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
+            return $this->goHome();
         }
  
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
