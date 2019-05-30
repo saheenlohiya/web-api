@@ -158,7 +158,7 @@ class SiteController extends Controller
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+            Yii::$app->session->setFlash('error', $e->getMessage());
         }
  
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
