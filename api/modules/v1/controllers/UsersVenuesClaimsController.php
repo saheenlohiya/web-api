@@ -30,10 +30,9 @@ class UsersVenuesClaimsController extends TuBaseApiController {
     }
     /**
      * @param $user_id
-     * @return \app\models\UsersVenuesClaimsController[]|array
+     * @return \app\models\UsersVenuesClaims[]|array
      */
     public function actionListByUser($user_id) {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
         if($this->checkAuthorization($user_id)){
             return UsersVenuesClaims::create()->getVenueClaimsByUser($user_id);
         }
