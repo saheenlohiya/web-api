@@ -271,6 +271,7 @@ class Users extends BaseUsers implements IdentityInterface {
     public function getTeamByUser($user_id) {
         return self::find()
             ->where(['team_manager_id' => $user_id])
+            ->with(['usersVenuesClaims', 'usersVenuesClaims.venue'])
             ->asArray(true)
             ->all();
     }
