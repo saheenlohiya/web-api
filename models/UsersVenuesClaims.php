@@ -195,5 +195,12 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         }
     }
 
+    public function getVenueClaimssByUser($user_id) {
+        return UsersVenuesFollows::find()
+            ->where(['user_id' => $user_id])
+            ->orderBy(['venue_claim_verified_date' => 'DESC'])
+            ->asArray(true)
+            ->all();
+    }
 
 }

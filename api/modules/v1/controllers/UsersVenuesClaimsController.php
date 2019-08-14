@@ -28,5 +28,15 @@ class UsersVenuesClaimsController extends TuBaseApiController {
             return UsersVenuesClaims::create()->claim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone);
         }
     }
+    /**
+     * @param $user_id
+     * @return \app\models\UsersVenuesClaimsController[]|array
+     */
+    public function actionListByUser($user_id) {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if($this->checkAuthorization($user_id)){
+            return UsersVenuesClaims::create()->getVenueClaimsByUser($user_id);
+        }
+    }
 
 }
