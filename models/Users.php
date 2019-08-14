@@ -267,5 +267,12 @@ class Users extends BaseUsers implements IdentityInterface {
     {
         $this->user_password = Yii::$app->security->generatePasswordHash($password);
     }
+    
+    public function getTeamByUser($user_id) {
+        return self::find()
+            ->where(['team_manager_id' => $user_id])
+            ->asArray(true)
+            ->all();
+    }
 
 }
