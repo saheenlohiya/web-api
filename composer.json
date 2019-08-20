@@ -1,0 +1,87 @@
+{
+    "name": "yiisoft/yii2-app-basic",
+    "description": "Yii 2 Basic Project Template",
+    "keywords": ["yii2", "framework", "basic", "project template"],
+    "homepage": "http://www.yiiframework.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/dwamianm/yii2-google-places-library.git"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/dwamianm/urbanairship-api.git"
+      }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0.0",
+	"fxp/composer-asset-plugin": "~1.2.0",
+	"yiisoft/yii2-debug": "~2.0.0",
+	"yiisoft/yii2-gii": "~2.0.0",
+        "yiisoft/yii2": "~2.0.13",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "flow/jsonpath": "^0.3.4",
+        "symfony/process": "^3.2",
+        "symfony/dependency-injection": "^3.2",
+        "symfony/http-kernel": "^3.2",
+        "symfony/filesystem": "^3.2",
+        "phpunit/php-invoker": "^1.1",
+        "schmunk42/yii2-giiant": "@stable",
+        "willdurand/geocoder": "^4.0.0",
+        "frostealth/yii2-aws-s3": "~2.0",
+        "2amigos/yii2-google-places-library" : "dev-master",
+        "naski/urbanairship-api": "dev-master",
+        "grptx/yii2-firebase": "~0.3.1",
+        "understeam/yii2-fcm": "~0.1",
+        "php-http/httplug": "^1.1",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message": "^1.6",
+        "geocoder-php/nominatim-provider": "^4.1",
+	 "yiisoft/yii2-faker": "~2.0.0",
+        "codeception/base": "^2.2.3",
+        "codeception/verify": "~0.3.1",
+        "codeception/specify": "~0.4.3"
+    },
+    "require-dev": {
+       
+    },
+    "config": {
+        "fxp-asset": {
+            "installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "process-timeout": 1800
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "runtime": "0777",
+                    "web/assets": "0777",
+                    "yii": "0755"
+                }
+            ],
+            "generateCookieValidationKey": [
+                "config/web.php"
+            ]
+        }
+    }
+}

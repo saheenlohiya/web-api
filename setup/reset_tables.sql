@@ -1,0 +1,14 @@
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE users;
+TRUNCATE TABLE users_venues_claims;
+TRUNCATE TABLE users_venues_coupons;
+TRUNCATE TABLE users_venues_follows;
+TRUNCATE TABLE users_venues_ratings;
+TRUNCATE TABLE users_venues_ratings_images;
+TRUNCATE TABLE users_venues_ratings_responses;
+TRUNCATE TABLE venues;
+TRUNCATE TABLE venues_admins;
+TRUNCATE TABLE venues_coupons;
+TRUNCATE TABLE venues_images;
+TRUNCATE TABLE venues_settings;
+SET FOREIGN_KEY_CHECKS = 1;
