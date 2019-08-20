@@ -1,0 +1,15 @@
+workflows:
+  version: 2
+  tellus_tests:
+    jobs:
+        build:
+          docker:
+            - image: circleci/php:7.3.4
+            - run:
+              name: mysql 
+              command: 
+                - mysql -u ubuntu -e "create database tellus_tests"
+                - mysql -u ubuntu tellus_tests < setup/dump.sql
+            - run:
+              command:
+                - php vendor/bin/codecept run unit
