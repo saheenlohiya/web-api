@@ -4,8 +4,8 @@ return [
     'transport' => [
         'class' => 'Swift_SmtpTransport',
         'host' => 'email-smtp.us-east-1.amazonaws.com',
-        'username' => 'AKIAIYOOR4KG7FX5AFWA',
-        'password' => 'ArcDUvHKOYBeL0GTOTKZWOMAszFes5VITPr0M4xxTZ1s',
+        'username' => 'AKIA2N6LJNL5H3KK7RMT',
+        'password' => 'BLea1cOF3vFMBk2SvGKYxzqMrtNzMuRSdh6eFW46a6lr',
         'port' => '587',
         'encryption' => 'tls',
     ],
