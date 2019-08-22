@@ -4,7 +4,7 @@ if(YII_ENV_DEV || YII_ENV == 'dev'){
         'class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=tellus-main-cluster.cluster-cusw3pjt3qpv.us-east-1.rds.amazonaws.com;dbname=tellus',
         'username' => 'tellus',
-        'password' => 'Yux4JFTVdw6y7A7ZQs',
+        'password' => 'ne#qua4yuya50Bu',
         'charset' => 'utf8',
     ];
 }
@@ -13,7 +13,7 @@ else if(YII_ENV == 'test'){
         'class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=tellus-main-cluster.cluster-cusw3pjt3qpv.us-east-1.rds.amazonaws.com;dbname=tellus',
         'username' => 'tellus',
-        'password' => 'Yux4JFTVdw6y7A7ZQs',
+        'password' => 'ne#qua4yuya50Bu',
         'charset' => 'utf8',
     ];
 }
@@ -22,7 +22,7 @@ else{
         'class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=tellus-main-cluster.cluster-cusw3pjt3qpv.us-east-1.rds.amazonaws.com;dbname=tellus',
         'username' => 'tellus',
-        'password' => 'Yux4JFTVdw6y7A7ZQs',
+        'password' => 'ne#qua4yuya50Bu',
         'charset' => 'utf8',
     ];
 }
