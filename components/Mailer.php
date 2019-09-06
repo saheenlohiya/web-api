@@ -432,13 +432,13 @@ class Mailer extends Component
             ->setSubject($subject)
             ->send();
 
-        /*
+        
         return $mailer->compose(['html' => $view, 'text' => 'text/' . $view], $params)
             ->setTo($to)
             ->setFrom($this->sender)
             ->setSubject($subject)
             ->send();
-        */
+        
 
     }
 
@@ -452,8 +452,8 @@ class Mailer extends Component
     public function sendRatingNotificationSupport($user, $attributes)
     {
         return $this->sendMessage(
-            //Yii::$app->params['adminEmail'],
-            "john@tellusintel.com",
+            Yii::$app->params['adminEmail'],
+            //"john@tellusintel.com",
             $this->getRatingNotificationSupportSubject(),
             'rating-notify-support',
             ['user' => $user, 'attributes'=>$attributes]
