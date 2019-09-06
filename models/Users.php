@@ -210,12 +210,12 @@ class Users extends BaseUsers implements IdentityInterface {
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
-        // if ($insert) {
-        //     //send welcome message
-        //     if (!$this->mailer->sendWelcomeMessage($this)) {
-        //         Throw new Exception("Could not send welcome email");
-        //     }
-        // }
+        if ($insert) {
+            //send welcome message
+            if (!$this->mailer->sendWelcomeMessage($this)) {
+                Throw new Exception("Could not send welcome email");
+            }
+        }
 
 
     }
