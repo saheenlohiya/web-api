@@ -2,8 +2,8 @@
 if(YII_ENV_DEV || YII_ENV == 'dev'){
     return [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=127.0.0.1;dbname=tellus',
-        'username' => 'ubuntu',
+        'dsn' => 'mysql:host=tellus-main-cluster.cluster-cusw3pjt3qpv.us-east-1.rds.amazonaws.com;dbname=tellus',
+        'username' => 'tellus',
         'password' => '',
         'charset' => 'utf8',
     ];
@@ -11,8 +11,8 @@ if(YII_ENV_DEV || YII_ENV == 'dev'){
 else if(YII_ENV == 'test'){
     return [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=127.0.0.1;dbname=tellus_tests',
-        'username' => 'ubuntu',
+        'dsn' => 'mysql:host=tellus-main-cluster.cluster-cusw3pjt3qpv.us-east-1.rds.amazonaws.com;dbname=tellus',
+        'username' => 'tellus',
         'password' => '',
         'charset' => 'utf8',
     ];

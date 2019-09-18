@@ -25,6 +25,9 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0.0",
+	"fxp/composer-asset-plugin": "~1.2.0",
+	"yiisoft/yii2-debug": "~2.0.0",
+	"yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2": "~2.0.13",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -44,16 +47,14 @@
         "php-http/httplug": "^1.1",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
-        "geocoder-php/nominatim-provider": "^4.1"
-    },
-    "require-dev": {
-        "yiisoft/yii2-debug": "~2.0.0",
-        "yiisoft/yii2-gii": "~2.0.0",
-        "yiisoft/yii2-faker": "~2.0.0",
-
+        "geocoder-php/nominatim-provider": "^4.1",
+	 "yiisoft/yii2-faker": "~2.0.0",
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1",
         "codeception/specify": "~0.4.3"
+    },
+    "require-dev": {
+       
     },
     "config": {
         "fxp-asset": {

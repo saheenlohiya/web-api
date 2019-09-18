@@ -113,3 +113,22 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.navbar-brand {
+    padding-top: 0px!important;
+}
+.navbar-inverse {
+    background-color: #848484!important;
+    border-color: #848484!important;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: white!important;
+}
+.center-align{
+    float: none;
+    margin: auto;
+    position: relative;
+
+}
+.float-right{
+    float: right;
+}

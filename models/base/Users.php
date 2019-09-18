@@ -18,6 +18,9 @@ use Yii;
  * @property string $user_phone
  * @property string $user_gender
  * @property string $user_dob
+ * @property string $user_role
+ * @property string $team_manager_id
+ * @property string $business_name
  * @property string $user_password
  * @property string $user_address_1
  * @property string $user_address_2
@@ -72,10 +75,10 @@ abstract class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_gender', 'user_photo_url'], 'string'],
+            [['user_gender', 'user_photo_url', 'business_name', 'user_role'], 'string'],
             [['user_dob', 'user_date_joined', 'user_date_modified'], 'safe'],
             [['user_lat', 'user_lon'], 'number'],
-            [['user_active', 'user_is_verified'], 'integer'],
+            [['user_active', 'user_is_verified', 'team_manager_id'], 'integer'],
             [['uuid', 'user_email', 'user_password', 'user_address_1', 'user_address_2'], 'string', 'max' => 100],
             [['user_firstname', 'user_lastname', 'user_facebook_account_id'], 'string', 'max' => 50],
             [['user_username'], 'string', 'max' => 25],
@@ -111,6 +114,9 @@ abstract class Users extends \yii\db\ActiveRecord
             'user_phone' => 'User Phone',
             'user_gender' => 'User Gender',
             'user_dob' => 'User Dob',
+            'user_role' => 'User Role',
+            'team_manager_id' => 'Team Manager Id',
+            'business_name' => 'Business Name',
             'user_password' => 'User Password',
             'user_address_1' => 'User Address 1',
             'user_address_2' => 'User Address 2',

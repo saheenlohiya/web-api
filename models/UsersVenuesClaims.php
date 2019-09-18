@@ -202,5 +202,12 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         return false;
     }
 
+    public function getVenueClaimsByUser($user_id) {
+        return self::find()
+            ->where(['user_id' => $user_id])
+            ->with(['venue', 'venue.usersVenuesRatings'])
+            ->asArray(true)
+            ->all();
+    }
 
 }
