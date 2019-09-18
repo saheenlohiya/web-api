@@ -87,15 +87,12 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     {
         //make sure params are not empty and are set
         if (!is_null($user_id) && !is_null($venue_rating_id) && !is_null($response_comment) && !empty($response_comment)) {
-
-            $this->user_venue_rating_id = $venue_rating_id;
-            $this->user_venue_rating_responding_user_id = $user_id;
-            $this->user_venue_rating_response = $response_comment;
-
-            $result = $this->save();
-
-            if ($result) {
-                return $result;
+            $newRespond = self::create();
+            $newRespond->user_venue_rating_id                 = $venue_rating_id;
+            $newRespond->user_venue_rating_responding_user_id = $user_id;
+            $newRespond->user_venue_rating_response           = $response_comment;
+            if ($newRespond->save()) {
+                return $newRespond;
             }
         }
 

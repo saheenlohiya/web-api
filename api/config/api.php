@@ -69,12 +69,15 @@ $config = [
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-ratings-responses'],
                     'extraPatterns' => [
-                        'GET view-responses' => 'view-responses'
+                        'GET view-responses' => 'view-responses',
+                        'POST submit-responses' => 'submit-responses'
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-claims'],
                     'extraPatterns' => [
-                        'GET claim' => 'claim'                    ],
+                        'GET claim' => 'claim',
+                        'POST remove-claim' => 'remove-claim'
+                    ],
                 ]
             ],
         ],
