@@ -29,17 +29,6 @@ class UsersVenuesClaimsController extends TuBaseApiController {
         }
     }
 
-    public function actionRemoveClaim($user_id, $venue_id) {
-        if($this->checkAuthorization($user_id)){
-            $result =   UsersVenuesClaims::create()->removeVenueClaimById($user_id, $venue_id);
-            if($result == 1){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    }
-
     /**
      * @param $user_id
      * @return \app\models\UsersVenuesClaims[]|array
