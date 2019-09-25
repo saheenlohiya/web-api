@@ -194,13 +194,6 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             Throw new Exception("Could not notify of claim approval");
         }
     }
-    
-    public function getVenueClaimsByUser($user_id) {
-        return self::find()
-            ->where(['user_id' => $user_id])
-            ->with(['venue', 'venue.usersVenuesRatings'])
-            ->asArray(true)
-            ->all();
-    }
+
 
 }

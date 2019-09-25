@@ -139,14 +139,4 @@ class UsersController extends TuBaseApiController
         unset($userData['user_auth_key']);
         return $userData;
     }
-
-    /**
-     * @param $user_id
-     * @return \app\models\Users[]|array
-     */
-    public function actionListTeam($user_id) {
-        if($this->checkAuthorization($user_id)){
-            return Users::create()->getTeamByUser($user_id);
-        }
-    }
 }
