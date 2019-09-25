@@ -149,4 +149,16 @@ class UsersController extends TuBaseApiController
             return Users::create()->getTeamByUser($user_id);
         }
     }
+    
+    public function actionUpdateProfile(){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = \Yii::$app->request->post();
+        if($this->checkAuthorization($params['user_id'])){
+           if (!is_null($params['user_id']) && !is_null($params['user_firstname']) && !is_null($params['user_lastname'])) {
+                $result = Users::create()->updateMyProfile($params['user_id'],$params['user_firstname'],$params['user_lastname']);
+                return $result;
+            }
+        }
+    }
+    
 }

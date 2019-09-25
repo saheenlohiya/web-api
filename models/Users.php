@@ -275,5 +275,18 @@ class Users extends BaseUsers implements IdentityInterface {
             ->asArray(true)
             ->all();
     }
+    
+    
+    public function updateMyProfile($user_id, $user_firstname, $user_lastname)
+    {
+        if (!is_null($user_id) && !is_null($user_firstname) && !is_null($user_lastname)) {
+            $update_query = "update users set user_firstname='$user_firstname',user_lastname='$user_lastname' where id='$user_id'";
+            Yii::$app->db->createCommand($update_query)->execute();
+            return true;
+        }
+        return false;
+    }
+    
+    
 
 }
