@@ -6,6 +6,7 @@ use app\components\Common;
 use app\components\Mailer;
 use app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
 use yii\helpers\ArrayHelper;
+use app\models\Venues;
 
 
 /**
@@ -90,10 +91,10 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
     public function afterSave($insert, $changedAttributes) {
 
         parent::afterSave($insert, $changedAttributes);
-        if ($insert) {
-            //notify admins
-            $this->_notifyAdmins();
-            $this->_notifyUser();
+            if ($insert) {
+                //notify admins
+                $this->_notifyAdmins();
+                $this->_notifyUser();
         }
     }
 
@@ -108,7 +109,7 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             $newClaim->venue_claim_claimer_phone = $venue_claim_claimer_phone;
 
             if ($newClaim->save()) {
-                return $newClaim;
+                return self::find()->where(['venue_id' => $venue_id, 'user_id' => $user_id])->with(['venue'])->asArray()->one();;
             }
         }
 
