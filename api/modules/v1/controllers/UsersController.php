@@ -154,8 +154,8 @@ class UsersController extends TuBaseApiController
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $params = \Yii::$app->request->post();
         if($this->checkAuthorization($params['user_id'])){
-           if (!is_null($params['user_id']) && !is_null($params['user_firstname']) && !is_null($params['user_lastname'])) {
-                $result = Users::create()->updateMyProfile($params['user_id'],$params['user_firstname'],$params['user_lastname']);
+           if (!is_null($params['user_id']) && !is_null($params['user_firstname']) && !is_null($params['user_lastname']) && !is_null($params['user_address_one']) && !is_null($params['user_city']) && !is_null($params['user_state']) && !is_null($params['user_zip']) ) {
+                $result = Users::create()->updateMyProfile($params['user_id'],$params['user_firstname'],$params['user_lastname'],$params['user_address_one'],$params['user_city'],$params['user_state'],$params['user_zip']);
                 return $result;
             }
         }
