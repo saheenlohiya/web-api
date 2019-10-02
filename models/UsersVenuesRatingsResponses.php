@@ -92,6 +92,8 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
             $newRespond->user_venue_rating_responding_user_id = $user_id;
             $newRespond->user_venue_rating_response           = $response_comment;
             if ($newRespond->save()) {
+                $newdate = Yii::$app->formatter->asDate($newRespond['user_venue_rating_response_date'],'php:Y-m-d h:i:s');
+                ArrayHelper::setValue($newRespond, 'user_venue_rating_response_date', $newdate);
                 return $newRespond;
             }
         }
