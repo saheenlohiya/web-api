@@ -215,14 +215,12 @@ class Users extends BaseUsers implements IdentityInterface {
             if (!$this->mailer->sendWelcomeMessage($this)) {
                 Throw new Exception("Could not send welcome email");
             }
-            $last_inserted_data =  self::find(['business_name','resettoken','team_manager_id','user_active','user_address_1','user_address_2','user_auth_key','user_city','user_device_token','user_facebook_account_id','user_gender','user_is_verified','user_password','user_phone','user_photo_url','user_role','user_state','user_username','user_verification_code'])
+            $last_inserted_data =  self::find()
                 ->where(['id' => $this->id])
                 ->asArray(true)
                 ->all();
+
             ArrayHelper::merge($this, $last_inserted_data[0]);
-            //$array2 = ['business_name' => '','resettoken' => '','team_manager_id' => '','user_active' => '','user_address_1' => '','user_address_2' => '','user_auth_key' => '','user_city' => '','user_device_token' => '','user_facebook_account_id' => '','user_gender' => '','user_is_verified' => '','user_password' => '','user_phone' => '','user_photo_url' => '','user_role' => '','user_state' => '','user_username' => '','user_verification_code'=>''];                
-           // ArrayHelper::merge($this, $array2);
-           
         }
 
 
