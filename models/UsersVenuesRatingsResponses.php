@@ -122,7 +122,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                     if ($user['user_role'] == "user"){
                         $userrole = "user";
                     } else if($user['user_role'] == "manager"){
-                        if ($user['team_manager_id'] > 0) {
+                        if ($user['team_manager_id'] != '') {
                             $userrole = "team_member";
                         } else {
                             $userrole = "manager";  
