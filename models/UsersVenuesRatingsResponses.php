@@ -7,6 +7,7 @@ use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsRespons
 use Yii;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
+use app\models\Users;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
@@ -106,13 +107,30 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
            $resultResponse = self::find()
+                ->select(['users_venues_ratings_responses.*', 'users.user_role', 'users.team_manager_id'])
                 ->where(['user_venue_rating_id' => $user_venue_rating_id])
+                ->leftJoin('users', 'users.id=users_venues_ratings_responses.user_venue_rating_responding_user_id')
                 ->orderBy(['id' => SORT_ASC])
                 ->asArray(true)
                 ->all();
-        
+           
             $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
             Yii::$app->db->createCommand($update_query)->execute();
+
+            if(!is_null($resultResponse)){
+                foreach($resultResponse as $user) {
+                    if($user['user_role'] == "manager"){
+                        $userrole = "manager";
+                    } else if(($user['user_role'] == "manager") && ($user['team_manager_id'] > 0) ){
+                        $userrole = "team_member";
+                    } else if($user['user_role'] == "user"){
+                        $userrole = "user";
+                    }
+
+                    $user['user_role'] = $userrole;
+                }
+            }
+
             return $resultResponse;
         }
         return false;
