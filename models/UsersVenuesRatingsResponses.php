@@ -95,6 +95,25 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
             if ($newRespond->save()) {
                 $newdate = Yii::$app->formatter->asDate($newRespond['user_venue_rating_response_date'],'php:Y-m-d h:i:s');
                 ArrayHelper::setValue($newRespond, 'user_venue_rating_response_date', $newdate);
+                
+                $newresultResponse = Users::find()
+                    ->where(['id' => $newRespond['user_venue_rating_responding_user_id']])
+                    ->asArray()
+                    ->one();
+                if(!is_null($newresultResponse)){
+                    if($newresultResponse['user_role']== 'user'){
+                        $userrole = "Customer";
+                    }elseif(($newresultResponse['user_role']== 'manager') && ($newresultResponse['team_manager_id'] > 0) || ($newresultResponse['team_manager_id'] != '')  ){
+                        $userrole = "Team Member";
+                    }elseif($newresultResponse['user_role']== 'manager'){
+                        $userrole = "Manager";
+                    }
+                }
+                $userdata       = ['user_role'=>$userrole];
+                $results        = ArrayHelper::toArray($newRespond);
+                $newrecorddata  = ArrayHelper::merge($results, $userdata);
+                $newRespond     = (object)$newrecorddata;
+                
                 return $newRespond;
             }
         }
