@@ -7,6 +7,7 @@ use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsRespons
 use Yii;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
+use app\models\Users;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
@@ -88,14 +89,33 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         //make sure params are not empty and are set
         if (!is_null($user_id) && !is_null($venue_rating_id) && !is_null($response_comment) && !empty($response_comment)) {
 
-            $this->user_venue_rating_id = $venue_rating_id;
-            $this->user_venue_rating_responding_user_id = $user_id;
-            $this->user_venue_rating_response = $response_comment;
-
-            $result = $this->save();
-
-            if ($result) {
-                return $result;
+            $newRespond = self::create();
+            $newRespond->user_venue_rating_id                 = $venue_rating_id;
+            $newRespond->user_venue_rating_responding_user_id = $user_id;
+            $newRespond->user_venue_rating_response           = $response_comment;
+            if ($newRespond->save()) {
+                $newdate = Yii::$app->formatter->asDate($newRespond['user_venue_rating_response_date'],'php:Y-m-d h:i:s');
+                ArrayHelper::setValue($newRespond, 'user_venue_rating_response_date', $newdate);
+                
+                $newresultResponse = Users::find()
+                    ->where(['id' => $newRespond['user_venue_rating_responding_user_id']])
+                    ->asArray()
+                    ->one();
+                if(!is_null($newresultResponse)){
+                    if($newresultResponse['user_role']== 'user'){
+                        $userrole = "Customer";
+                    }elseif(($newresultResponse['user_role']== 'manager') && ($newresultResponse['team_manager_id'] > 0) || ($newresultResponse['team_manager_id'] != '')  ){
+                        $userrole = "Team Member";
+                    }elseif($newresultResponse['user_role']== 'manager'){
+                        $userrole = "Manager";
+                    }
+                }
+                $userdata       = ['user_role'=>$userrole];
+                $results        = ArrayHelper::toArray($newRespond);
+                $newrecorddata  = ArrayHelper::merge($results, $userdata);
+                $newRespond     = (object)$newrecorddata;
+                
+                return $newRespond;
             }
         }
 
@@ -106,13 +126,19 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     {
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
-            return self::find()
+           $resultResponse = self::find()
+                ->select(['users_venues_ratings_responses.*', 'IF(users.user_role = "user", "Customer", (IF (users.team_manager_id != "", "Team Member", "Manager"))) as user_role'])
                 ->where(['user_venue_rating_id' => $user_venue_rating_id])
+                ->leftJoin('users', 'users.id=users_venues_ratings_responses.user_venue_rating_responding_user_id')
                 ->orderBy(['id' => SORT_ASC])
                 ->asArray(true)
                 ->all();
-        }
 
+           $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
+            Yii::$app->db->createCommand($update_query)->execute();
+
+            return $resultResponse;
+        }
         return false;
     }
 

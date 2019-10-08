@@ -43,8 +43,7 @@ class TUPushNotifications {
         if ($this->message != '') {
             try {
                 $response = $this->client->send($this->message);
-               print_r((string) $response->getBody());
-               return $response;
+                return $response;
                 //return  $response = Yii::$app->fcm->send($this->message);
             } catch (Exception $e) {
                 print_r($e);

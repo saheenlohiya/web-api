@@ -44,6 +44,7 @@ $config = [
                         'GET me' => 'me',
                         'GET update-device-token' => 'update-device-token',
                         'POST login' => 'login',
+                        'POST update-profile' => 'update-profile'
                     ]
                 ],
                 [

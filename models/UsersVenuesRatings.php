@@ -176,9 +176,9 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
                               uvr2.*
                             FROM
                               users_venues_ratings uvr2
-                              JOIN venues
-                                ON venues.id = uvr2.venue_id
-                            WHERE venues.user_id = :user_id)
+                              JOIN users_venues_claims
+                                ON users_venues_claims.venue_id = uvr2.venue_id
+                            WHERE users_venues_claims.user_id = :user_id)
                           ) u
                         ORDER BY last_response_date DESC";
 
