@@ -101,7 +101,9 @@ $config = [
             'class' => 'app\api\modules\v1\ApiModule',
         ],
     ],
-    'params' => $params,
+    'params' => $params,    
+    
+    
 ];
 
 return $config;
