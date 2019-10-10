@@ -195,6 +195,13 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             Throw new Exception("Could not notify of claim approval");
         }
     }
+    
+     public function removeVenueClaimById($user_id, $venue_id) {
+        if (!is_null($user_id) && !is_null($venue_id)) {
+           return self::deleteAll(['user_id'=>$user_id,'venue_id'=>$venue_id]);
+        }
+        return false;
+    }
 
     public function getVenueClaimsByUser($user_id) {
         return self::find()

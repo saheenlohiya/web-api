@@ -23,13 +23,15 @@ class UsersVenuesRatingsResponsesController extends TuBaseApiController {
         return $behaviors;
     }
 
-    public function actionViewResponses($user_venue_rating_id) {
+    public function actionViewResponses($user_venue_rating_id, $user_id) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        return UsersVenuesRatingsResponses::create()->viewResponses($user_venue_rating_id);
+        return UsersVenuesRatingsResponses::create()->viewResponses($user_venue_rating_id, $user_id);
     }
     
-    
-    
-    
+     public function actionSubmitResponses($user_id, $venue_rating_id, $user_venue_rating_responding_user_id, $response_comment) {
+        if($this->checkAuthorization($user_id)){
+            return UsersVenuesRatingsResponses::create()->respond($venue_rating_id, $user_venue_rating_responding_user_id, $response_comment);
+        }
+    }
 
 }

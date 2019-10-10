@@ -219,7 +219,7 @@ class Users extends BaseUsers implements IdentityInterface {
                 ->where(['id' => $this->id])
                 ->asArray(true)
                 ->all();
-
+            
             ArrayHelper::merge($this, $last_inserted_data[0]);
         }
 
