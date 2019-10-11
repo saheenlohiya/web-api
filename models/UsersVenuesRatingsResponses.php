@@ -247,4 +247,9 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
             }
         }
     }
+    
+    
+    
+    
+    
 }

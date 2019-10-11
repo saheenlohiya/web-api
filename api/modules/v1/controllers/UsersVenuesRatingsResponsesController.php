@@ -33,5 +33,9 @@ class UsersVenuesRatingsResponsesController extends TuBaseApiController {
             return UsersVenuesRatingsResponses::create()->respond($venue_rating_id, $user_venue_rating_responding_user_id, $response_comment);
         }
     }
+    
+    
+    
+    
 
 }
