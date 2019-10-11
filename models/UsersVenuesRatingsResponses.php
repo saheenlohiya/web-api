@@ -125,7 +125,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
     {
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
-           $resultResponse = self::find()
+            $resultResponse = self::find()
                 ->select(['users_venues_ratings_responses.*', 'IF(users.user_role = "user", "Customer", (IF (users.team_manager_id != "", "Team Member", "Manager"))) as user_role'])
                 ->where(['user_venue_rating_id' => $user_venue_rating_id])
                 ->leftJoin('users', 'users.id=users_venues_ratings_responses.user_venue_rating_responding_user_id')
@@ -133,8 +133,10 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                 ->asArray(true)
                 ->all();
 
-            $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
-            Yii::$app->db->createCommand($update_query)->execute();
+            if ($user_id > 0) {
+                $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
+                Yii::$app->db->createCommand($update_query)->execute();
+            }
 
             return $resultResponse;
         }
