@@ -8,6 +8,8 @@ use Yii;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use app\models\Users;
+use app\models\UsersVenuesClaims;
+use app\models\UsersVenuesRatings;
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
@@ -121,24 +123,35 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
         return false;
     }
 
-    public function viewResponses($user_venue_rating_id, $user_id)
-    {
+    public function viewResponses($user_venue_rating_id, $user_id) {
+        $resultResponse = false;
+
         //make sure params are not empty and are set
         if (!is_null($user_venue_rating_id)) {
-           $resultResponse = self::find()
-                ->select(['users_venues_ratings_responses.*', 'IF(users.user_role = "user", "Customer", (IF (users.team_manager_id != "", "Team Member", "Manager"))) as user_role'])
-                ->where(['user_venue_rating_id' => $user_venue_rating_id])
-                ->leftJoin('users', 'users.id=users_venues_ratings_responses.user_venue_rating_responding_user_id')
-                ->orderBy(['id' => SORT_ASC])
-                ->asArray(true)
-                ->all();
+            $ratingdata = UsersVenuesRatings::find()
+                    ->select(['users_venues_ratings.id'])
+                    ->where(['users_venues_ratings.id' => $user_venue_rating_id, 'users.team_manager_id' => NULL, 'users_venues_claims.venue_claim_status' => 'active'])
+                    ->leftJoin('users_venues_claims', 'users_venues_claims.venue_id=users_venues_ratings.venue_id')
+                    ->leftJoin('users', 'users.id=users_venues_claims.user_id')
+                    ->one();
 
-            $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
-            Yii::$app->db->createCommand($update_query)->execute();
+            if (! empty($ratingdata)) {
+                $resultResponse = self::find()
+                    ->select(['users_venues_ratings_responses.*', 'IF(users.user_role = "user", "Customer", (IF (users.team_manager_id != "", "Team Member", "Manager"))) as user_role'])
+                    ->where(['user_venue_rating_id' => $user_venue_rating_id])
+                    ->leftJoin('users', 'users.id=users_venues_ratings_responses.user_venue_rating_responding_user_id')
+                    ->orderBy(['id' => SORT_ASC])
+                    ->asArray(true)
+                    ->all();
 
-            return $resultResponse;
+                if ($user_id > 0) {
+                    $update_query = "update users_venues_ratings_responses set user_venue_rating_response_read='1' where user_venue_rating_responding_user_id !='$user_id' AND user_venue_rating_id ='$user_venue_rating_id'";
+                    Yii::$app->db->createCommand($update_query)->execute();
+                }
+            }
         }
-        return false;
+
+        return $resultResponse;
     }
 
 //    public function setMessagesToRead($user_id,$venue_id,$message_id){

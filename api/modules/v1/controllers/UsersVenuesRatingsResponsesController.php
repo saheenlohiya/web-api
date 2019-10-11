@@ -23,7 +23,7 @@ class UsersVenuesRatingsResponsesController extends TuBaseApiController {
         return $behaviors;
     }
 
-    public function actionViewResponses($user_venue_rating_id, $user_id) {
+    public function actionViewResponses($user_venue_rating_id, $user_id = 0) {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         return UsersVenuesRatingsResponses::create()->viewResponses($user_venue_rating_id, $user_id);
     }

@@ -59,7 +59,6 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
             if ($insert) {
                 //stuff to happen before save
                 $this->venue_claim_date = date('Y-m-d H:i:s');
-                $this->venue_claim_status = self::VENUE_CLAIM_STATUS_PENDING;
 
                 $this->venue_claim_code = rand(1000, 9999999);
                 $this->venue_claim_hash = \Yii::$app->security->generateRandomString();
@@ -98,15 +97,16 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         }
     }
 
-    public function claim($user_id, $venue_id,$venue_claim_claimer_name,$venue_claim_claimer_email,$venue_claim_claimer_phone) {
+    public function claim($user_id, $venue_id,$venue_claim_claimer_name,$venue_claim_claimer_email,$venue_claim_claimer_phone, $venue_claim_status) {
         //make sure another claim doesnt exist
         if (!self::find()->where(['user_id' => $user_id, 'venue_id' => $venue_id])->exists()) {
             $newClaim = self::create();
-            $newClaim->venue_id = $venue_id;
-            $newClaim->user_id = $user_id;
-            $newClaim->venue_claim_claimer_name = $venue_claim_claimer_name;
-            $newClaim->venue_claim_claimer_email = $venue_claim_claimer_email;
-            $newClaim->venue_claim_claimer_phone = $venue_claim_claimer_phone;
+            $newClaim->venue_id                     = $venue_id;
+            $newClaim->user_id                      = $user_id;
+            $newClaim->venue_claim_claimer_name     = $venue_claim_claimer_name;
+            $newClaim->venue_claim_claimer_email    = $venue_claim_claimer_email;
+            $newClaim->venue_claim_claimer_phone    = $venue_claim_claimer_phone;
+            $newClaim->venue_claim_status           = ($venue_claim_status != '') ? $venue_claim_status : self::VENUE_CLAIM_STATUS_PENDING;
 
             if ($newClaim->save()) {
                 return self::find()->where(['venue_id' => $venue_id, 'user_id' => $user_id])->with(['venue'])->asArray()->one();;

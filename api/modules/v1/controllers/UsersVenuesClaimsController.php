@@ -23,9 +23,9 @@ class UsersVenuesClaimsController extends TuBaseApiController {
         return $behaviors;
     }
 
-    public function actionClaim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone) {
+    public function actionClaim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone, $venue_claim_status = UsersVenuesClaims::VENUE_CLAIM_STATUS_PENDING) {
         if($this->checkAuthorization($user_id)){
-            return UsersVenuesClaims::create()->claim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone);
+            return UsersVenuesClaims::create()->claim($user_id, $venue_id, $venue_claim_claimer_name, $venue_claim_claimer_email, $venue_claim_claimer_phone, $venue_claim_status);
         }
     }
 
