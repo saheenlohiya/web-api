@@ -167,19 +167,21 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
                         FROM
                           (
                             (SELECT
-                              *
+                              uvr1.*
                             FROM
                               users_venues_ratings uvr1
-                            WHERE uvr1.user_id = :user_id)
+                              LEFT JOIN users_venues_claims ON users_venues_claims.venue_id = uvr1.venue_id
+                            WHERE uvr1.user_id = :user_id AND users_venues_claims.venue_claim_status = 'active')
                             UNION
                             (SELECT
-                              uvr2.*
+                              users_venues_ratings.*
                             FROM
-                              users_venues_ratings uvr2
-                              JOIN users_venues_claims
-                                ON users_venues_claims.venue_id = uvr2.venue_id
-                            WHERE users_venues_claims.user_id = :user_id)
+                              users_venues_claims uvc
+                              JOIN users_venues_ratings
+                                ON users_venues_ratings.venue_id = uvc.venue_id
+                            WHERE uvc.user_id = :user_id AND uvc.venue_claim_status = 'active')
                           ) u
+                        GROUP BY venue_id
                         ORDER BY last_response_date DESC";
 
             //ratings I submitted
