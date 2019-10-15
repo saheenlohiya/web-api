@@ -36,7 +36,6 @@
         "symfony/dependency-injection": "^3.2",
         "symfony/http-kernel": "^3.2",
         "symfony/filesystem": "^3.2",
-        "phpunit/php-invoker": "^1.1",
         "schmunk42/yii2-giiant": "@stable",
         "willdurand/geocoder": "^4.0.0",
         "frostealth/yii2-aws-s3": "~2.0",
@@ -51,7 +50,9 @@
 	 "yiisoft/yii2-faker": "~2.0.0",
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1",
-        "codeception/specify": "~0.4.3"
+        "codeception/specify": "~0.4.3",
+        "wadeshuler/yii2-sms-twilio": "~1.0",
+        "twilio/sdk": "^5.36"
     },
     "require-dev": {
        

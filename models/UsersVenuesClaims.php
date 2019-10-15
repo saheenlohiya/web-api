@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+use yii\db\Exception;
 use app\components\Common;
 use app\components\Mailer;
 use app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
@@ -198,6 +200,8 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
     
      public function removeVenueClaimById($user_id, $venue_id) {
         if (!is_null($user_id) && !is_null($venue_id)) {
+            $update_query = "update venues set user_id=NULL where id='$venue_id'";
+            Yii::$app->db->createCommand($update_query)->execute();
            return self::deleteAll(['user_id'=>$user_id,'venue_id'=>$venue_id]);
         }
         return false;

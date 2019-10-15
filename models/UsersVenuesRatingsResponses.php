@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\components\TUPushNotifications;
+use app\components\Twilio;
 use app\models\base\UsersVenuesRatingsResponses as BaseUsersVenuesRatingsResponses;
 use Yii;
 use yii\db\Exception;
@@ -67,7 +68,6 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                 $this->user_venue_rating_response_read = false;
                 $this->user_venue_rating_response_date = date(DATE_ISO8601);
             }
-
             return true;
         } else {
             return false;
@@ -111,6 +111,22 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                         $userrole = "Manager";
                     }
                 }
+                
+                $getvenuedata = UsersVenuesRatings::find()
+                    ->select(['users.user_firstname', 'users.user_email', 'users.user_phone', 'vc.*'])
+                    ->leftJoin('users_venues_claims as vc', 'vc.venue_id=users_venues_ratings.venue_id')
+                    ->leftJoin('users', 'users.id=vc.user_id')
+                    ->where(['users_venues_ratings.id' => $newRespond['user_venue_rating_id'],'vc.venue_claim_status' => 'active'])
+                    ->andWhere(['!=', 'users.id', $newRespond['user_venue_rating_responding_user_id']])
+                    ->groupBy(['users.id'])
+                    ->orderBy(['users_venues_ratings.id' => SORT_DESC])
+                    ->asArray(true)
+                    ->all();
+                
+                foreach ($getvenuedata as $reponsedata){
+                    Twilio::sendSms($newRespond['user_venue_rating_response'], $reponsedata['user_phone']);
+                }
+               
                 $userdata       = ['user_role'=>$userrole];
                 $results        = ArrayHelper::toArray($newRespond);
                 $newrecorddata  = ArrayHelper::merge($results, $userdata);
