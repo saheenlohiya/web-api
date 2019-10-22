@@ -139,7 +139,12 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
 
             return $resultResponse;
         }
-        return false;
+        $headers = Yii::$app->response->headers;
+        $headers->add('X-Pagination-Current-Page', '');
+        $headers->add('X-Pagination-Total-Count', '');
+        $headers->add('X-Pagination-Page-Count', '');
+        $headers->add('X-Pagination-Per-Page', '');
+        return $resultResponse;
     }
 
 //    public function setMessagesToRead($user_id,$venue_id,$message_id){
