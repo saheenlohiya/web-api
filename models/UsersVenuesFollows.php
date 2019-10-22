@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use app\models\base\UsersVenuesFollows as BaseUsersVenuesFollows;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -82,6 +83,11 @@ class UsersVenuesFollows extends BaseUsersVenuesFollows {
     }
 
     public function getVenueFollowsByUser($user_id) {
+        $headers = Yii::$app->response->headers;
+        $headers->add('X-Pagination-Current-Page', '');
+        $headers->add('X-Pagination-Total-Count', '');
+        $headers->add('X-Pagination-Page-Count', '');
+        $headers->add('X-Pagination-Per-Page', '');
         return UsersVenuesFollows::find()
             ->where(['user_id' => $user_id])
             ->with(['venue.venuesImages'])
