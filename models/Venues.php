@@ -113,11 +113,11 @@ class Venues extends BaseVenues
             //now search again assuming we now have an updated list
             $this->results = $this->getNearbySavedPlaces($latitude, $longitude, $radius, $limit);
         }
-        $headers = Yii::$app->response->headers;
-        $headers->add('X-Pagination-Current-Page', '');
-        $headers->add('X-Pagination-Total-Count', '');
-        $headers->add('X-Pagination-Page-Count', '');
-        $headers->add('X-Pagination-Per-Page', '');
+        // $headers = Yii::$app->response->headers;
+        // $headers->add('X-Pagination-Current-Page', '');
+        // $headers->add('X-Pagination-Total-Count', '');
+        // $headers->add('X-Pagination-Page-Count', '');
+        // $headers->add('X-Pagination-Per-Page', '');
         return $this->results;
 
     }
@@ -143,11 +143,11 @@ class Venues extends BaseVenues
             //now search again assuming we now have an updated list
             $this->results = $this->getSearchedSavedPlaces($this->_ids, $latitude, $longitude, $limit);
         }
-        $headers = Yii::$app->response->headers;
-        $headers->add('X-Pagination-Current-Page', '');
-        $headers->add('X-Pagination-Total-Count', '');
-        $headers->add('X-Pagination-Page-Count', '');
-        $headers->add('X-Pagination-Per-Page', '');
+        // $headers = Yii::$app->response->headers;
+        // $headers->add('X-Pagination-Current-Page', '');
+        // $headers->add('X-Pagination-Total-Count', '');
+        // $headers->add('X-Pagination-Page-Count', '');
+        // $headers->add('X-Pagination-Per-Page', '');
         return $this->results;
     }
 

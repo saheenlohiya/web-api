@@ -150,11 +150,11 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
                 ->with($relationships)
                 ->orderBy(['venue_rating_resolved' => SORT_ASC, 'venue_rating_date' => SORT_DESC])
                 ->asArray(true);
-            $headers = Yii::$app->response->headers;
-            $headers->add('X-Pagination-Current-Page', '');
-            $headers->add('X-Pagination-Total-Count', '');
-            $headers->add('X-Pagination-Page-Count', '');
-            $headers->add('X-Pagination-Per-Page', '');
+            // $headers = Yii::$app->response->headers;
+            // $headers->add('X-Pagination-Current-Page', '');
+            // $headers->add('X-Pagination-Total-Count', '');
+            // $headers->add('X-Pagination-Page-Count', '');
+            // $headers->add('X-Pagination-Per-Page', '');
             return $sql->all();
         }
     }
@@ -188,11 +188,11 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
                         ORDER BY last_response_date DESC";
 
             //ratings I submitted
-            $headers = Yii::$app->response->headers;
-            $headers->add('X-Pagination-Current-Page', '');
-            $headers->add('X-Pagination-Total-Count', '');
-            $headers->add('X-Pagination-Page-Count', '');
-            $headers->add('X-Pagination-Per-Page', '');
+            // $headers = Yii::$app->response->headers;
+            // $headers->add('X-Pagination-Current-Page', '');
+            // $headers->add('X-Pagination-Total-Count', '');
+            // $headers->add('X-Pagination-Page-Count', '');
+            // $headers->add('X-Pagination-Per-Page', '');
             return UsersVenuesRatings::findBySql($unionQuery)
                 ->with(['usersVenuesRatingsResponses', 'venue', 'user'])
                 ->params([':user_id' => $user_id])
