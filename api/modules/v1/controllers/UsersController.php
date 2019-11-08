@@ -161,4 +161,15 @@ class UsersController extends TuBaseApiController
         }
     }
     
+    public function actionDeleteTeammember($user_id, $team_member_id) {
+        if($this->checkAuthorization($user_id)){
+            $result     =   Users::create()->deleteTeamMemberById($team_member_id);
+            if($result == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
 }

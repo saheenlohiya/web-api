@@ -219,7 +219,7 @@ class Users extends BaseUsers implements IdentityInterface {
                 ->where(['id' => $this->id])
                 ->asArray(true)
                 ->all();
-
+            
             ArrayHelper::merge($this, $last_inserted_data[0]);
         }
 
@@ -289,6 +289,22 @@ class Users extends BaseUsers implements IdentityInterface {
             $update_query = "update users set user_firstname='$user_firstname',user_lastname='$user_lastname',user_address_1='$user_address_one',user_city='$user_city',user_state='$user_state',user_zip='$user_zip' where id='$user_id'";
             Yii::$app->db->createCommand($update_query)->execute();
             return true;
+        }
+        return false;
+    }
+    
+     public function deleteTeamMemberById($team_member_id) {
+        if (!is_null($team_member_id)) {
+           $deleteRespond   = self::deleteAll(['id'=>$team_member_id]);
+           if($deleteRespond){
+                Yii::$app->db->createCommand()->update('users_venues_claims', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                 Yii::$app->db->createCommand()->update('users_venues_coupons', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                Yii::$app->db->createCommand()->update('users_venues_follows', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                Yii::$app->db->createCommand()->update('users_venues_ratings', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                Yii::$app->db->createCommand()->update('users_venues_ratings_responses', ['user_venue_rating_responding_user_id' => NULL], 'user_venue_rating_responding_user_id="'.$team_member_id.'"')->execute();
+                 Yii::$app->db->createCommand()->update('venues', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+               return $deleteRespond;
+           }
         }
         return false;
     }
