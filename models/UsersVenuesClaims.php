@@ -9,6 +9,7 @@ use app\components\Mailer;
 use app\models\base\UsersVenuesClaims as BaseUsersVenuesClaims;
 use yii\helpers\ArrayHelper;
 use app\models\Venues;
+use app\models\Users;
 
 
 /**
@@ -200,8 +201,22 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
     
      public function removeVenueClaimById($user_id, $venue_id) {
         if (!is_null($user_id) && !is_null($venue_id)) {
-            $update_query = "update venues set user_id=NULL where id='$venue_id'";
-            Yii::$app->db->createCommand($update_query)->execute();
+           Yii::$app->db->createCommand()->update('venues', ['user_id' => NULL], 'id="'.$venue_id.'"')->execute();
+            $UserResponse = Users::find()
+                            ->where(['id' => $user_id])
+                            ->asArray()
+                            ->one();
+            if (($UserResponse['user_role'] == 'manager') && ($UserResponse['team_manager_id'] == NULL)){
+                $allUserResponse = Users::find()
+                                    ->where(['team_manager_id' => $user_id])
+                                    ->asArray(true)
+                                    ->all();
+                if(!is_null($allUserResponse)){
+                    foreach ($allUserResponse as $user_record){
+                        self::deleteAll(['user_id'=>$user_record['id'],'venue_id'=>$venue_id]);
+                    }
+                }
+            }
            return self::deleteAll(['user_id'=>$user_id,'venue_id'=>$venue_id]);
         }
         return false;

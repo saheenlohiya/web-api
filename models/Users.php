@@ -297,6 +297,7 @@ class Users extends BaseUsers implements IdentityInterface {
         if (!is_null($team_member_id)) {
            $deleteRespond   = self::deleteAll(['id'=>$team_member_id]);
            if($deleteRespond){
+               Yii::$app->db->createCommand()->update('users', ['team_manager_id' => NULL], 'team_manager_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_claims', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                  Yii::$app->db->createCommand()->update('users_venues_coupons', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_follows', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
