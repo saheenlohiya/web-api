@@ -45,7 +45,8 @@ $config = [
                         'GET update-device-token' => 'update-device-token',
                         'POST login' => 'login',
                         'POST update-profile' => 'update-profile',
-                        'POST delete-teammember' => 'delete-teammember'
+                        'POST delete-teammember' => 'delete-teammember',
+                        'POST forgot-password'  => 'forgot-password'
                     ]
                 ],
                 [

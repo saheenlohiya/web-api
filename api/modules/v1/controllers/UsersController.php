@@ -4,6 +4,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\filters\TuQueryParamAuth;
 use app\models\Users;
+use app\models\PasswordResetRequestForm;
 use yii;
 use yii\web\Response;
 
@@ -172,4 +173,18 @@ class UsersController extends TuBaseApiController
         }
     }
     
+    public function actionForgotPassword() {
+        $params     = Yii::$app->request->post();
+
+        if (! empty($params) && isset($params['user_email'])) {
+            $reset_model = new PasswordResetRequestForm();
+            $reset_model->user_email = $params['user_email'];
+
+            if ($reset_model->sendEmail()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }
