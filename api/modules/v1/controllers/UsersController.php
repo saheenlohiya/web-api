@@ -30,7 +30,7 @@ class UsersController extends TuBaseApiController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists', 'login', 'create', 'options'],
+            'except' => ['email-exists', 'login', 'create', 'options', 'forgot-password'],
             'optional' => []
         ];
         // remove authentication filter
