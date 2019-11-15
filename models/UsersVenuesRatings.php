@@ -186,7 +186,6 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
                                 ON users_venues_ratings.venue_id = uvc.venue_id
                             WHERE uvc.user_id = :user_id AND uvc.venue_claim_status = 'active')
                           ) u
-                        GROUP BY venue_id
                         ORDER BY last_response_date DESC";
 
             //ratings I submitted
