@@ -30,7 +30,7 @@ class UsersController extends TuBaseApiController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => TuQueryParamAuth::className(),
-            'except' => ['email-exists', 'login', 'create', 'options', 'forgot-password'],
+            'except' => ['email-exists', 'login', 'create', 'options', 'forgot-password', 'update-password'],
             'optional' => []
         ];
         // remove authentication filter
@@ -179,6 +179,7 @@ class UsersController extends TuBaseApiController
         if (! empty($params) && isset($params['user_email'])) {
             $reset_model = new PasswordResetRequestForm();
             $reset_model->user_email = $params['user_email'];
+            $reset_model->reset_password_url = 'http://localhost:6075/reset-password';
 
             if ($reset_model->sendEmail()) {
                 return true;
@@ -187,4 +188,17 @@ class UsersController extends TuBaseApiController
             }
         }
     }
+    
+    public function actionUpdatePassword() {
+        $params                 = \Yii::$app->request->post();
+        if (! empty($params) && isset($params['resettoken']) && isset($params['user_password'])) {
+            $update_result      = Users::create()->updatePasswordByResetToken($params);
+            if($update_result == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
 }

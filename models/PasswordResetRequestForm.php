@@ -11,6 +11,7 @@ use yii\base\Model;
 class PasswordResetRequestForm extends Model
 {
     public $user_email;
+    public $reset_password_url;
  
     /**
      * @inheritdoc
@@ -40,7 +41,11 @@ class PasswordResetRequestForm extends Model
         $user = Users::findOne([
             'user_email' => $this->user_email,
         ]);
- 
+
+        $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 'token' => $user->resettoken]);
+        if(isset($this->reset_password_url) && !empty($this->reset_password_url)){
+            $resetLink          = "http://localhost:6075/reset-password?token=".$user->resettoken;    
+        }
         if (!$user) {
             return false;
         }
@@ -51,12 +56,12 @@ class PasswordResetRequestForm extends Model
                 return false;
             }
         }
- 
+
         return Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
-                ['user' => $user]
+                ['user' => $user, 'resetLink' => $resetLink]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'The TellUs App'])
             ->setTo($this->user_email)

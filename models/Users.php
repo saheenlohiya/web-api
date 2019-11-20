@@ -295,21 +295,31 @@ class Users extends BaseUsers implements IdentityInterface {
     
      public function deleteTeamMemberById($team_member_id) {
         if (!is_null($team_member_id)) {
-           $deleteRespond   = self::deleteAll(['id'=>$team_member_id]);
-           if($deleteRespond){
-               Yii::$app->db->createCommand()->update('users', ['team_manager_id' => NULL], 'team_manager_id="'.$team_member_id.'"')->execute();
+            $deleteRespond   = self::deleteAll(['id'=>$team_member_id]);
+            if($deleteRespond){
+                Yii::$app->db->createCommand()->update('users', ['team_manager_id' => NULL], 'team_manager_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_claims', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
-                 Yii::$app->db->createCommand()->update('users_venues_coupons', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                Yii::$app->db->createCommand()->update('users_venues_coupons', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_follows', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_ratings', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                 Yii::$app->db->createCommand()->update('users_venues_ratings_responses', ['user_venue_rating_responding_user_id' => NULL], 'user_venue_rating_responding_user_id="'.$team_member_id.'"')->execute();
-                 Yii::$app->db->createCommand()->update('venues', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
+                Yii::$app->db->createCommand()->update('venues', ['user_id' => NULL], 'user_id="'.$team_member_id.'"')->execute();
                return $deleteRespond;
-           }
+            }
         }
         return false;
     }
-    
-    
+
+    public function updatePasswordByResetToken($params) {
+        if (!is_null($params['resettoken']) && !is_null($params['user_password'])) {
+            $new_password       = Yii::$app->security->generatePasswordHash($params['user_password']);
+            $newresultResponse  = Yii::$app->db->createCommand()->update('users', ['user_password' => $new_password, 'resettoken' => NULL], 'resettoken="'.$params['resettoken'].'"')->execute();
+            if ($newresultResponse == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+   
 
 }
