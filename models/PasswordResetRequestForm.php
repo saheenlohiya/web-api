@@ -44,7 +44,7 @@ class PasswordResetRequestForm extends Model
 
         $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 'token' => $user->resettoken]);
         if(isset($this->reset_password_url) && !empty($this->reset_password_url)){
-            $resetLink          = "http://localhost:6075/reset-password?token=".$user->resettoken;    
+            $resetLink          = "https://app.thetellusapp.com/reset-password?token=".$user->resettoken;    
         }
         if (!$user) {
             return false;

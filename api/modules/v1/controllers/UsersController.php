@@ -179,7 +179,7 @@ class UsersController extends TuBaseApiController
         if (! empty($params) && isset($params['user_email'])) {
             $reset_model = new PasswordResetRequestForm();
             $reset_model->user_email = $params['user_email'];
-            $reset_model->reset_password_url = 'http://localhost:6075/reset-password';
+            $reset_model->reset_password_url = 'https://app.thetellusapp.com/reset-password';
 
             if ($reset_model->sendEmail()) {
                 return true;
