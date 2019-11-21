@@ -223,15 +223,19 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
     }
     
     
-    public function removeClaimLocationTeamMember($manager_id, $team_memberid) {
+    public function removeClaimLocationTeamMember($manager_id, $team_memberid, $venue_id) {
         if (!is_null($manager_id) && !is_null($team_memberid)) {
             $all_claim_UserResponse = Users::find()
                                     ->where(['id' => $team_memberid, 'team_manager_id' => $manager_id])
                                     ->asArray(true)
                                     ->all();
             if(!is_null($all_claim_UserResponse)){
-                self::deleteAll(['user_id'=>$team_memberid]);
-                return true;
+               $removeClaim_result  =  self::deleteAll(['user_id'=>$team_memberid, 'venue_id'=> $venue_id]);
+                if(!is_null($removeClaim_result) && ($removeClaim_result != 0)){
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
