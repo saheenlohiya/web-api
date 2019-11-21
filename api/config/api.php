@@ -80,7 +80,8 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/users-venues-claims'],
                     'extraPatterns' => [
                         'GET claim' => 'claim',
-                        'POST remove-claim' => 'remove-claim'
+                        'POST remove-claim' => 'remove-claim',
+                        'POST remove-claim-location-team-member' => 'remove-claim-location-team-member'
                     ],
                 ]
             ],

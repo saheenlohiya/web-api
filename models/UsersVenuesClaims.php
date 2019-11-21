@@ -221,6 +221,23 @@ class UsersVenuesClaims extends BaseUsersVenuesClaims {
         }
         return false;
     }
+    
+    
+    public function removeClaimLocationTeamMember($manager_id, $team_memberid) {
+        if (!is_null($manager_id) && !is_null($team_memberid)) {
+            $all_claim_UserResponse = Users::find()
+                                    ->where(['id' => $team_memberid, 'team_manager_id' => $manager_id])
+                                    ->asArray(true)
+                                    ->all();
+            if(!is_null($all_claim_UserResponse)){
+                self::deleteAll(['user_id'=>$team_memberid]);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 
     public function getVenueClaimsByUser($user_id) {
         return self::find()

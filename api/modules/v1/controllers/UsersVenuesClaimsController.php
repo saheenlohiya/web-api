@@ -39,6 +39,12 @@ class UsersVenuesClaimsController extends TuBaseApiController {
             }
         }
     }
+    
+    public function actionRemoveClaimLocationTeamMember($user_id, $manager_id, $team_memberid) {
+        if($this->checkAuthorization($user_id)){
+            return UsersVenuesClaims::create()->removeClaimLocationTeamMember($manager_id, $team_memberid);
+        }
+    }
 
     /**
      * @param $user_id
