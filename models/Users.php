@@ -283,10 +283,22 @@ class Users extends BaseUsers implements IdentityInterface {
     }
     
     
-    public function updateMyProfile($user_id, $user_firstname, $user_lastname, $user_address_one, $user_city, $user_state, $user_zip)
-    {
-        if (!is_null($user_id) && !is_null($user_firstname) && !is_null($user_lastname)) {
-            $update_query = "update users set user_firstname='$user_firstname',user_lastname='$user_lastname',user_address_1='$user_address_one',user_city='$user_city',user_state='$user_state',user_zip='$user_zip' where id='$user_id'";
+    public function updateMyProfile($params = array()) {
+        if ( !empty($params) && !is_null($params['user_id']) && !is_null($params['user_firstname']) && !is_null($params['user_lastname'])) {
+            //$update_query = "update users set user_firstname='$user_firstname',user_lastname='$user_lastname',user_phone='$user_phone',user_address_1='$user_address_one',user_city='$user_city',user_state='$user_state',user_zip='$user_zip' where id='$user_id'";
+            $email_notification = 0;
+            $sms_notification   = 0;
+            $push_notification  = 0;
+            if (isset($params['email_notification']) && $params['email_notification'] == 1){
+                $email_notification = 1;
+            }
+            if (isset($params['sms_notification']) && $params['sms_notification'] == 1){
+                $sms_notification   = 1;
+            }
+            if (isset($params['push_notification']) && $params['push_notification'] == 1){
+                $push_notification   = 1;
+            }
+            $update_query = 'update users set user_firstname= "'.$params['user_firstname'].'", user_lastname="'.$params['user_lastname'].'",user_phone="'.$params['user_phone'].'",user_address_1="'.$params['user_address_one'].'",user_city="'.$params['user_city'].'",user_state="'.$params['user_state'].'",user_zip="'.$params['user_zip'].'",email_notification ='.$email_notification.',sms_notification ='.$sms_notification.',push_notification ='.$push_notification.' where id = '.$params['user_id'];
             Yii::$app->db->createCommand($update_query)->execute();
             return true;
         }
