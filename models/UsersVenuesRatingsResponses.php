@@ -133,7 +133,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                         $push_tokens    = array();
                         $get_user_token = UserToken::find()
                             ->select(['user_token.token'])
-                            ->where(['user_token.user_id' => $reponsedata['user_id'],'user_token.token_type' => 'web'])
+                            ->where(['user_token.user_id' => $reponsedata['user_id']])
                             ->asArray(true)
                             ->all();
                         if(!empty($get_user_token)) {
