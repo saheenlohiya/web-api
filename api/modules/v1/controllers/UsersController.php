@@ -204,7 +204,7 @@ class UsersController extends TuBaseApiController
     
     public function actionSetUserToken() {
         $params                 = \Yii::$app->request->post();
-        if (! empty($params) && isset($params['token']) && isset($params['token_type']) && isset($params['userid'])) {
+        if (! empty($params) && isset($params['token']) && isset($params['token_type']) && isset($params['user_id'])) {
             $token_result      = UserToken::create()->addUserToken($params);
             if($token_result == 1){
                 return true;
@@ -216,7 +216,7 @@ class UsersController extends TuBaseApiController
     
     public function actionRemoveUserToken() {
         $params                 = \Yii::$app->request->post();
-        if (! empty($params) && isset($params['token']) && isset($params['userid'])) {
+        if (! empty($params) && isset($params['token']) && isset($params['user_id'])) {
             $remove_token_result      = UserToken::create()->removeUserToken($params);
             if($remove_token_result == 1){
                 return true;

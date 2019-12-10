@@ -75,9 +75,9 @@ class UserToken extends BaseUserToken {
     
     
     public function addUserToken($params = array()) {
-        if ( !empty($params) && !is_null($params['token']) && !is_null($params['token_type']) && !is_null($params['userid'])) {
+        if ( !empty($params) && !is_null($params['token']) && !is_null($params['token_type']) && !is_null($params['user_id'])) {
             $addnewToken                = self::create();
-            $addnewToken->user_id       = $params['userid'];
+            $addnewToken->user_id       = $params['user_id'];
             $addnewToken->token         = $params['token'];
             $addnewToken->token_type    = $params['token_type'];
             if($addnewToken->save()){
@@ -88,8 +88,8 @@ class UserToken extends BaseUserToken {
     }
     
     public function removeUserToken($params = array()) {
-        if ( !empty($params) && !is_null($params['token']) && !is_null($params['userid'])) {
-            $removetoken_result    = self::deleteAll(['token'=>$params['token'],'user_id'=>$params['userid']]);
+        if ( !empty($params) && !is_null($params['token']) && !is_null($params['user_id'])) {
+            $removetoken_result    = self::deleteAll(['token'=>$params['token'],'user_id'=>$params['user_id']]);
             if(!is_null($removetoken_result) && ($removetoken_result != 0)){   
                 return true; 
             }
