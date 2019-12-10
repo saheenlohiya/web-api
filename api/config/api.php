@@ -47,7 +47,9 @@ $config = [
                         'POST update-profile' => 'update-profile',
                         'POST delete-teammember' => 'delete-teammember',
                         'POST forgot-password'  => 'forgot-password',
-                        'POST update-password'  => 'update-password'
+                        'POST update-password'  => 'update-password',
+                        'POST set-user-token'   =>  'set-user-token',
+                        'POST remove-user-token'   =>  'remove-user-token'
                     ]
                 ],
                 [

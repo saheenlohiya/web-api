@@ -11,6 +11,8 @@ use yii\helpers\ArrayHelper;
 use app\models\Users;
 use app\models\UsersVenuesClaims;
 use app\models\UsersVenuesRatings;
+use app\models\UserToken;
+use app\helpers\FirebaseNotifications; 
 
 /**
  * This is the model class for table "users_venues_ratings_responses".
@@ -113,7 +115,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                 }
                 
                 $getvenuedata = UsersVenuesRatings::find()
-                    ->select(['users.user_firstname', 'users.user_email', 'users.user_phone', 'vc.*'])
+                    ->select(['users.user_firstname', 'users.user_email', 'users.user_phone', 'users.sms_notification','users.user_device_token', 'vc.*'])
                     ->leftJoin('users_venues_claims as vc', 'vc.venue_id=users_venues_ratings.venue_id')
                     ->leftJoin('users', 'users.id=vc.user_id')
                     ->where(['users_venues_ratings.id' => $newRespond['user_venue_rating_id'],'vc.venue_claim_status' => 'active'])
@@ -122,11 +124,29 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                     ->orderBy(['users_venues_ratings.id' => SORT_DESC])
                     ->asArray(true)
                     ->all();
-                
+                $service        = new FirebaseNotifications();
                 foreach ($getvenuedata as $reponsedata){
-                    Twilio::sendSms($newRespond['user_venue_rating_response'], $reponsedata['user_phone']);
+                    if($reponsedata['sms_notification'] == 1){
+                        Twilio::sendSms($newRespond['user_venue_rating_response'], $reponsedata['user_phone']);
+                    }
+                    if($reponsedata['push_notification'] == 1){
+                        $push_tokens    = array();
+                        $get_user_token = UserToken::find()
+                            ->select(['user_token.token'])
+                            ->where(['user_token.user_id' => $user_id,'user_token.token_type' => 'web'])
+                            ->asArray(true)
+                            ->all();
+                        if(!empty($get_user_token)) {
+                            foreach ($get_user_token as $user_token){
+                                $push_tokens[] = $user_token['token'];
+                            }
+                            if(!empty($push_tokens)) {
+                                $message = array('title' => "New message on Tellus", 'body' => $newRespond['user_venue_rating_response']);
+                                $service->sendNotification($push_tokens, $message);
+                            }
+                        }
+                    }
                 }
-               
                 $userdata       = ['user_role'=>$userrole];
                 $results        = ArrayHelper::toArray($newRespond);
                 $newrecorddata  = ArrayHelper::merge($results, $userdata);

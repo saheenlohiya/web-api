@@ -4,6 +4,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\filters\TuQueryParamAuth;
 use app\models\Users;
+use app\models\UserToken;
 use app\models\PasswordResetRequestForm;
 use yii;
 use yii\web\Response;
@@ -194,6 +195,30 @@ class UsersController extends TuBaseApiController
         if (! empty($params) && isset($params['resettoken']) && isset($params['user_password'])) {
             $update_result      = Users::create()->updatePasswordByResetToken($params);
             if($update_result == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    public function actionSetUserToken() {
+        $params                 = \Yii::$app->request->post();
+        if (! empty($params) && isset($params['token']) && isset($params['token_type']) && isset($params['userid'])) {
+            $token_result      = UserToken::create()->addUserToken($params);
+            if($token_result == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    public function actionRemoveUserToken() {
+        $params                 = \Yii::$app->request->post();
+        if (! empty($params) && isset($params['token']) && isset($params['userid'])) {
+            $remove_token_result      = UserToken::create()->removeUserToken($params);
+            if($remove_token_result == 1){
                 return true;
             }else{
                 return false;
