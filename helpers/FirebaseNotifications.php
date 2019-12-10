@@ -25,7 +25,7 @@ class FirebaseNotifications extends BaseObject
     public $apiUrl = 'https://fcm.googleapis.com/fcm/send';
 
     public function __construct() {
-        $this->authKey = "AIzaSyBE8mhh2i0byQYclvN9pjihGDxfZqGQf1k";
+        $this->authKey = "AAAA7OdvvUo:APA91bGRXwMjY8976sIuIvpprvfELiBpuTXDMKCuGQfW7K-vaSEt9JA-equzMVEkNIaSQoTk5Q6lHzp-_c4EKaukXfRYy_rP0FLZVgZ__DnT5JbnBHv6LVm9brCFRUdwl2jjLD7SvKK0lOI3FEip0JhfTJ3W1B7qTA";
     }
     public function init()
     {
