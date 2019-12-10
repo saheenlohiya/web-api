@@ -113,9 +113,9 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                         $userrole = "Manager";
                     }
                 }
-                
+
                 $getvenuedata = UsersVenuesRatings::find()
-                    ->select(['users.user_firstname', 'users.user_email', 'users.user_phone', 'users.sms_notification','users.user_device_token', 'vc.*'])
+                    ->select(['users.user_firstname', 'users.user_email', 'users.user_phone', 'users.sms_notification', 'users.push_notification','users.user_device_token', 'vc.*'])
                     ->leftJoin('users_venues_claims as vc', 'vc.venue_id=users_venues_ratings.venue_id')
                     ->leftJoin('users', 'users.id=vc.user_id')
                     ->where(['users_venues_ratings.id' => $newRespond['user_venue_rating_id'],'vc.venue_claim_status' => 'active'])
@@ -133,7 +133,7 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                         $push_tokens    = array();
                         $get_user_token = UserToken::find()
                             ->select(['user_token.token'])
-                            ->where(['user_token.user_id' => $user_id,'user_token.token_type' => 'web'])
+                            ->where(['user_token.user_id' => $reponsedata['user_id'],'user_token.token_type' => 'web'])
                             ->asArray(true)
                             ->all();
                         if(!empty($get_user_token)) {
@@ -141,7 +141,11 @@ class UsersVenuesRatingsResponses extends BaseUsersVenuesRatingsResponses
                                 $push_tokens[] = $user_token['token'];
                             }
                             if(!empty($push_tokens)) {
-                                $message = array('title' => "New message on Tellus", 'body' => $newRespond['user_venue_rating_response']);
+                                $message = array(
+                                        'title' => "New message on Tellus", 
+                                        'body' => $newRespond['user_venue_rating_response']
+                                );
+
                                 $service->sendNotification($push_tokens, $message);
                             }
                         }
