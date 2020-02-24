@@ -243,17 +243,38 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
 
     private function _notifyVenueManager()
     {
-        //find the manager
-        $venue = Venues::find()->where(['id' => $this->venue_id])->with(['user'])->one();
-        if (!is_null($venue)) {
-            //see if the venue is claimed
-            if (!is_null($venue->user) && is_array($venue->user) && count($venue->user) > 0) {
-                //send welcome message
-                if (!$this->mailer->sendRatingNotification($this, $venue, $venue->user)) {
-                    Throw new Exception("Could not send welcome email");
+
+        /* Get Venue Details*/
+        $venue = Venues::find()->where(['id' => $this->venue_id]);
+
+        /* Get Venue Manager */ 
+        $get_venue_manager_email_query = "SELECT users.user_email FROM `users_venues_claims`,`users` WHERE users.user_role = 'manager' AND users_venues_claims.user_id = users.id AND `venue_id` = ".$this->venue_id;
+        $get_venue_manager_emails = Yii::$app->db->createCommand($get_venue_manager_email_query)->execute();
+
+        if(!empty($get_venue_manager_emails))
+        {
+            /* if multiple Venue Manager Fatch Manager Email */ 
+            for ($i=0; $i <count($get_venue_manager_email) ; $i++) 
+            { 
+                /* Send Rating Notification*/
+                if (!$this->mailer->sendRatingNotification_new($this, $venue, $get_venue_manager_email[$i])) {
+                        Throw new Exception("Could not send welcome email");
                 }
             }
         }
+
+
+        //find the manager
+        // $venue = Venues::find()->where(['id' => $this->venue_id])->with(['user'])->one();
+        // if (!is_null($venue)) {
+        //     //see if the venue is claimed
+        //     if (!is_null($venue->user) && is_array($venue->user) && count($venue->user) > 0) {
+        //         //send welcome message
+        //         if (!$this->mailer->sendRatingNotification($this, $venue, $venue->user)) {
+        //             Throw new Exception("Could not send welcome email");
+        //         }
+        //     }
+        // }
     }
     public function sendToSupport() {
         $user = \Yii::$app->user->identity;
