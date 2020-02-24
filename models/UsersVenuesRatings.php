@@ -258,9 +258,13 @@ class UsersVenuesRatings extends BaseUsersVenuesRatings
             { 
                 /* Send Rating Notification*/
                 if (!$this->mailer->sendRatingNotification_new($this, $venue, $get_venue_manager_email[$i])) {
-                        Throw new Exception("Could not send welcome email");
+                        Throw new Exception("Could not send Manager Notification  email");
                 }
             }
+        }
+        else
+        {
+            Throw new Exception("Venue Manager Not Found");
         }
 
 
