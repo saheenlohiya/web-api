@@ -332,6 +332,24 @@ class Mailer extends Component
             ['user' => $user, 'rating' => $rating, 'venue' => $venue]
         );
     }
+    
+    /**
+     * Modify Function
+     * Sends an email to the venue manager when a new rating is submitted
+     * @param UsersVenuesRatings $rating
+     * @param Venues $venue
+     * @param email $email 
+     * @return bool
+     */
+
+    public function sendRatingNotification_new(UsersVenuesRatings $rating, Venues $venue, $email)
+    {
+        return $this->sendMessage(
+            $email,$this->getRatingNotifySubject(),
+            'rating-notify',
+            ['rating' => $rating, 'venue' => $venue]
+        );
+    }
 
     /**
      * Sends a new generated password to a user.
